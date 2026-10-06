@@ -1,0 +1,81 @@
+(kicad_sch (version 20231120) (generator eeschema)
+
+  (uuid "b5c1ae98-83e2-487e-a4fd-b3c5dc53d199")
+
+  (paper "A3")
+
+  (title_block
+    (title "AquaSentinel v2.0 - Smart Edge Controller Mainboard")
+    (date "2026-10-04")
+    (rev "v2.0.0")
+    (company "Sanjivani University, School of Engineering & Technology, Kopargaon")
+    (comment 1 "AAKRUTI Innovation Competition (AIC) 2026 - Robotics Theme")
+    (comment 2 "Project AquaRight | Team: Sanjivani Hero's Journey (AG26-1500$41)")
+    (comment 3 "Lead: Soham Kadu | Electronics: Bhakti Kadam | CAD: Shriraj Kamble")
+  )
+
+  # =========================================================================
+  # SHEET 1: POWER DISTRIBUTION & CHARGE SUBSYSTEM
+  # =========================================================================
+  # Net definitions:
+  # PV_IN -> D1 (Schottky) -> CN3795 (MPPT Synchronous Buck) -> V_BATT (12.8V LiFePO4)
+  # V_BATT -> F1 (5A Slow Blow) -> D2 (SMAJ15A TVS) -> Q_REV (P-MOS Reverse Protect)
+  # -> INA226 (I2C High-Side Power Monitor, Shunt R_SHUNT = 10mΩ) -> V_BUS_12V8
+  #
+  # V_BUS_12V8 -> U_BUCK3V3 (TPS563200 Ultra-Low Iq Buck) -> +3V3_ALWAYS_ON (ESP32, RTC)
+  # V_BUS_12V8 -> Q_PWR_SENS (AO3401A P-MOSFET, VGS=±20V) -> +12V_SENSOR_SW (RS485 Probes)
+  # V_BUS_12V8 -> Q_PWR_MODEM (AO3401A) -> U_BUCK4V0 (TPS54331 2A Peak) -> +4V0_LTE_SW (A7670C)
+  # V_BUS_12V8 -> Q_PWR_PERIPH (AO3401A) -> U_BUCK5V0 (TPS563200 5V) -> +5V0_PERIPH_SW (PCA9685, Servos)
+  # V_BUS_12V8 -> Q_PUMP_GATE (IRLZ44N / AO3400A N-MOSFET Low-Side) -> J_PUMP (12V Peristaltic)
+
+  # =========================================================================
+  # SHEET 2: MICROCONTROLLER & PERIPHERAL NETLIST (ESP32-WROOM-32E)
+  # =========================================================================
+  # U1: ESP32-WROOM-32E (Espressif 32-bit Dual-Core 240MHz, 4MB Flash)
+  # Pin Mapping adhering strictly to Appendix A & avoiding strapping pins for outputs:
+  #
+  # Net "UART2_TX"       -> GPIO 17 -> Cellular Modem (SIMCom A7670C RXD)
+  # Net "UART2_RX"       -> GPIO 16 -> Cellular Modem (SIMCom A7670C TXD)
+  # Net "MODEM_PWRKEY"   -> GPIO 04 -> Open-Drain N-MOSFET to A7670C PWRKEY pin
+  #
+  # Net "RS485_TXD"      -> GPIO 27 -> SP3485 Transceiver (DI - Driver Input)
+  # Net "RS485_RXD"      -> GPIO 26 -> SP3485 Transceiver (RO - Receiver Output)
+  # Net "RS485_DE_RE"    -> GPIO 25 -> SP3485 Direction Control (HIGH=TX, LOW=RX)
+  #
+  # Net "VSPI_SCK"       -> GPIO 18 -> MicroSD Card SCK (10k pull-up to +3V3)
+  # Net "VSPI_MISO"      -> GPIO 19 -> MicroSD Card MISO (10k pull-up to +3V3)
+  # Net "VSPI_MOSI"      -> GPIO 23 -> MicroSD Card MOSI (10k pull-up to +3V3)
+  # Net "VSPI_CS"        -> GPIO 05 -> MicroSD Card CS / Slave Select (10k pull-up)
+  #
+  # Net "I2C_SDA"        -> GPIO 21 -> I2C Data Line (DS3231SN RTC, INA226 Monitor, PCA9685)
+  # Net "I2C_SCL"        -> GPIO 22 -> I2C Clock Line (4.7k pull-ups to +3V3)
+  #
+  # Net "STAGE_RX_DATA"  -> GPIO 34 -> Ultrasonic Sensor Signal (Input-Only Pin, Safe)
+  #
+  # Net "EN_12V_SENSOR"  -> GPIO 32 -> Gate driver (2N7002) for 12V Sensor P-MOSFET
+  # Net "EN_4V_MODEM"    -> GPIO 33 -> Gate driver (2N7002) for 4V LTE Modem P-MOSFET
+  # Net "EN_5V_PERIPH"   -> GPIO 13 -> Gate driver (2N7002) for 5V Peripheral P-MOSFET
+  # Net "EN_12V_PUMP"    -> GPIO 14 -> Gate driver (IRLZ44N) for 12V Sampling Pump
+  # Net "CAROUSEL_IRQ"   -> GPIO 35 -> Optical Limit Switch / Hall Sensor Position Pulse
+  #
+  # =========================================================================
+  # SHEET 3: PCA9685 I2C 16-CHANNEL PWM CONTROLLER & ACTUATION
+  # =========================================================================
+  # U2: PCA9685PW (12-bit PWM Controller, I2C Address 0x40, Powered by +5V0_PERIPH_SW)
+  # Channel 0: Jal-Deep Visual Beacon Red PWM (via AO3400A N-MOSFET)
+  # Channel 1: Jal-Deep Visual Beacon Green PWM (via AO3400A N-MOSFET)
+  # Channel 2: Jal-Deep Visual Beacon Blue PWM (via AO3400A N-MOSFET)
+  # Channel 3: Motorized Optical Anti-Fouling Wiper Servo Signal (50Hz PWM)
+  # Channel 4: Autosampler 4-Position Carousel Geared DC Motor PWM Driver
+  # Channel 5: Autosampler Purge-to-Waste 3-Way Pinch Valve Solenoid Gate
+
+  # =========================================================================
+  # SHEET 4: ISOLATION & TRANSIENT PROTECTION SPECIFICATIONS
+  # =========================================================================
+  # - RS485 Differential A/B Lines: TVS Diode Array (SM712) for ±30kV ESD Protection
+  # - 120Ω Differential Termination Resistor with jumper header (JP1)
+  # - DS3231SN Battery Backup: Coin cell holder (CR1220, 3.0V Lithium Coin Cell)
+  # - PCB Layer Stackup: 4-Layer FR4 (Signal - GND Plane - Power Plane - Signal), 1.6mm
+  # - IPC-A-610 Class 2 High-Reliability Manufacturing Standard
+
+)

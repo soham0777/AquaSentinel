@@ -1,0 +1,28 @@
+<!doctype html><html><head><meta charset="utf-8"><title>STEP check</title>
+<script src="https://cdn.jsdelivr.net/npm/occt-import-js@0.0.23/dist/occt-import-js.js"></script></head>
+<body style="font:12px monospace"><h3>OpenCASCADE (occt-import-js) STEP read check</h3><pre id="o">loading...</pre>
+<script>
+const FILES = ["cad/parts/AS3-101_Pier_bracket_weldment_upper_and_lower_identical.step", "cad/parts/AS3-102_Pole_clamp_cap.step", "cad/parts/AS3-103_Stage_target_plate.step", "cad/parts/AS3-111_Guide_pole_2in_Sch_40S_SS316L.step", "cad/parts/AS3-112_Pole_top_cap.step", "cad/parts/AS3-113_Stop_collar_split_clamp_on.step", "cad/parts/AS3-114_Stop_buffer_ring_EPDM.step", "cad/parts/AS3-201_Pontoon_hull_rotomoulded_foam_filled.step", "cad/parts/AS3-202_Bow_bumper_pad.step", "cad/parts/AS3-203_Hull_vent_test_plug.step", "cad/parts/AS3-211_Crossbeam_SHS_40x40x3.step", "cad/parts/AS3-212_Beam_end_cap.step", "cad/parts/AS3-213_Equipment_deck_plate.step", "cad/parts/AS3-301_Guide_carriage_fixed_half_weldment.step", "cad/parts/AS3-302_Guide_carriage_opening_gate_weldment.step", "cad/parts/AS3-311_Concave_guide_roller_UHMW_PE.step", "cad/parts/AS3-312_Roller_axle_M10_nyloc_nuts.step", "cad/parts/AS3-313_Gate_hinge_pin_D10.step", "cad/parts/AS3-314_T_handle_latch_pin_tool_free.step", "cad/parts/AS3-321_Carriage_brace_struts_pair.step", "cad/parts/AS3-401_Sensor_well_sleeve_PE100_D160_SDR26.step", "cad/parts/AS3-402_Hatch_flange_ring_quarter_turn_seat.step", "cad/parts/AS3-403_Sensor_guard_cage.step", "cad/parts/AS3-404_V_debris_deflector.step", "cad/parts/AS3-411_Cartridge_cap_wiper_drive_housing.step", "cad/parts/AS3-412_Cartridge_lift_handle.step", "cad/parts/AS3-413_Cartridge_spine_wiper_shaft.step", "cad/parts/AS3-414_Probe_holder_spiders_x2.step", "cad/parts/AS3-415_Optical_wiper_arm_brush_pads.step", "cad/parts/AS3-416_Probe_cables_in_well_run.step", "cad/parts/AS3-417_Sampler_intake_strainer_riser.step", "cad/parts/AS3-420_Probe_body_envelope.step", "cad/parts/AS3-421_ID_band_pH_probe.step", "cad/parts/AS3-422_ID_band_EC_probe.step", "cad/parts/AS3-423_ID_band_Optical_DO.step", "cad/parts/AS3-424_ID_band_Turbidity_probe.step", "cad/parts/AS3-501_Pod_mounting_rails_pair.step", "cad/parts/AS3-511_Power_control_pod_IP67_body.step", "cad/parts/AS3-512_Pod_lid_hinged.step", "cad/parts/AS3-513_Pod_mounting_plate.step", "cad/parts/AS3-514_LiFePO4_12_8_V_6_Ah_with_BMS.step", "cad/parts/AS3-515_Controller_board_ESP32_RS485_RTC_microSD_LTE_Cat.step", "cad/parts/AS3-516_MPPT_charge_controller.step", "cad/parts/AS3-521_PV_module_20_W_frame_backsheet.step", "cad/parts/AS3-522_PV_module_20_W_cells_glass.step", "cad/parts/AS3-523_Canopy_stanchions_hinge_pin_blocks.step", "cad/parts/AS3-601_Autosampler_cassette_insulated_body.step", "cad/parts/AS3-602_Autosampler_lid_hinged_tamper_seal_hasp.step", "cad/parts/AS3-603_Bottle_carousel_lift_out_cassette.step", "cad/parts/AS3-604_Sample_bottle_250_mL_HDPE_lab_supplied.step", "cad/parts/AS3-605_Bottle_cap_septum.step", "cad/parts/AS3-606_Peristaltic_pump_12_V_reversible.step", "cad/parts/AS3-701_Beacon_mast.step", "cad/parts/AS3-702_Jal_Deep_beacon_base.step", "cad/parts/AS3-703_Jal_Deep_360_deg_LED_lens_green_normal_red_alert.step", "cad/parts/AS3-711_LTE_antenna_whip_N_type.step", "cad/parts/AS3-712_Stage_sensor_waterproof_ultrasonic_looking_up.step", "cad/parts/AS3-801_Grab_handle_two_person_carry.step", "cad/parts/AS3-802_Lifting_eye_bolt_M12_DIN_580.step", "cad/parts/AS3-811_Cable_harness_probes_stage_sensor_PV_beacon.step", "cad/parts/AS3-812_Sampler_hoses_intake_purge_to_waste.step", "cad/parts/AS3-901_Bolt_M8_x_60_A4_washer.step", "cad/parts/AS3-902_Bolt_M10_x_70_A4_washer.step", "cad/parts/AS3-903_Screw_M6_x_25_A4.step", "cad/parts/AS3-904_Chemical_anchor_M12_x_130_A4.step", "cad/parts/AS3-905_Bolt_M10_x_40_A4_washer.step", "cad/assembly/AquaSentinel_R3_Assembly_MidWater.step"];
+function count(node){let n=node.meshes.length;for(const c of node.children)n+=count(c);return n;}
+function names(node,acc){if(node.name)acc.push(node.name);for(const c of node.children)names(c,acc);return acc;}
+occtimportjs().then(async occt => {
+  const out=[]; const o=document.getElementById('o'); o.textContent='';
+  for (const f of FILES){
+    const t0=performance.now();
+    try{
+      const buf=new Uint8Array(await (await fetch('../'+f)).arrayBuffer());
+      const r=occt.ReadStepFile(buf,null);
+      let tris=0, lo=[1e9,1e9,1e9], hi=[-1e9,-1e9,-1e9];
+      for(const m of r.meshes){tris+=m.index.array.length/3; const p=m.attributes.position.array;
+        for(let i=0;i<p.length;i+=3){for(let k=0;k<3;k++){lo[k]=Math.min(lo[k],p[i+k]);hi[k]=Math.max(hi[k],p[i+k]);}}}
+      const rec={file:f,success:r.success,meshes:r.meshes.length,triangles:tris,
+        bbox_mm:[lo.map(v=>+v.toFixed(1)),hi.map(v=>+v.toFixed(1))],
+        nodes:r.root?names(r.root,[]).length:0, first_names:r.root?names(r.root,[]).slice(0,6):[], ms:Math.round(performance.now()-t0)};
+      out.push(rec); o.textContent+=JSON.stringify(rec)+'\n';
+    }catch(e){out.push({file:f,success:false,error:String(e)}); o.textContent+=f+' ERROR '+e+'\n';}
+  }
+  await fetch('/save?path=checks/step_validation.json',{method:'POST',body:JSON.stringify(out,null,1)});
+  o.textContent+='\nDONE '+out.filter(r=>r.success&&r.meshes>0).length+'/'+out.length+' files read with geometry';
+  document.title='STEP check DONE';
+});
+</script></body></html>

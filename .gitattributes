@@ -1,0 +1,15 @@
+* text=auto
+*.step binary
+*.stl binary
+*.glb binary
+*.zip binary
+*.docx binary
+*.SLDPRT binary
+*.SLDASM binary
+*.mp4 binary
+*.gif binary
+*.png binary
+*.jpg binary
+*.pdf binary
+# the viewer embeds the model; keep it out of the language statistics
+docs/viewer.html linguist-generated
