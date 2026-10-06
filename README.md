@@ -55,7 +55,6 @@ flowchart LR
     D["🧠 <b>DECIDE</b><br/>on the float (ESP32)<br/>CPCB hard limits act at once<br/>+ site baseline learned in 7 days<br/>2 of last 3 readings unusual"]
     A["🚨 <b>ACT</b><br/>beacon turns red<br/>SMS / LTE alert<br/>250 mL sample sealed<br/>+ timestamp + chain of custody"]
     S --> D --> A
-    A -. "normal again" .-> S
     style S fill:#E8F4FA,stroke:#005686,color:#0B2540
     style D fill:#E8F4FA,stroke:#005686,color:#0B2540
     style A fill:#FDECEE,stroke:#C8102E,color:#5A0A14
