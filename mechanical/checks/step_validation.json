@@ -1,0 +1,1548 @@
+[
+ {
+  "file": "cad/parts/AS3-101_Pier_bracket_weldment_upper_and_lower_identical.step",
+  "success": true,
+  "meshes": 7,
+  "triangles": 340,
+  "bbox_mm": [
+   [
+    -360,
+    -110,
+    -90
+   ],
+   [
+    -0.3,
+    110,
+    90
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Pier bracket (weldment) - upper and lower identical"
+  ],
+  "ms": 697
+ },
+ {
+  "file": "cad/parts/AS3-102_Pole_clamp_cap.step",
+  "success": true,
+  "meshes": 3,
+  "triangles": 244,
+  "bbox_mm": [
+   [
+    0.3,
+    -76,
+    -40
+   ],
+   [
+    59.9,
+    76,
+    40
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Pole clamp cap"
+  ],
+  "ms": 139
+ },
+ {
+  "file": "cad/parts/AS3-103_Stage_target_plate.step",
+  "success": true,
+  "meshes": 1,
+  "triangles": 12,
+  "bbox_mm": [
+   [
+    55,
+    -55,
+    36
+   ],
+   [
+    185,
+    55,
+    40
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Stage target plate"
+  ],
+  "ms": 319
+ },
+ {
+  "file": "cad/parts/AS3-111_Guide_pole_2in_Sch_40S_SS316L.step",
+  "success": true,
+  "meshes": 1,
+  "triangles": 384,
+  "bbox_mm": [
+   [
+    -30.1,
+    -30.1,
+    -196.8
+   ],
+   [
+    30.1,
+    30.1,
+    2781.2
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Guide pole 2in Sch 40S SS316L"
+  ],
+  "ms": 458
+ },
+ {
+  "file": "cad/parts/AS3-112_Pole_top_cap.step",
+  "success": true,
+  "meshes": 1,
+  "triangles": 236,
+  "bbox_mm": [
+   [
+    -32.1,
+    -32.1,
+    0
+   ],
+   [
+    32.1,
+    32.1,
+    30
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Pole top cap"
+  ],
+  "ms": 93
+ },
+ {
+  "file": "cad/parts/AS3-113_Stop_collar_split_clamp_on.step",
+  "success": true,
+  "meshes": 2,
+  "triangles": 396,
+  "bbox_mm": [
+   [
+    -50,
+    -50,
+    0
+   ],
+   [
+    62,
+    50,
+    30
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Stop collar (split, clamp-on)"
+  ],
+  "ms": 496
+ },
+ {
+  "file": "cad/parts/AS3-114_Stop_buffer_ring_EPDM.step",
+  "success": true,
+  "meshes": 1,
+  "triangles": 384,
+  "bbox_mm": [
+   [
+    -48,
+    -48,
+    0
+   ],
+   [
+    48,
+    48,
+    20
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Stop buffer ring (EPDM)"
+  ],
+  "ms": 258
+ },
+ {
+  "file": "cad/parts/AS3-201_Pontoon_hull_rotomoulded_foam_filled.step",
+  "success": true,
+  "meshes": 3,
+  "triangles": 1836,
+  "bbox_mm": [
+   [
+    0,
+    -121,
+    0
+   ],
+   [
+    1000,
+    121,
+    260
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Pontoon hull (rotomoulded, foam filled)"
+  ],
+  "ms": 887
+ },
+ {
+  "file": "cad/parts/AS3-202_Bow_bumper_pad.step",
+  "success": true,
+  "meshes": 1,
+  "triangles": 316,
+  "bbox_mm": [
+   [
+    -8,
+    -22,
+    -45
+   ],
+   [
+    8,
+    22,
+    45
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Bow bumper pad"
+  ],
+  "ms": 125
+ },
+ {
+  "file": "cad/parts/AS3-203_Hull_vent_test_plug.step",
+  "success": true,
+  "meshes": 2,
+  "triangles": 184,
+  "bbox_mm": [
+   [
+    -17,
+    -17,
+    0
+   ],
+   [
+    17,
+    17,
+    15
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Hull vent / test plug"
+  ],
+  "ms": 368
+ },
+ {
+  "file": "cad/parts/AS3-211_Crossbeam_SHS_40x40x3.step",
+  "success": true,
+  "meshes": 1,
+  "triangles": 128,
+  "bbox_mm": [
+   [
+    -20,
+    -375,
+    -20
+   ],
+   [
+    20,
+    375,
+    20
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Crossbeam SHS 40x40x3"
+  ],
+  "ms": 251
+ },
+ {
+  "file": "cad/parts/AS3-212_Beam_end_cap.step",
+  "success": true,
+  "meshes": 1,
+  "triangles": 60,
+  "bbox_mm": [
+   [
+    -20.5,
+    0,
+    -20.5
+   ],
+   [
+    20.5,
+    4,
+    20.5
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Beam end cap"
+  ],
+  "ms": 77
+ },
+ {
+  "file": "cad/parts/AS3-213_Equipment_deck_plate.step",
+  "success": true,
+  "meshes": 1,
+  "triangles": 672,
+  "bbox_mm": [
+   [
+    100,
+    -170,
+    300
+   ],
+   [
+    885,
+    170,
+    303
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Equipment deck plate"
+  ],
+  "ms": 495
+ },
+ {
+  "file": "cad/parts/AS3-301_Guide_carriage_fixed_half_weldment.step",
+  "success": true,
+  "meshes": 22,
+  "triangles": 2140,
+  "bbox_mm": [
+   [
+    -121,
+    -118,
+    180
+   ],
+   [
+    140,
+    121,
+    592
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Guide carriage - fixed half (weldment)"
+  ],
+  "ms": 829
+ },
+ {
+  "file": "cad/parts/AS3-302_Guide_carriage_opening_gate_weldment.step",
+  "success": true,
+  "meshes": 18,
+  "triangles": 1560,
+  "bbox_mm": [
+   [
+    -121,
+    -118,
+    180
+   ],
+   [
+    16,
+    121,
+    592
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Guide carriage - opening gate (weldment)"
+  ],
+  "ms": 896
+ },
+ {
+  "file": "cad/parts/AS3-311_Concave_guide_roller_UHMW_PE.step",
+  "success": true,
+  "meshes": 1,
+  "triangles": 1360,
+  "bbox_mm": [
+   [
+    -27.5,
+    -27.5,
+    -20
+   ],
+   [
+    27.5,
+    27.5,
+    20
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Concave guide roller UHMW-PE"
+  ],
+  "ms": 566
+ },
+ {
+  "file": "cad/parts/AS3-312_Roller_axle_M10_nyloc_nuts.step",
+  "success": true,
+  "meshes": 3,
+  "triangles": 116,
+  "bbox_mm": [
+   [
+    -8,
+    -9.2,
+    -35
+   ],
+   [
+    8,
+    9.2,
+    35
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Roller axle M10 + nyloc nuts"
+  ],
+  "ms": 351
+ },
+ {
+  "file": "cad/parts/AS3-313_Gate_hinge_pin_D10.step",
+  "success": true,
+  "meshes": 2,
+  "triangles": 152,
+  "bbox_mm": [
+   [
+    -120,
+    102,
+    225
+   ],
+   [
+    -102,
+    120,
+    513
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Gate hinge pin D10"
+  ],
+  "ms": 273
+ },
+ {
+  "file": "cad/parts/AS3-314_T_handle_latch_pin_tool_free.step",
+  "success": true,
+  "meshes": 4,
+  "triangles": 256,
+  "bbox_mm": [
+   [
+    -24,
+    -9,
+    -22
+   ],
+   [
+    24,
+    9,
+    42.4
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "T-handle latch pin (tool-free)"
+  ],
+  "ms": 113
+ },
+ {
+  "file": "cad/parts/AS3-321_Carriage_brace_struts_pair.step",
+  "success": true,
+  "meshes": 6,
+  "triangles": 456,
+  "bbox_mm": [
+   [
+    118.9,
+    -172,
+    303
+   ],
+   [
+    397,
+    172,
+    575.1
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Carriage brace struts (pair)"
+  ],
+  "ms": 340
+ },
+ {
+  "file": "cad/parts/AS3-401_Sensor_well_sleeve_PE100_D160_SDR26.step",
+  "success": true,
+  "meshes": 1,
+  "triangles": 512,
+  "bbox_mm": [
+   [
+    160,
+    -80,
+    -60
+   ],
+   [
+    320,
+    80,
+    308.5
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Sensor well sleeve PE100 D160 SDR26"
+  ],
+  "ms": 203
+ },
+ {
+  "file": "cad/parts/AS3-402_Hatch_flange_ring_quarter_turn_seat.step",
+  "success": true,
+  "meshes": 1,
+  "triangles": 512,
+  "bbox_mm": [
+   [
+    145,
+    -95,
+    303
+   ],
+   [
+    335,
+    95,
+    309
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Hatch flange ring (quarter-turn seat)"
+  ],
+  "ms": 512
+ },
+ {
+  "file": "cad/parts/AS3-403_Sensor_guard_cage.step",
+  "success": true,
+  "meshes": 15,
+  "triangles": 1924,
+  "bbox_mm": [
+   [
+    158,
+    -82,
+    -384
+   ],
+   [
+    322,
+    82,
+    -60
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Sensor guard cage"
+  ],
+  "ms": 802
+ },
+ {
+  "file": "cad/parts/AS3-404_V_debris_deflector.step",
+  "success": true,
+  "meshes": 1,
+  "triangles": 20,
+  "bbox_mm": [
+   [
+    110,
+    -62,
+    -330
+   ],
+   [
+    172,
+    62,
+    259.5
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "V debris deflector"
+  ],
+  "ms": 11
+ },
+ {
+  "file": "cad/parts/AS3-411_Cartridge_cap_wiper_drive_housing.step",
+  "success": true,
+  "meshes": 13,
+  "triangles": 972,
+  "bbox_mm": [
+   [
+    147,
+    -93,
+    309
+   ],
+   [
+    333,
+    93,
+    377
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Cartridge cap + wiper drive housing"
+  ],
+  "ms": 591
+ },
+ {
+  "file": "cad/parts/AS3-412_Cartridge_lift_handle.step",
+  "success": true,
+  "meshes": 1,
+  "triangles": 572,
+  "bbox_mm": [
+   [
+    232.1,
+    -53,
+    323
+   ],
+   [
+    247.9,
+    53,
+    422
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Cartridge lift handle"
+  ],
+  "ms": 317
+ },
+ {
+  "file": "cad/parts/AS3-413_Cartridge_spine_wiper_shaft.step",
+  "success": true,
+  "meshes": 2,
+  "triangles": 316,
+  "bbox_mm": [
+   [
+    227.5,
+    -12.5,
+    -351
+   ],
+   [
+    252.5,
+    12.5,
+    309
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Cartridge spine + wiper shaft"
+  ],
+  "ms": 421
+ },
+ {
+  "file": "cad/parts/AS3-414_Probe_holder_spiders_x2.step",
+  "success": true,
+  "meshes": 18,
+  "triangles": 2656,
+  "bbox_mm": [
+   [
+    187.2,
+    -52.8,
+    -212
+   ],
+   [
+    292.8,
+    52.8,
+    -50
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Probe holder spiders (x2)"
+  ],
+  "ms": 1224
+ },
+ {
+  "file": "cad/parts/AS3-415_Optical_wiper_arm_brush_pads.step",
+  "success": true,
+  "meshes": 3,
+  "triangles": 36,
+  "bbox_mm": [
+   [
+    178,
+    -8,
+    -356
+   ],
+   [
+    302,
+    8,
+    -341.5
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Optical wiper arm + brush pads"
+  ],
+  "ms": 19
+ },
+ {
+  "file": "cad/parts/AS3-416_Probe_cables_in_well_run.step",
+  "success": true,
+  "meshes": 4,
+  "triangles": 1264,
+  "bbox_mm": [
+   [
+    176.7,
+    -35.3,
+    -40
+   ],
+   [
+    303.3,
+    35.3,
+    308.5
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Probe cables (in-well run)"
+  ],
+  "ms": 823
+ },
+ {
+  "file": "cad/parts/AS3-417_Sampler_intake_strainer_riser.step",
+  "success": true,
+  "meshes": 3,
+  "triangles": 296,
+  "bbox_mm": [
+   [
+    273,
+    -12,
+    -335
+   ],
+   [
+    297,
+    12,
+    344
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Sampler intake strainer + riser"
+  ],
+  "ms": 112
+ },
+ {
+  "file": "cad/parts/AS3-420_Probe_body_envelope.step",
+  "success": true,
+  "meshes": 1,
+  "triangles": 716,
+  "bbox_mm": [
+   [
+    -17,
+    -17,
+    0
+   ],
+   [
+    17,
+    17,
+    300
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Probe body (envelope)"
+  ],
+  "ms": 573
+ },
+ {
+  "file": "cad/parts/AS3-421_ID_band_pH_probe.step",
+  "success": true,
+  "meshes": 1,
+  "triangles": 320,
+  "bbox_mm": [
+   [
+    -16.8,
+    -16.8,
+    200
+   ],
+   [
+    16.8,
+    16.8,
+    228
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "ID band - pH probe"
+  ],
+  "ms": 125
+ },
+ {
+  "file": "cad/parts/AS3-422_ID_band_EC_probe.step",
+  "success": true,
+  "meshes": 1,
+  "triangles": 320,
+  "bbox_mm": [
+   [
+    -16.8,
+    -16.8,
+    200
+   ],
+   [
+    16.8,
+    16.8,
+    228
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "ID band - EC probe"
+  ],
+  "ms": 451
+ },
+ {
+  "file": "cad/parts/AS3-423_ID_band_Optical_DO.step",
+  "success": true,
+  "meshes": 1,
+  "triangles": 320,
+  "bbox_mm": [
+   [
+    -16.8,
+    -16.8,
+    200
+   ],
+   [
+    16.8,
+    16.8,
+    228
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "ID band - Optical DO"
+  ],
+  "ms": 244
+ },
+ {
+  "file": "cad/parts/AS3-424_ID_band_Turbidity_probe.step",
+  "success": true,
+  "meshes": 1,
+  "triangles": 320,
+  "bbox_mm": [
+   [
+    -16.8,
+    -16.8,
+    200
+   ],
+   [
+    16.8,
+    16.8,
+    228
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "ID band - Turbidity probe"
+  ],
+  "ms": 189
+ },
+ {
+  "file": "cad/parts/AS3-501_Pod_mounting_rails_pair.step",
+  "success": true,
+  "meshes": 2,
+  "triangles": 24,
+  "bbox_mm": [
+   [
+    350,
+    -112,
+    303
+   ],
+   [
+    640,
+    112,
+    315
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Pod mounting rails (pair)"
+  ],
+  "ms": 132
+ },
+ {
+  "file": "cad/parts/AS3-511_Power_control_pod_IP67_body.step",
+  "success": true,
+  "meshes": 22,
+  "triangles": 1216,
+  "bbox_mm": [
+   [
+    330,
+    -140,
+    315
+   ],
+   [
+    660,
+    139,
+    465
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Power & control pod IP67 (body)"
+  ],
+  "ms": 605
+ },
+ {
+  "file": "cad/parts/AS3-512_Pod_lid_hinged.step",
+  "success": true,
+  "meshes": 3,
+  "triangles": 500,
+  "bbox_mm": [
+   [
+    343,
+    -132,
+    460
+   ],
+   [
+    647,
+    143,
+    495
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Pod lid (hinged)"
+  ],
+  "ms": 175
+ },
+ {
+  "file": "cad/parts/AS3-513_Pod_mounting_plate.step",
+  "success": true,
+  "meshes": 1,
+  "triangles": 12,
+  "bbox_mm": [
+   [
+    357,
+    -120,
+    321
+   ],
+   [
+    633,
+    120,
+    323
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Pod mounting plate"
+  ],
+  "ms": 316
+ },
+ {
+  "file": "cad/parts/AS3-514_LiFePO4_12_8_V_6_Ah_with_BMS.step",
+  "success": true,
+  "meshes": 1,
+  "triangles": 140,
+  "bbox_mm": [
+   [
+    367,
+    -112.5,
+    323
+   ],
+   [
+    518,
+    -47.5,
+    417
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "LiFePO4 12.8 V 6 Ah with BMS"
+  ],
+  "ms": 311
+ },
+ {
+  "file": "cad/parts/AS3-515_Controller_board_ESP32_RS485_RTC_microSD_LTE_Cat.step",
+  "success": true,
+  "meshes": 8,
+  "triangles": 192,
+  "bbox_mm": [
+   [
+    477,
+    5,
+    323
+   ],
+   [
+    637,
+    105,
+    350.6
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Controller board (ESP32, RS485, RTC, microSD, LTE Cat-1)"
+  ],
+  "ms": 66
+ },
+ {
+  "file": "cad/parts/AS3-516_MPPT_charge_controller.step",
+  "success": true,
+  "meshes": 1,
+  "triangles": 140,
+  "bbox_mm": [
+   [
+    532,
+    -110,
+    323
+   ],
+   [
+    632,
+    -50,
+    351
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "MPPT charge controller"
+  ],
+  "ms": 371
+ },
+ {
+  "file": "cad/parts/AS3-521_PV_module_20_W_frame_backsheet.step",
+  "success": true,
+  "meshes": 3,
+  "triangles": 120,
+  "bbox_mm": [
+   [
+    364.4,
+    -175,
+    574
+   ],
+   [
+    813.5,
+    175,
+    667.4
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "PV module 20 W (frame + backsheet)"
+  ],
+  "ms": 243
+ },
+ {
+  "file": "cad/parts/AS3-522_PV_module_20_W_cells_glass.step",
+  "success": true,
+  "meshes": 24,
+  "triangles": 288,
+  "bbox_mm": [
+   [
+    390.7,
+    -151.5,
+    604.9
+   ],
+   [
+    790.1,
+    151.5,
+    663.1
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "PV module 20 W (cells + glass)"
+  ],
+  "ms": 186
+ },
+ {
+  "file": "cad/parts/AS3-523_Canopy_stanchions_hinge_pin_blocks.step",
+  "success": true,
+  "meshes": 12,
+  "triangles": 1376,
+  "bbox_mm": [
+   [
+    400,
+    -185,
+    303
+   ],
+   [
+    810,
+    185,
+    632.3
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Canopy stanchions + hinge / pin blocks"
+  ],
+  "ms": 665
+ },
+ {
+  "file": "cad/parts/AS3-601_Autosampler_cassette_insulated_body.step",
+  "success": true,
+  "meshes": 2,
+  "triangles": 392,
+  "bbox_mm": [
+   [
+    670,
+    -115,
+    303
+   ],
+   [
+    855,
+    115,
+    543
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Autosampler cassette (insulated body)"
+  ],
+  "ms": 147
+ },
+ {
+  "file": "cad/parts/AS3-602_Autosampler_lid_hinged_tamper_seal_hasp.step",
+  "success": true,
+  "meshes": 2,
+  "triangles": 760,
+  "bbox_mm": [
+   [
+    668,
+    -117,
+    543
+   ],
+   [
+    847,
+    117,
+    574
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Autosampler lid (hinged, tamper-seal hasp)"
+  ],
+  "ms": 658
+ },
+ {
+  "file": "cad/parts/AS3-603_Bottle_carousel_lift_out_cassette.step",
+  "success": true,
+  "meshes": 2,
+  "triangles": 264,
+  "bbox_mm": [
+   [
+    671.5,
+    -86,
+    309
+   ],
+   [
+    843.5,
+    86,
+    323
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Bottle carousel (lift-out cassette)"
+  ],
+  "ms": 76
+ },
+ {
+  "file": "cad/parts/AS3-604_Sample_bottle_250_mL_HDPE_lab_supplied.step",
+  "success": true,
+  "meshes": 1,
+  "triangles": 428,
+  "bbox_mm": [
+   [
+    -31,
+    -31,
+    0
+   ],
+   [
+    31,
+    31,
+    140
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Sample bottle 250 mL HDPE (lab-supplied)"
+  ],
+  "ms": 465
+ },
+ {
+  "file": "cad/parts/AS3-605_Bottle_cap_septum.step",
+  "success": true,
+  "meshes": 1,
+  "triangles": 108,
+  "bbox_mm": [
+   [
+    -16,
+    -16,
+    0
+   ],
+   [
+    16,
+    16,
+    14
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Bottle cap (septum)"
+  ],
+  "ms": 139
+ },
+ {
+  "file": "cad/parts/AS3-606_Peristaltic_pump_12_V_reversible.step",
+  "success": true,
+  "meshes": 2,
+  "triangles": 216,
+  "bbox_mm": [
+   [
+    731.5,
+    -60,
+    489
+   ],
+   [
+    783.5,
+    14,
+    541
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Peristaltic pump 12 V (reversible)"
+  ],
+  "ms": 231
+ },
+ {
+  "file": "cad/parts/AS3-701_Beacon_mast.step",
+  "success": true,
+  "meshes": 2,
+  "triangles": 380,
+  "bbox_mm": [
+   [
+    830,
+    195,
+    300
+   ],
+   [
+    890,
+    255,
+    800
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Beacon mast"
+  ],
+  "ms": 208
+ },
+ {
+  "file": "cad/parts/AS3-702_Jal_Deep_beacon_base.step",
+  "success": true,
+  "meshes": 1,
+  "triangles": 156,
+  "bbox_mm": [
+   [
+    820,
+    185,
+    800
+   ],
+   [
+    900,
+    265,
+    822
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Jal-Deep beacon base"
+  ],
+  "ms": 147
+ },
+ {
+  "file": "cad/parts/AS3-703_Jal_Deep_360_deg_LED_lens_green_normal_red_alert.step",
+  "success": true,
+  "meshes": 1,
+  "triangles": 316,
+  "bbox_mm": [
+   [
+    823,
+    188,
+    822
+   ],
+   [
+    897,
+    262,
+    894
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Jal-Deep 360 deg LED lens (green normal / red alert)"
+  ],
+  "ms": 267
+ },
+ {
+  "file": "cad/parts/AS3-711_LTE_antenna_whip_N_type.step",
+  "success": true,
+  "meshes": 3,
+  "triangles": 244,
+  "bbox_mm": [
+   [
+    845,
+    -240,
+    300
+   ],
+   [
+    875,
+    -210,
+    561
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "LTE antenna (whip, N-type)"
+  ],
+  "ms": 119
+ },
+ {
+  "file": "cad/parts/AS3-712_Stage_sensor_waterproof_ultrasonic_looking_up.step",
+  "success": true,
+  "meshes": 2,
+  "triangles": 232,
+  "bbox_mm": [
+   [
+    98,
+    -20,
+    592
+   ],
+   [
+    138,
+    20,
+    638
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Stage sensor (waterproof ultrasonic, looking up)"
+  ],
+  "ms": 260
+ },
+ {
+  "file": "cad/parts/AS3-801_Grab_handle_two_person_carry.step",
+  "success": true,
+  "meshes": 3,
+  "triangles": 756,
+  "bbox_mm": [
+   [
+    -77,
+    -17,
+    0
+   ],
+   [
+    77,
+    17,
+    65.8
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Grab handle (two-person carry)"
+  ],
+  "ms": 392
+ },
+ {
+  "file": "cad/parts/AS3-802_Lifting_eye_bolt_M12_DIN_580.step",
+  "success": true,
+  "meshes": 3,
+  "triangles": 920,
+  "bbox_mm": [
+   [
+    -23,
+    -12,
+    -14
+   ],
+   [
+    23,
+    12,
+    52
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Lifting eye bolt M12 (DIN 580)"
+  ],
+  "ms": 357
+ },
+ {
+  "file": "cad/parts/AS3-811_Cable_harness_probes_stage_sensor_PV_beacon.step",
+  "success": true,
+  "meshes": 5,
+  "triangles": 2128,
+  "bbox_mm": [
+   [
+    138,
+    -132,
+    308.1
+   ],
+   [
+    850,
+    225.9,
+    617.8
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Cable harness (probes, stage sensor, PV, beacon)"
+  ],
+  "ms": 1568
+ },
+ {
+  "file": "cad/parts/AS3-812_Sampler_hoses_intake_purge_to_waste.step",
+  "success": true,
+  "meshes": 2,
+  "triangles": 928,
+  "bbox_mm": [
+   [
+    279,
+    -116,
+    180
+   ],
+   [
+    901,
+    6,
+    372.9
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Sampler hoses (intake + purge-to-waste)"
+  ],
+  "ms": 544
+ },
+ {
+  "file": "cad/parts/AS3-901_Bolt_M8_x_60_A4_washer.step",
+  "success": true,
+  "meshes": 3,
+  "triangles": 172,
+  "bbox_mm": [
+   [
+    -9.1,
+    -9.1,
+    -60
+   ],
+   [
+    9.1,
+    9.1,
+    6.6
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Bolt M8 x 60 A4 + washer"
+  ],
+  "ms": 360
+ },
+ {
+  "file": "cad/parts/AS3-902_Bolt_M10_x_70_A4_washer.step",
+  "success": true,
+  "meshes": 3,
+  "triangles": 172,
+  "bbox_mm": [
+   [
+    -10.9,
+    -10.9,
+    -70
+   ],
+   [
+    10.9,
+    10.9,
+    8.3
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Bolt M10 x 70 A4 + washer"
+  ],
+  "ms": 262
+ },
+ {
+  "file": "cad/parts/AS3-903_Screw_M6_x_25_A4.step",
+  "success": true,
+  "meshes": 3,
+  "triangles": 172,
+  "bbox_mm": [
+   [
+    -7.2,
+    -7.2,
+    -25
+   ],
+   [
+    7.2,
+    7.2,
+    5
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Screw M6 x 25 A4"
+  ],
+  "ms": 97
+ },
+ {
+  "file": "cad/parts/AS3-904_Chemical_anchor_M12_x_130_A4.step",
+  "success": true,
+  "meshes": 3,
+  "triangles": 172,
+  "bbox_mm": [
+   [
+    -12.2,
+    -12.2,
+    -130
+   ],
+   [
+    12.2,
+    12.2,
+    10
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Chemical anchor M12 x 130 A4"
+  ],
+  "ms": 261
+ },
+ {
+  "file": "cad/parts/AS3-905_Bolt_M10_x_40_A4_washer.step",
+  "success": true,
+  "meshes": 3,
+  "triangles": 172,
+  "bbox_mm": [
+   [
+    -10.9,
+    -10.9,
+    -40
+   ],
+   [
+    10.9,
+    10.9,
+    8.3
+   ]
+  ],
+  "nodes": 1,
+  "first_names": [
+   "Bolt M10 x 40 A4 + washer"
+  ],
+  "ms": 101
+ },
+ {
+  "file": "cad/assembly/AquaSentinel_R3_Assembly_MidWater.step",
+  "success": true,
+  "meshes": 453,
+  "triangles": 64612,
+  "bbox_mm": [
+   [
+    -478,
+    -391,
+    -196.8
+   ],
+   [
+    901,
+    391,
+    2811.2
+   ]
+  ],
+  "nodes": 145,
+  "first_names": [
+   "AquaSentinel_R3_MidWater",
+   "Pontoon hull (rotomoulded, foam filled)",
+   "Pontoon hull (rotomoulded, foam filled)",
+   "Bow bumper pad",
+   "Bow bumper pad",
+   "Hull vent / test plug"
+  ],
+  "ms": 20074
+ }
+]

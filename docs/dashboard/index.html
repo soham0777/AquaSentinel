@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AquaSentinel v2.0 — Autonomous River Early-Warning & Forensic Preservation Console</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Top Sticky Header -->
+  <header>
+    <div class="brand">
+      <span class="brand-badge">AQUARIGHT</span>
+      <div>
+        <div class="brand-title" id="txt-app-title">AquaSentinel Early-Warning & Community Protection Console</div>
+        <div class="brand-sub" id="txt-app-sub">Maharashtra Basin — Godavari River Corridor (Kopargaon Bridge to Puntamba Reach)</div>
+      </div>
+    </div>
+
+    <!-- Center Control Bar: Language & Mode Switches -->
+    <div class="controls-bar">
+      <!-- Language Selector -->
+      <div class="lang-selector">
+        <button class="lang-btn active" data-lang="en">English</button>
+        <button class="lang-btn" data-lang="mr">मराठी</button>
+        <button class="lang-btn" data-lang="hi">हिन्दी</button>
+      </div>
+
+      <!-- View Mode Switch -->
+      <div class="view-switch">
+        <button class="mode-btn active" id="btn-mode-operator">⚙️ <span id="txt-mode-operator">Command Center</span></button>
+        <button class="mode-btn" id="btn-mode-community">🌊 <span id="txt-mode-community">Community Portal (लोकसहभाग)</span></button>
+      </div>
+
+      <!-- Demo Mode Toggle -->
+      <div class="demo-toggle-container">
+        <label class="switch">
+          <input type="checkbox" id="demo-mode-toggle" checked>
+          <span class="slider round"></span>
+        </label>
+        <span class="demo-label" id="txt-demo-badge">DEMO MODE</span>
+      </div>
+    </div>
+
+    <!-- Live Telemetry Status Pills -->
+    <div class="status-pills">
+      <div class="pill">
+        <span class="pulse-dot"></span>
+        <span id="txt-pill-node">NODE 01: ACTIVE</span>
+      </div>
+      <div class="pill">
+        <span style="color:var(--accent-cyan)">💾 MicroSD: COMMITTED</span>
+      </div>
+      <div class="pill">
+        <span style="color:var(--accent-green)">☀️ 20W Solar: FLOAT</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Prominent Demo Mode Banner -->
+  <div id="demo-banner" class="demo-banner">
+    ⚠️ <span id="txt-demo-banner-text">DEMO MODE ACTIVE — Replaying Synthetic Godavari River Pollution Scenario for Evaluation</span>
+  </div>
+
+  <!-- Main Container -->
+  <main>
+    
+    <!-- Left Main Column (Telemetry & Risk) -->
+    <div class="left-col">
+
+      <!-- Dynamic Alert Banner (Hidden by default, triggered on anomaly) -->
+      <div id="alert-banner" class="alert-banner">
+        <div class="alert-header">
+          <div id="alert-title" class="alert-title">
+            <span>⚠️</span> <span id="txt-alert-title-text">CRITICAL ANOMALOUS POLLUTION FLAGGED</span>
+          </div>
+          <span class="latency-badge" id="txt-latency-badge">
+            LATENCY: &lt;15 MINS
+          </span>
+        </div>
+        <div id="alert-desc" class="alert-body">
+          Upstream plume detected at Kopargaon Bridge Outfall. Downstream community warning horizon activated!
+        </div>
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- VIEW 1: OPERATOR / COMMAND VIEW                         -->
+      <!-- ======================================================== -->
+      <div id="view-operator">
+        
+        <!-- 6-Parameter Multi-Sensor Live Feed -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <span>📊</span> <span id="txt-sensor-header">In-Situ RS485 Submerged Sensor Array (15-Minute Epoch)</span>
+            </div>
+            <span class="badge" id="txt-sensor-badge">4 Industrial Probes + Ultrasonic Stage</span>
+          </div>
+
+          <div class="metric-grid">
+            <!-- pH Metric -->
+            <div class="metric-card" id="card-ph">
+              <div class="metric-label" id="txt-lbl-ph">pH Level (Glass Probe)</div>
+              <div class="metric-value" id="val-ph">7.42</div>
+              <div class="metric-unit">pH Units (CPCB: 6.0 – 9.0)</div>
+              <div class="progress-bar-bg">
+                <div id="bar-ph" class="progress-bar-fill" style="width: 74%;"></div>
+              </div>
+            </div>
+
+            <!-- Turbidity Metric -->
+            <div class="metric-card" id="card-turb">
+              <div class="metric-label" id="txt-lbl-turb">Turbidity (90° Nephelometric)</div>
+              <div class="metric-value" id="val-turb">8.4</div>
+              <div class="metric-unit">NTU (SEN0710 Industrial)</div>
+              <div class="progress-bar-bg">
+                <div id="bar-turb" class="progress-bar-fill" style="width: 8%;"></div>
+              </div>
+            </div>
+
+            <!-- Dissolved Oxygen Metric -->
+            <div class="metric-card" id="card-do">
+              <div class="metric-label" id="txt-lbl-do">Dissolved Oxygen (Optical DO)</div>
+              <div class="metric-value" id="val-do">7.15</div>
+              <div class="metric-unit">mg/L (CPCB Class C: ≥ 4.0)</div>
+              <div class="progress-bar-bg">
+                <div id="bar-do" class="progress-bar-fill" style="width: 71%;"></div>
+              </div>
+            </div>
+
+            <!-- Electrical Conductivity Metric -->
+            <div class="metric-card" id="card-ec">
+              <div class="metric-label" id="txt-lbl-ec">Electrical Conductivity (EC)</div>
+              <div class="metric-value" id="val-ec">382</div>
+              <div class="metric-unit">µS/cm (Bipolar AC K=10)</div>
+              <div class="progress-bar-bg">
+                <div id="bar-ec" class="progress-bar-fill" style="width: 17%;"></div>
+              </div>
+            </div>
+
+            <!-- Water Temperature Metric -->
+            <div class="metric-card" id="card-temp">
+              <div class="metric-label" id="txt-lbl-temp">Water Temperature</div>
+              <div class="metric-value" id="val-temp">24.6</div>
+              <div class="metric-unit">°C (Integrated PT1000)</div>
+              <div class="progress-bar-bg">
+                <div id="bar-temp" class="progress-bar-fill" style="width: 49%;"></div>
+              </div>
+            </div>
+
+            <!-- River Stage Metric -->
+            <div class="metric-card" id="card-stage">
+              <div class="metric-label" id="txt-lbl-stage">River Water Level (Stage)</div>
+              <div class="metric-value" id="val-stage">1.35</div>
+              <div class="metric-unit">Meters (Ultrasonic Elevation)</div>
+              <div class="progress-bar-bg">
+                <div id="bar-stage" class="progress-bar-fill" style="width: 45%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Robotics Actuation & Forensic Autosampler Status -->
+        <div class="card" style="margin-top: 1.25rem;">
+          <div class="card-header">
+            <div class="card-title">
+              <span>🤖</span> <span id="txt-robotics-header">Robotics Closed-Loop Actuation Status</span>
+            </div>
+            <button class="btn btn-outline" id="btn-open-coc">📋 <span id="txt-btn-coc">View Chain-of-Custody Card</span></button>
+          </div>
+
+          <div class="robotics-grid">
+            <!-- Autosampler Carousel Status -->
+            <div class="robotics-card">
+              <div class="robotics-title">Forensic Autosampler Carousel (4 Vials)</div>
+              <div class="carousel-visual">
+                <div class="vial-slot occupied" id="vial-1">
+                  <div class="vial-icon">🧪</div>
+                  <div class="vial-label">Vial #1</div>
+                  <div class="vial-status">SEALED (250mL)</div>
+                </div>
+                <div class="vial-slot ready" id="vial-2">
+                  <div class="vial-icon">🧪</div>
+                  <div class="vial-label">Vial #2</div>
+                  <div class="vial-status">READY (Sterile)</div>
+                </div>
+                <div class="vial-slot ready" id="vial-3">
+                  <div class="vial-icon">🧪</div>
+                  <div class="vial-label">Vial #3</div>
+                  <div class="vial-status">READY (Sterile)</div>
+                </div>
+                <div class="vial-slot ready" id="vial-4">
+                  <div class="vial-icon">🧪</div>
+                  <div class="vial-label">Vial #4</div>
+                  <div class="vial-status">READY (Sterile)</div>
+                </div>
+              </div>
+              <div class="robotics-meta" id="txt-sampler-meta">
+                Status: Purge-to-Waste Armed | Next draw: 20s Purge + 30s Fill | Holding Limit: 24 Hours
+              </div>
+            </div>
+
+            <!-- Optical Wiper Status -->
+            <div class="robotics-card">
+              <div class="robotics-title">Optical Anti-Fouling Wiper</div>
+              <div class="wiper-status-box">
+                <div class="wiper-icon">🧹</div>
+                <div>
+                  <div class="wiper-headline">Status: PARKED (Hydrodynamic Recess)</div>
+                  <div class="wiper-sub" id="txt-wiper-sub">Interval: Every 6 Hours | Next Sweep: 3h 42m | Drift Auto-Trigger: Active</div>
+                </div>
+              </div>
+              <button class="btn btn-secondary" id="btn-manual-wipe" style="margin-top: 0.75rem; width: 100%;">
+                🔄 <span id="txt-btn-wipe">Trigger Manual Wiper Sweep</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- VIEW 2: HUMAN-CENTRIC COMMUNITY VIEW (लोकसहभाग)           -->
+      <!-- ======================================================== -->
+      <div id="view-community" style="display: none;">
+        <div class="card community-hero-card">
+          <div class="community-header">
+            <h2 id="txt-comm-title">गोदावरी नदी जलसुरक्षा सूचना (River Water Safety Advisory)</h2>
+            <p id="txt-comm-sub">स्थान: कोपरगाव पूल ते पुणतांबा घाट (Location: Kopargaon Bridge to Puntamba Reach)</p>
+          </div>
+
+          <!-- 360° Visual Beacon Representation (Jal-Deep) -->
+          <div class="beacon-visual-container">
+            <div class="beacon-halo-glow safe" id="beacon-halo">
+              <div class="beacon-inner-ring">
+                <div class="beacon-label-top" id="txt-beacon-state">जलदीप स्थिती: सुरक्षित</div>
+                <div class="beacon-headline" id="txt-beacon-headline">पाणी वापरासाठी सुरक्षित आहे</div>
+                <div class="beacon-sub" id="txt-beacon-sub">नदीचे पाणी सामान्य मर्यादेत वाहत आहे (Water is in normal baseline)</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Practical Community Action Guidance -->
+          <div class="community-guidance-grid">
+            <div class="guidance-card safe" id="guide-drinking">
+              <div class="guide-icon">🚰</div>
+              <div class="guide-title" id="txt-guide-drink-title">पिण्याचे पाणी (Drinking Supply)</div>
+              <div class="guide-desc" id="txt-guide-drink-desc">येसगाव साठवण तलावातून येणारे पाणी सुरक्षित आहे. नदीचे कच्चे पाणी गाळून व उकळून वापरावे.</div>
+            </div>
+            <div class="guidance-card safe" id="guide-bathing">
+              <div class="guide-icon">🚿</div>
+              <div class="guide-title" id="txt-guide-bath-title">स्नान व कपडे धुणे (Bathing & Ghats)</div>
+              <div class="guide-desc" id="txt-guide-bath-desc">पुणतांबा घाटावर पाणी वापरासाठी सुरक्षित आहे. कोणतीही रासायनिक गळती आढळलेली नाही.</div>
+            </div>
+            <div class="guidance-card safe" id="guide-farming">
+              <div class="guide-icon">🌾</div>
+              <div class="guide-title" id="txt-guide-farm-title">शेती व पशुधन (Irrigation & Cattle)</div>
+              <div class="guide-desc" id="txt-guide-farm-desc">उपसा जलसिंचन योजना सुरू ठेवण्यास कोणतीही हरकत नाही. विद्युत वाहकता सामान्य आहे.</div>
+            </div>
+          </div>
+
+          <!-- Emergency Community Hotline -->
+          <div class="community-contact-banner">
+            <span>📞 <strong id="txt-hotline-title">कोपरगाव नगरपरिषद आपत्कालीन पाणी नियंत्रण कक्ष:</strong> टोल-फ्री १८००-२३३-XXXX</span>
+            <button class="btn btn-primary" id="btn-subscribe-sms">📱 <span id="txt-btn-sms">मोफत SMS सूचना सुरू करा</span></button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Sidebar Column (Transport Modeling & Downstream Protection) -->
+    <div class="right-col">
+
+      <!-- Downstream Lotic Plume Transport Map -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <span>🌊</span> <span id="txt-transport-title">1-D River Plume Transport & Warning Horizon</span>
+          </div>
+        </div>
+
+        <div class="river-track-container">
+          <div class="river-channel">
+            <div id="plume-indicator" class="plume-indicator" style="display:none;"></div>
+            
+            <!-- Station Node 1 (Kopargaon Bridge) -->
+            <div class="station-marker node-active" style="left: 0%;">
+              <div class="marker-dot"></div>
+              <div class="marker-label">
+                <strong>AquaSentinel #1</strong><br>Kopargaon Bridge (0.0 km)
+              </div>
+            </div>
+
+            <!-- Downstream Lift Scheme (4.5 km) -->
+            <div class="station-marker node-town" style="left: 24%;">
+              <div class="marker-dot"></div>
+              <div class="marker-label">
+                <strong>Lift Scheme A</strong><br>Rural Intake (4.5 km)
+              </div>
+            </div>
+
+            <!-- Intermediate Rural Intake (11.0 km) -->
+            <div class="station-marker node-town" style="left: 58%;">
+              <div class="marker-dot"></div>
+              <div class="marker-label">
+                <strong>Intermediate Lift</strong><br>Canal Pump (11.0 km)
+              </div>
+            </div>
+
+            <!-- Puntamba Riverbank Ghats (19.0 km) -->
+            <div class="station-marker node-town" style="left: 92%;">
+              <div class="marker-dot"></div>
+              <div class="marker-label">
+                <strong>Puntamba Ghats</strong><br>Community Reach (19.0 km)
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Warning Countdown ETA Cards -->
+        <div class="eta-container">
+          <div class="eta-card" id="eta-a">
+            <div class="eta-header">
+              <span class="eta-town">Lift Scheme A (4.5 km)</span>
+              <span class="eta-tag safe" id="tag-a">SAFE</span>
+            </div>
+            <div class="eta-countdown" id="time-a">NORMAL FLOW</div>
+            <div class="eta-action" id="desc-a">Intake pumps operating normally</div>
+          </div>
+
+          <div class="eta-card" id="eta-b">
+            <div class="eta-header">
+              <span class="eta-town">Puntamba Ghats (19.0 km)</span>
+              <span class="eta-tag safe" id="tag-b">SAFE</span>
+            </div>
+            <div class="eta-countdown" id="time-b">NORMAL FLOW</div>
+            <div class="eta-action" id="desc-b">Riverbank water in clean baseline</div>
+          </div>
+        </div>
+
+        <!-- Emergency Lockout Controls -->
+        <div class="lockout-panel">
+          <button class="btn btn-danger" id="btn-lockout-pumps">
+            ⛔ <span id="txt-btn-lockout">EMERGENCY INTAKE LOCKOUT (TRIP PUMPS)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Simulation Scenario Injection Panel (For Demo) -->
+      <div class="card" style="margin-top: 1.25rem;">
+        <div class="card-header">
+          <div class="card-title">
+            <span>⚡</span> <span id="txt-sim-title">Event Simulation & Demonstration Controls</span>
+          </div>
+        </div>
+        <p class="sim-desc" id="txt-sim-desc">
+          Click below to inject simulated lotic contamination plumes into the live model and observe downstream advance warning countdowns:
+        </p>
+        <div class="btn-group">
+          <button class="btn btn-warning" id="btn-sim-acid">
+            🧪 <span id="txt-sim-btn-acid">Simulate Industrial Acid Dump</span>
+          </button>
+          <button class="btn btn-danger" id="btn-sim-sewage">
+            ☣️ <span id="txt-sim-btn-sewage">Simulate 9.98 MLD Sewage Spill</span>
+          </button>
+          <button class="btn btn-secondary" id="btn-sim-reset">
+            🔄 <span id="txt-sim-btn-reset">Reset to Clean Baseline</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ======================================================== -->
+  <!-- MODAL: CHAIN-OF-CUSTODY (CoC) FORENSIC SAMPLE REPORT     -->
+  <!-- ======================================================== -->
+  <div id="modal-coc" class="modal-overlay" style="display: none;">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3>📋 Legal Chain-of-Custody (CoC) Sample Preservation Record</h3>
+        <button class="modal-close" id="btn-close-coc">&times;</button>
+      </div>
+      <div class="modal-body" id="coc-printable-area">
+        <div class="coc-header-block">
+          <div class="coc-title">AQUASENTINEL FORENSIC SAMPLE RECORD</div>
+          <div class="coc-sub">Authoritative Physical Evidence Document for NABL Accredited Laboratory Analysis</div>
+          <div class="coc-id">Tracking ID: <strong>AQ-2026-GOD-BOTTLE-01</strong> | Station: <strong>Kopargaon Bridge (Node 01)</strong></div>
+        </div>
+
+        <table class="coc-table">
+          <tr>
+            <td><strong>Collection Agency:</strong> AquaSentinel Autonomous Edge Unit</td>
+            <td><strong>Custodian / Operator:</strong> Team Sanjivani Hero's Journey</td>
+          </tr>
+          <tr>
+            <td><strong>Sampling Trigger Reason:</strong> <span class="text-rose font-bold">STAT_EVENT: Multi-Parameter Shock Load</span></td>
+            <td><strong>Timestamp (UTC):</strong> <span id="coc-time">2026-10-04 02:15:30 UTC</span></td>
+          </tr>
+          <tr>
+            <td><strong>Sample Vial ID:</strong> Bottle #1 (250 mL Borosilicate)</td>
+            <td><strong>Preservation State:</strong> Sealed Silicone Septum (4°C Cooler Box)</td>
+          </tr>
+        </table>
+
+        <div class="coc-section-title">In-Situ Surrogate Telemetry Snapshot at Time of Capture</div>
+        <table class="coc-telemetry-table">
+          <thead>
+            <tr>
+              <th>pH Level</th>
+              <th>Conductivity (EC)</th>
+              <th>Dissolved Oxygen (DO)</th>
+              <th>Turbidity</th>
+              <th>Water Temp</th>
+              <th>River Stage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>4.82 (Acidic)</td>
+              <td>1,240 µS/cm</td>
+              <td>2.15 mg/L (Hypoxic)</td>
+              <td>85.4 NTU</td>
+              <td>24.2 °C</td>
+              <td>1.45 m</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="coc-signatures">
+          <div class="sig-box">
+            <div class="sig-line"></div>
+            <div>Automated Station Cryptographic Seal</div>
+          </div>
+          <div class="sig-box">
+            <div class="sig-line"></div>
+            <div>Receiving NABL Lab Chemist Sign / Date</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" onclick="window.print()">🖨️ Print Chain-of-Custody Sheet</button>
+        <button class="btn btn-secondary" id="btn-modal-dismiss">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

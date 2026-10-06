@@ -1,0 +1,775 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AquaSentinel R3 Viewer</title>
+<style>
+  :root {
+    --ink: #13202b; --muted: #5b6b78; --panel: rgba(255,255,255,0.92); --line: #d6dde3;
+    --accent: #0b6e99; --accent2: #f2b705; --ok: #1f8a4c; --bad: #c0392b; --bg: #e9eef2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --ink: #e8eef3; --muted: #9fb0bd; --panel: rgba(18,26,33,0.92); --line: #2c3a45; --bg: #0f161c; }
+  }
+  :root[data-theme="dark"] { --ink: #e8eef3; --muted: #9fb0bd; --panel: rgba(18,26,33,0.92); --line: #2c3a45; --bg: #0f161c; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: var(--bg); color: var(--ink);
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif; }
+  #app { position: fixed; inset: 0; }
+  canvas { display: block; }
+  .hud-title { position: absolute; left: 20px; top: 16px; pointer-events: none; }
+  .hud-title h1 { margin: 0; font-size: 20px; letter-spacing: 0.2px; }
+  .hud-title p { margin: 2px 0 0; font-size: 12.5px; color: var(--muted); }
+  #panel { position: absolute; right: 12px; top: 12px; width: 300px; max-height: calc(100% - 24px); overflow: auto;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 13px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.12); backdrop-filter: blur(6px); }
+  #panel h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin: 14px 0 6px; }
+  #panel h2:first-child { margin-top: 0; }
+  .row { display: flex; gap: 6px; flex-wrap: wrap; margin: 4px 0; }
+  button { font: inherit; font-size: 12.5px; padding: 6px 10px; border-radius: 7px; border: 1px solid var(--line);
+    background: transparent; color: var(--ink); cursor: pointer; }
+  button:hover { border-color: var(--accent); }
+  button.on { background: var(--accent); color: #fff; border-color: var(--accent); }
+  button.primary { background: var(--accent); color: #fff; border-color: var(--accent); font-weight: 600; }
+  label.sl { display: block; margin: 8px 0 2px; font-size: 12px; color: var(--muted); }
+  input[type=range] { width: 100%; }
+  #parts { max-height: 220px; overflow: auto; border: 1px solid var(--line); border-radius: 7px; padding: 4px; }
+  #parts div { padding: 3px 6px; border-radius: 5px; cursor: pointer; font-size: 12px; display: flex; justify-content: space-between; gap: 8px; }
+  #parts div:hover, #parts div.sel { background: rgba(11,110,153,0.12); }
+  #parts span.q { color: var(--muted); }
+  #info { margin-top: 8px; font-size: 12px; line-height: 1.45; min-height: 20px; }
+  #info b { font-size: 13px; }
+  .checks div { font-size: 12px; display: flex; gap: 6px; }
+  .checks .p { color: var(--ok); font-weight: 700; } .checks .f { color: var(--bad); font-weight: 700; }
+  #caption { position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%); max-width: min(900px, calc(100% - 360px));
+    background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 18px; display: none;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.14); }
+  #caption .k { font-size: 11.5px; color: var(--accent); font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; }
+  #caption .t { font-size: 19px; font-weight: 650; margin: 2px 0; }
+  #caption .c { font-size: 14px; color: var(--muted); line-height: 1.4; }
+  #stepbar { position: absolute; left: 20px; right: 330px; bottom: 8px; height: 4px; display: none; gap: 3px; }
+  #stepbar i { flex: 1; background: var(--line); border-radius: 2px; } #stepbar i.d { background: var(--accent); }
+  .lbl { font-size: 12px; padding: 3px 8px; border-radius: 6px; background: rgba(19,32,43,0.86); color: #fff; white-space: nowrap;
+    border-left: 3px solid var(--accent2); pointer-events: none; }
+  .lbl b { color: var(--accent2); font-weight: 700; margin-right: 6px; }
+  #gauge { position: absolute; left: 20px; top: 80px; display: none; background: var(--panel); border: 1px solid var(--line);
+    border-radius: 10px; padding: 10px 14px; font-size: 13px; min-width: 190px; }
+  #gauge .v { font-size: 26px; font-weight: 700; }
+  #gauge .s { color: var(--muted); font-size: 12px; }
+  #card { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; pointer-events: none; }
+  #card .in { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 26px 34px; text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.18); }
+  #card h3 { margin: 0 0 4px; font-size: 30px; } #card p { margin: 0; color: var(--muted); font-size: 15px; }
+  #card .nums { display: grid; grid-template-columns: repeat(3, auto); gap: 10px 26px; margin-top: 16px; text-align: left; }
+  #card .nums div { font-size: 13px; color: var(--muted); } #card .nums b { display: block; font-size: 20px; color: var(--ink); }
+  body.capture #panel { display: none; }
+  body.capture #caption { max-width: 1100px; }
+  body.capture #stepbar { right: 20px; }
+  @media (max-width: 760px) {
+    #panel { left: 8px; right: 8px; width: auto; top: auto; bottom: 8px; max-height: 42%; }
+    #caption { max-width: calc(100% - 32px); bottom: auto; top: 70px; }
+    #stepbar { right: 20px; }
+  }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/" } }
+</script>
+</head>
+<body>
+<div id="app"></div>
+<div class="hud-title"><h1>AquaSentinel R3</h1><p>Pole-guided river water-quality station &middot; AquaRight &middot; AAKRUTI 2026 (Robotics)</p></div>
+<div id="gauge"><div class="s">River stage (relative to low design level)</div><div class="v" id="gv">0.00 m</div><div class="s" id="gs"></div></div>
+<div id="caption"><div class="k" id="ck"></div><div class="t" id="ct"></div><div class="c" id="cc"></div></div>
+<div id="stepbar"></div>
+<div id="card"><div class="in"><h3>AquaSentinel R3</h3><p>Rides the river on a guide pole. Senses, warns, and keeps the evidence.</p><div class="nums" id="nums"></div></div></div>
+<div id="panel">
+  <h2>Animation</h2>
+  <div class="row"><button class="primary" id="play">&#9654; Play full animation</button><button id="stop">Stop</button></div>
+  <h2>Mechanism</h2>
+  <label class="sl">Assembled &harr; exploded</label><input type="range" id="explode" min="0" max="1" step="0.01" value="0">
+  <label class="sl">River stage <span id="wl"></span></label><input type="range" id="water" min="0" max="1" step="0.005" value="0.5">
+  <label class="sl">Yaw about the pole (weathervane)</label><input type="range" id="yaw" min="-40" max="40" step="1" value="0">
+  <div class="row"><button id="b_gate">Open gate</button><button id="b_service">Service access</button><button id="b_cart">Lift cartridge</button><button id="b_event">Pollution event</button></div>
+  <h2>View</h2>
+  <div class="row"><button data-v="iso">Iso</button><button data-v="side">Side</button><button data-v="front">Downstream</button><button data-v="top">Top</button><button data-v="under">Underwater</button></div>
+  <div class="row"><button id="b_sec">Section</button><button id="b_xray">X-ray</button><button id="b_env" class="on">River</button><button id="b_lbl">Labels</button></div>
+  <h2>Parts (click)</h2>
+  <div id="parts"></div>
+  <div id="info"></div>
+  <h2>Design checks (from CAD)</h2>
+  <div class="checks" id="checks"></div>
+</div>
+<script>window.__GLB_B64__ = "/*GLB_BASE64*/";</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
+
+const params = new URLSearchParams(location.search);
+const CAPTURE = params.has('capture');
+if (CAPTURE) document.body.classList.add('capture');
+
+// ------------------------------------------------------------------ renderer
+const app = document.getElementById('app');
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(CAPTURE ? 1 : Math.min(devicePixelRatio, 2));
+renderer.setSize(innerWidth, innerHeight);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 0.95;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.localClippingEnabled = true;
+app.appendChild(renderer.domElement);
+const labelRenderer = new CSS2DRenderer();
+labelRenderer.setSize(innerWidth, innerHeight);
+labelRenderer.domElement.style.position = 'absolute';
+labelRenderer.domElement.style.inset = '0';
+labelRenderer.domElement.style.pointerEvents = 'none';
+app.appendChild(labelRenderer.domElement);
+
+const scene = new THREE.Scene();
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+scene.environmentIntensity = 0.55;
+
+function gradientTexture(top, bottom) {
+  const c = document.createElement('canvas'); c.width = 4; c.height = 512;
+  const g = c.getContext('2d'); const gr = g.createLinearGradient(0, 0, 0, 512);
+  gr.addColorStop(0, top); gr.addColorStop(1, bottom); g.fillStyle = gr; g.fillRect(0, 0, 4, 512);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+}
+const SKY = gradientTexture('#8fb8d8', '#eef3f6');
+const STUDIO = gradientTexture('#dfe5ea', '#f7f9fa');
+scene.background = SKY;
+
+const camera = new THREE.PerspectiveCamera(32, innerWidth / innerHeight, 0.02, 200);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+
+scene.add(new THREE.HemisphereLight(0xdfefff, 0x6b5b45, 0.55));
+const sun = new THREE.DirectionalLight(0xffffff, 2.3);
+sun.position.set(3.5, 6.5, 4.0);
+sun.castShadow = true;
+sun.shadow.mapSize.set(4096, 4096);
+const sc = sun.shadow.camera; sc.left = -3; sc.right = 3; sc.top = 4.5; sc.bottom = -3; sc.near = 0.5; sc.far = 20;
+sun.shadow.bias = -0.0004; sun.shadow.normalBias = 0.02;
+scene.add(sun); scene.add(sun.target);
+const fill = new THREE.DirectionalLight(0xcfe3ff, 0.6); fill.position.set(-4, 3, -3); scene.add(fill);
+
+// water with procedural ripple normals
+function rippleNormal() {
+  const N = 256, c = document.createElement('canvas'); c.width = c.height = N;
+  const g = c.getContext('2d'), img = g.createImageData(N, N);
+  const h = (x, y) => Math.sin(x * 0.11 + y * 0.05) * 0.6 + Math.sin(x * 0.043 - y * 0.12) * 0.5 + Math.sin((x + y) * 0.21) * 0.25;
+  for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
+    const dx = h(x + 1, y) - h(x - 1, y), dy = h(x, y + 1) - h(x, y - 1);
+    const nx = -dx, ny = -dy, nz = 2.0, l = Math.hypot(nx, ny, nz), i = (y * N + x) * 4;
+    img.data[i] = (nx / l * 0.5 + 0.5) * 255; img.data[i + 1] = (ny / l * 0.5 + 0.5) * 255; img.data[i + 2] = (nz / l * 0.5 + 0.5) * 255; img.data[i + 3] = 255;
+  }
+  g.putImageData(img, 0, 0); const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(11, 11); return t;
+}
+const waterNormal = rippleNormal();
+const water = new THREE.Mesh(new THREE.PlaneGeometry(40, 40, 1, 1),
+  new THREE.MeshPhysicalMaterial({ color: 0x245e70, transparent: true, opacity: 0.62, roughness: 0.08, metalness: 0.0,
+    normalMap: waterNormal, normalScale: new THREE.Vector2(0.18, 0.18), side: THREE.DoubleSide, depthWrite: false }));
+water.rotation.x = -Math.PI / 2; water.renderOrder = 10; scene.add(water);
+const bed = new THREE.Mesh(new THREE.PlaneGeometry(40, 40), new THREE.MeshStandardMaterial({ color: 0x4a4436, roughness: 1 }));
+bed.rotation.x = -Math.PI / 2; bed.receiveShadow = true; scene.add(bed);
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(30, 30), new THREE.ShadowMaterial({ opacity: 0.18 }));
+floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; floor.visible = false; scene.add(floor);
+
+// ------------------------------------------------------------------ state
+const S = { explode: 0, water: 0.5, yaw: 0, gate: 0, canopy: 0, podlid: 0, samplerlid: 0, cart: 0, carousel: 0,
+  section: false, xray: false, env: 'river', labels: false, event: 0, pier: false };
+let META = null, ROOT = null, FLOAT = null, LEVELS = null;
+const inst = [];           // {obj, base, explode, step, data, mats}
+const pivots = {};         // name -> {obj, base, axis, open, lift}
+const byName = {};
+const sectionPlane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0.0005);
+const m2t = (x, y, z) => new THREE.Vector3(x / 1000, z / 1000, -y / 1000);
+
+function setupScene(gltf) {
+  ROOT = gltf.scene.getObjectByName('AquaSentinel_R3');
+  META = gltf.scene.userData || (gltf.parser && gltf.parser.json.scenes[0].extras) || {};
+  scene.add(gltf.scene);
+  FLOAT = gltf.scene.getObjectByName('FLOAT');
+  LEVELS = FLOAT.userData;
+  gltf.scene.traverse(o => {
+    if (o.userData && o.userData.pivot) {
+      const ax = o.userData.axis;
+      pivots[o.userData.pivot] = { obj: o, base: o.position.clone(), axis: new THREE.Vector3(ax[0], ax[1], ax[2]).normalize(),
+        open: THREE.MathUtils.degToRad(o.userData.open_deg || 0), lift: o.userData.lift || 0 };
+    }
+    if (o.isMesh) {
+      o.castShadow = true; o.receiveShadow = true;
+      o.material = o.material.clone();
+      const d = o.userData || {};
+      const rec = { obj: o, base: o.position.clone(), explode: new THREE.Vector3(...(d.explode || [0, 0, 0])),
+        step: d.step || 0, data: d, baseMat: { opacity: o.material.opacity, transparent: o.material.transparent, emissive: o.material.emissive.clone(), color: o.material.color.clone() } };
+      if (d.group !== 'env') o.material.clippingPlanes = [];
+      inst.push(rec); byName[o.name] = rec;
+    }
+  });
+  buildPartList(); buildChecks();
+  applyState();
+}
+
+// ------------------------------------------------------------------ apply state
+const ease = t => t < 0 ? 0 : t > 1 ? 1 : t * t * (3 - 2 * t);
+function waterZ() { return LEVELS ? (META.levels.water_low + (META.levels.water_high - META.levels.water_low) * S.water) : 0; }
+function applyState(t = null) {
+  if (!FLOAT) return;
+  const wz = waterZ();
+  FLOAT.position.z = wz - LEVELS.draft;
+  FLOAT.rotation.z = THREE.MathUtils.degToRad(S.yaw);
+  water.position.y = wz / 1000;
+  water.visible = S.env === 'river'; bed.visible = S.env === 'river'; floor.visible = S.env !== 'river';
+  bed.position.y = -1.4; floor.position.y = (LEVELS.keel_low - 420) / 1000;
+  scene.background = S.env === 'river' ? SKY : STUDIO;
+  for (const r of inst) {
+    const isEnv = r.data.group === 'env';
+    if (isEnv) { r.obj.visible = S.env === 'river' || S.pier; r.obj.material.clippingPlanes = []; continue; }
+    const e = (r.data.group === 'guide' ? 1 : 1) * S.explode;
+    r.obj.position.copy(r.base).addScaledVector(r.explode, e);
+    if (r.vis !== undefined) r.obj.visible = r.vis; else r.obj.visible = true;
+    const xr = S.xray && /^(Pod_Body|Pod_Lid|Sampler_Body|Sampler_Lid|Sensor_Well|Pontoon_)/.test(r.obj.name);
+    r.obj.material.transparent = xr || r.baseMat.transparent;
+    r.obj.material.opacity = xr ? 0.18 : r.baseMat.opacity;
+    r.obj.material.depthWrite = !xr;
+    r.obj.material.clippingPlanes = S.section ? [sectionPlane] : [];
+    r.obj.material.side = S.section ? THREE.DoubleSide : THREE.FrontSide;
+  }
+  const P = pivots;
+  if (P.gate) P.gate.obj.quaternion.setFromAxisAngle(P.gate.axis, P.gate.open * S.gate);
+  if (P.canopy) P.canopy.obj.quaternion.setFromAxisAngle(P.canopy.axis, P.canopy.open * S.canopy);
+  if (P.podlid) P.podlid.obj.quaternion.setFromAxisAngle(P.podlid.axis, P.podlid.open * S.podlid);
+  if (P.samplerlid) P.samplerlid.obj.quaternion.setFromAxisAngle(P.samplerlid.axis, P.samplerlid.open * S.samplerlid);
+  if (P.cartridge) { P.cartridge.obj.position.copy(P.cartridge.base); P.cartridge.obj.position.z += P.cartridge.lift * S.cart; }
+  // carousel + bottles lift out with the sampler lid open
+  for (const r of inst) if (/^(Bottle_|Bottle_Carousel)/.test(r.obj.name)) r.obj.position.z = r.base.z + r.explode.z * S.explode + 320 * S.carousel;
+  // event: beacon red, hose and bottle 1 glow
+  const lens = byName['Beacon_Lens'];
+  if (lens) {
+    const red = S.event > 0;
+    const pulse = red ? 0.55 + 0.45 * Math.sin((t ?? performance.now() / 1000) * 9) : 1;
+    lens.obj.material.color.set(red ? 0xff6655 : 0x8cffb4);
+    lens.obj.material.emissive.set(red ? 0xff1a0a : 0x0dbf4d).multiplyScalar(red ? pulse : 1);
+  }
+  const hose = byName['Sampler_Hoses'];
+  if (hose) { hose.obj.material.emissive.setRGB(0.0, 0.9 * S.event, 1.6 * S.event); hose.obj.material.opacity = S.event > 0 ? 1 : hose.baseMat.opacity; }
+  const b1 = byName['Bottle_1'];
+  if (b1) b1.obj.material.emissive.setRGB(0.0, 0.35 * S.event, 0.6 * S.event);
+  document.getElementById('gauge').style.display = gaugeOn && !CAPTURE ? 'block' : 'none';
+  document.getElementById('gv').textContent = ((wz - META.levels.water_low) / 1000).toFixed(2) + ' m';
+  document.getElementById('gs').textContent = 'float keel ' + ((wz - LEVELS.draft) / 1000).toFixed(2) + ' m  |  draft ' + LEVELS.draft.toFixed(0) + ' mm (constant)';
+  document.getElementById('wl').textContent = '(' + ((wz - META.levels.water_low) / 1000).toFixed(2) + ' m)';
+}
+
+// ------------------------------------------------------------------ views
+function floatCentre() { return m2t(380, 0, (FLOAT ? FLOAT.position.z : 0) + 220); }
+const VIEWS = {
+  iso:   () => ({ pos: m2t(-1500, 2300, waterZ() + 1500), tgt: floatCentre() }),
+  side:  () => ({ pos: m2t(420, 3900, waterZ() + 350), tgt: m2t(420, 0, waterZ() + 150) }),
+  front: () => ({ pos: m2t(3400, -900, waterZ() + 900), tgt: floatCentre() }),
+  top:   () => ({ pos: m2t(380, 1, waterZ() + 4200), tgt: m2t(380, 0, waterZ()) }),
+  under: () => ({ pos: m2t(1400, 1500, waterZ() - 900), tgt: m2t(240, 0, waterZ() - 250) }),
+  wide:  () => ({ pos: m2t(2600, 5200, 2600), tgt: m2t(-100, 0, 1050) }),
+};
+function setView(name, inst = true) {
+  const v = VIEWS[name](); if (inst) { camera.position.copy(v.pos); controls.target.copy(v.tgt); controls.update(); }
+  return v;
+}
+
+// ------------------------------------------------------------------ UI
+function buildPartList() {
+  const box = document.getElementById('parts'); box.innerHTML = '';
+  const seen = new Map();
+  for (const r of inst) { if (r.data.group === 'env') continue; const k = r.data.pid + '|' + r.data.part;
+    seen.set(k, (seen.get(k) || []).concat([r])); }
+  [...seen.entries()].sort().forEach(([k, list]) => {
+    const [pid, name] = k.split('|'); const d = document.createElement('div');
+    d.innerHTML = `<span>${pid} ${name}</span><span class="q">x${list.length}</span>`;
+    d.onclick = () => { selectParts(list); [...box.children].forEach(c => c.classList.remove('sel')); d.classList.add('sel'); };
+    box.appendChild(d);
+  });
+}
+let selected = [];
+function selectParts(list) {
+  for (const r of selected) r.obj.material.emissive.copy(r.baseMat.emissive);
+  selected = list; for (const r of list) r.obj.material.emissive.setRGB(0.95, 0.55, 0.0);
+  const d = list[0].data;
+  document.getElementById('info').innerHTML = `<b>${d.pid} &mdash; ${d.part}</b><br>Qty ${list.length} &middot; ${d.material}<br>` +
+    `${d.process ? 'Make: ' + d.process + '<br>' : ''}${d.desc ? d.desc + '<br>' : ''}Mass each ${d.kg} kg`;
+}
+function buildChecks() {
+  const c = document.getElementById('checks'); c.innerHTML = '';
+  for (const [k, v] of Object.entries(META.checks || {})) c.innerHTML += `<div><span class="${v ? 'p' : 'f'}">${v ? 'PASS' : 'FAIL'}</span>${k}</div>`;
+  const n = META.key_numbers || {};
+  document.getElementById('nums').innerHTML = [
+    ['Mass (CAD)', n.mass_kg + ' kg'], ['Draft', n.draft_mm + ' mm'], ['Freeboard', n.freeboard_mm + ' mm'],
+    ['Reserve buoyancy', n.reserve + 'x'], ['GM transverse', n.gm_t + ' m'], ['Pole safety factor', n.pole_sf]
+  ].map(([a, b]) => `<div>${a}<b>${b}</b></div>`).join('');
+}
+const $ = id => document.getElementById(id);
+$('explode').oninput = e => { S.explode = +e.target.value; applyState(); };
+$('water').oninput = e => { S.water = +e.target.value; gaugeOn = true; applyState(); };
+$('yaw').oninput = e => { S.yaw = +e.target.value; applyState(); };
+function toggleAnim(key, targets, btn) {
+  const open = !btn.classList.contains('on'); btn.classList.toggle('on', open);
+  tweenTo(Object.fromEntries(targets.map(k => [k, open ? 1 : 0])), 1.2);
+}
+$('b_gate').onclick = e => toggleAnim('gate', ['gate'], e.target);
+$('b_service').onclick = e => toggleAnim('service', ['canopy', 'podlid', 'samplerlid'], e.target);
+$('b_cart').onclick = e => toggleAnim('cart', ['cart'], e.target);
+$('b_event').onclick = e => toggleAnim('event', ['event'], e.target);
+$('b_sec').onclick = e => { S.section = !S.section; e.target.classList.toggle('on', S.section); applyState(); };
+$('b_xray').onclick = e => { S.xray = !S.xray; e.target.classList.toggle('on', S.xray); applyState(); };
+$('b_env').onclick = e => { S.env = S.env === 'river' ? 'studio' : 'river'; e.target.classList.toggle('on', S.env === 'river'); applyState(); };
+$('b_lbl').onclick = e => { S.labels = !S.labels; e.target.classList.toggle('on', S.labels); refreshStaticLabels(); };
+document.querySelectorAll('[data-v]').forEach(b => b.onclick = () => flyTo(VIEWS[b.dataset.v](), 1.2));
+
+const ray = new THREE.Raycaster(), mouse = new THREE.Vector2();
+renderer.domElement.addEventListener('pointerdown', ev => { renderer.domElement._down = [ev.clientX, ev.clientY]; });
+renderer.domElement.addEventListener('pointerup', ev => {
+  const d = renderer.domElement._down; if (!d || Math.hypot(ev.clientX - d[0], ev.clientY - d[1]) > 4) return;
+  mouse.set(ev.clientX / innerWidth * 2 - 1, -ev.clientY / innerHeight * 2 + 1); ray.setFromCamera(mouse, camera);
+  const hit = ray.intersectObjects(inst.filter(r => r.obj.visible && r.data.group !== 'env').map(r => r.obj), false)
+    .filter(h => !S.section || sectionPlane.distanceToPoint(h.point) >= 0)[0];
+  if (hit) { const r = byName[hit.object.name]; const same = inst.filter(x => x.data.pid === r.data.pid); selectParts(same); }
+});
+
+// ------------------------------------------------------------------ labels
+const labels = [];
+function addLabel(r, text, ttl = null, atBase = true, pid = '', name = '') {
+  const el = document.createElement('div'); el.className = 'lbl'; el.innerHTML = text;
+  const o = new CSS2DObject(el); const keep = r.obj.position.clone(); if (atBase) r.obj.position.copy(r.base); r.obj.updateMatrixWorld(true);
+  const b = new THREE.Box3().setFromObject(r.obj); b.getCenter(o.position); r.obj.position.copy(keep); r.obj.updateMatrixWorld(true);
+  scene.add(o); let nm = name || r.data.label || r.data.part; nm = nm.replace(/\s*\((?!x)[^)]*\)\s*/g, ' ').trim(); if (nm.length > 40) nm = nm.slice(0, 38) + '...';
+  labels.push({ o, r, ttl, born: clock, pid: pid || r.data.pid, name: nm }); return o;
+}
+function clearLabels() { for (const l of labels) scene.remove(l.o); labels.length = 0; }
+const STATIC_LABELS = ['Pontoon_Starboard', 'Crossbeam_2', 'Deck_Plate', 'Carriage_Fixed', 'Carriage_Gate', 'Roller_1', 'Sensor_Well',
+  'Sensor_Cage', 'Debris_Deflector', 'Cartridge_Cap', 'Probe_PH', 'Pod_Body', 'Battery', 'PV_Module_Cells', 'Sampler_Body', 'Bottle_1',
+  'Beacon_Lens', 'Stage_Sensor', 'Wiper_Arm', 'LTE_Antenna'];
+function refreshStaticLabels() {
+  clearLabels(); if (!S.labels) return;
+  for (const n of STATIC_LABELS) { const r = byName[n]; if (r && r.obj.visible) addLabel(r, `<b>${r.data.pid}</b>${r.data.label || r.data.part}`, null, false); }
+}
+// ------------------------------------------------------------------ tweens + camera moves
+let tweens = [];
+function tweenTo(target, dur) {
+  const from = {}; for (const k in target) from[k] = S[k];
+  tweens.push({ from, target, t0: clock, dur });
+}
+let camMove = null;
+function flyTo(v, dur) { camMove = { p0: camera.position.clone(), t0: controls.target.clone(), p1: v.pos, t1: v.tgt, s: clock, dur }; }
+
+// ------------------------------------------------------------------ timeline (full animation)
+function buildTimeline() {
+  const T = [];
+  let t = 0;
+  const cap = (k, title, text, at, d) => T.push({ t: at, dur: d, cap: { k, title, text } });
+  const V = (p, q) => [m2t(...p), m2t(...q)];
+  T.push({ t: 0, dur: 3.5, fn: () => { S.env = 'studio'; S.pier = true; }, view: V([3400, 2400, 2100], [-200, 0, 1250]) });
+  cap('AquaRight  |  AAKRUTI 2026  |  Robotics', 'AquaSentinel R3',
+      'A river water-quality station that rides a guide pole: no motor, no propeller, no GPS.', 0, 3.5);
+  t = 3.5;
+  const stepDur = { 1: 3.2, 2: 3.6, 3: 3.0, 4: 3.4, 5: 5.0, 6: 3.8, 7: 3.4, 8: 3.0, 9: 3.4, 10: 3.2, 11: 4.4, 12: 3.2 };
+  const stepView = {
+    1: V([3000, 2100, 1900], [-330, 0, 1250]),  2: V([3200, 2300, 2100], [-250, 0, 1300]),
+    3: V([2300, 2300, 2100], [380, 0, 950]),    4: V([1900, 1800, 2500], [430, 0, 1150]),
+    5: V([950, 1250, 1950], [0, 0, 1380]),      6: V([1650, 1550, 620], [240, 0, 930]),
+    7: V([1500, 1350, 2100], [500, 0, 1300]),   8: V([1800, 1500, 2400], [560, 0, 1450]),
+    9: V([2100, 1150, 2000], [760, 0, 1350]),   10: V([2300, 1700, 2300], [520, 0, 1500]),
+    11: V([950, 1350, 1900], [240, 0, 1250]),   12: V([2100, 2000, 2300], [420, 0, 1200]) };
+  for (const st of META.steps) {
+    const d = stepDur[st.step] || 3.2;
+    T.push({ t, dur: d, step: st.step, view: stepView[st.step] });
+    cap(`Assembly ${st.step} / ${META.steps.length}`, st.title, st.caption, t, d);
+    t += d;
+  }
+  const demo = (title, text, d, fn, view, k = 'How it works') => { T.push({ t, dur: d, fn, view }); if (title) cap(k, title, text, t, d); t += d; };
+  demo('Into the river', 'The float sits at its design draft. Two pier brackets hold the 2 in stainless pole.', 3.2,
+    p => { S.env = 'river'; S.pier = true; water.material.opacity = 0.62 * ease(p * 1.4); }, V([3400, 4300, 2500], [0, 0, 1100]));
+  demo('River rises 1 m: the float rises with it', 'Buoyancy lifts the float along the pole on eight concave rollers. No motor, no GPS, no station-keeping energy.', 5.0,
+    p => { S.water = 0.5 + 0.5 * ease(p); gaugeOn = true; }, V([900, 6200, 2900], [150, 0, 1250]));
+  demo('...and falls 2 m: it follows down', 'Roller tiers are 350 mm apart, so the carriage cannot self-lock even if the rollers seize (drawer rule, checked on the CAD).', 5.0,
+    p => { S.water = 1 - ease(p); }, null);
+  demo('Back to normal level', 'A stage sensor on the carriage reads its distance to the target plate: the river level is logged with every sample.', 3.0,
+    p => { S.water = 0.5 * ease(p); }, null);
+  demo('The current aligns it; the pole carries no torque', 'Pivoting at its bow, the float trails downstream like a weathervane. Only the rub rails can ever touch the pier.', 5.0,
+    p => { S.yaw = 28 * Math.sin(p * Math.PI * 2); gaugeOn = false; }, V([500, 1, 5400], [300, 0, 900]));
+  demo('Gate opens: the float comes off without removing the pole', 'Two tool-free T-handle pins. The front half of the carriage swings forward on its hinge.', 4.4,
+    p => { S.gate = p < 0.5 ? ease(p * 2.2) : ease((1 - p) * 2.2); }, V([-250, 1350, 1950], [-60, 0, 1300]));
+  demo('Service from the deck', 'Canopy hinges up, pod and sampler lids open, and the whole bottle carousel lifts out to go to the lab.', 5.2,
+    p => { const a = ease(Math.min(1, p * 2.2)), b = ease(Math.min(1, Math.max(0, (p - 0.35) * 2.6)));
+      S.canopy = a; S.podlid = b; S.samplerlid = b; S.carousel = ease(Math.max(0, (p - 0.65) * 3.0)); },
+    V([1900, 1500, 2350], [600, 0, 1350]));
+  demo('Pull-up sensor cartridge', 'pH, EC, optical DO and turbidity probes come up through the well on one handle: clean and calibrate from the deck, no wading.', 5.2,
+    p => { S.canopy = S.podlid = S.samplerlid = 1 - ease(Math.min(1, p * 3)); S.carousel = S.canopy;
+      S.cart = p < 0.7 ? ease(p / 0.7) : 1 - ease((p - 0.7) / 0.3); }, V([450, 1750, 1650], [240, 0, 1450]));
+  demo('Sense, decide, act', 'A pH / EC spike is flagged on the ESP32. Jal-Deep turns red for people on the bank, the pump purges and fills bottle 1, and an LTE alert goes out.', 6.0,
+    p => { S.event = p < 0.85 ? 1 : 1 - ease((p - 0.85) / 0.15); S.xray = p > 0.15 && p < 0.9; }, V([2200, 1700, 1900], [600, 0, 1300]));
+  demo('Inside', 'Section through the sensor well, cartridge, power pod and sampler.', 5.0,
+    p => { S.section = p < 0.98; S.xray = false; }, V([450, 2700, 1350], [420, 0, 1050]));
+  demo('Exploded view', 'Every part has a part number, material and process in the BOM, and its own STEP file.', 4.0,
+    p => { S.section = false; S.env = 'studio'; S.pier = false; S.explode = ease(Math.min(1, p / 0.6)); }, V([2800, 3900, 3200], [380, 0, 1300]), 'CAD package');
+  demo('', '', 3.0, p => { S.explode = 1 - ease(p); if (p > 0.95) { S.env = 'river'; S.pier = true; } }, null);
+  T.push({ t, dur: 6.5, card: true, orbit: true });
+  t += 6.5;
+  return { T, total: t };
+}
+
+let clock = 0;
+let anim = null;
+let gaugeOn = false;
+function startAnimation() {
+  const tl = buildTimeline(); anim = { ...tl, t: 0 };
+  Object.assign(S, { explode: 0, water: 0.5, yaw: 0, gate: 0, canopy: 0, podlid: 0, samplerlid: 0, cart: 0, carousel: 0,
+    section: false, xray: false, event: 0, env: 'studio', pier: true });
+  water.material.opacity = 0; gaugeOn = false;
+  for (const r of inst) { if (r.data.group !== 'env') r.vis = false; delete r._q; }
+  const bar = $('stepbar'); bar.innerHTML = META.steps.map(() => '<i></i>').join(''); bar.style.display = 'flex';
+  $('caption').style.display = 'block'; $('card').style.display = 'none'; clearLabels();
+  setCam(m2t(3400, 2400, 2100), m2t(-200, 0, 1250));
+}
+function stopAnimation() {
+  anim = null; for (const r of inst) { delete r.vis; delete r._q; } water.material.opacity = 0.62; S.pier = false; S.env = 'river';
+  gaugeOn = false; $('caption').style.display = 'none'; $('stepbar').style.display = 'none'; $('card').style.display = 'none';
+  clearLabels(); applyState();
+}
+$('play').onclick = startAnimation; $('stop').onclick = stopAnimation;
+
+// ------------------------------------------------------------------ overlay compositor (captions + labels burned into stills and video)
+const comp = document.createElement('canvas');
+const cx = comp.getContext('2d');
+function rrectPath(c, x, y, w, h, r) {
+  c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r);
+  c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath();
+}
+function wrapText(c, text, maxW) {
+  const words = (text || '').split(' '); const lines = []; let line = '';
+  for (const w of words) { const tt = line ? line + ' ' + w : w; if (c.measureText(tt).width > maxW && line) { lines.push(line); line = w; } else line = tt; }
+  if (line) lines.push(line); return lines;
+}
+function compose(overlay = true) {
+  const W = renderer.domElement.width, H = renderer.domElement.height;
+  if (comp.width !== W || comp.height !== H) { comp.width = W; comp.height = H; }
+  cx.drawImage(renderer.domElement, 0, 0);
+  if (!overlay) return comp;
+  const s = H / 1080;
+  const F = (wgt, px) => `${wgt} ${Math.round(px * s)}px "Segoe UI", system-ui, sans-serif`;
+  // title block
+  cx.save();
+  cx.fillStyle = 'rgba(255,255,255,0.78)'; rrectPath(cx, 24 * s, 22 * s, 560 * s, 74 * s, 10 * s); cx.fill();
+  cx.fillStyle = '#13202b'; cx.font = F(700, 30); cx.fillText('AquaSentinel R3', 42 * s, 58 * s);
+  cx.fillStyle = '#4b5b68'; cx.font = F(500, 17); cx.fillText('Pole-guided river water-quality station  |  AquaRight  |  AAKRUTI 2026', 42 * s, 84 * s);
+  // labels: near-object tags for a few, side callouts for many
+  const vis = [];
+  for (const l of labels) { const v = l.o.position.clone().project(camera); if (v.z > 1 || !l.o.visible) continue;
+    vis.push({ l, x: (v.x + 1) / 2 * W, y: (1 - v.y) / 2 * H }); }
+  const tag = (x, y, l, align) => {
+    cx.font = F(700, 19); const w1 = cx.measureText(l.pid + '  ').width; cx.font = F(500, 19); const w2 = cx.measureText(l.name).width;
+    const tw = w1 + w2 + 28 * s, tx = align === 'right' ? x - tw : x;
+    cx.fillStyle = 'rgba(19,32,43,0.9)'; rrectPath(cx, tx, y - 17 * s, tw, 34 * s, 6 * s); cx.fill();
+    cx.fillStyle = '#f2b705'; cx.fillRect(align === 'right' ? tx + tw - 4 * s : tx, y - 17 * s, 4 * s, 34 * s);
+    cx.font = F(700, 19); cx.fillText(l.pid, tx + 14 * s, y + 7 * s);
+    cx.fillStyle = '#ffffff'; cx.font = F(500, 19); cx.fillText(l.name, tx + 14 * s + w1, y + 7 * s);
+    return tw;
+  };
+  const leader = (x0, y0, x1, y1) => { cx.strokeStyle = '#f2b705'; cx.lineWidth = 2.2 * s; cx.beginPath(); cx.moveTo(x0, y0); cx.lineTo(x1, y1); cx.stroke();
+    cx.fillStyle = '#f2b705'; cx.beginPath(); cx.arc(x0, y0, 5 * s, 0, Math.PI * 2); cx.fill(); };
+  if (vis.length <= 4) {
+    for (const v of vis) { leader(v.x, v.y, v.x + 46 * s, v.y - 42 * s); tag(v.x + 46 * s, v.y - 58 * s, v.l, 'left'); }
+  } else {
+    for (const side of ['left', 'right']) {
+      const list = vis.filter(v => (side === 'left') === (v.x < W * 0.5)).sort((a, b) => a.y - b.y);
+      const gap = 42 * s; let yPrev = 128 * s;
+      const ys = list.map(v => { const y = Math.max(v.y, yPrev + gap); yPrev = y; return y; });
+      const over = ys.length ? ys[ys.length - 1] - (H - 60 * s) : 0;
+      if (over > 0) for (let i = ys.length - 1, lim = H - 60 * s; i >= 0; i--) { ys[i] = Math.min(ys[i], lim); lim = ys[i] - gap; }
+      let maxw = 0; for (const v of list) { cx.font = F(700, 19); const a = cx.measureText(v.l.pid + '  ').width; cx.font = F(500, 19);
+        maxw = Math.max(maxw, a + cx.measureText(v.l.name).width + 28 * s); }
+      const xcol = side === 'left' ? 24 * s + maxw + 6 * s : W - 24 * s - maxw - 6 * s;
+      list.forEach((v, i) => { leader(v.x, v.y, xcol, ys[i]); tag(xcol + (side === 'left' ? -6 * s : 6 * s), ys[i], v.l, side === 'left' ? 'right' : 'left'); });
+    }
+  }
+  // stage gauge
+  if (gaugeOn) {
+    const wz = waterZ(); const st = ((wz - META.levels.water_low) / 1000);
+    cx.fillStyle = 'rgba(255,255,255,0.85)'; rrectPath(cx, 24 * s, 112 * s, 360 * s, 104 * s, 10 * s); cx.fill();
+    cx.fillStyle = '#4b5b68'; cx.font = F(500, 16); cx.fillText('River stage above low design level', 42 * s, 140 * s);
+    cx.fillStyle = '#0b6e99'; cx.font = F(700, 40); cx.fillText(st.toFixed(2) + ' m', 42 * s, 184 * s);
+    cx.fillStyle = '#4b5b68'; cx.font = F(500, 15); cx.fillText('draft stays ' + LEVELS.draft.toFixed(0) + ' mm at every level', 42 * s, 206 * s);
+  }
+  // caption
+  if ($('caption').style.display === 'block' && $('ct').textContent) {
+    const maxW = Math.min(1180 * s, W * 0.72);
+    cx.font = F(500, 23); const lines = wrapText(cx, $('cc').textContent, maxW - 56 * s);
+    const h = (98 + 30 * lines.length) * s, x = (W - maxW) / 2, y = H - h - 40 * s;
+    cx.fillStyle = 'rgba(255,255,255,0.93)'; rrectPath(cx, x, y, maxW, h, 12 * s); cx.fill();
+    cx.fillStyle = '#0b6e99'; cx.fillRect(x, y, 6 * s, h);
+    cx.font = F(700, 16); cx.fillStyle = '#0b6e99'; cx.fillText($('ck').textContent.toUpperCase(), x + 28 * s, y + 32 * s);
+    cx.font = F(700, 32); cx.fillStyle = '#13202b'; cx.fillText($('ct').textContent, x + 28 * s, y + 70 * s);
+    cx.font = F(500, 23); cx.fillStyle = '#3d4b56'; lines.forEach((ln, i) => cx.fillText(ln, x + 28 * s, y + (104 + 30 * i) * s));
+  }
+  // step bar
+  if ($('stepbar').style.display === 'flex') {
+    const segs = [...$('stepbar').children]; const n = segs.length; const x0 = 40 * s, w = W - 80 * s, gap = 6 * s, sw = (w - gap * (n - 1)) / n;
+    segs.forEach((c, i) => { cx.fillStyle = c.classList.contains('d') ? '#0b6e99' : 'rgba(19,32,43,0.18)'; cx.fillRect(x0 + i * (sw + gap), H - 16 * s, sw, 5 * s); });
+  }
+  // end card
+  if ($('card').style.display === 'flex') {
+    const w = 900 * s, h = 330 * s, x = (W - w) / 2, y = (H - h) / 2 - 40 * s;
+    cx.fillStyle = 'rgba(255,255,255,0.94)'; rrectPath(cx, x, y, w, h, 16 * s); cx.fill();
+    cx.textAlign = 'center'; cx.fillStyle = '#13202b'; cx.font = F(700, 46); cx.fillText('AquaSentinel R3', W / 2, y + 70 * s);
+    cx.fillStyle = '#4b5b68'; cx.font = F(500, 22); cx.fillText('Rides the river on a guide pole. Senses, warns, and keeps the evidence.', W / 2, y + 108 * s);
+    const n = META.key_numbers; const items = [['Mass (CAD)', n.mass_kg + ' kg'], ['Draft / freeboard', n.draft_mm + ' / ' + n.freeboard_mm + ' mm'],
+      ['Reserve buoyancy', n.reserve + ' x'], ['GM transverse', n.gm_t + ' m'], ['Pole safety factor', String(n.pole_sf)], ['Carriage jam margin', n.jam + ' x']];
+    items.forEach(([a, b], i) => { const cxp = x + w * (0.2 + 0.3 * (i % 3)), cy = y + (175 + 85 * Math.floor(i / 3)) * s;
+      cx.fillStyle = '#4b5b68'; cx.font = F(500, 18); cx.fillText(a, cxp, cy); cx.fillStyle = '#0b6e99'; cx.font = F(700, 30); cx.fillText(b, cxp, cy + 36 * s); });
+    cx.fillStyle = '#7a8893'; cx.font = F(500, 15); cx.fillText('Design estimates computed from the CAD geometry  |  not test results', W / 2, y + h - 18 * s);
+    cx.textAlign = 'left';
+  }
+  cx.restore();
+  return comp;
+}
+
+function setCam(p, t) { camera.position.copy(p); controls.target.copy(t); controls.update(); }
+let camKey = null;
+function stepAnimation(dt) {
+  if (!anim) return;
+  anim.t += dt; const t = anim.t;
+  let capNow = null;
+  for (const e of anim.T) {
+    if (t < e.t) continue;
+    const p = e.dur ? Math.min(1, (t - e.t) / e.dur) : 1;
+    if (e.cap && t < e.t + e.dur) capNow = e.cap;
+    if (e.view && !e._viewDone) { e._viewDone = true; camKey = { p0: camera.position.clone(), t0: controls.target.clone(), p1: e.view[0], t1: e.view[1], s: e.t, dur: Math.min(2.2, e.dur * 0.8) }; }
+    if (e.step !== undefined) {
+      const list = inst.filter(r => r.step === e.step && r.data.group !== 'env');
+      list.forEach((r, i) => {
+        const st = e.t + Math.min(i * 0.04, e.dur * 0.45), q = ease((t - st) / Math.max(0.9, e.dur * 0.5));
+        if (t >= st) { r.vis = true; r.obj.position.copy(r.base).addScaledVector(r.explode, 1 - q); r._q = q; }
+      });
+      if (!e._lbl && t > e.t + 0.6) { e._lbl = true;
+        const seen = new Set(); let n = 0;
+        for (const r of list) { if (seen.has(r.data.pid) || r.data.kind === 'fastener' || n >= 3) continue; seen.add(r.data.pid); n++;
+          { const q = list.filter(x => x.data.pid === r.data.pid).length; addLabel(r, `<b>${r.data.pid}</b>${r.data.label || r.data.part}`, e.dur - 0.6, true, r.data.pid, (r.data.label || r.data.part) + (q > 1 ? ' x' + q : '')); } }
+      }
+      [...$('stepbar').children].forEach((c, i) => c.classList.toggle('d', i < e.step));
+    }
+    if (e.fn && t < e.t + e.dur + 0.05) e.fn(p);
+    if (e.card) { $('card').style.display = t > e.t + 0.6 ? 'flex' : 'none'; }
+    if (e.orbit && t >= e.t) { const a = (t - e.t) * 0.18; const c = m2t(380, 0, 1150); const r0 = 3.6;
+      setCam(new THREE.Vector3(c.x + r0 * Math.cos(2.2 - a), c.y + 1.3, c.z + r0 * Math.sin(2.2 - a)), c); camKey = null; }
+  }
+  // the float parts that are not yet "placed" must not be repositioned by applyState
+  if (camKey) { const q = ease((t - camKey.s) / camKey.dur); camera.position.lerpVectors(camKey.p0, camKey.p1, q);
+    controls.target.lerpVectors(camKey.t0, camKey.t1, q); if (q >= 1) camKey = null; }
+  if (capNow && capNow.title) { $('caption').style.display = 'block'; $('ck').textContent = capNow.k; $('ct').textContent = capNow.title; $('cc').textContent = capNow.text; }
+  else { $('caption').style.display = 'none'; $('ct').textContent = ''; }
+  if (t >= anim.total) { anim.done = true; }
+}
+
+// ------------------------------------------------------------------ main loop
+function frame(dt) {
+  clock += dt;
+  for (const tw of tweens) { const q = ease((clock - tw.t0) / tw.dur); for (const k in tw.target) S[k] = tw.from[k] + (tw.target[k] - tw.from[k]) * q; tw.done = q >= 1; }
+  tweens = tweens.filter(t => !t.done);
+  if (camMove) { const q = ease((clock - camMove.s) / camMove.dur); camera.position.lerpVectors(camMove.p0, camMove.p1, q);
+    controls.target.lerpVectors(camMove.t0, camMove.t1, q); if (q >= 1) camMove = null; }
+  if (anim) {
+    const placed = new Map(); stepAnimation(dt);
+    applyStateAnim();
+  } else applyState(clock);
+  for (const l of labels) { if (l.ttl !== null && clock - l.born > l.ttl) { scene.remove(l.o); l.dead = true; } }
+  for (let i = labels.length - 1; i >= 0; i--) if (labels[i].dead) labels.splice(i, 1);
+  waterNormal.offset.x = clock * 0.012; waterNormal.offset.y = clock * 0.007;
+  controls.update();
+  if (!window.__norender) { renderer.render(scene, camera); labelRenderer.render(scene, camera); }
+}
+function applyStateAnim() {
+  // like applyState, but keep the assembly-step positions/visibility computed by the timeline
+  const keep = inst.map(r => [r, r.obj.position.clone(), r.vis]);
+  applyState(anim.t);
+  for (const [r, pos, vis] of keep) { if (r.data.group === 'env') continue; r.obj.visible = !!vis;
+    if (r._q !== undefined && r._q < 1) r.obj.position.copy(pos); }
+}
+let last = performance.now();
+function loop() { if (!window.__manual) { const now = performance.now(); frame(Math.min(0.05, (now - last) / 1000)); last = now; } requestAnimationFrame(loop); }
+
+addEventListener('resize', () => { if (window.__fixedSize) return; camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight); labelRenderer.setSize(innerWidth, innerHeight); });
+
+// ------------------------------------------------------------------ capture API (renders + video)
+async function post(path, blob) { const r = await fetch('/save?path=' + encodeURIComponent(path), { method: 'POST', body: blob }); return r.text(); }
+function setFixedSize(w, h) { window.__fixedSize = true; renderer.setSize(w, h, false); labelRenderer.setSize(w, h);
+  renderer.domElement.style.width = w + 'px'; renderer.domElement.style.height = h + 'px'; camera.aspect = w / h; camera.updateProjectionMatrix(); }
+// ------------------------------------------------------------------ technical drawing mode (orthographic, hidden-line)
+const orthoCam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.01, 60);
+const normMat = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
+const quadCam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+const edgeMat = new THREE.ShaderMaterial({
+  uniforms: { tN: { value: null }, tD: { value: null }, px: { value: new THREE.Vector2() }, fill: { value: 0.955 }, thr: { value: 4e-5 } },
+  vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position.xy, 0.0, 1.0); }',
+  fragmentShader: `
+    uniform sampler2D tN; uniform sampler2D tD; uniform vec2 px; uniform float fill; uniform float thr; varying vec2 vUv;
+    vec3 nrm(vec2 o) { return texture2D(tN, vUv + o * px).xyz * 2.0 - 1.0; }
+    float dep(vec2 o) { return texture2D(tD, vUv + o * px).x; }
+    void main() {
+      float d0 = dep(vec2(0.0)); vec3 n0 = nrm(vec2(0.0)); bool bg0 = d0 > 0.99999;
+      float e = 0.0; float lap = -4.0 * d0;
+      vec2 o[4]; o[0] = vec2(1.0, 0.0); o[1] = vec2(-1.0, 0.0); o[2] = vec2(0.0, 1.0); o[3] = vec2(0.0, -1.0);
+      for (int i = 0; i < 4; i++) {
+        float di = dep(o[i]); bool bgi = di > 0.99999; lap += di;
+        if (bgi != bg0) e = 1.0;
+        if (!bg0 && !bgi && dot(nrm(o[i]), n0) < 0.80) e = 1.0;
+      }
+      if (!bg0 && abs(lap) > thr) e = 1.0;
+      vec3 col = bg0 ? vec3(1.0) : vec3(fill);
+      gl_FragColor = vec4(mix(col, vec3(0.07, 0.08, 0.09), e), 1.0);
+    }`,
+  depthTest: false, depthWrite: false });
+const quad = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), edgeMat);
+const quadScene = new THREE.Scene(); quadScene.add(quad);
+async function orthoShot(path, o) {
+  window.__manual = true;
+  const w = o.w || 2400, h = o.h || 1600, s = o.s;           // s = pixels per mm
+  setFixedSize(w, h);
+  Object.assign(S, { explode: 0, water: 0.5, yaw: 0, gate: 0, canopy: 0, podlid: 0, samplerlid: 0, cart: 0, carousel: 0,
+    section: false, xray: false, event: 0, env: 'studio', pier: false }, o.state || {});
+  applyState(1.0);
+  const hide = o.hide ? new RegExp(o.hide) : null;
+  for (const r of inst) if (r.data.group !== 'env') r.obj.visible = !(hide && hide.test(r.obj.name));
+  for (const r of inst) if (r.data.group === 'env') r.obj.visible = !!o.pier;
+  water.visible = false; bed.visible = false; floor.visible = false; for (const l of labels) l.o.visible = false;
+  const hw = w / 2 / s / 1000, hh = h / 2 / s / 1000;
+  orthoCam.left = -hw; orthoCam.right = hw; orthoCam.top = hh; orthoCam.bottom = -hh;
+  const [a, b] = o.center;   // model mm: (x, z) elev | (x, y) plan | (y, z) end
+  if (o.view === 'elev') { orthoCam.position.copy(m2t(a, -25000, b)); orthoCam.up.set(0, 1, 0); orthoCam.lookAt(m2t(a, 0, b)); }
+  if (o.view === 'plan') { orthoCam.position.copy(m2t(a, b, 25000)); orthoCam.up.set(0, 0, -1); orthoCam.lookAt(m2t(a, b, 0)); }
+  if (o.view === 'end')  { orthoCam.position.copy(m2t(25000, a, b)); orthoCam.up.set(0, 1, 0); orthoCam.lookAt(m2t(0, a, b)); }
+  if (o.view === 'bow')  { orthoCam.position.copy(m2t(-25000, a, b)); orthoCam.up.set(0, 1, 0); orthoCam.lookAt(m2t(0, a, b)); }
+  orthoCam.near = 0.01; orthoCam.far = 60; orthoCam.updateProjectionMatrix();
+  const rt = new THREE.WebGLRenderTarget(w, h, { type: THREE.HalfFloatType });
+  rt.depthTexture = new THREE.DepthTexture(w, h); rt.depthTexture.type = THREE.FloatType;
+  const keepTM = renderer.toneMapping, keepBG = scene.background;
+  renderer.toneMapping = THREE.NoToneMapping; scene.background = null; renderer.setClearColor(0x000000, 1);
+  const keepStbd = new THREE.Plane(new THREE.Vector3(0, 0, -1), 0.0005);
+  renderer.clippingPlanes = S.section ? [o.keep === 'starboard' ? keepStbd : sectionPlane] : [];
+  for (const r of inst) r.obj.material.clippingPlanes = [];
+  scene.overrideMaterial = normMat;
+  renderer.setRenderTarget(rt); renderer.clear(); renderer.render(scene, orthoCam); renderer.setRenderTarget(null);
+  scene.overrideMaterial = null;
+  edgeMat.uniforms.tN.value = rt.texture; edgeMat.uniforms.tD.value = rt.depthTexture;
+  edgeMat.uniforms.px.value.set(1 / w, 1 / h);
+  renderer.render(quadScene, quadCam);
+  const blob = await new Promise(r => renderer.domElement.toBlob(r, 'image/png'));
+  renderer.toneMapping = keepTM; scene.background = keepBG; renderer.clippingPlanes = []; rt.dispose();
+  for (const l of labels) l.o.visible = true;
+  return post(path, blob);
+}
+
+window.AS = {
+  S, VIEWS, setView, applyState, setFixedSize, m2t, ortho: orthoShot,
+  setCamModel: (p, t) => setCam(m2t(...p), m2t(...t)),
+  async still(path, state = {}, view = null, w = 2400, h = 1500, overlay = false, fmt = 'image/png', hide = null) {
+    window.__manual = true; setFixedSize(w, h); Object.assign(S, state); applyState(1.0);
+    if (hide) { const re = new RegExp(hide); for (const r of inst) if (r.data.group !== 'env' && re.test(r.obj.name)) r.obj.visible = false; }
+    if (view) { if (typeof view === 'string') setView(view); else setCam(m2t(...view[0]), m2t(...view[1])); }
+    controls.update(); refreshStaticLabels();
+    renderer.render(scene, camera);
+    const c = compose(overlay);
+    const blob = await new Promise(r => c.toBlob(r, fmt, 0.92));
+    return post(path, blob);
+  },
+  async seek(path, t, w = 1600, h = 900) {
+    window.__manual = true; setFixedSize(w, h); startAnimation(); window.__norender = true;
+    const dt = 1 / 30; for (let i = 0; i < Math.round(t / dt); i++) frame(dt);
+    window.__norender = false; frame(0.0001);
+    const c = compose(true);
+    const blob = await new Promise(r => c.toBlob(r, 'image/jpeg', 0.9));
+    const res = await post(path, blob); return res + ' total=' + anim.total.toFixed(1);
+  },
+  async recordWC(path, opts = {}) {
+    const fps = opts.fps || 30, w = opts.w || 1920, h = opts.h || 1080;
+    const { Muxer, ArrayBufferTarget } = await import('https://cdn.jsdelivr.net/npm/mp4-muxer@5.1.3/+esm');
+    window.__manual = true; setFixedSize(w, h); startAnimation();
+    const muxer = new Muxer({ target: new ArrayBufferTarget(), video: { codec: 'avc', width: w, height: h, frameRate: fps }, fastStart: 'in-memory' });
+    let encErr = null;
+    const enc = new VideoEncoder({ output: (chunk, meta) => muxer.addVideoChunk(chunk, meta), error: e => { encErr = e; } });
+    enc.configure({ codec: opts.codec || 'avc1.640028', width: w, height: h, bitrate: opts.bitrate || 14e6, framerate: fps, latencyMode: 'quality' });
+    const yieldTask = () => new Promise(r => { const ch = new MessageChannel(); ch.port1.onmessage = () => r(); ch.port2.postMessage(0); });
+    const frames = Math.ceil(anim.total * fps); const dt = 1 / fps; const t0 = performance.now();
+    const gifEvery = opts.gifEvery || 0; const small = document.createElement('canvas');
+    small.width = opts.gifW || 720; small.height = Math.round(small.width * h / w); const sctx = small.getContext('2d');
+    window.__recProgress = 0;
+    for (let i = 0; i < frames; i++) {
+      frame(dt); compose(true);
+      const vf = new VideoFrame(comp, { timestamp: Math.round(i * 1e6 / fps), duration: Math.round(1e6 / fps) });
+      enc.encode(vf, { keyFrame: i % (fps * 2) === 0 }); vf.close();
+      if (gifEvery && i % gifEvery === 0) { sctx.drawImage(comp, 0, 0, small.width, small.height);
+        const b = await new Promise(r => small.toBlob(r, 'image/jpeg', 0.88)); post(`animation/gif_frames/f${String(i / gifEvery).padStart(4, '0')}.jpg`, b); }
+      while (enc.encodeQueueSize > 6) await yieldTask();
+      window.__recProgress = (i + 1) / frames;
+      if (encErr) throw encErr;
+    }
+    await enc.flush(); muxer.finalize();
+    const res = await post(path + '.mp4', new Blob([muxer.target.buffer], { type: 'video/mp4' }));
+    stopAnimation(); window.__manual = false;
+    return `${res} | ${frames} frames @ ${fps} fps | ${((performance.now() - t0) / 1000).toFixed(1)} s to render`;
+  },
+  async record(path, opts = {}) {
+    const fps = opts.fps || 30, w = opts.w || 1920, h = opts.h || 1080;
+    window.__manual = true; setFixedSize(w, h);
+    startAnimation(); frame(0.0001); compose(true);
+    const stream = comp.captureStream(0); const track = stream.getVideoTracks()[0];
+    const types = ['video/mp4;codecs=avc1.640028', 'video/mp4;codecs=avc1', 'video/mp4', 'video/webm;codecs=vp9', 'video/webm'];
+    const mime = opts.mime || types.find(t => MediaRecorder.isTypeSupported(t));
+    const rec = new MediaRecorder(stream, { mimeType: mime, videoBitsPerSecond: opts.bitrate || 16e6 });
+    const chunks = []; rec.ondataavailable = e => e.data.size && chunks.push(e.data);
+    const doneP = new Promise(r => rec.onstop = r);
+    rec.start(1000);
+    const frames = Math.ceil(anim.total * fps); const dt = 1 / fps; const t0 = performance.now();
+    const gifEvery = opts.gifEvery || 0; const small = document.createElement('canvas');
+    small.width = opts.gifW || 720; small.height = Math.round(small.width * h / w); const sctx = small.getContext('2d');
+    let late = 0;
+    for (let i = 0; i < frames; i++) {
+      frame(dt); compose(true); track.requestFrame && track.requestFrame();
+      if (gifEvery && i % gifEvery === 0) { sctx.drawImage(comp, 0, 0, small.width, small.height);
+        const b = await new Promise(r => small.toBlob(r, 'image/jpeg', 0.88)); post(`animation/gif_frames/f${String(i / gifEvery).padStart(4, '0')}.jpg`, b); }
+      const target = t0 + (i + 1) * 1000 / fps; const wait = target - performance.now();
+      if (wait < -5) late++;
+      await new Promise(r => setTimeout(r, Math.max(0, wait)));
+    }
+    rec.stop(); await doneP;
+    const blob = new Blob(chunks, { type: mime }); const ext = mime.includes('mp4') ? 'mp4' : 'webm';
+    const res = await post(path + '.' + ext, blob); stopAnimation(); window.__manual = false;
+    return `${res} | ${mime} | ${frames} frames | late frames ${late} | wall ${((performance.now() - t0) / 1000).toFixed(1)} s`;
+  },
+};
+
+// ------------------------------------------------------------------ load
+async function load() {
+  const loader = new GLTFLoader();
+  let buf;
+  if (window.__GLB_B64__ && window.__GLB_B64__.length > 100) {
+    const bin = atob(window.__GLB_B64__); buf = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) buf[i] = bin.charCodeAt(i); buf = buf.buffer;
+  } else buf = await (await fetch(params.get('glb') || '../cad/assembly/AquaSentinel_R3.glb')).arrayBuffer();
+  const gltf = await new Promise((res, rej) => loader.parse(buf, '', res, rej));
+  gltf.scene.userData = gltf.parser.json.scenes[0].extras;
+  setupScene(gltf);
+  setView('iso');
+  window.AS.ready = true;
+  loop();
+}
+load();
+</script>
+</body>
+</html>

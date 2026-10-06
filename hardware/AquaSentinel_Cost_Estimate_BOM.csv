@@ -1,0 +1,26 @@
+Item_ID,Subassembly,Component_Name,Material_or_Part_Number,Manufacturing_or_Procurement,Quantity,Prototype_Cost_INR,Prototype_Cost_USD,Scale_100_Cost_USD,Engineering_Justification
+A-01,Floating Platform,Twin Buoyancy Pontoons,UV-Stabilized HDPE (PE-100) 900x200x220mm,Rotomolded (Production) / Thermoformed (Proto),2,5200,54.20,38.00,Reserve buoyancy SF = 2.81; 15 deg raked bows for low drag
+A-02,Floating Platform,Structural Bridge Deck,6061-T6 Aluminum Plate (4.0mm sheet),CNC Waterjet Profiling & Hard Anodizing,1,4200,43.78,28.00,Central slot for 2-inch pole and roller carriage
+A-03,Floating Platform,Ergonomic Top Canopy,Vacuum-Formed UV-ABS / Composite,Thermoformed with Molded Handles,1,3400,35.44,22.00,Low-profile aerodynamic cover with captive quarter-turn latches
+B-01,Guide-Pole Kinematics,2-inch Sch 40S 316L Guide Pole (3.6m),ASME B36.19M (60.3mm OD x 3.91mm wall),Centerless Ground Seamless Tubing,1,7800,81.30,55.00,Yield 170 MPa; withstands 1.5 m/s current + 500 N debris snag
+B-02,Guide-Pole Kinematics,Dual Pier Mounting Brackets,316L Heavy-Duty Formed Flanges (5.0mm),CNC Press Brake & TIG Welded,2,3600,37.52,24.00,3.2m bracket span; propped pinned structure (SF = 2.69)
+B-03,Guide-Pole Kinematics,Anti-Jamming 8-Roller Carriage,6061-T6 Split Cage + UHMW-PE Rollers,CNC Machined (250mm vertical span),1,5100,53.16,32.00,L_span = 250mm satisfies drawer rule (38.2x anti-jam margin)
+C-01,Electronics & Control,Dual IP67 Sealed Enclosures,Die-Cast Aluminum / Polycarbonate,COTS Hermetic Pods with Gaskets,2,3200,33.35,20.00,Mass-balanced mounting (+180mm and -180mm from pole)
+C-02,Electronics & Control,Smart Edge Controller Board,ESP32-WROOM-32E + Custom Carrier PCB,2-Layer SMD Assembly,1,1600,16.68,11.00,Dual-core 240MHz MCU with FreeRTOS deep-sleep cycling
+C-03,Electronics & Control,Cellular LTE Cat-1 Modem,SIMCom A7670C (B1/B3/B5/B8/B40),COTS Module with SMA Antenna,1,1000,10.42,7.50,Reliable cloud telemetry & SMS alert fallback for India
+D-01,Solar Power System,Split Monocrystalline Solar Array,2x 10W Monocrystalline PV Panels,Custom Split Canopy Mounting,2,1800,18.76,12.00,Yields 39.0 Wh/day in monsoon (9.6x load surplus)
+D-02,Solar Power System,LiFePO4 Marine Battery Pack,12.8V 6,000 mAh (4S 32700 cells with BMS),Industrial Grade Pack,1,3800,39.61,26.00,61.4 Wh usable; provides 15.1 days of continuous zero-sun autonomy
+D-03,Solar Power System,MPPT Solar Charge Controller,CN3795 Synchronous Buck Module,COTS High-Efficiency Converter,1,1600,16.68,10.00,Maximum power point tracking with <1 mA night leakage
+E-01,Submerged Sensor Array,Industrial RS485 pH Probe,DFRobot SEN0708 (Modbus-RTU),COTS Industrial Sensor + 18% GST,1,16500,171.98,125.00,Continuous immersion; replaceable reference junction
+E-02,Submerged Sensor Array,Industrial RS485 EC Probe (K=10),DFRobot SEN0707 (10-20,000 uS/cm),COTS Industrial Sensor + 18% GST,1,18200,189.70,138.00,Bipolar AC excitation prevents electrode polarization
+E-03,Submerged Sensor Array,Optical Luminescent DO Probe,DFRobot SEN0680 (Modbus-RTU),COTS Industrial Optical Sensor + 18% GST,1,28900,301.23,220.00,Optical fluorophore; zero oxygen consumption or electrolyte
+E-04,Submerged Sensor Array,Industrial RS485 Turbidity Probe,DFRobot SEN0710 (0-1000 NTU, IP68),COTS Nephelometric 90 deg Sensor + 18% GST,1,17500,182.41,130.00,True 90 deg scattered light measurement in lotic rivers
+F-01,Sensor Protection,Hydrodynamic Sensor Cage,316L Stainless Steel Perforated (60% open),Roll-Formed Cylinder with V-Deflector,1,2200,22.93,14.00,Shields probes from submerged branches and hyacinth roots
+G-01,Robotics Autosampler,12V Peristaltic Sampling Pump,DC Food-Grade Pump (500 mL/min delivery),Self-Priming with Santoprene Tubing,1,2400,25.02,16.00,Draws 200 mL raw plume water into sealed sample vial in 25s
+G-02,Robotics Autosampler,4-Vial Rotary Indexing Carousel,6061-T6 Base + Geared Motor + Optical Limit,CNC Milled Carousel Mechanism,1,3600,37.52,24.00,Indexes 4x 250mL borosilicate vials for forensic laboratory
+G-03,Robotics Autosampler,Forensic Sampling Vials,250mL Borosilicate Bottles + Silicone Septa,Pre-Cleaned EPA Standard Glassware,4,800,8.34,5.00,Preserves forensic legal evidence for NGT / pollution board
+G-04,Robotics Autosampler,Purge-to-Waste 3-Way Valve,12V DC Solenoid Pinch Valve,Chemically Inert Fluidic Control,1,1400,14.59,9.00,20s reverse purge clears tubing before filling sample vial
+H-01,Robotics Wiper,Motorized Anti-Fouling Wiper Arm,Waterproof Micro-Servo + EPDM Squeegee,CNC Anodized Arm & Rubber Wiper,1,1800,18.76,12.00,Sweeps optical turbidity and DO windows every 6 hours
+I-01,Human-Centric Safety,360 deg Visual Safety Beacon (Jal-Deep),High-Intensity Hermetic RGB LED Halo Ring,Polycarbonate Weatherproof Housing,1,1400,14.59,9.00,Provides immediate visual riverbank status (Green/Amber/Red)
+I-02,Cable Management,Marine Fasteners & IP67 Glands,316 Stainless Nyloc Screws + Weipu Glands,COTS Marine Hardware Kit,1 Set,1000,10.42,7.00,Strain-relieved waterproof umbilical harness
+TOTAL,Complete Station,AquaSentinel v2.0 Robot Station,Integrated Cyber-Physical Platform,Complete Hardware & Sensor Package,1,134000,1396.71,943.50,Affordable, buildable, legally verifiable river early-warning robot
