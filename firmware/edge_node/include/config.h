@@ -99,4 +99,45 @@
 #define RIVER_STRETCH_ID      "GODAVARI-KOPARGAON" // monitored river stretch
 #endif
 
+// -----------------------------------------------------------------------------
+// 7. Fitted Sensor Channels (bit order shared with SensorReadings.health[])
+// A channel that is not fitted is not polled and never raises a sensor fault.
+// Water temperature comes from the pH probe's reply.
+// -----------------------------------------------------------------------------
+#define SENSOR_BIT_PH         (1 << 0)
+#define SENSOR_BIT_EC         (1 << 1)
+#define SENSOR_BIT_DO         (1 << 2)
+#define SENSOR_BIT_TURB       (1 << 3)
+#define SENSOR_BIT_TEMP       (1 << 4)
+#define SENSOR_BIT_STAGE      (1 << 5)  // no stage driver yet (audit F4): leave unfitted
+
+#ifndef SENSORS_FITTED
+#ifdef BENCH_DEMO
+#define SENSORS_FITTED        (SENSOR_BIT_EC) // bench demo: the EC probe only
+#else
+#define SENSORS_FITTED        (SENSOR_BIT_PH | SENSOR_BIT_EC | SENSOR_BIT_DO | SENSOR_BIT_TURB | SENSOR_BIT_TEMP)
+#endif
+#endif
+
+// -----------------------------------------------------------------------------
+// 8. Modbus-RTU Timing (DFRobot: polling interval and response wait both above 200 ms)
+// -----------------------------------------------------------------------------
+#define MODBUS_RESPONSE_TIMEOUT_MS 300
+#define MODBUS_POLL_GAP_MS         250
+
+// -----------------------------------------------------------------------------
+// 9. Plausible Ranges: a reading outside them is flagged HEALTH_OUT_OF_BOUNDS and never used.
+// Confirm each against its datasheet when the probes are commissioned (BENCH_DEMO_PLAN.md, P1-8).
+// -----------------------------------------------------------------------------
+#define RANGE_PH_MIN          0.0f     // pH scale
+#define RANGE_PH_MAX          14.0f
+#define RANGE_EC_MIN          10.0f    // µS/cm; SEN0707 (K=10) measures 10-20,000. Lower: out of water, or pure water
+#define RANGE_EC_MAX          20000.0f
+#define RANGE_DO_MIN          0.0f     // mg/L
+#define RANGE_DO_MAX          20.0f    // saturation is about 14.6 mg/L at 0 °C; margin for supersaturation
+#define RANGE_TURB_MIN        0.0f     // NTU; SEN0710 measures 0-1000
+#define RANGE_TURB_MAX        1000.0f
+#define RANGE_TEMP_MIN        -20.0f   // °C; probe operating range -20 to +60
+#define RANGE_TEMP_MAX        60.0f
+
 #endif // CONFIG_H

@@ -6,9 +6,9 @@ It runs the **sense → decide → act** loop on a 15-minute deep-sleep cycle, s
 | Module | Job |
 |---|---|
 | `main.cpp` | wake, run one cycle, sleep; counters kept in RTC memory across deep sleep |
-| `sensor_interface` | power-gated 12 V RS485 Modbus bus: pH, EC, optical DO, turbidity; ultrasonic stage sensor |
+| `sensor_interface` | power-gated 12 V RS485 Modbus bus: pH, EC, optical DO, turbidity; ultrasonic stage sensor (driver still to write). A failed or implausible read is NaN and never used |
 | `dsp_filters` | exponential smoothing of each probe before any decision |
-| `anomaly_engine` | CPCB Class C hard limits + robust z-score against a 24-bin diurnal baseline; acts on 2 of the last 3 readings |
+| `anomaly_engine` | CPCB Class C hard limits + robust z-score against a 24-bin diurnal baseline; acts on 2 of the last 3 readings; a fitted probe without a valid reading raises SENSOR_FAULT instead of "normal" |
 | `autosampler` | 20 s purge to waste, 30 s fill, carousel indexing; bottle index and lockout kept in NVS |
 | `wiper_actuator` | servo sweeps of the optical faces against biofouling |
 | `microsd_logger` | time-stamped evidence log on microSD |
@@ -25,8 +25,11 @@ pio run -e esp32dev             # field build (15-minute deep-sleep cycle)
 pio run -e bench                # bench-demo build for the finale (see BENCH_DEMO_PLAN.md)
 pio run -e bench -t upload      # flash
 pio device monitor -b 115200    # serial log
+pio test -e bench               # unit tests (they run on the connected board)
 ```
 
-**Status:** compiles cleanly (both environments, espressif32 6.13.0 / Arduino-ESP32 2.0.17) since the audit's P0-1
-fixes; not yet run on the real probes, actuators or modem. Fail-safe sensing (P0-2) and the decision state machine
-(P0-3) come next: see [BENCH_DEMO_PLAN.md](BENCH_DEMO_PLAN.md).
+**Status:** compiles cleanly in both environments (espressif32 6.13.0 / Arduino-ESP32 2.0.17) since the audit's P0-1
+fixes. Fail-safe sensing (P0-2) is in place: a dead, garbled or implausible probe reading is never used, and a fitted
+probe without a valid reading shows SENSOR_FAULT, never "normal". The unit tests in `test/` compile but have not yet run
+on a board, and nothing has run on the real probes, actuators or modem. The decision state machine (P0-3) is next: see
+[BENCH_DEMO_PLAN.md](BENCH_DEMO_PLAN.md).

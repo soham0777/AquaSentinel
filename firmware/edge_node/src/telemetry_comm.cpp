@@ -8,9 +8,10 @@ void TelemetryManager::init() {
 
 static const char* riskName(RiskLevel level) {
     switch (level) {
-        case RISK_WATCH: return "WATCH";
-        case RISK_EVENT: return "EVENT";
-        default:         return "NORMAL";
+        case RISK_WATCH:        return "WATCH";
+        case RISK_EVENT:        return "EVENT";
+        case RISK_SENSOR_FAULT: return "SENSOR_FAULT";
+        default:                return "NORMAL";
     }
 }
 
@@ -36,11 +37,16 @@ String TelemetryManager::serializePayload(const SensorReadings& r, const Anomaly
         if (r.valid[i]) valid_mask |= (1 << i);
     }
     data["valid"] = valid_mask;
+    JsonArray health = data.createNestedArray("health"); // SensorHealthCode bits per channel, same order
+    for (int i = 0; i < 6; i++) {
+        health.add(r.health[i]);
+    }
 
     JsonObject alert = doc.createNestedObject("anomaly_engine");
     alert["level"] = riskName(anom.level);
     alert["score"] = round(anom.max_score * 100.0f) / 100.0f;
     alert["flags"] = anom.contributing_flags;
+    alert["fault_mask"] = anom.fault_mask;
     alert["sample_triggered"] = anom.autosampler_trigger;
     alert["reason"] = anom.reason;
     doc["bottles_filled"] = bottles_filled;

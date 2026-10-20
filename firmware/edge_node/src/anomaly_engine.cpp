@@ -21,30 +21,37 @@ RTC_DATA_ATTR static bool rtc_baselines_initialized = false;
 RTC_DATA_ATTR static uint8_t rtc_outlier_history = 0; // Last 3 cycles bitmask
 RTC_DATA_ATTR static uint8_t rtc_normal_consecutive = 0;
 RTC_DATA_ATTR static RiskLevel rtc_current_risk = RISK_NORMAL;
+RTC_DATA_ATTR static uint8_t rtc_prev_fault_mask = 0; // channels faulted on the previous cycle
 
 RTC_DATA_ATTR static SensorReadings rtc_prev_reading;
 RTC_DATA_ATTR static bool rtc_has_prev = false;
 
 static const float ALPHA = 1.0f / 96.0f; // Daily EWMA smoothing factor
+static const char* const CHANNEL_NAMES[6] = { "pH", "EC", "DO", "turbidity", "temperature", "stage" };
 
 AnomalyEngine::AnomalyEngine() {}
 
 void AnomalyEngine::init() {
     if (!rtc_baselines_initialized) {
-        // Initial cold-boot defaults
-        for (int h = 0; h < 24; h++) {
-            rtc_ph_bins[h] = { 7.50f, 0.15f };
-            rtc_do_bins[h] = { 6.50f, 0.40f };
-            rtc_temp_bins[h] = { 24.0f, 1.00f };
-        }
-        rtc_ec_baseline = { 450.0f, 35.0f };
-        rtc_turb_baseline = { 12.0f, 3.0f };
-        rtc_baselines_initialized = true;
-        rtc_outlier_history = 0;
-        rtc_normal_consecutive = 0;
-        rtc_current_risk = RISK_NORMAL;
-        rtc_has_prev = false;
+        resetBaselines();
     }
+}
+
+void AnomalyEngine::resetBaselines() {
+    // Initial cold-boot defaults
+    for (int h = 0; h < 24; h++) {
+        rtc_ph_bins[h] = { 7.50f, 0.15f };
+        rtc_do_bins[h] = { 6.50f, 0.40f };
+        rtc_temp_bins[h] = { 24.0f, 1.00f };
+    }
+    rtc_ec_baseline = { 450.0f, 35.0f };
+    rtc_turb_baseline = { 12.0f, 3.0f };
+    rtc_baselines_initialized = true;
+    rtc_outlier_history = 0;
+    rtc_normal_consecutive = 0;
+    rtc_current_risk = RISK_NORMAL;
+    rtc_prev_fault_mask = 0;
+    rtc_has_prev = false;
 }
 
 float AnomalyEngine::computeZScore(float val, float mu, float d, float floor_val) {
@@ -59,17 +66,18 @@ bool AnomalyEngine::checkHardLimits(const SensorReadings& r, AnomalyResult& res)
     bool tripped = false;
     res.contributing_flags = 0;
 
-    if (r.ph < LIMIT_PH_MIN || r.ph > LIMIT_PH_MAX) {
+    // Only channels with a valid reading are checked (audit F2)
+    if (r.valid[0] && (r.ph < LIMIT_PH_MIN || r.ph > LIMIT_PH_MAX)) {
         tripped = true;
         res.contributing_flags |= (1 << 0);
         snprintf(res.reason, sizeof(res.reason), "HARD_LIMIT: pH=%.2f out of bounds [%.1f, %.1f]", r.ph, LIMIT_PH_MIN, LIMIT_PH_MAX);
     }
-    if (r.do_val < LIMIT_DO_MIN) {
+    if (r.valid[2] && r.do_val < LIMIT_DO_MIN) {
         tripped = true;
         res.contributing_flags |= (1 << 2);
         snprintf(res.reason, sizeof(res.reason), "HARD_LIMIT: Hypoxia DO=%.2f mg/L < %.1f mg/L", r.do_val, LIMIT_DO_MIN);
     }
-    if (r.ec > LIMIT_EC_MAX) {
+    if (r.valid[1] && r.ec > LIMIT_EC_MAX) {
         tripped = true;
         res.contributing_flags |= (1 << 1);
         snprintf(res.reason, sizeof(res.reason), "HARD_LIMIT: Saline/Effluent Spike EC=%.1f uS/cm > %.0f uS/cm", r.ec, LIMIT_EC_MAX);
@@ -84,8 +92,17 @@ AnomalyResult AnomalyEngine::evaluate(const SensorReadings& r, uint8_t hour_of_d
     res.contributing_flags = 0;
     res.autosampler_trigger = false;
     res.reason[0] = '\0';
+    res.fault_mask = 0;
+    res.fault_onset = false;
 
     if (hour_of_day >= 24) hour_of_day = 0;
+
+    // 0. Fail-safe (audit F2): a fitted channel without a valid reading is a fault, and its value is never used
+    for (int i = 0; i < 6; i++) {
+        if (r.health[i] != HEALTH_OK && r.health[i] != HEALTH_NOT_FITTED) res.fault_mask |= (1 << i);
+    }
+    res.fault_onset = (res.fault_mask & ~rtc_prev_fault_mask) != 0;
+    rtc_prev_fault_mask = res.fault_mask;
 
     // 1. Check CPCB Designated Best Use Hard Regulatory Tripwires First
     if (checkHardLimits(r, res)) {
@@ -97,11 +114,11 @@ AnomalyResult AnomalyEngine::evaluate(const SensorReadings& r, uint8_t hour_of_d
         return res;
     }
 
-    // 2. Compute Robust Diurnal Z-Scores
-    float z_ph = computeZScore(r.ph, rtc_ph_bins[hour_of_day].mu, rtc_ph_bins[hour_of_day].d, 0.05f);
-    float z_ec = computeZScore(r.ec, rtc_ec_baseline.mu, rtc_ec_baseline.d, 10.0f);
-    float z_do = computeZScore(r.do_val, rtc_do_bins[hour_of_day].mu, rtc_do_bins[hour_of_day].d, 0.20f);
-    float z_turb = computeZScore(r.turbidity, rtc_turb_baseline.mu, rtc_turb_baseline.d, 2.0f);
+    // 2. Compute Robust Diurnal Z-Scores (valid channels only; an invalid channel scores 0)
+    float z_ph = r.valid[0] ? computeZScore(r.ph, rtc_ph_bins[hour_of_day].mu, rtc_ph_bins[hour_of_day].d, 0.05f) : 0.0f;
+    float z_ec = r.valid[1] ? computeZScore(r.ec, rtc_ec_baseline.mu, rtc_ec_baseline.d, 10.0f) : 0.0f;
+    float z_do = r.valid[2] ? computeZScore(r.do_val, rtc_do_bins[hour_of_day].mu, rtc_do_bins[hour_of_day].d, 0.20f) : 0.0f;
+    float z_turb = r.valid[3] ? computeZScore(r.turbidity, rtc_turb_baseline.mu, rtc_turb_baseline.d, 2.0f) : 0.0f;
 
     float max_z = z_ph;
     uint8_t flags = 0;
@@ -118,15 +135,8 @@ AnomalyResult AnomalyEngine::evaluate(const SensorReadings& r, uint8_t hour_of_d
     if (total_cycles < 672) {
         snprintf(res.reason, sizeof(res.reason), "LEARNING_PERIOD: Baseline learning active (%u/672 cycles)", total_cycles);
         res.level = RISK_NORMAL;
-        // Update baselines
-        rtc_ph_bins[hour_of_day].mu += ALPHA * (r.ph - rtc_ph_bins[hour_of_day].mu);
-        rtc_ph_bins[hour_of_day].d += ALPHA * (fabsf(r.ph - rtc_ph_bins[hour_of_day].mu) - rtc_ph_bins[hour_of_day].d);
-        rtc_ec_baseline.mu += ALPHA * (r.ec - rtc_ec_baseline.mu);
-        rtc_ec_baseline.d += ALPHA * (fabsf(r.ec - rtc_ec_baseline.mu) - rtc_ec_baseline.d);
-        rtc_do_bins[hour_of_day].mu += ALPHA * (r.do_val - rtc_do_bins[hour_of_day].mu);
-        rtc_do_bins[hour_of_day].d += ALPHA * (fabsf(r.do_val - rtc_do_bins[hour_of_day].mu) - rtc_do_bins[hour_of_day].d);
-        rtc_turb_baseline.mu += ALPHA * (r.turbidity - rtc_turb_baseline.mu);
-        rtc_turb_baseline.d += ALPHA * (fabsf(r.turbidity - rtc_turb_baseline.mu) - rtc_turb_baseline.d);
+        updateBaselines(r, hour_of_day);
+        applyFaultOverlay(res);
         return res;
     }
 
@@ -161,20 +171,47 @@ AnomalyResult AnomalyEngine::evaluate(const SensorReadings& r, uint8_t hour_of_d
 
         // Update EWMA baselines ONLY during normal clean conditions
         if (rtc_current_risk == RISK_NORMAL) {
-            rtc_ph_bins[hour_of_day].mu += ALPHA * (r.ph - rtc_ph_bins[hour_of_day].mu);
-            rtc_ph_bins[hour_of_day].d += ALPHA * (fabsf(r.ph - rtc_ph_bins[hour_of_day].mu) - rtc_ph_bins[hour_of_day].d);
-            rtc_ec_baseline.mu += ALPHA * (r.ec - rtc_ec_baseline.mu);
-            rtc_ec_baseline.d += ALPHA * (fabsf(r.ec - rtc_ec_baseline.mu) - rtc_ec_baseline.d);
-            rtc_do_bins[hour_of_day].mu += ALPHA * (r.do_val - rtc_do_bins[hour_of_day].mu);
-            rtc_do_bins[hour_of_day].d += ALPHA * (fabsf(r.do_val - rtc_do_bins[hour_of_day].mu) - rtc_do_bins[hour_of_day].d);
-            rtc_turb_baseline.mu += ALPHA * (r.turbidity - rtc_turb_baseline.mu);
-            rtc_turb_baseline.d += ALPHA * (fabsf(r.turbidity - rtc_turb_baseline.mu) - rtc_turb_baseline.d);
+            updateBaselines(r, hour_of_day);
         }
     }
 
     rtc_prev_reading = r;
     rtc_has_prev = true;
+    applyFaultOverlay(res);
     return res;
+}
+
+void AnomalyEngine::updateBaselines(const SensorReadings& r, uint8_t hour_of_day) {
+    // An invalid channel is never folded into a baseline (audit F2)
+    if (r.valid[0]) {
+        rtc_ph_bins[hour_of_day].mu += ALPHA * (r.ph - rtc_ph_bins[hour_of_day].mu);
+        rtc_ph_bins[hour_of_day].d += ALPHA * (fabsf(r.ph - rtc_ph_bins[hour_of_day].mu) - rtc_ph_bins[hour_of_day].d);
+    }
+    if (r.valid[1]) {
+        rtc_ec_baseline.mu += ALPHA * (r.ec - rtc_ec_baseline.mu);
+        rtc_ec_baseline.d += ALPHA * (fabsf(r.ec - rtc_ec_baseline.mu) - rtc_ec_baseline.d);
+    }
+    if (r.valid[2]) {
+        rtc_do_bins[hour_of_day].mu += ALPHA * (r.do_val - rtc_do_bins[hour_of_day].mu);
+        rtc_do_bins[hour_of_day].d += ALPHA * (fabsf(r.do_val - rtc_do_bins[hour_of_day].mu) - rtc_do_bins[hour_of_day].d);
+    }
+    if (r.valid[3]) {
+        rtc_turb_baseline.mu += ALPHA * (r.turbidity - rtc_turb_baseline.mu);
+        rtc_turb_baseline.d += ALPHA * (fabsf(r.turbidity - rtc_turb_baseline.mu) - rtc_turb_baseline.d);
+    }
+}
+
+void AnomalyEngine::applyFaultOverlay(AnomalyResult& res) {
+    // A fitted probe with no valid reading must never look safe. Report SENSOR_FAULT unless a valid channel
+    // is already in EVENT: a real spill is not hidden by a fault on another probe.
+    if (res.fault_mask == 0 || res.level == RISK_EVENT) return;
+    res.level = RISK_SENSOR_FAULT;
+    int n = snprintf(res.reason, sizeof(res.reason), "SENSOR_FAULT: no valid reading from");
+    for (int i = 0; i < 6 && n > 0 && n < (int)sizeof(res.reason); i++) {
+        if (res.fault_mask & (1 << i)) {
+            n += snprintf(res.reason + n, sizeof(res.reason) - n, " %s", CHANNEL_NAMES[i]);
+        }
+    }
 }
 
 void AnomalyEngine::getBaseline(uint8_t param_idx, uint8_t hour, float& out_mu, float& out_scale) {
