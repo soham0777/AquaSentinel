@@ -8,8 +8,8 @@ piece of evidence lives. Update it whenever a verified understanding changes (se
 |---|---|
 | Repository | https://github.com/soham0777/AquaSentinel (public), branch `main` |
 | Audited commit | `840f1a65453bfc757174bfe90a9ab636c7dd5269` (2026-10-06, "Redesign the README and project site"); tag `v1.0-fdc` = `8ba1e44` (Final Design Concept submission) |
-| Local copy | `C:\Users\dell\OneDrive\Desktop\AquaSentinel` (OneDrive-synced); audit docs on branch `audit/engineering-knowledge-base`, not committed |
-| Backups | `C:\Users\dell\OneDrive\Desktop\AquaSentinel_Backups` — full-history git bundle + ZIP of all files + docs ZIP + the four `v1.0-fdc` release files (editable PPTX deck, three 1080p videos) in `release_v1.0-fdc\`; SHA-256 in `SHA256SUMS.txt` (release files match GitHub's published digests) |
+| Local copy | `C:\Users\dell\OneDrive\Desktop\AquaSentinel` (OneDrive-synced), checked out on `bench-demo`. Local branches, none pushed: `audit/engineering-knowledge-base` (these audit docs), `bench-demo` (firmware fixes P0-1 to P0-3), `scale-model-1to5` (the 1:5 printable model). Each is based on `840f1a6`, so the folder shows the other branches' files as untracked |
+| Backups | `C:\Users\dell\OneDrive\Desktop\AquaSentinel_Backups`, every file listed with its SHA-256 in `SHA256SUMS.txt`. 18 Oct: full-history git bundle, ZIP of all files, docs ZIPs, and the four `v1.0-fdc` release files (editable PPTX deck, three 1080p videos) in `release_v1.0-fdc\`, which match GitHub's published digests. 20 Oct: a bundle of all local branches, a ZIP of the audit docs and the 1:5 model, and a ZIP of the private competition folder |
 | Audit date | 2026-10-18 |
 | Team | Team Sanjivani Hero's Journey, Sanjivani University, Kopargaon — AAKRUTI Innovation Competition 2026 (Robotics) |
 
@@ -26,9 +26,10 @@ Godavari at Kopargaon.
 | Mechanical design (66 parts) | **Complete and reproducible.** `build.py` regenerates CAD, BOM and checks identically; 14/14 design checks pass |
 | Structural checks | Hand calcs + 2 SOLIDWORKS static studies. FEA SF 4.4 is a fixed-end idealisation; pinned SF 3.10, **2.66 with the carriage couple** |
 | Drawings (6 × A3) | Consistent with the CAD; **not regenerable** from the repo (view renders missing) |
-| Firmware (ESP32) | **Does not compile**; actuators are print stubs; stage reading is a constant; clock never set; dead probes read as normal water |
+| Firmware (ESP32) | On `main`: **does not compile**; dead probes read as normal water. On local branch `bench-demo` (20 Oct): compiles in both builds with 0 warnings (P0-1); a dead probe raises SENSOR_FAULT (P0-2); one sample per event, and the learned state survives a power cut (P0-3); 26 unit tests compile but **none has run on a board**. Still to write: actuator, beacon, stage sensor, clock and modem drivers |
 | Electronics | **No schematic** (the `.kicad_sch` is prose); MOSFET rating and rail-polarity conflicts |
-| Decision logic | Works on synthetic data: **4/4 events flagged at +30 min** (audit script); state-machine and persistence flaws |
+| Decision logic | Works on synthetic data: **4/4 events flagged at +30 min** (audit script). The state-machine and persistence flaws are fixed on `bench-demo` (P0-3); not yet run on hardware |
+| 1:5 scale model | STL files for a Bambu H2D, with a print and assembly guide (branch `scale-model-1to5`). A scale model of the form and mechanism, not a working prototype |
 | Data | **All synthetic** or design estimates; no field data |
 | Website / viewer / dashboard | Run without errors; dashboard is a demo that can look live |
 | Built or tested in water | **No** |
@@ -41,9 +42,12 @@ at 25° · drag at 1.5 m/s 142 N · pole: 54.8 MPa pinned (64.0 MPa with couple)
 
 ## 5. Ten things to know before changing anything
 1. A failed probe read returns a normal-looking constant and the decision engine ignores validity flags → fail-silent "green".
+   *Fixed on `bench-demo` (P0-2).*
 2. Firmware modules `microsd_logger` and `telemetry_comm` belong to an older data model; `main.cpp` calls methods that do not exist.
+   *Fixed on `bench-demo` (P0-1).*
 3. Learned baselines live in RTC memory and vanish on any power loss/brown-out (LTE bursts make brown-outs likely).
-4. Hard-limit trips re-trigger the sampler every reading; four bottles go to the first one or two events.
+   *Fixed on `bench-demo` (P0-3).*
+4. Hard-limit trips re-trigger the sampler every reading; four bottles go to the first one or two events. *Fixed on `bench-demo` (P0-3).*
 5. The 2 m stage range, 1.5 m/s current and 500 N debris load are assumptions; above the top stop the float is held under water.
 6. The float sits in the bridge pier's wake; the weathervane argument assumes uniform flow.
 7. The upward ultrasonic stage sensor is inside its blind zone near high water and sees the upper stop collar first.
@@ -56,7 +60,9 @@ at 25° · drag at 1.5 m/s 142 N · pole: 54.8 MPa pinned (64.0 MPa with couple)
 |---|---|
 | `mechanical/src` | Parametric design engine (params → parts → analysis → export → drawings) |
 | `mechanical/cad`, `checks`, `drawings`, `simulation`, `solidworks` | Generated CAD/BOM/checks, drawing set, FEA studies and reports, SOLIDWORKS Pack and Go |
-| `firmware/edge_node` | ESP32 PlatformIO project (not compiling) |
+| `firmware/edge_node` | ESP32 PlatformIO project: does not compile on `main`, compiles on `bench-demo`. [firmware/BENCH_DEMO_PLAN.md](firmware/BENCH_DEMO_PLAN.md) (on `bench-demo`) is the plan to the finale |
+| `mechanical/scale_model_1to5` | 1:5 printable model and the scripts that generate it (branch `scale-model-1to5`) |
+| `competition_private` | Private, never committed: the semi-final preparation pack and `WORK_REGISTER.md`, the register of all work and presentations |
 | `analytics` | Synthetic dataset + generator, decision reference, evaluation, proxy model, plume model |
 | `hardware` | Text "schematic", power budget, v2 cost estimate, bench energy procedure |
 | `docs` | GitHub Pages site (index, viewer, dashboard, media, deck) and v2 engineering notes |
@@ -89,12 +95,16 @@ part numbers `AS3-xyz` with the hundreds digit = subsystem (1 guide, 2 hull/fram
 
 ## 8. Decisions waiting for the owner
 1. ~~Download the four GitHub release assets~~ — done 2026-10-18: downloaded and verified (size and SHA-256 equal GitHub's digests).
-2. Install PlatformIO + ESP32 platform to compile the firmware after the P0 fixes?
-3. Keep the audit docs on the audit branch, or merge them? (Anything under `docs/` is published by GitHub Pages.)
-4. Which items of the prioritised plan to start; changes would be proposed on a branch for review first.
+2. ~~Install PlatformIO + ESP32 platform~~ — done 2026-10-20: VS Code and PlatformIO Core 6.2.0, `espressif32` pinned at 6.13.0.
+3. Keep the audit docs on the audit branch, or merge them? (Anything under `docs/` is published by GitHub Pages.) Since 2026-10-20
+   they are committed on the local branch `audit/engineering-knowledge-base`: not merged, not pushed.
+4. ~~Which items of the prioritised plan to start~~ — P0-1, P0-2 and P0-3 done on `bench-demo` (2026-10-20). Next, from
+   `firmware/BENCH_DEMO_PLAN.md`: demo mode, probe commissioning, drivers and the phone alert.
+5. What to push to GitHub, and when. Nothing has been pushed: `main` on GitHub is still `840f1a6`.
 
 ## 9. Change log of this file
 | Date | Change |
 |---|---|
 | 2026-10-18 | Created from the full audit of commit 840f1a6 |
 | 2026-10-18 | Release `v1.0-fdc` assets downloaded with your approval and verified; archive now complete |
+| 2026-10-20 | Updated after the first fixes: firmware status (P0-1 to P0-3 on `bench-demo`), the 1:5 model, the branch layout, the 20 Oct backups and the private work register |
