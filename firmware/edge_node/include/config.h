@@ -140,4 +140,19 @@
 #define RANGE_TEMP_MIN        -20.0f   // °C; probe operating range -20 to +60
 #define RANGE_TEMP_MAX        60.0f
 
+// -----------------------------------------------------------------------------
+// 10. Decision State and Flash Persistence (audit F5, F7, F11)
+// Counted in decision cycles, which are kept in flash: the clock is not reliable yet (audit F4).
+// -----------------------------------------------------------------------------
+#define LEARNING_CYCLES          (7UL * 24 * 60 / SAMPLING_INTERVAL_MIN)            // 7 days: 672 at 15 min
+#define SAMPLE_LOCKOUT_CYCLES    (SAMPLE_LOCKOUT_MIN / SAMPLING_INTERVAL_MIN)       // 60 min: 4 cycles
+#define WIPER_INTERVAL_CYCLES    (WIPER_INTERVAL_HOURS * 60 / SAMPLING_INTERVAL_MIN) // 6 h: 24 cycles
+#define NVS_SAVE_INTERVAL_CYCLES 4   // learned state saved at least hourly, and at once on a risk or fault change
+#define NODE_NVS_NAMESPACE       "aquanode"   // decision cycle counter
+#ifdef PIO_UNIT_TESTING
+#define ENGINE_NVS_NAMESPACE     "aqeng_test" // unit tests never overwrite the real learned state
+#else
+#define ENGINE_NVS_NAMESPACE     "aquaengine" // baselines, learning progress, risk state
+#endif
+
 #endif // CONFIG_H

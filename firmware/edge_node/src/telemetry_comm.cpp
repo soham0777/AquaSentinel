@@ -15,14 +15,14 @@ static const char* riskName(RiskLevel level) {
     }
 }
 
-String TelemetryManager::serializePayload(const SensorReadings& r, const AnomalyResult& anom, uint32_t boot_count,
+String TelemetryManager::serializePayload(const SensorReadings& r, const AnomalyResult& anom, uint32_t cycle,
                                           uint8_t bottles_filled) {
     StaticJsonDocument<768> doc;
 
     doc["device_id"] = DEVICE_ID;
     doc["fw_ver"] = FIRMWARE_VERSION;
     doc["stretch"] = RIVER_STRETCH_ID;
-    doc["boot_seq"] = boot_count;
+    doc["cycle"] = cycle; // decision cycle, kept in flash (replaces "boot_seq", which restarted at every reset)
     doc["ts"] = r.timestamp;
 
     JsonObject data = doc.createNestedObject("telemetry");
