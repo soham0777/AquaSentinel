@@ -1,0 +1,806 @@
+{
+ "scale": "1:5",
+ "units": "mm",
+ "source": "mechanical/src/params.py (R3)",
+ "bed_used_mm": [
+  300.0,
+  320.0,
+  300.0
+ ],
+ "parts": [
+  {
+   "id": "F01",
+   "file": "parts/F01_hull_starboard.stl",
+   "name": "Pontoon hull, starboard",
+   "colour": "yellow",
+   "qty": 1,
+   "print_size_mm": [
+    203.2,
+    48.4,
+    52.0
+   ],
+   "volume_cm3": 441.73,
+   "solids": 1,
+   "brep_valid": true,
+   "triangles": 6122,
+   "open_or_bad_edges": 0,
+   "signed_volume_mm3": 441728.1,
+   "watertight": true,
+   "overhang_gt45_mm2": 1972.9,
+   "flat_downward_mm2": 1445.9
+  },
+  {
+   "id": "F02",
+   "file": "parts/F02_hull_port.stl",
+   "name": "Pontoon hull, port",
+   "colour": "yellow",
+   "qty": 1,
+   "print_size_mm": [
+    203.2,
+    48.4,
+    52.0
+   ],
+   "volume_cm3": 441.73,
+   "solids": 1,
+   "brep_valid": true,
+   "triangles": 6122,
+   "open_or_bad_edges": 0,
+   "signed_volume_mm3": 441728.1,
+   "watertight": true,
+   "overhang_gt45_mm2": 1972.9,
+   "flat_downward_mm2": 1445.9
+  },
+  {
+   "id": "F03",
+   "file": "parts/F03_frame_deck_struts_stanchions.stl",
+   "name": "Frame: 4 crossbeams, deck, carriage struts, canopy stanchions, LTE antenna",
+   "colour": "silver",
+   "qty": 1,
+   "print_size_mm": [
+    157.0,
+    150.0,
+    78.3
+   ],
+   "volume_cm3": 61.93,
+   "solids": 1,
+   "brep_valid": true,
+   "triangles": 12938,
+   "open_or_bad_edges": 0,
+   "signed_volume_mm3": 61923.0,
+   "watertight": true,
+   "overhang_gt45_mm2": 7800.3,
+   "flat_downward_mm2": 7800.3
+  },
+  {
+   "id": "F04",
+   "file": "parts/F04_guide_carriage.stl",
+   "name": "Bow guide carriage, 8 rollers, stage sensor",
+   "colour": "silver",
+   "qty": 1,
+   "print_size_mm": [
+    52.2,
+    47.8,
+    92.4
+   ],
+   "volume_cm3": 24.06,
+   "solids": 1,
+   "brep_valid": true,
+   "triangles": 29644,
+   "open_or_bad_edges": 0,
+   "signed_volume_mm3": 24049.8,
+   "watertight": true,
+   "overhang_gt45_mm2": 1932.9,
+   "flat_downward_mm2": 1455.2
+  },
+  {
+   "id": "F05",
+   "file": "parts/F05_sensor_well_and_cage.stl",
+   "name": "Sensor well, hatch flange and guard cage",
+   "colour": "black",
+   "qty": 1,
+   "print_size_mm": [
+    38.0,
+    38.0,
+    138.6
+   ],
+   "volume_cm3": 14.92,
+   "solids": 1,
+   "brep_valid": true,
+   "triangles": 3830,
+   "open_or_bad_edges": 0,
+   "signed_volume_mm3": 14913.8,
+   "watertight": true,
+   "overhang_gt45_mm2": 530.8,
+   "flat_downward_mm2": 520.3
+  },
+  {
+   "id": "F06",
+   "file": "parts/F06_debris_deflector.stl",
+   "name": "V debris deflector",
+   "colour": "black",
+   "qty": 1,
+   "print_size_mm": [
+    19.7,
+    117.2,
+    19.7
+   ],
+   "volume_cm3": 7.04,
+   "solids": 1,
+   "brep_valid": true,
+   "triangles": 36,
+   "open_or_bad_edges": 0,
+   "signed_volume_mm3": 7036.8,
+   "watertight": true,
+   "overhang_gt45_mm2": 105.4,
+   "flat_downward_mm2": 0.0
+  },
+  {
+   "id": "F07",
+   "file": "parts/F07_cartridge_cap_handle.stl",
+   "name": "Sensor cartridge cap with lift handle",
+   "colour": "black",
+   "qty": 1,
+   "print_size_mm": [
+    37.2,
+    37.2,
+    22.6
+   ],
+   "volume_cm3": 4.67,
+   "solids": 1,
+   "brep_valid": true,
+   "triangles": 11486,
+   "open_or_bad_edges": 0,
+   "signed_volume_mm3": 4661.9,
+   "watertight": true,
+   "overhang_gt45_mm2": 40.1,
+   "flat_downward_mm2": 13.0
+  },
+  {
+   "id": "F08",
+   "file": "parts/F08_probe_cluster.stl",
+   "name": "Probe cluster: 4 probes, spine, holders, wiper",
+   "colour": "dark grey",
+   "qty": 1,
+   "print_size_mm": [
+    24.8,
+    21.1,
+    133.4
+   ],
+   "volume_cm3": 11.9,
+   "solids": 1,
+   "brep_valid": true,
+   "triangles": 17222,
+   "open_or_bad_edges": 0,
+   "signed_volume_mm3": 11887.9,
+   "watertight": true,
+   "overhang_gt45_mm2": 281.7,
+   "flat_downward_mm2": 281.7
+  },
+  {
+   "id": "F09",
+   "file": "parts/F09_control_pod.stl",
+   "name": "Power and control pod",
+   "colour": "light grey",
+   "qty": 1,
+   "print_size_mm": [
+    66.0,
+    56.6,
+    38.4
+   ],
+   "volume_cm3": 114.32,
+   "solids": 1,
+   "brep_valid": true,
+   "triangles": 4680,
+   "open_or_bad_edges": 0,
+   "signed_volume_mm3": 114315.5,
+   "watertight": true,
+   "overhang_gt45_mm2": 2657.8,
+   "flat_downward_mm2": 2443.3
+  },
+  {
+   "id": "F10",
+   "file": "parts/F10_autosampler.stl",
+   "name": "Autosampler cassette",
+   "colour": "white",
+   "qty": 1,
+   "print_size_mm": [
+    37.4,
+    46.8,
+    53.2
+   ],
+   "volume_cm3": 81.13,
+   "solids": 1,
+   "brep_valid": true,
+   "triangles": 3996,
+   "open_or_bad_edges": 0,
+   "signed_volume_mm3": 81129.2,
+   "watertight": true,
+   "overhang_gt45_mm2": 110.4,
+   "flat_downward_mm2": 70.8
+  },
+  {
+   "id": "F11",
+   "file": "parts/F11_pv_canopy.stl",
+   "name": "Solar (PV) canopy",
+   "colour": "dark blue",
+   "qty": 1,
+   "print_size_mm": [
+    90.0,
+    70.0,
+    8.6
+   ],
+   "volume_cm3": 22.83,
+   "solids": 1,
+   "brep_valid": true,
+   "triangles": 2428,
+   "open_or_bad_edges": 0,
+   "signed_volume_mm3": 22827.0,
+   "watertight": true,
+   "overhang_gt45_mm2": 496.6,
+   "flat_downward_mm2": 496.6
+  },
+  {
+   "id": "F12",
+   "file": "parts/F12_beacon_mast.stl",
+   "name": "Beacon mast and beacon base",
+   "colour": "silver",
+   "qty": 1,
+   "print_size_mm": [
+    16.0,
+    16.0,
+    109.8
+   ],
+   "volume_cm3": 4.23,
+   "solids": 1,
+   "brep_valid": true,
+   "triangles": 1676,
+   "open_or_bad_edges": 0,
+   "signed_volume_mm3": 4228.0,
+   "watertight": true,
+   "overhang_gt45_mm2": 24.3,
+   "flat_downward_mm2": 3.1
+  },
+  {
+   "id": "F13",
+   "file": "parts/F13_beacon_lens_green.stl",
+   "name": "Beacon lens, GREEN (normal)",
+   "colour": "translucent green",
+   "qty": 1,
+   "print_size_mm": [
+    14.8,
+    14.8,
+    14.8
+   ],
+   "volume_cm3": 2.19,
+   "solids": 1,
+   "brep_valid": true,
+   "triangles": 1598,
+   "open_or_bad_edges": 0,
+   "signed_volume_mm3": 2183.1,
+   "watertight": true,
+   "overhang_gt45_mm2": 3.1,
+   "flat_downward_mm2": 3.1
+  },
+  {
+   "id": "F14",
+   "file": "parts/F14_beacon_lens_red.stl",
+   "name": "Beacon lens, RED (alert)",
+   "colour": "translucent red",
+   "qty": 1,
+   "print_size_mm": [
+    14.8,
+    14.8,
+    14.8
+   ],
+   "volume_cm3": 2.19,
+   "solids": 1,
+   "brep_valid": true,
+   "triangles": 1598,
+   "open_or_bad_edges": 0,
+   "signed_volume_mm3": 2183.1,
+   "watertight": true,
+   "overhang_gt45_mm2": 3.1,
+   "flat_downward_mm2": 3.1
+  },
+  {
+   "id": "F15a",
+   "file": "parts/F15a_grab_handle_1.stl",
+   "name": "Grab handle 1 of 4",
+   "colour": "silver",
+   "qty": 1,
+   "print_size_mm": [
+    30.8,
+    6.8,
+    13.2
+   ],
+   "volume_cm3": 0.66,
+   "solids": 1,
+   "brep_valid": true,
+   "triangles": 9068,
+   "open_or_bad_edges": 0,
+   "signed_volume_mm3": 662.4,
+   "watertight": true,
+   "overhang_gt45_mm2": 67.8,
+   "flat_downward_mm2": 16.7
+  },
+  {
+   "id": "F15b",
+   "file": "parts/F15b_grab_handle_2.stl",
+   "name": "Grab handle 2 of 4",
+   "colour": "silver",
+   "qty": 1,
+   "print_size_mm": [
+    30.8,
+    6.8,
+    13.2
+   ],
+   "volume_cm3": 0.66,
+   "solids": 1,
+   "brep_valid": true,
+   "triangles": 9068,
+   "open_or_bad_edges": 0,
+   "signed_volume_mm3": 662.4,
+   "watertight": true,
+   "overhang_gt45_mm2": 67.8,
+   "flat_downward_mm2": 16.7
+  },
+  {
+   "id": "F15c",
+   "file": "parts/F15c_grab_handle_3.stl",
+   "name": "Grab handle 3 of 4",
+   "colour": "silver",
+   "qty": 1,
+   "print_size_mm": [
+    30.8,
+    6.8,
+    13.2
+   ],
+   "volume_cm3": 0.66,
+   "solids": 1,
+   "brep_valid": true,
+   "triangles": 9068,
+   "open_or_bad_edges": 0,
+   "signed_volume_mm3": 662.4,
+   "watertight": true,
+   "overhang_gt45_mm2": 67.8,
+   "flat_downward_mm2": 16.7
+  },
+  {
+   "id": "F15d",
+   "file": "parts/F15d_grab_handle_4.stl",
+   "name": "Grab handle 4 of 4",
+   "colour": "silver",
+   "qty": 1,
+   "print_size_mm": [
+    30.8,
+    6.8,
+    13.2
+   ],
+   "volume_cm3": 0.66,
+   "solids": 1,
+   "brep_valid": true,
+   "triangles": 9068,
+   "open_or_bad_edges": 0,
+   "signed_volume_mm3": 662.4,
+   "watertight": true,
+   "overhang_gt45_mm2": 67.8,
+   "flat_downward_mm2": 16.7
+  },
+  {
+   "id": "S01",
+   "file": "parts/S01_display_base.stl",
+   "name": "Display base (riverbed)",
+   "colour": "grey",
+   "qty": 1,
+   "print_size_mm": [
+    260.0,
+    170.0,
+    8.0
+   ],
+   "volume_cm3": 250.03,
+   "solids": 1,
+   "brep_valid": true,
+   "triangles": 10420,
+   "open_or_bad_edges": 0,
+   "signed_volume_mm3": 250029.5,
+   "watertight": true,
+   "overhang_gt45_mm2": 0.0,
+   "flat_downward_mm2": 0.0
+  },
+  {
+   "id": "S02",
+   "file": "parts/S02_pier_column.stl",
+   "name": "Bridge pier column",
+   "colour": "concrete grey",
+   "qty": 1,
+   "print_size_mm": [
+    60.0,
+    304.2,
+    22.1
+   ],
+   "volume_cm3": 361.18,
+   "solids": 1,
+   "brep_valid": true,
+   "triangles": 2732,
+   "open_or_bad_edges": 0,
+   "signed_volume_mm3": 361182.0,
+   "watertight": true,
+   "overhang_gt45_mm2": 0.0,
+   "flat_downward_mm2": 0.0
+  },
+  {
+   "id": "S03",
+   "file": "parts/S03_pier_bracket_lower.stl",
+   "name": "Pier bracket, lower",
+   "colour": "silver",
+   "qty": 1,
+   "print_size_mm": [
+    36.0,
+    44.0,
+    84.0
+   ],
+   "volume_cm3": 17.17,
+   "solids": 1,
+   "brep_valid": true,
+   "triangles": 2340,
+   "open_or_bad_edges": 0,
+   "signed_volume_mm3": 17165.7,
+   "watertight": true,
+   "overhang_gt45_mm2": 547.4,
+   "flat_downward_mm2": 373.8
+  },
+  {
+   "id": "S04",
+   "file": "parts/S04_pier_bracket_upper.stl",
+   "name": "Pier bracket, upper (with stage target plate)",
+   "colour": "silver",
+   "qty": 1,
+   "print_size_mm": [
+    36.0,
+    44.0,
+    109.0
+   ],
+   "volume_cm3": 18.02,
+   "solids": 1,
+   "brep_valid": true,
+   "triangles": 2362,
+   "open_or_bad_edges": 0,
+   "signed_volume_mm3": 18017.3,
+   "watertight": true,
+   "overhang_gt45_mm2": 547.3,
+   "flat_downward_mm2": 375.0
+  },
+  {
+   "id": "S05a",
+   "file": "parts/S05a_stop_collar_lower.stl",
+   "name": "Stop collar + buffer, lower",
+   "colour": "silver",
+   "qty": 1,
+   "print_size_mm": [
+    22.4,
+    20.0,
+    10.0
+   ],
+   "volume_cm3": 1.88,
+   "solids": 1,
+   "brep_valid": true,
+   "triangles": 1336,
+   "open_or_bad_edges": 0,
+   "signed_volume_mm3": 1874.0,
+   "watertight": true,
+   "overhang_gt45_mm2": 0.0,
+   "flat_downward_mm2": 0.0
+  },
+  {
+   "id": "S05b",
+   "file": "parts/S05b_stop_collar_upper.stl",
+   "name": "Stop collar + buffer, upper (fit upside down)",
+   "colour": "silver",
+   "qty": 1,
+   "print_size_mm": [
+    22.4,
+    20.0,
+    10.0
+   ],
+   "volume_cm3": 1.88,
+   "solids": 1,
+   "brep_valid": true,
+   "triangles": 1336,
+   "open_or_bad_edges": 0,
+   "signed_volume_mm3": 1874.0,
+   "watertight": true,
+   "overhang_gt45_mm2": 0.0,
+   "flat_downward_mm2": 0.0
+  },
+  {
+   "id": "S06",
+   "file": "parts/S06_pole_cap.stl",
+   "name": "Pole top cap",
+   "colour": "black",
+   "qty": 1,
+   "print_size_mm": [
+    14.8,
+    14.8,
+    7.5
+   ],
+   "volume_cm3": 0.66,
+   "solids": 1,
+   "brep_valid": true,
+   "triangles": 1262,
+   "open_or_bad_edges": 0,
+   "signed_volume_mm3": 655.7,
+   "watertight": true,
+   "overhang_gt45_mm2": 118.7,
+   "flat_downward_mm2": 118.7
+  }
+ ],
+ "checks": {
+  "AquaSentinel_R3_1to5_FLOAT.stl": {
+   "parts": 18,
+   "triangles": 139648,
+   "extent_mm": [
+    292.6,
+    265.2,
+    138.6
+   ],
+   "fits_300x320x300": true,
+   "layout": {
+    "F03": [
+     3.0,
+     3.0
+    ],
+    "F02": [
+     164.0,
+     3.0
+    ],
+    "F01": [
+     216.4,
+     3.0
+    ],
+    "F11": [
+     3.0,
+     157.0
+    ],
+    "F09": [
+     97.0,
+     157.0
+    ],
+    "F04": [
+     167.0,
+     210.2
+    ],
+    "F06": [
+     268.8,
+     3.0
+    ],
+    "F10": [
+     223.2,
+     210.2
+    ],
+    "F05": [
+     97.0,
+     217.6
+    ],
+    "F07": [
+     3.0,
+     231.0
+    ],
+    "F08": [
+     268.8,
+     124.2
+    ],
+    "F12": [
+     268.8,
+     149.3
+    ],
+    "F13": [
+     268.8,
+     169.3
+    ],
+    "F14": [
+     268.8,
+     188.1
+    ],
+    "F15c": [
+     288.8,
+     149.3
+    ],
+    "F15d": [
+     287.6,
+     184.1
+    ],
+    "F15a": [
+     268.8,
+     206.9
+    ],
+    "F15b": [
+     279.6,
+     206.9
+    ]
+   }
+  },
+  "AquaSentinel_R3_1to5_STAND.stl": {
+   "parts": 7,
+   "triangles": 21788,
+   "extent_mm": [
+    236.0,
+    304.2,
+    109.0
+   ],
+   "fits_300x320x300": true,
+   "layout": {
+    "S02": [
+     3.0,
+     9.0
+    ],
+    "S01": [
+     69.0,
+     28.0
+    ],
+    "S03": [
+     115.0,
+     52.0
+    ],
+    "S04": [
+     157.0,
+     52.0
+    ],
+    "S05a": [
+     118.8,
+     118.0
+    ],
+    "S05b": [
+     146.8,
+     118.0
+    ],
+    "S06": [
+     176.6,
+     120.6
+    ]
+   }
+  },
+  "rod_to_rollers_mm": 0.387,
+  "carriage_frame_overlap_mm3": 0.0,
+  "strut_tips_to_lugs_mm": [
+   0.2,
+   0.2
+  ],
+  "well_tube_to_deck_hole_mm": 0.5,
+  "probe_cluster_to_well_and_cage_mm": 1.0,
+  "cartridge_cap_well_overlap_mm3": 0.0,
+  "deflector_to_well_mm": 0.173,
+  "deflector_frame_overlap_mm3": 0.0,
+  "canopy_frame_overlap_mm3": 0.0,
+  "canopy_to_sampler_mm": 2.517,
+  "canopy_to_pod_mm": 17.966,
+  "struts_to_cartridge_lift_path_mm": 1.56,
+  "pod_frame_overlap_mm3": 0.0,
+  "sampler_frame_overlap_mm3": 0.0,
+  "mast_frame_overlap_mm3": 0.0,
+  "hulls_frame_overlap_mm3": 0.0,
+  "carriage_to_hulls_mm": 9.6,
+  "at_lowest_overlap_float_vs_stand_mm3": 0.0,
+  "at_lowest_closest_noncarriage_mm": [
+   7.89,
+   "F06-S01"
+  ],
+  "at_lowest_carriage_to_stops_mm": 0.0,
+  "at_lowest_cage_bottom_above_table_mm": 4.0,
+  "at_highest_overlap_float_vs_stand_mm3": 0.0,
+  "at_highest_closest_noncarriage_mm": [
+   9.6,
+   "F06-S05a"
+  ],
+  "at_highest_carriage_to_stops_mm": 0.0,
+  "at_highest_cage_bottom_above_table_mm": 69.0,
+  "stand": {
+   "keel_lowest": 80.8,
+   "keel_highest": 145.8,
+   "travel": 65.0,
+   "clamp_lower_z": 98.0,
+   "clamp_upper_z": 282.2,
+   "column_top": 306.2,
+   "rod_length": 310.0,
+   "rod_d": 12.0
+  }
+ },
+ "optional_rod_half": {
+  "file": "parts/OPT_rod_half_print_2.stl",
+  "print_size_mm": [
+   12.0,
+   310.0,
+   6.0
+  ],
+  "triangles": 1200,
+  "open_or_bad_edges": 0,
+  "signed_volume_mm3": 17489.3,
+  "watertight": true
+ },
+ "float_mass_estimate": {
+  "assumptions": "PLA 1.24 g/cm3, 2 walls, ~1 mm top/bottom skins, 15 % infill, one lens fitted",
+  "grams_total": 446.0,
+  "per_part": [
+   {
+    "id": "F01",
+    "grams": 118.4
+   },
+   {
+    "id": "F02",
+    "grams": 118.4
+   },
+   {
+    "id": "F03",
+    "grams": 50.1
+   },
+   {
+    "id": "F04",
+    "grams": 29.8
+   },
+   {
+    "id": "F05",
+    "grams": 18.5
+   },
+   {
+    "id": "F06",
+    "grams": 8.7
+   },
+   {
+    "id": "F07",
+    "grams": 4.2
+   },
+   {
+    "id": "F08",
+    "grams": 10.2
+   },
+   {
+    "id": "F09",
+    "grams": 35.2
+   },
+   {
+    "id": "F10",
+    "grams": 25.5
+   },
+   {
+    "id": "F11",
+    "grams": 18.8
+   },
+   {
+    "id": "F12",
+    "grams": 3.4
+   },
+   {
+    "id": "F13",
+    "grams": 1.2
+   },
+   {
+    "id": "F15a",
+    "grams": 0.8
+   },
+   {
+    "id": "F15b",
+    "grams": 0.8
+   },
+   {
+    "id": "F15c",
+    "grams": 0.8
+   },
+   {
+    "id": "F15d",
+    "grams": 0.8
+   }
+  ],
+  "cg_mm": [
+   83.8,
+   0.4,
+   45.0
+  ],
+  "draft_mm": 26.2,
+  "lcb_x_mm": 83.9,
+  "lcg_minus_lcb_mm": -0.1,
+  "design_scaled": {
+   "grams": 388.0,
+   "draft_mm": 23.4,
+   "lcg_x_mm": 79.0
+  }
+ }
+}
