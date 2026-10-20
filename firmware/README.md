@@ -21,8 +21,12 @@ regenerates `include/exported_anomaly_weights.h` from the dataset.
 
 ```bash
 cd edge_node
-pio run            # build
-pio run -t upload  # flash
+pio run -e esp32dev             # field build (15-minute deep-sleep cycle)
+pio run -e bench                # bench-demo build for the finale (see BENCH_DEMO_PLAN.md)
+pio run -e bench -t upload      # flash
+pio device monitor -b 115200    # serial log
 ```
 
-**Status:** not yet compiled and bench-run on the real probes and modem.
+**Status:** compiles cleanly (both environments, espressif32 6.13.0 / Arduino-ESP32 2.0.17) since the audit's P0-1
+fixes; not yet run on the real probes, actuators or modem. Fail-safe sensing (P0-2) and the decision state machine
+(P0-3) come next: see [BENCH_DEMO_PLAN.md](BENCH_DEMO_PLAN.md).

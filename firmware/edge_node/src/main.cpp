@@ -101,11 +101,13 @@ void setup() {
     }
 
     // 7. ACT: MicroSD Atomic Persistence & 4G LTE Telemetry
-    sdLogger.logTelemetry(readings, anomaly);
+    sdLogger.logReading(readings, anomaly);
 
     // Upload immediately on EVENT, otherwise hourly batch (every 4 cycles)
     if (anomaly.level == RISK_EVENT || (boot_counter % 4 == 0)) {
-        telemetryMgr.transmitTelemetry(readings, anomaly, autoSampler.getFilledBottlesCount());
+        String frame = telemetryMgr.serializePayload(readings, anomaly, boot_counter,
+                                                     autoSampler.getFilledBottlesCount());
+        telemetryMgr.transmit(frame, anomaly.level == RISK_EVENT);
     }
 
     // 8. Sleep Power Management: Re-arm 15-minute RTC timer
