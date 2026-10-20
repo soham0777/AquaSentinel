@@ -1,0 +1,2406 @@
+{
+ "repository": {
+  "url": "https://github.com/soham0777/AquaSentinel",
+  "visibility": "public",
+  "default_branch": "main",
+  "checked_out_commit": "840f1a65453bfc757174bfe90a9ab636c7dd5269",
+  "commit_subject": "Redesign the README and project site",
+  "commit_date": "2026-10-06T23:25:17+05:30",
+  "tree_sha1": "16fff1fcb64e199111266b5f90ddc82e9f689647",
+  "total_commits": 3,
+  "refs": {
+   "refs/heads/main": "840f1a65453bfc757174bfe90a9ab636c7dd5269",
+   "refs/tags/v1.0-fdc": "8ba1e44819a8a74c021e00bec11e4f608ed53587 (lightweight tag)"
+  },
+  "submodules": [],
+  "lfs_objects": [],
+  "symlinks": [],
+  "github_release_assets_not_in_git": [
+   {
+    "name": "AquaSentinel_FDC_AAKRUTI_2026.pptx",
+    "bytes": 13476282
+   },
+   {
+    "name": "AquaSentinel_Journey_Video_1080p.mp4",
+    "bytes": 36756679
+   },
+   {
+    "name": "AquaSentinel_Pitch_Video_1080p.mp4",
+    "bytes": 91530849
+   },
+   {
+    "name": "AquaSentinel_R3_Assembly_and_Operation_1080p.mp4",
+    "bytes": 137483710
+   }
+  ],
+  "release_assets_downloaded": true,
+  "release_assets_download": {
+   "date": "2026-10-18",
+   "source": "https://github.com/soham0777/AquaSentinel/releases/tag/v1.0-fdc",
+   "method": "curl.exe -L --fail from browser_download_url; digests from the GitHub releases API",
+   "approved_by_user": true,
+   "folder": "C:\\Users\\dell\\OneDrive\\Desktop\\AquaSentinel_Backups\\release_v1.0-fdc",
+   "assets": [
+    {
+     "name": "AquaSentinel_FDC_AAKRUTI_2026.pptx",
+     "path": "AquaSentinel_Backups\\release_v1.0-fdc\\AquaSentinel_FDC_AAKRUTI_2026.pptx",
+     "size_bytes": 13476282,
+     "sha256": "720e85941f7d63e1cdf6d2f8da6ab6a1bcb5cbd6375850cc4b5cba2a1c63ac16",
+     "github_api_digest": "720e85941f7d63e1cdf6d2f8da6ab6a1bcb5cbd6375850cc4b5cba2a1c63ac16",
+     "size_matches_github": true,
+     "sha256_matches_github": true,
+     "package": {
+      "zip_crc_ok": true,
+      "slides": 13,
+      "pdf_pages": 13,
+      "slides_matching_committed_pdf": 13,
+      "media_files": 32,
+      "app": {
+       "Application": "Microsoft Office PowerPoint",
+       "AppVersion": "16.0000",
+       "Slides": "13"
+      },
+      "core": {
+       "creator": "ARORA Shubham",
+       "lastModifiedBy": null,
+       "created": "2024-04-17T11:40:34Z",
+       "modified": "2026-10-05T11:56:58Z"
+      },
+      "content": {
+       "slides": 13,
+       "hidden_slides": [],
+       "media_by_type": {
+        "png": 28,
+        "jpeg": 4
+       },
+       "embeddings": [],
+       "comment_parts": [],
+       "external_link_targets": {},
+       "slides_with_speaker_notes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+       ],
+       "speaker_note_words": 471
+      }
+     }
+    },
+    {
+     "name": "AquaSentinel_Journey_Video_1080p.mp4",
+     "path": "AquaSentinel_Backups\\release_v1.0-fdc\\AquaSentinel_Journey_Video_1080p.mp4",
+     "size_bytes": 36756679,
+     "sha256": "cfcfda79f05f93e1aac0b2f38ef7b326299593975ad7b045870b5e39088d5b82",
+     "github_api_digest": "cfcfda79f05f93e1aac0b2f38ef7b326299593975ad7b045870b5e39088d5b82",
+     "size_matches_github": true,
+     "sha256_matches_github": true,
+     "media": {
+      "duration_s": 118.0,
+      "video": "1920x1080 h264 60/1",
+      "audio": "aac 48000 Hz x2"
+     },
+     "committed_lower_resolution_copy": {
+      "path": "docs/media/journey.mp4",
+      "duration_s": 118.02,
+      "video": "1280x720 h264 30/1",
+      "audio": "aac 48000 Hz x2"
+     },
+     "frame_comparison_with_copy": {
+      "frame_psnr_db_vs_720p_copy": {
+       "5s": 30.640136,
+       "30s": 48.415342,
+       "60s": 57.376961,
+       "90s": 58.502114
+      },
+      "control_psnr_db_1080p_30s_vs_720p_60s": 9.717999,
+      "method": "ffmpeg psnr filter, one frame per time, both scaled to 640x360 yuv420p"
+     }
+    },
+    {
+     "name": "AquaSentinel_Pitch_Video_1080p.mp4",
+     "path": "AquaSentinel_Backups\\release_v1.0-fdc\\AquaSentinel_Pitch_Video_1080p.mp4",
+     "size_bytes": 91530849,
+     "sha256": "b320a7f20d82d5d9ebe9fb1d99995228268dbd2ebb6ccc8804a22acaf7c59540",
+     "github_api_digest": "b320a7f20d82d5d9ebe9fb1d99995228268dbd2ebb6ccc8804a22acaf7c59540",
+     "size_matches_github": true,
+     "sha256_matches_github": true,
+     "media": {
+      "duration_s": 110.53,
+      "video": "1920x1080 h264 50/1",
+      "audio": "aac 48000 Hz x2"
+     },
+     "committed_lower_resolution_copy": {
+      "path": "docs/media/pitch.mp4",
+      "duration_s": 110.53,
+      "video": "1280x720 h264 30/1",
+      "audio": "aac 48000 Hz x2"
+     },
+     "frame_comparison_with_copy": {
+      "frame_psnr_db_vs_720p_copy": {
+       "5s": 34.45298,
+       "30s": 42.862723,
+       "60s": 56.630875,
+       "90s": 59.888513
+      },
+      "control_psnr_db_1080p_30s_vs_720p_60s": 7.68529,
+      "method": "ffmpeg psnr filter, one frame per time, both scaled to 640x360 yuv420p"
+     }
+    },
+    {
+     "name": "AquaSentinel_R3_Assembly_and_Operation_1080p.mp4",
+     "path": "AquaSentinel_Backups\\release_v1.0-fdc\\AquaSentinel_R3_Assembly_and_Operation_1080p.mp4",
+     "size_bytes": 137483710,
+     "sha256": "33c2651387023e2ea071b4514d3a031a5aee137cfadf30a6ddd9da512a270e23",
+     "github_api_digest": "33c2651387023e2ea071b4514d3a031a5aee137cfadf30a6ddd9da512a270e23",
+     "size_matches_github": true,
+     "sha256_matches_github": true,
+     "media": {
+      "duration_s": 106.63,
+      "video": "1920x1080 h264 30/1",
+      "audio": "none"
+     },
+     "committed_lower_resolution_copy": {
+      "path": "docs/media/assembly-and-operation.mp4",
+      "duration_s": 106.63,
+      "video": "1280x720 h264 30/1",
+      "audio": "none"
+     },
+     "frame_comparison_with_copy": {
+      "frame_psnr_db_vs_720p_copy": {
+       "5s": 56.857356,
+       "30s": 53.461476,
+       "60s": 54.926119,
+       "90s": 53.200921
+      },
+      "control_psnr_db_1080p_30s_vs_720p_60s": 13.374976,
+      "method": "ffmpeg psnr filter, one frame per time, both scaled to 640x360 yuv420p"
+     }
+    }
+   ]
+  }
+ },
+ "local_copy": {
+  "path": "C:\\Users\\dell\\OneDrive\\Desktop\\AquaSentinel",
+  "os": "Windows 11 Pro 10.0.26200 (64-bit)",
+  "desktop_resolution": "[Environment]::GetFolderPath('Desktop') -> C:\\Users\\dell\\OneDrive\\Desktop (OneDrive-redirected)",
+  "clone_date": "2026-10-18",
+  "clone_method": "git clone (full history) with --config core.autocrlf=false --config core.longpaths=true",
+  "local_git_config_added": {
+   "core.autocrlf": "false",
+   "core.longpaths": "true",
+   "core.eol": "lf"
+  },
+  "line_ending_note": "With text=auto, Windows checkout produced CRLF in 64 files; core.eol=lf was set and those 64 files restored from git, so every file equals its committed blob",
+  "audit_branch": "audit/engineering-knowledge-base (created at 840f1a6; main untouched; nothing committed or pushed)",
+  "integrity": {
+   "git_fsck_full_strict": "clean",
+   "files_byte_identical_to_blobs": "283/283"
+  }
+ },
+ "backups": {
+  "directory": "C:\\Users\\dell\\OneDrive\\Desktop\\AquaSentinel_Backups",
+  "bundle": {
+   "file": "AquaSentinel_840f1a6_full-history_2026-10-18.bundle",
+   "bytes": 109099360,
+   "sha256": "117e28a9a6971db2ef99c702541e3e0a1eccebcd3684065732b833b6d87dc24b",
+   "verification": "git bundle verify OK (complete history, 5 refs); test restore: tree 16fff1fc..., HEAD and tag identical, fsck clean"
+  },
+  "zip": {
+   "file": "AquaSentinel_840f1a6_files_2026-10-18.zip",
+   "bytes": 109355176,
+   "sha256": "0d3945ee12837a4c194272555ceb70366ad0496c7597f6706a6b1e427cc5eefa",
+   "verification": "283/283 entries, SHA-256 of every entry equals the inventory; CRC test OK",
+   "excluded": "nothing (no caches/build outputs in a fresh clone)"
+  },
+  "docs_zip": {
+   "file": "AquaSentinel_audit-docs_2026-10-18_v2.zip",
+   "supersedes": "AquaSentinel_audit-docs_2026-10-18.zip (kept)",
+   "contents": "README_PROJECT_CONTEXT.md and every audit output under docs/",
+   "sha256": "in SHA256SUMS.txt (a manifest inside the ZIP cannot hold the ZIP's own hash)"
+  },
+  "release_assets": {
+   "folder": "release_v1.0-fdc",
+   "files": [
+    "AquaSentinel_FDC_AAKRUTI_2026.pptx",
+    "AquaSentinel_Journey_Video_1080p.mp4",
+    "AquaSentinel_Pitch_Video_1080p.mp4",
+    "AquaSentinel_R3_Assembly_and_Operation_1080p.mp4"
+   ],
+   "verification": "size and SHA-256 equal the GitHub API values for all four"
+  }
+ },
+ "inventory_summary": {
+  "files": 283,
+  "bytes": 141028348,
+  "by_category": {
+   "config": 5,
+   "docs": 17,
+   "image": 74,
+   "source": 41,
+   "data": 4,
+   "video": 4,
+   "other": 1,
+   "cad": 136,
+   "archive": 1
+  },
+  "review_status": {
+   "tested": 165,
+   "reviewed": 114,
+   "requiring clarification": 1,
+   "inaccessible": 3
+  }
+ },
+ "files": [
+  {
+   "path": ".gitattributes",
+   "size_bytes": 282,
+   "sha256": "1a8db468e6147106fac836c47de962bf5d07eb0d4c3a4976dc2660df8905a73a",
+   "git_blob": "be4b01fff97a9b8ac35657ef85a945dc49abb112",
+   "status": "tested"
+  },
+  {
+   "path": ".gitignore",
+   "size_bytes": 265,
+   "sha256": "ede308797f66270abc1676a1908ec1224a9129f84476b27807120be72bb630e9",
+   "git_blob": "3648a824a78ea6357fe31724e1a8ed61d3eb64d8",
+   "status": "reviewed"
+  },
+  {
+   "path": "LICENSE",
+   "size_bytes": 1294,
+   "sha256": "314303962ab3b904b2407a6f640e89f8d38dd03f86f2bf0cd320c0309d972c69",
+   "git_blob": "e7df43e3095864fbe1b1e4d04bea2fd153430cd3",
+   "status": "reviewed"
+  },
+  {
+   "path": "README.md",
+   "size_bytes": 14182,
+   "sha256": "3e43a1f8cf1479bf86deda67adaaca4043a43611f3e03dd46f75932030de626f",
+   "git_blob": "52b4c443e7ebfb3ce30e579b25bf80e0c068f212",
+   "status": "reviewed"
+  },
+  {
+   "path": "analytics/README.md",
+   "size_bytes": 1220,
+   "sha256": "6b9dfaa24214482c518df7252928df1a020a5a64b91bfdf0e28a516300e9eba7",
+   "git_blob": "53d1fb0a2a3a4a76cfabcbf4c5d86ae5d248873f",
+   "status": "reviewed"
+  },
+  {
+   "path": "analytics/advection_dispersion_breakthrough_curves.png",
+   "size_bytes": 541688,
+   "sha256": "23a24b1e7a3bc4f30eb977febf7c93dfd9e769434330ee1a68d24dd4be3e5df0",
+   "git_blob": "d0bd0b64ad775ef90c6e6f9a5573dd9e9d3b9c76",
+   "status": "reviewed"
+  },
+  {
+   "path": "analytics/advection_dispersion_model.py",
+   "size_bytes": 7481,
+   "sha256": "e30d0ebb6c4825196e679c292583f87a1bc1535df48853bd0caeec5a6314ef3f",
+   "git_blob": "500b9d4eec82c219f8cd0ed6fdd39c2640f6d17f",
+   "status": "tested"
+  },
+  {
+   "path": "analytics/dataset/README.md",
+   "size_bytes": 3663,
+   "sha256": "e1c5594607a8a3d59627cfa6d467761c560a31caab1c9637d1382f162b0dcccc",
+   "git_blob": "196d9628db62f61b32206a4143186cb4025b10f2",
+   "status": "reviewed"
+  },
+  {
+   "path": "analytics/dataset/generate_water_quality_timeseries.py",
+   "size_bytes": 5307,
+   "sha256": "ef6a4e49d086d78d3c30f909ac2b2c66ee79bf5835fc98baa3eb20ae10288877",
+   "git_blob": "024b2ee12502fa30c33e2a8abdd327d43eb261a5",
+   "status": "tested"
+  },
+  {
+   "path": "analytics/dataset/synthetic_river_timeseries.csv",
+   "size_bytes": 226533,
+   "sha256": "f9756c78b137a9b11d7cfdfc2875970e606dbf01bda258bce8b9a28171c019f6",
+   "git_blob": "4d78a43bab4049e2a6484e86cf6402d0752e943f",
+   "status": "tested"
+  },
+  {
+   "path": "analytics/detector.py",
+   "size_bytes": 6383,
+   "sha256": "bd44af57bec251f727ed422c13c61bc9e4c445011ba5fdc42c3cc46d3276c3c8",
+   "git_blob": "a6f698e12a86cef96198b595a881281049a32fd7",
+   "status": "tested"
+  },
+  {
+   "path": "analytics/evaluate.py",
+   "size_bytes": 4929,
+   "sha256": "bef0fae39ffbb06f045388c8ba54df5c4f07a8feda91a4f3c39c62c590d5b98d",
+   "git_blob": "398b4a99321607407d71fbe594b103cb2ec9c53d",
+   "status": "tested"
+  },
+  {
+   "path": "analytics/plot_detector_evaluation.png",
+   "size_bytes": 665348,
+   "sha256": "7eacc771deda5c5e4206b313413728928a4f10fa6410544ecded5cbf85ae79f3",
+   "git_blob": "13d624935f513307c5ba11021fa1859da87a543b",
+   "status": "reviewed"
+  },
+  {
+   "path": "analytics/train_proxy_anomaly_engine.py",
+   "size_bytes": 5226,
+   "sha256": "11d8dcf9d869b2c98364fdfed19b1b1ae3f838d3c9c0be7b7f16edab73f2beb1",
+   "git_blob": "98309aec067fc0ae9476738216eebebfae750d39",
+   "status": "tested"
+  },
+  {
+   "path": "docs/assets/assembly.gif",
+   "size_bytes": 4588188,
+   "sha256": "8c9167d497e0c058f270eb95b72720ca168453d7b8bdb733212145615bb0dda0",
+   "git_blob": "1ae04e108c0b1350d505b4d9e3b8a7ec712087bc",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/banner.png",
+   "size_bytes": 203882,
+   "sha256": "5359807cc8dfa05cb2d5d743571347d30da202718366aab202ab6d5905a23d7d",
+   "git_blob": "4ccc552a0da4263cd154254fea284a46ac230efe",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/bracket-displacement.jpg",
+   "size_bytes": 52409,
+   "sha256": "d7f110adbc4e930e6eebb2472a5767fdd14a0d1eefbec1abe1d2f5d39404a135",
+   "git_blob": "95341475ec350164ea7655c8804ed9c9ddf3f17d",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/bracket-vonmises-stress.jpg",
+   "size_bytes": 57139,
+   "sha256": "96f8b6a9ad8a330b83a88070279bb3573a96c6ab01d8800ff65c8ff76f14197e",
+   "git_blob": "31bf704230f870c1db631a1bb727eb10b28e28ef",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/check-sheet.jpg",
+   "size_bytes": 211265,
+   "sha256": "c07492a7b207a85087ef6879c936c3670825182a1d9dde0005140f182a340fad",
+   "git_blob": "5557ae1fcaea361a7689af978377b5190b8dbe61",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/dashboard.jpg",
+   "size_bytes": 181022,
+   "sha256": "ffb8495b1218b83a5a9c5411d5b0594faa0d377e4069ad610682282db8f519de",
+   "git_blob": "bb99eae022833522b50eb1a6707a9287f848fba7",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/deck-overview.jpg",
+   "size_bytes": 254119,
+   "sha256": "1efdad42ba8ae6b65019a606d865e9a8b461304cfa0dde1d0aaaaa81725572fd",
+   "git_blob": "e1bafd7a372255543b77a80933cc42a00e73423c",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/detector-evaluation.jpg",
+   "size_bytes": 234771,
+   "sha256": "d0138068a9cfe142ea8475ba63624a8b8b057a37572514b06f49a89a04949416",
+   "git_blob": "1ffd652b01ce380775ec55904d06d07c2a3ee473",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/drawing-ga.jpg",
+   "size_bytes": 169755,
+   "sha256": "47e81a7ea02bd1023c8d8a9d22eefed6863048909cfef9363677eb0b83ac289c",
+   "git_blob": "20f5ea8dcb70e22e14e4a694aba5bf81f92a42c7",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/enovia-gantt.jpg",
+   "size_bytes": 122967,
+   "sha256": "24d22bc0e7b06f1d04034a247067f25e983ffadf49f1f79ec51a768648916016",
+   "git_blob": "cef342e2f5374a7031d06a9db8ebe6785cc43177",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/pole-displacement.jpg",
+   "size_bytes": 42734,
+   "sha256": "898c078ea30982f024cbc86dd216882264daf959843608b19089e139de714dbb",
+   "git_blob": "bc2395e645cf02b13ac728e6c11238a2b57fad0f",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/pole-vonmises-stress.jpg",
+   "size_bytes": 44998,
+   "sha256": "1a19ab7b58674edef33d79bc0adc89672165c1dc6b0ab6ac7f794ead11d5417c",
+   "git_blob": "34a9c63cffd13a1a941963f3d438c8a2e5196776",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/renders/alert-red.jpg",
+   "size_bytes": 78196,
+   "sha256": "ea93b4d4670ba028e3a6f2e453f3666fddb967f4ec516ed044fc5dd7821873a4",
+   "git_blob": "39bbc68eff396b2b8ffd9c4d8737e0d77bac7dc7",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/renders/cartridge-up.jpg",
+   "size_bytes": 110909,
+   "sha256": "0b3cfd7d080ecb378a8fb3c12d6417b47e660c635e95616f1e0965812de08b0a",
+   "git_blob": "0f01002de3bf0592b8354c77ce4fc5ef34eeeaa4",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/renders/exploded.jpg",
+   "size_bytes": 172367,
+   "sha256": "0031dfcee9b6065e9f51d29bd2653d3569b0b35ddef3c11a7046ada9574caaba",
+   "git_blob": "84972075a4a448a4bd3da66064069a9c991c881b",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/renders/gate-open.jpg",
+   "size_bytes": 105282,
+   "sha256": "20bb0d5771d4bb70188035138bac07570a1fcc2c1a4ced87fce0b41c18db01ba",
+   "git_blob": "b3cf1d26d1666d65d62657d92078fbb1f3ba63ba",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/renders/hero-river.jpg",
+   "size_bytes": 67282,
+   "sha256": "b01f8aab64d336f44607f3ddaead0b0198e958b30f9d52d5a6eec6e1b5b56057",
+   "git_blob": "46a3a485bb2074a012e1cff68805205da90d322e",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/renders/motion-study.jpg",
+   "size_bytes": 128340,
+   "sha256": "8eca89dd4b9dfdff1cfa5f57076397eb711289d41074b26d15752d9f5439f9d6",
+   "git_blob": "898d8d4670cc64c6ec1682aa1206e078daaa4d16",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/renders/section.jpg",
+   "size_bytes": 63884,
+   "sha256": "139accdc1765905e641679f8e6041695c644890d68762d5517b8fccac5deeb80",
+   "git_blob": "bec784fe2a8d6616b3af4bfe1c5f8ab9fd8907bc",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/renders/service-access.jpg",
+   "size_bytes": 93176,
+   "sha256": "356bfc32a9d026da1130a8642955d0b7f0bd320c35105b56bcf20f097d520bc2",
+   "git_blob": "6382beb116bbc19dfad5b5f166225f60f46a5d43",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/renders/studio-bow.jpg",
+   "size_bytes": 70987,
+   "sha256": "00bf64568e4428a29377df51a413cb780a25024ad575b3b044640945c626448a",
+   "git_blob": "86af96f4b2469e422ee86bd58df2b7b2868a8789",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/renders/studio-stern.jpg",
+   "size_bytes": 75554,
+   "sha256": "4abbae804a588919be7e2910fe9d99baa42265223eae42ffd4a6f1e611d91a96",
+   "git_blob": "cf6449ce8a108258b48698f36349b5a7efd9de30",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/renders/underwater.jpg",
+   "size_bytes": 70209,
+   "sha256": "2b7bce4a9a74e6c423f30a5b0e2b090c77b94095d953e67a646c12a49b2bd00b",
+   "git_blob": "f5ed01e8d2c339e87cad7256a20ee31697ff9dfa",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/renders/weathervane.jpg",
+   "size_bytes": 61354,
+   "sha256": "eb0f7ced1afaff701a8c98c1fb9d5b72367dea80eab188074c54b45bcc18304d",
+   "git_blob": "9e110e9198c03da408c8398241b788e405a4ddbe",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/rides-the-river.gif",
+   "size_bytes": 5314243,
+   "sha256": "de1896045801816159943582677901ebdd036d17d21ecb8a58c6fd3840f4e97e",
+   "git_blob": "19acb3b53c19404d7a6e91f1b97bbd0476191d35",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/slide-01.jpg",
+   "size_bytes": 127314,
+   "sha256": "d136ac876f2e30fb89ce6c6f03ae6a79b576fc517e4d726575c14e3366f7ee3d",
+   "git_blob": "af60f08254b1d032bec2a9576cdd6a1547ef03b5",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/slide-02.jpg",
+   "size_bytes": 156538,
+   "sha256": "e6af9073ad0ef9b6bfba2244b7fab608c093434cea5984dcd6dce6b8033b3b96",
+   "git_blob": "62583c9213b789c73060bd5a70d26cc93004c28f",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/slide-03.jpg",
+   "size_bytes": 158386,
+   "sha256": "374f5158368324f4af582421af642c0a1d7bf114c793091e18b0ad17083fed17",
+   "git_blob": "8a3451103b60aea5d762e3a88133662698e6e8b4",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/slide-04.jpg",
+   "size_bytes": 141240,
+   "sha256": "9f2649ca91d973bdb3c29f689808f3398da0a9242322d0caed1b319e13138b66",
+   "git_blob": "72cd7a286578989f44772716466b141db36d2c19",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/slide-05.jpg",
+   "size_bytes": 141318,
+   "sha256": "c871a8b65c9891f61a04e2d147007a777e743616e7e8b35194c851c8d4d9b58b",
+   "git_blob": "3706c9304aea184078b501cd03d095480d316e7d",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/slide-06.jpg",
+   "size_bytes": 146743,
+   "sha256": "369338d35feb05c4d036d68a8babc2dc13dfe60b486466563bcf5b24d0e6275f",
+   "git_blob": "e37804edbbd046c079ef11e730730f8d61765b2d",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/slide-07.jpg",
+   "size_bytes": 160226,
+   "sha256": "571ee8e294b01a4ec76bdc05a8686baa15fc034631f26fb28749b93285fa60b4",
+   "git_blob": "b2287fa925efeda64b2ade84a644eb1a3b07a192",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/slide-08.jpg",
+   "size_bytes": 144051,
+   "sha256": "e0a9cb3ad13abb44115c695b7abe5d71d4ca37d6e9881c8e170f51b9d7859556",
+   "git_blob": "ddfe4ba18e2cc0a3598612ce80652c0901f20568",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/slide-09.jpg",
+   "size_bytes": 144724,
+   "sha256": "9c7a9afab1355a062c45284da97b709db518788b26f9d3289521a7a51ec3baa4",
+   "git_blob": "4557e4cbb20b9690e5556bbff1fae7ef98c653e2",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/slide-10.jpg",
+   "size_bytes": 144990,
+   "sha256": "bf93dde1b77c788abbca0aa8762230dec599b294427a38365ba82fb2fe10b6f1",
+   "git_blob": "14fd053bfe964d985e054ebbcb26028a1921aa1c",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/slide-11.jpg",
+   "size_bytes": 115851,
+   "sha256": "2196acf7a95b2ce99eafc3c99ffa71a3b1d9dbebe941e096f6ae6e710efb64a4",
+   "git_blob": "60119897750c8164c55f00541189fb4d15202195",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/slide-12.jpg",
+   "size_bytes": 133233,
+   "sha256": "2d22f9e56c711dfc2fa632fdd9e9434cfe1f8ba4ae4868c12ffb28c1ce76392f",
+   "git_blob": "cde35a84fff52f33a0409ee8cde3ceb095f094ef",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/slide-13.jpg",
+   "size_bytes": 116348,
+   "sha256": "e652332f94f3863c5b826455c0afad5c1f7fe92e2978c0dc72cfca98b475a8ee",
+   "git_blob": "4c06b7241d6a5fd06f16ca344f42b50e16fb570b",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/ui/anatomy.png",
+   "size_bytes": 465270,
+   "sha256": "9e36b94530d655a356ba38eb5aaec336bbc216cc11c5b903069843e31d59a891",
+   "git_blob": "bb32f88eb2adf9f4157f4f306f9d254eb0ed60f7",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/ui/architecture.png",
+   "size_bytes": 230813,
+   "sha256": "1ba0cc86f65e17552f5b1e0de187e3b1a6fd5cac2f1146503cc5ee708b9699dc",
+   "git_blob": "705ab4da8e974b3ce5207de66f906bcb8d6e2c41",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/ui/btn-3d.png",
+   "size_bytes": 31692,
+   "sha256": "bb4020d7a5f4a01322b1e43ea89ec446c5d38c4cfc9cbf11aada10d7c47ac46e",
+   "git_blob": "b123b76fc2c407b574949023b75f6b60f465e06c",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/ui/btn-deck.png",
+   "size_bytes": 29489,
+   "sha256": "31a751a4b07c8a8c0114887a7450d3f128cfaa8cf97b7c41a3ea0817bbe83cf1",
+   "git_blob": "c833c1f5f809a83a74d80fa3f63ace6954897e7e",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/ui/btn-pitch.png",
+   "size_bytes": 31431,
+   "sha256": "80ed0d24ac9df69d094ccbba0350cee1ef7021a517c198541fa2685bb9b9c2b9",
+   "git_blob": "555f3ebfbaac059e6fbd8714cb45702822e6624d",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/ui/btn-site.png",
+   "size_bytes": 36321,
+   "sha256": "4569b0261589965a68cb23110e99e68f210822c3c499e2382f483c67938cf1e8",
+   "git_blob": "88a05ca71dcfaeecc18de468e34630fafd223871",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/ui/frame-dashboard.png",
+   "size_bytes": 817981,
+   "sha256": "afe0ee97a8bb105f93ffd25042630f0b54ccfafd812167be3ac5ccc162d645a5",
+   "git_blob": "342f685d130e8a852d86fef7a9845acc56ce5063",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/ui/frame-viewer.png",
+   "size_bytes": 738775,
+   "sha256": "84401ac5b8a8b1c1cc5ddf4c87baacb5bb9a4034295fdc36c66d38376fabe5d2",
+   "git_blob": "bca720d6cbb1179e5c4b68974d1534318712bd47",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/ui/kpis.png",
+   "size_bytes": 129492,
+   "sha256": "b89aa5ecc96e2990fe7058a6a35612bd4060092b62676ac3f4fd47806b7f3dea",
+   "git_blob": "afacfa8bf8e8b62fc0c53fea806a9b64373dbb5c",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/ui/problem.png",
+   "size_bytes": 221730,
+   "sha256": "968e51842cdbaa23b11c13bd9cec28e6aa131d5e4ae9524d34825205e8652291",
+   "git_blob": "5185363f30ebb12672a433465a16c88c3d9419c9",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/ui/sense-decide-act.png",
+   "size_bytes": 140127,
+   "sha256": "2032aaff3c0887527862cf590ab6ebfeb016f05763b44386070e9d52424824d6",
+   "git_blob": "cd93f27a77de2c360b78b91e3fe0c092537364e1",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/ui/team.png",
+   "size_bytes": 100524,
+   "sha256": "501bbeab2a8d578a87cccc8ee5a38dc5dfa04d9bc2e15a796e31ba6ca51f8cb5",
+   "git_blob": "b294d3ef18955c75cdd8a86e8eb498307735cfa1",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/ui/timeline.png",
+   "size_bytes": 128969,
+   "sha256": "759842d6922124ce8a85769b3ef31f3279f555dba71471a0efbc1751413015e5",
+   "git_blob": "036ced11640cbcfa5e9152c628659a49bc58cea5",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/ui/video-assembly-and-operation.png",
+   "size_bytes": 274105,
+   "sha256": "8532f527774b9f3de059d051176a6aaace22527d4531725c08dc106eafd67165",
+   "git_blob": "ba2d419370ba197fa3867514a30cb6a880c7fef8",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/ui/video-journey.png",
+   "size_bytes": 274502,
+   "sha256": "378a43357496ac994557d7cd0322fdbcfef944e78ae1df481447a9802712e2a4",
+   "git_blob": "119948afe375a453678e83c175b19cae2d586411",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/ui/video-pitch.png",
+   "size_bytes": 745216,
+   "sha256": "776ba4be7510496800dc7b004d77654c1b0afd70630ff9000438a331e7a904d9",
+   "git_blob": "1b0130a6f25a31233d57489a03018d56802305c2",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/assets/viewer.jpg",
+   "size_bytes": 139174,
+   "sha256": "dcbb1b4f3eec2da10ae5c1f31ee7145c2459842c916658194da4951a045e1c6a",
+   "git_blob": "8a7bc2ea77dd8d7fbb904bb122f7e87af66dcf1d",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/dashboard/css/styles.css",
+   "size_bytes": 19300,
+   "sha256": "033263ca2615ef71ff6fa4db5e7628cf1c82be1e58d4dfdb3669de5e169c7f5f",
+   "git_blob": "b6e7b38fe033ca553b9181826dad1c4f7064147e",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/dashboard/index.html",
+   "size_bytes": 20920,
+   "sha256": "cbd889d32052b47048218312e2175ea574878fab0710c6f8b7f85c3ebf026ee7",
+   "git_blob": "60176ad797b196ac76b4034ffec0072011eaed51",
+   "status": "tested"
+  },
+  {
+   "path": "docs/dashboard/js/app.js",
+   "size_bytes": 33295,
+   "sha256": "c8656625e2bb2f822ca566956bb85f15454250ce897c0fa3b62f999e7ef0e116",
+   "git_blob": "f4dafcebe978e819cd4e7fa3daf89ab0486567d6",
+   "status": "tested"
+  },
+  {
+   "path": "docs/engineering/claims_register.md",
+   "size_bytes": 7600,
+   "sha256": "67389eff65786c019b31e03b80830a0ca3c0b5b4a7d241e0ce8c32a357c821dc",
+   "git_blob": "db9d519f8ad156d125f3c62d90f853e427a86642",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/engineering/jury_QA.md",
+   "size_bytes": 14368,
+   "sha256": "5646f358fc8ae462175f869a5ed39d4713f65bd8f381f9cc5538fca66987126f",
+   "git_blob": "392f1aa589cb53440fc05c35e325c67261348079",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/engineering/robotics_subsystems_spec.md",
+   "size_bytes": 25169,
+   "sha256": "1a3345d5224d690750379c456f044dfc99252c13465a53f6ff4ca36e082cf0c0",
+   "git_blob": "ed0442024b336ada919798e6586173063a06c0f0",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/engineering/solidworks_build_guide.md",
+   "size_bytes": 10950,
+   "sha256": "ce0f6fe990b6e3826ba40323e4c33cde45a83d3168da84881e3a1094e89a88ae",
+   "git_blob": "44e886793c35a621ddf4930b8e0bb0c8f257b838",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/index.html",
+   "size_bytes": 26132,
+   "sha256": "217af8caf14cd9dce90fefcda27cbf91c3e49415e27053f1e3e7d0fa8e2aa520",
+   "git_blob": "00043dbf19a68500e03883b6134e1e9747eba1b1",
+   "status": "tested"
+  },
+  {
+   "path": "docs/media/assembly-and-operation.jpg",
+   "size_bytes": 63672,
+   "sha256": "863f03c072c2daf211913b2d315f48855a2219a12f9445f8c2f392d1ef625411",
+   "git_blob": "f328d965b39105a20b89911aa206834f93257c65",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/media/assembly-and-operation.mp4",
+   "size_bytes": 18717809,
+   "sha256": "81e11ff3710c4606ae6bd16e12a8bd9f6b531d90089ea5f80606c4657c09f5c9",
+   "git_blob": "651b5a23c6c6a237c69153c06e800ffff45c83ae",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/media/hero-loop.jpg",
+   "size_bytes": 37373,
+   "sha256": "2115cebf92d18cfae7150cf6318c5c5684b7820f8cca4c67cddcd6052a3a87e8",
+   "git_blob": "ed3d1adc1de7efd1587959db686e064f5f447677",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/media/hero-loop.mp4",
+   "size_bytes": 791539,
+   "sha256": "d7bc15a0cd32626f08d8bb64640c590b56e1da8d867d7fe81120a9e4f25b9164",
+   "git_blob": "5029acc96bf2c66c38ce814de23d9e1cbb2e1b27",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/media/journey.jpg",
+   "size_bytes": 100971,
+   "sha256": "1bae8d722ceb16741cb3400054d8f94ed29c5644c54b590e18b25d0b1a235786",
+   "git_blob": "8729b8d6d2fd6181fd992e3bc38c98d8da7cd0b3",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/media/journey.mp4",
+   "size_bytes": 15606015,
+   "sha256": "69dc3a742e6a046d389c63c4b500e88964a54bd96240a91c82bea4265253ff98",
+   "git_blob": "b1e92f252067d7cfdfb100a86619fd13695e9d35",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/media/pitch.jpg",
+   "size_bytes": 153141,
+   "sha256": "72f3a9ad31b12c490d861d5218c401e3c16b42aada0429b813dc14caffdf3967",
+   "git_blob": "0804e3eab786f182af046e518adf79f84d3496c3",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/media/pitch.mp4",
+   "size_bytes": 21075520,
+   "sha256": "3a88f6edb62a24a27bbf8c35206a5c53c311575618d0b79b77f61a04dba0db7d",
+   "git_blob": "d9b78e11733b930841bf00de3b2e3b09e34b758d",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/presentation/AquaSentinel_FDC_AAKRUTI_2026.pdf",
+   "size_bytes": 1394585,
+   "sha256": "c71b0f2bd9f1031cdc0fafe84773a81bbfd55bd0184c30863a8c9a8a1648f480",
+   "git_blob": "25df733c13e8d597eaa6c9a47c743866f479fb58",
+   "status": "reviewed"
+  },
+  {
+   "path": "docs/viewer.html",
+   "size_bytes": 1879844,
+   "sha256": "7a0c0f2a5728ae3407b5025b4883053ad7a66b4e43a7d106d488f7a51503f0ab",
+   "git_blob": "f6ed62a29d0e16afb0823a90ca601ef664f3ed39",
+   "status": "tested"
+  },
+  {
+   "path": "firmware/README.md",
+   "size_bytes": 1750,
+   "sha256": "476198885c5a99b4fd95702ad0316567c60b60fad5a9ae94cfe6e4a340018c17",
+   "git_blob": "7ae773e10e8e0ffc3c25d6b777f6e6733e2880d8",
+   "status": "reviewed"
+  },
+  {
+   "path": "firmware/edge_node/include/anomaly_engine.h",
+   "size_bytes": 1523,
+   "sha256": "e35aa7589cca07b44c255e2a37d246f9a4ac3bd31a67a5fa0d15734e022731f2",
+   "git_blob": "894cb55f66d787b07b87bcbcdc5d32700fd1bcca",
+   "status": "reviewed"
+  },
+  {
+   "path": "firmware/edge_node/include/autosampler.h",
+   "size_bytes": 1317,
+   "sha256": "cc5f1b8d09743b3da5fa8e48e3860b36a2b0623b341999feb63e4f7fee894d0e",
+   "git_blob": "2bc57b87b1d6d03cef68f2bc6f7c62b023005d8f",
+   "status": "reviewed"
+  },
+  {
+   "path": "firmware/edge_node/include/config.h",
+   "size_bytes": 4789,
+   "sha256": "2c22256095512a604000f02ba4013296bafdf1bad9e37fb942e8ba37db24e98a",
+   "git_blob": "8cb16b4d03dd4385caab1908d60ce993d741f787",
+   "status": "reviewed"
+  },
+  {
+   "path": "firmware/edge_node/include/dsp_filters.h",
+   "size_bytes": 430,
+   "sha256": "dc570706c018ca34546a82e38ad156d3b2d361a60b6f9a72f5bc2279bf065f6a",
+   "git_blob": "f70e7539c162957bf13337a0f09920b1e1c730bb",
+   "status": "reviewed"
+  },
+  {
+   "path": "firmware/edge_node/include/exported_anomaly_weights.h",
+   "size_bytes": 1725,
+   "sha256": "223fe44da3606106d034033e8eb5379b7b711163d0567fc6c2090c31dd58dd06",
+   "git_blob": "10b206436bb33efb78bf403d2d1dcf912df09ca8",
+   "status": "tested"
+  },
+  {
+   "path": "firmware/edge_node/include/microsd_logger.h",
+   "size_bytes": 580,
+   "sha256": "1ad342bfb42e26081eb9ce5c5c530e4067c252b5a1668297ccb0e05ce4cbedf9",
+   "git_blob": "ecec152672f90ce28e2cb6444075293b4564b8e5",
+   "status": "reviewed"
+  },
+  {
+   "path": "firmware/edge_node/include/sensor_interface.h",
+   "size_bytes": 1566,
+   "sha256": "7aca6f5cbd1c9d1edfe95b60c406c6a099329548e1bf23b0130b6ed0507be422",
+   "git_blob": "1b34fcd00ef950ce32534c33c37501a7030c8f59",
+   "status": "reviewed"
+  },
+  {
+   "path": "firmware/edge_node/include/telemetry_comm.h",
+   "size_bytes": 412,
+   "sha256": "8804afc40f4dad5e13608a46f7721a3358e118b26bbe59aae5c83fe1e8a11b63",
+   "git_blob": "cdbbbad89b177acb73398dcc736b158d7384447d",
+   "status": "reviewed"
+  },
+  {
+   "path": "firmware/edge_node/include/wiper_actuator.h",
+   "size_bytes": 528,
+   "sha256": "65dfd96c144e6b2d1983f5a8777e5fd82676198e08c60cf4b36d6fe14475cd16",
+   "git_blob": "3de849f33a88ac183f781bbca98180f172bb4488",
+   "status": "reviewed"
+  },
+  {
+   "path": "firmware/edge_node/platformio.ini",
+   "size_bytes": 301,
+   "sha256": "d0e57df1859299bc55e47e9a6624a14fe23daf07428ca09557d77adde0374b23",
+   "git_blob": "5ffb88c61530aae00863cba647ee9fb98e9b8c54",
+   "status": "reviewed"
+  },
+  {
+   "path": "firmware/edge_node/src/anomaly_engine.cpp",
+   "size_bytes": 8536,
+   "sha256": "38502ae7a03cb745b84a76d9a8f5bea708be143cae93b3e8b8e0a8f6a54e20f5",
+   "git_blob": "4eff154f02757efb69cf928f72a4255836625602",
+   "status": "tested"
+  },
+  {
+   "path": "firmware/edge_node/src/autosampler.cpp",
+   "size_bytes": 5495,
+   "sha256": "dab740e7278833993faca28e0bcd3279ceaea707f60c48f4c7980c1fedad2c80",
+   "git_blob": "b607c9803e9b001d6ed3dcad4b1c6eab6afe4a29",
+   "status": "reviewed"
+  },
+  {
+   "path": "firmware/edge_node/src/dsp_filters.cpp",
+   "size_bytes": 736,
+   "sha256": "194a4ec4859546c4b01075f5dcdb125a6a098afb603883e9a1d1f774168232c2",
+   "git_blob": "28b15a0b3b9a855d155172f75c9e0f94710008e0",
+   "status": "reviewed"
+  },
+  {
+   "path": "firmware/edge_node/src/main.cpp",
+   "size_bytes": 4779,
+   "sha256": "585e2b506b115acc548e62b73ee4b6f951eab046799fbc736b4f64a5057a63b0",
+   "git_blob": "729371c00b917076f2ea928544e3aea28361a26b",
+   "status": "reviewed"
+  },
+  {
+   "path": "firmware/edge_node/src/microsd_logger.cpp",
+   "size_bytes": 2577,
+   "sha256": "47367ac9791ed92f8133ac0cfa72ecc814809c6ec0a3c012e36804ba554479a3",
+   "git_blob": "ab4d9bdbdc22f664433b6ac6c2ba33e10e7bc058",
+   "status": "reviewed"
+  },
+  {
+   "path": "firmware/edge_node/src/sensor_interface.cpp",
+   "size_bytes": 6462,
+   "sha256": "4060ca38ab8c71f297b3cd26c8cdd0b25dfbc39fabb2d4450af13e023dbcda79",
+   "git_blob": "50b269e46619eace1e0e8d5c7f020a135eced00c",
+   "status": "reviewed"
+  },
+  {
+   "path": "firmware/edge_node/src/telemetry_comm.cpp",
+   "size_bytes": 1774,
+   "sha256": "2eda0cb843cff68f5a1666c39598255a02e407f283142269d02d87f41c7be268",
+   "git_blob": "770c21eec11dd7ffa0a0a5e79d1ef356923c69f3",
+   "status": "reviewed"
+  },
+  {
+   "path": "firmware/edge_node/src/wiper_actuator.cpp",
+   "size_bytes": 1082,
+   "sha256": "1d543b0718c387070e722c9c9a995ff93816500e294985e17e00138d7a24fcfa",
+   "git_blob": "87ba2fc97b3de88fab48d2e713c6effdb45d3648",
+   "status": "reviewed"
+  },
+  {
+   "path": "hardware/AquaSentinel_Cost_Estimate_BOM.csv",
+   "size_bytes": 5218,
+   "sha256": "e3f5c562df4545ba0ddc409865d5465b9ce2e23b2e6b17e40e08406a8bf047d6",
+   "git_blob": "52dbe4795cc08225ce35c544b287a64b482ff7b2",
+   "status": "tested"
+  },
+  {
+   "path": "hardware/README.md",
+   "size_bytes": 1013,
+   "sha256": "efe76142b9e2072a8cf8f6c1431a76dc39c81ab7a9d0815097910a8cf6dafc4b",
+   "git_blob": "6b4c9ff736bb36422dcc48032f85668a6ce3a2c3",
+   "status": "reviewed"
+  },
+  {
+   "path": "hardware/bench_energy_test_procedure.md",
+   "size_bytes": 6335,
+   "sha256": "f36c46d14ebe1ae71e373f420e5e413b0b5f8582d125230c220ff0082ddb937a",
+   "git_blob": "c0556862d4926dab1715cf80c2ec669e6a45a2da",
+   "status": "reviewed"
+  },
+  {
+   "path": "hardware/kicad/AquaSentinel_Mainboard.kicad_sch",
+   "size_bytes": 4777,
+   "sha256": "14949c584fc85ebb8cb0d510bf2f6c18db7c8b7ebb79d41d7887d632ebcf7583",
+   "git_blob": "9909f3da0e880701f90afe425896cde2f8655791",
+   "status": "requiring clarification"
+  },
+  {
+   "path": "hardware/power_budget.csv",
+   "size_bytes": 1983,
+   "sha256": "3a618799e4c7aae3d6cf1014c1712f2a1a31b205b1117dcbe26b77422360f30d",
+   "git_blob": "2a38b90221a70ca0a69625dc6758599d2fdb0de2",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/README.md",
+   "size_bytes": 4753,
+   "sha256": "1b32627dcd57cd89bf03010f0108aa1992fcf5933515b21fb744298b8a41589d",
+   "git_blob": "7a91303f4f834abef179b0a273e3cd5ac50fec22",
+   "status": "reviewed"
+  },
+  {
+   "path": "mechanical/cad/BOM_R3.csv",
+   "size_bytes": 11834,
+   "sha256": "40a7af7a312ef2e161f860aa29d763efe9252d91665989c9b5d55bce6012ea68",
+   "git_blob": "654110348ca4a8831b69ecbcee1037f0da71eea6",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/assembly/AquaSentinel_R3.glb",
+   "size_bytes": 1370468,
+   "sha256": "174039cf24452aee43c0feac495c44078dd89c2bc25d07784c1da6045dac0948",
+   "git_blob": "161ac7c4aaeb5d1b87f4133088066688ab0baa12",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/assembly/AquaSentinel_R3_Assembly_MidWater.step",
+   "size_bytes": 16769180,
+   "sha256": "f2dd48dd4e6d3b8f7340dc49c655feacfd5d9bcd5c61d466bb515fa64c3fa42a",
+   "git_blob": "4bd9de762a30973ef7dfedc4299138d4d3019c84",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-101_Pier_bracket_weldment_upper_and_lower_identical.step",
+   "size_bytes": 139014,
+   "sha256": "d4efaa069524e1f26e32858420098fcd8a2f8269a89d0de92d8d7a9bd6928cc9",
+   "git_blob": "c2037a0cf32d88291be05c19622af6b8b3157659",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-101_Pier_bracket_weldment_upper_and_lower_identical.stl",
+   "size_bytes": 17084,
+   "sha256": "e6de7d8baf765b43b796f9a43190536f6075a856058efab95274f8831960a568",
+   "git_blob": "45199c4032295ed54af70ee5217a4a4e59b30508",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-102_Pole_clamp_cap.step",
+   "size_bytes": 103742,
+   "sha256": "80b82a5580ad691144eb99ce1afd01bf12f5e77f958531a83c22cdfd44f72aad",
+   "git_blob": "fa1d6dc9be0419bdddf1ac1445f2ea2c13e58ffb",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-102_Pole_clamp_cap.stl",
+   "size_bytes": 12284,
+   "sha256": "d8e920e110662c7082e523d05456daa901a3e04fe8ee8f6f7776a74667423d02",
+   "git_blob": "7c6288ad04e4be4ac50296301b433babf52bdfb0",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-103_Stage_target_plate.step",
+   "size_bytes": 6508,
+   "sha256": "9338e640af49a7cd8f4f114d3f1a53490ca9a04de15f8c90b0e001ee386be5ec",
+   "git_blob": "5b89617f89a350a0b7a527e9478e7b5c6df708e4",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-103_Stage_target_plate.stl",
+   "size_bytes": 684,
+   "sha256": "51e09221ee5d04398cc30c092b68c079b901134997f88f08ab260229d617d833",
+   "git_blob": "f68565834a65f4abb6eb8771cfb916244e22b768",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-111_Guide_pole_2in_Sch_40S_SS316L.step",
+   "size_bytes": 166691,
+   "sha256": "dec8c713571a607f6ea9254b12669b9857e7158d0475bb4900957e69fe15bd46",
+   "git_blob": "406ec3b9edc60b61be1d7b7a98f825f596de0c6c",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-111_Guide_pole_2in_Sch_40S_SS316L.stl",
+   "size_bytes": 19284,
+   "sha256": "ab6270ff377f3b89fce3745643effa2461214f6837a0cc42063bba36790d25a9",
+   "git_blob": "8c2cfa458d62324b57570f86b6e7d410345d86f0",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-112_Pole_top_cap.step",
+   "size_bytes": 82078,
+   "sha256": "e6d9563db214577fc4e24f152a2bc2cf9f7b045a6a090a8f0db444f582ee8977",
+   "git_blob": "3023a7be505d72b38c5f1f19a9d1f48e2c57f3d0",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-112_Pole_top_cap.stl",
+   "size_bytes": 11884,
+   "sha256": "837154f30b9580f093b25c038b413a7b4cd890227dcbb0078bbed68710b821b4",
+   "git_blob": "d6bb3ab8777229c4a67ac4a70e7e74dcad52f1ea",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-113_Stop_collar_split_clamp_on.step",
+   "size_bytes": 168782,
+   "sha256": "a22c939ed362aadd922ea7b852508398caa4bd292e8a56157819be28e2f836d7",
+   "git_blob": "787c567c485e7949ac8689dbaacc1eed32e95914",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-113_Stop_collar_split_clamp_on.stl",
+   "size_bytes": 19884,
+   "sha256": "b42221c5e7fdeae3b62281849e540edd6cdbc8e9f42400950ddde90f550af7ca",
+   "git_blob": "c18ff30f426ad87d240d945c0aa3f32d17ba2cb1",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-114_Stop_buffer_ring_EPDM.step",
+   "size_bytes": 163572,
+   "sha256": "169e13af7ed8e35c03d8020a6524e7900d36cade1eb1d18d7cf1c3dcd07b6699",
+   "git_blob": "b691a15c13ba0724c5602f64d5b5738a48b92cfd",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-114_Stop_buffer_ring_EPDM.stl",
+   "size_bytes": 19284,
+   "sha256": "5b4e973e27d4e1dee420bf80cee83c49d20bfab63b9901118e948b0f9d7d9ed1",
+   "git_blob": "a6489afb03c1b9e1c589a178f85752e8c4bbb00c",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-201_Pontoon_hull_rotomoulded_foam_filled.step",
+   "size_bytes": 801529,
+   "sha256": "1de89e6ef60055e31beb33dd68b5f0b8d07eeaf55d200da2552ede71184668bb",
+   "git_blob": "7497732361278c5fe37838a65627d4dcd1f87d72",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-201_Pontoon_hull_rotomoulded_foam_filled.stl",
+   "size_bytes": 91884,
+   "sha256": "49d316db2cb3beeec061b43513f5db75195c6e51a19db6f2d63871b083b5fd55",
+   "git_blob": "c21881900e7c9b1e23920285997c482d8e00e663",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-202_Bow_bumper_pad.step",
+   "size_bytes": 127939,
+   "sha256": "67f59d1510431759e673a6fafd3c64ae517271b0ecba4f476752fad0b383a29f",
+   "git_blob": "8278bc8570dab5415e6415cd0380fd94e9593291",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-202_Bow_bumper_pad.stl",
+   "size_bytes": 15884,
+   "sha256": "d8bb4eab29190fb7ca893b69e0aa7e837a05df3ae5ea771f3b2884922e3fc7c3",
+   "git_blob": "8732ab57b79a21f1638eaa7b5f9568da98a7f240",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-203_Hull_vent_test_plug.step",
+   "size_bytes": 64831,
+   "sha256": "d484518b173cec53660ccdebb47b765a6f3ded499c87551311d2f3a1b6a1540a",
+   "git_blob": "6767d0293159fe0708cf12044cd8b203e1b72c86",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-203_Hull_vent_test_plug.stl",
+   "size_bytes": 9284,
+   "sha256": "5e749784fc29839d0c2638b680b7da298ff1ef53dd051404b29f80e6255dd166",
+   "git_blob": "54bdda02e83b468f45a7cc3919f454db541efc3e",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-211_Crossbeam_SHS_40x40x3.step",
+   "size_bytes": 53518,
+   "sha256": "ad35cfd56b63fc7fab29ab855c6f30716bc24f76937062deb1a6001ad1d0239a",
+   "git_blob": "1e08891ce995848cd44f6b74e6eb985c461af8de",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-211_Crossbeam_SHS_40x40x3.stl",
+   "size_bytes": 6484,
+   "sha256": "f4eee71750750c852ed065bdbe2e8ff092db104c7bb070f30240e5bcde8f1d6c",
+   "git_blob": "010c78be402ce26c867819fe5880f5eae1f64cc9",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-212_Beam_end_cap.step",
+   "size_bytes": 19553,
+   "sha256": "31bece5dbcf14f6793a6d6b42dda325d0ad01d57372df917bc11f5c3ac53cf6e",
+   "git_blob": "0fe4d14158c017e26a6ac911674040ed356f6a3f",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-212_Beam_end_cap.stl",
+   "size_bytes": 3084,
+   "sha256": "06fcdc897963ea3a03a372a10e26ca304ec898ef33c7f307b673f967fc96a750",
+   "git_blob": "fe8c7b2ce0207d27a75764cee291ce9144b63148",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-213_Equipment_deck_plate.step",
+   "size_bytes": 284818,
+   "sha256": "c2651ee651a0626947460900b8541390d02ceabef3b041795f39c098e714d3de",
+   "git_blob": "de39cea3e4719b979fdc7be76e5d4447545402a2",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-213_Equipment_deck_plate.stl",
+   "size_bytes": 33684,
+   "sha256": "d82953a477e4df77cd046c874420fa4ff4fedb6c03b1606a4bb2d03a02501012",
+   "git_blob": "71308b3883745866ec39f79ec7b9d4eea9d90fda",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-301_Guide_carriage_fixed_half_weldment.step",
+   "size_bytes": 889854,
+   "sha256": "caa1c02a0225963972940861ab1ef376a5b44ae9ff1da8c6589cc526e9e5172c",
+   "git_blob": "850bddca492823e68c3627cf9be1490f62193caf",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-301_Guide_carriage_fixed_half_weldment.stl",
+   "size_bytes": 107084,
+   "sha256": "75efeed50cffbe8d41843cb99c131c181ec76aa8cb391580dc31a1309bdf4fbe",
+   "git_blob": "8c13d92f34a3744b4cae1c427424dd29906fcf0d",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-302_Guide_carriage_opening_gate_weldment.step",
+   "size_bytes": 634273,
+   "sha256": "df7b455bdf3a4ee031d76e1a007438880698223cb4c18a577c4ed99f1399cbd0",
+   "git_blob": "ae5f97aaf40ed5ac8bc1e889d3b54c59f89c6b83",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-302_Guide_carriage_opening_gate_weldment.stl",
+   "size_bytes": 78084,
+   "sha256": "29b199f428db74dad9678ce6fd35a20b0ddbf41f26f2d87a612b38fb4762bba0",
+   "git_blob": "6382f59ed58a7245d55cdd1d75fb9b0971518a08",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-311_Concave_guide_roller_UHMW_PE.step",
+   "size_bytes": 614116,
+   "sha256": "1115441e5425d4cdd867f735760d28a37e5ee2b6d40d68e114e8aaf7f715fc02",
+   "git_blob": "b5408fb7983212fd1d05514bab9cd0ddb14f48b8",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-311_Concave_guide_roller_UHMW_PE.stl",
+   "size_bytes": 68084,
+   "sha256": "534aa2c62de152a68b3d1ad43d74e0a20f6d4d120b8f8cf50258da740cf8ed44",
+   "git_blob": "f34977b18d21764d79f9d84ee9c41041707d44e4",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-312_Roller_axle_M10_nyloc_nuts.step",
+   "size_bytes": 38514,
+   "sha256": "f7ee62e799f8c9388d101c342017315d76e3b324374c9062a46725a3a996656e",
+   "git_blob": "151896becf440b35be2bd892ff44213413de3206",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-312_Roller_axle_M10_nyloc_nuts.stl",
+   "size_bytes": 5884,
+   "sha256": "c17e7aad6e20716b6996faed9b985c6924c85198a90d38519821acfaf8ec5516",
+   "git_blob": "4c96652ed865b7066b33ad6d49624fb5702bca30",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-313_Gate_hinge_pin_D10.step",
+   "size_bytes": 48162,
+   "sha256": "0fac7d8f366e741e78f64660ab2110e504493b233168acff782f1c473aea51ea",
+   "git_blob": "d054066ad51710254a771d1d86cb8baaedbd4efc",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-313_Gate_hinge_pin_D10.stl",
+   "size_bytes": 7684,
+   "sha256": "317d239967fd33224268f205a9c237de692c73a3a9064c0607eb2b0604fd4e0c",
+   "git_blob": "5ca6148b8bb1028f040ef89a2338fcb391c83650",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-314_T_handle_latch_pin_tool_free.step",
+   "size_bytes": 81591,
+   "sha256": "7e2c054a034313b06b736a68c55d70f1fc2b1caccd64f75815e4ed5da89230ed",
+   "git_blob": "669809da8919c4d469b3c454fec4d1285158747b",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-314_T_handle_latch_pin_tool_free.stl",
+   "size_bytes": 12884,
+   "sha256": "31e4a1c26d6438e2bc6d4b974f769171b3c86b67268086785f1ff8d4ba871a19",
+   "git_blob": "e604e431fab2f7c1c4e0aa6b6ea1f4cba358ef01",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-321_Carriage_brace_struts_pair.step",
+   "size_bytes": 147216,
+   "sha256": "f4d6ab541724fe9a2d7bb5953f7ba1ae6a67a14d10d5c349910d84e109d238e3",
+   "git_blob": "f3024205e5ee39b34183887d8d338d929e4db928",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-321_Carriage_brace_struts_pair.stl",
+   "size_bytes": 22884,
+   "sha256": "db7ea3e183bc6a26d5786b55708fac58ba97824f89a02860d8ef47a7faa86021",
+   "git_blob": "ffac5ec1953d9ff69df1c2c21e1a2f42e9ade147",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-401_Sensor_well_sleeve_PE100_D160_SDR26.step",
+   "size_bytes": 220250,
+   "sha256": "58fd23cce2829e4c1f531eca367139a2d1c23e23020260212a9d6c810708ef4b",
+   "git_blob": "8c933420d545fd03277a5e97cbe0f440be71fc12",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-401_Sensor_well_sleeve_PE100_D160_SDR26.stl",
+   "size_bytes": 25684,
+   "sha256": "b8aec249ca7747d0cd127e69b0aeb8030e286ca59fe4c066ae36bc13296d7e8b",
+   "git_blob": "f449f26992cf0ee5ced8c2b6c17599025766bdd4",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-402_Hatch_flange_ring_quarter_turn_seat.step",
+   "size_bytes": 219543,
+   "sha256": "b10c87e732b92a771bfb969b38edc141f63b5473aab13888b6f0cdff888e5112",
+   "git_blob": "32b731931676452518fbc1efd4feb255a8b7913f",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-402_Hatch_flange_ring_quarter_turn_seat.stl",
+   "size_bytes": 25684,
+   "sha256": "2b0425d625d8980a7b3bcbe9b0e9a475531a1f78188d011c2082cac871833524",
+   "git_blob": "546faeb77edd082d3d537d5ed5f39a1161438d8e",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-403_Sensor_guard_cage.step",
+   "size_bytes": 819013,
+   "sha256": "3d31355e92cac405902da1803e5a566857899373e80c8ec6ad18129d8f6b629d",
+   "git_blob": "64967fb5761cf035a45f152e71a34a40c30292e1",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-403_Sensor_guard_cage.stl",
+   "size_bytes": 96284,
+   "sha256": "46817bdf9a1f86208eb01eb54ff273d0b3ce6287db3f1e96af83faa0615392b1",
+   "git_blob": "744e753e33ad1188957a1a42cf792de165ac8f37",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-404_V_debris_deflector.step",
+   "size_bytes": 8874,
+   "sha256": "15403311e870a1ae504c940f30933661ffd0bab539374dd9758f00e583853ead",
+   "git_blob": "7525a9fa2e0616ce347a23f9713d7489f08dc604",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-404_V_debris_deflector.stl",
+   "size_bytes": 1084,
+   "sha256": "2f5410b384e4726115238915eed9e223334ff0108ea5ba931e6179c253e68987",
+   "git_blob": "28b442a0d6a473b5f6363ea1efc2ab36b5768a6d",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-411_Cartridge_cap_wiper_drive_housing.step",
+   "size_bytes": 310282,
+   "sha256": "d14e5b586606a1f007b280d39df9a6d9c8ad6f93400da7760c5df3c170a42557",
+   "git_blob": "a38e9dd3b4af5f5f93d0033adcf79b42066dfbd3",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-411_Cartridge_cap_wiper_drive_housing.stl",
+   "size_bytes": 48684,
+   "sha256": "ed3f7e8e114a9cc74ccc22af7a3d988dd7ca4bb2e4427a04720cfb3c63a31996",
+   "git_blob": "667e6bb090c4fad05a63976ca52200847d27eb99",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-412_Cartridge_lift_handle.step",
+   "size_bytes": 307137,
+   "sha256": "feabedbac3896c8e23ed5d1cb7d45c3c45414722e515bf6f67359d788133af36",
+   "git_blob": "0ac06691a6ba40a2b7292b5a511e8b075277e6f4",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-412_Cartridge_lift_handle.stl",
+   "size_bytes": 28684,
+   "sha256": "7fff2ec6ed7c3f3577b50679ec8f36505cddcf95f4ae3db541afeb551834e452",
+   "git_blob": "0893cca7fafa04b5927ade087becc529102c9aab",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-413_Cartridge_spine_wiper_shaft.step",
+   "size_bytes": 129028,
+   "sha256": "505ad3e59115839e37930ee6ba1613b4f519ed7577ebcc9cea58d58f2fe5dcda",
+   "git_blob": "06bcb1a90074e2bd1b950894b2f87a1584e680e2",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-413_Cartridge_spine_wiper_shaft.stl",
+   "size_bytes": 15884,
+   "sha256": "b9287db2fc8971de06c47002962503076adf118eafc478ac06ee32854bace3ae",
+   "git_blob": "c864983ecf6e70eb80c497f5d19cd0e700869ff9",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-414_Probe_holder_spiders_x2.step",
+   "size_bytes": 1191818,
+   "sha256": "d610be497723a704e1ad47d191454127e1428c8dd6e4503e5f5ed0114de57a86",
+   "git_blob": "ef2823863a530c7e77157c8d03ccadd51e7f4b93",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-414_Probe_holder_spiders_x2.stl",
+   "size_bytes": 132884,
+   "sha256": "815dbe99e7244d5a9432f8408c5278f3fcd325a22eb59c29e4482e89e970bf4a",
+   "git_blob": "bc4d37cb9a68bac508a7e4a16a536800a107b13b",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-415_Optical_wiper_arm_brush_pads.step",
+   "size_bytes": 16150,
+   "sha256": "192a66e077e296288947c75ea414a1332679112a6a14be8e86995d3c9bf476da",
+   "git_blob": "b897bd61050a17d04fbfd5a621fc440c31846a9c",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-415_Optical_wiper_arm_brush_pads.stl",
+   "size_bytes": 1884,
+   "sha256": "86a91da770b5e307dd7cfea95f695f4abb006903a9719c3da4241881c7ce2ec8",
+   "git_blob": "de7dcd8cd5e033fac954aab51baae79a51dc801c",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-416_Probe_cables_in_well_run.step",
+   "size_bytes": 565439,
+   "sha256": "7279ac991e312e4833162ff49cecba8a0f6668d56719dabb271cd6f8733601b3",
+   "git_blob": "5c5f3b63dc2a792f0a753d2c077a790b0ff2b1c3",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-416_Probe_cables_in_well_run.stl",
+   "size_bytes": 63284,
+   "sha256": "f2294142e7b7524b44fe0fc6e7ce3142be30874ff9ca22fc151d812bc7a4c715",
+   "git_blob": "d3bdbbc415cc72cfc9655776ee4e3fd8c9f63e50",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-417_Sampler_intake_strainer_riser.step",
+   "size_bytes": 107416,
+   "sha256": "9381fd9672f31243b63df3153e5e834d9790707829a5142fef7d63cf248047a3",
+   "git_blob": "9b52e28b6ca1d2a43a47fea571e974ffa6fda9fc",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-417_Sampler_intake_strainer_riser.stl",
+   "size_bytes": 14884,
+   "sha256": "bfc88858b6493bf74239ed9460ee977b57c160a8a29d2f3e821546c634b9a992",
+   "git_blob": "d44bff9794ad3096c00c0f62d6675a7deeef4b84",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-420_Probe_body_envelope.step",
+   "size_bytes": 290030,
+   "sha256": "feb5a68c3185dbe8ebca5ca50c0222e92ca7b1b417ceeb38758f01065a041782",
+   "git_blob": "aa7571dd84b3a7340c1d40bb40d869918dd0f5bd",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-420_Probe_body_envelope.stl",
+   "size_bytes": 35884,
+   "sha256": "96b01511d3c006ef9bb1d1ec17e40e4ee64e0575bb2cfa988259678ee6d3b08c",
+   "git_blob": "bcfd0c407df070f93267b91303acf0368fb9552d",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-421_ID_band_pH_probe.step",
+   "size_bytes": 136488,
+   "sha256": "ae1222519606b7190549fd0b6d34578d77a60a71768edd0d14e5600a69cd7d94",
+   "git_blob": "6ffbacf725db6b2312f497cfc758ee70bce68900",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-421_ID_band_pH_probe.stl",
+   "size_bytes": 16084,
+   "sha256": "5239867f142dfb88499092f62dbeffb9697eaca9404055d4f872d1a5bfab6025",
+   "git_blob": "1ed608fef1bca92ac4e450b4ee33491a8948d7cd",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-422_ID_band_EC_probe.step",
+   "size_bytes": 136490,
+   "sha256": "677197ebdeb5e3506a0e01bf24aa68f8012fe9256a7caeb3fd39b781fbdc500c",
+   "git_blob": "3b1da3806f2a7bd82bfea9dccdf07926b9b06a4e",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-422_ID_band_EC_probe.stl",
+   "size_bytes": 16084,
+   "sha256": "a4ab9947552f54ef44294cb661af640a434e2b753c0823b8acd1485b80e96fef",
+   "git_blob": "067e72be137611fe1df7601b108c109489a07944",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-423_ID_band_Optical_DO.step",
+   "size_bytes": 136493,
+   "sha256": "0936ab4728df58534808b320faa8ec2c9bc09980da8c15f0dab0f36a6c5651e1",
+   "git_blob": "de2f2e8fd873f386b540aac7bbbcca9b870c3a15",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-423_ID_band_Optical_DO.stl",
+   "size_bytes": 16084,
+   "sha256": "83b352a3853463b807d09c68f5cfe050101ed7a4cb071c04a2cac81437fbb91a",
+   "git_blob": "ad3700372e9546999e72b192feb27638f99ac9fd",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-424_ID_band_Turbidity_probe.step",
+   "size_bytes": 136504,
+   "sha256": "b094cc39a0d85081b469dd717bdefa2c0c782da154c82b1393f1813468ab874f",
+   "git_blob": "dde7c9bf20854d2fed38c0e8e1276e3bc5c290b0",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-424_ID_band_Turbidity_probe.stl",
+   "size_bytes": 16084,
+   "sha256": "c5e6569ea6630798c7ed06f4fde1ae552bea91ec08b6875afac6c1b61a55c00b",
+   "git_blob": "53c11b3af2d41f71ccba48bcd643f6ab943807e8",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-501_Pod_mounting_rails_pair.step",
+   "size_bytes": 11311,
+   "sha256": "de9eee68b2142f630e69623ebf866817ff77ab7789a3e5c09ea82eff2fb86927",
+   "git_blob": "dd5577729b4cbb3560ae001ebdf0107d85401554",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-501_Pod_mounting_rails_pair.stl",
+   "size_bytes": 1284,
+   "sha256": "ffb448975c28edfa46c5b85889a5354b070e7c92f225c36b477ea499b7343780",
+   "git_blob": "08cf68ddaf8ccf93b1954ef17f8e2a01fabd3a6b",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-511_Power_control_pod_IP67_body.step",
+   "size_bytes": 440951,
+   "sha256": "da9c83e5f1822a706b9fb893ae19c1806cd2b0faf2368ab845ef8bccafccc679",
+   "git_blob": "b3de13d816cf0b7ea6dd9856bf4900683be8fcce",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-511_Power_control_pod_IP67_body.stl",
+   "size_bytes": 60884,
+   "sha256": "b9fda489dacf8b03139e01a25a31acdc7111744714fab553880c8ee1356bc76a",
+   "git_blob": "ff07b744c75023ec5f45df090a09e2d7211eba57",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-512_Pod_lid_hinged.step",
+   "size_bytes": 194176,
+   "sha256": "98d19c601ee9aebb083ec0da2ebe73d0b2871b3158ebd66d36109559d206f6ef",
+   "git_blob": "43e595389f8c9890a34ede2fc22d8fc7bc4144b7",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-512_Pod_lid_hinged.stl",
+   "size_bytes": 25084,
+   "sha256": "56e8eba2e204d0fdcc3acd8b41f3cadfa192876e23f83c2744007b1259e45ae6",
+   "git_blob": "22117b4a09cb2e48e700b8526307d16828955827",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-513_Pod_mounting_plate.step",
+   "size_bytes": 6507,
+   "sha256": "4459c07b8b96b05e1162d40f715af3c8c44c59599eafe12cc0102f82ebdb4914",
+   "git_blob": "60f827bc8c758cfe0130f66f3919c258805f0a27",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-513_Pod_mounting_plate.stl",
+   "size_bytes": 684,
+   "sha256": "22e53bca528ee0615c437d9f511f87693ff8c84f91fefca650d509e58d2c25d0",
+   "git_blob": "91679383ebe4480793efb048e311c87d86a6018f",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-514_LiFePO4_12_8_V_6_Ah_with_BMS.step",
+   "size_bytes": 55825,
+   "sha256": "c873fcd5c7b0bf5a6b3da37ab7eb9665188ecf006122f9625e876653adcee48a",
+   "git_blob": "48ec8aee81b88a74c29bd6a130042b90d0220ae4",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-514_LiFePO4_12_8_V_6_Ah_with_BMS.stl",
+   "size_bytes": 7084,
+   "sha256": "efe208ff658144b13923048c5e571af91aca94af9c5744d66845eff9a1eb271d",
+   "git_blob": "397636ae8a57ebe332cc53f591ee994e5ef62447",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-515_Controller_board_ESP32_RS485_RTC_microSD_LTE_Cat.step",
+   "size_bytes": 69514,
+   "sha256": "b9d7f7d3437d5a6ca83821eabda3248655dc3e5ee8dfe347b7be82d4109f27d2",
+   "git_blob": "4d13d5e41f20ccc887f727c4d35df30181110ceb",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-515_Controller_board_ESP32_RS485_RTC_microSD_LTE_Cat.stl",
+   "size_bytes": 9684,
+   "sha256": "56baf5a3ca5f62d68d26322432e6e3b35aabd3b49c4ed3820f9d4ee8e7cb3fc5",
+   "git_blob": "2fde2a43042aac01078c07a929f93418d3cc94a6",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-516_MPPT_charge_controller.step",
+   "size_bytes": 55727,
+   "sha256": "4cbee972c29cedcb475ff774f865f1c2b0a1f690e690c2aef4cc0ab424c88be3",
+   "git_blob": "bb89a51d6f8bd336db118e8998f960be2e65974f",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-516_MPPT_charge_controller.stl",
+   "size_bytes": 7084,
+   "sha256": "7a3cc5d392fa0f43c3d0337d3088b838360b2bb9469bbb7b149a841d2b00e28d",
+   "git_blob": "18aad0ab0c60438181e3feefa451262d955aaebf",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-521_PV_module_20_W_frame_backsheet.step",
+   "size_bytes": 52917,
+   "sha256": "45226b49c4d72f5a23b7fb316424a85842bb5c98a55a2e0005832b1ed83d95dd",
+   "git_blob": "a46d3e712191611f1c8966a34aea686a5eb6859f",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-521_PV_module_20_W_frame_backsheet.stl",
+   "size_bytes": 6084,
+   "sha256": "a4a062cfd2178dc3f55436c3a4060b1a8a37995c2a7046f7f3f40e2ffe8daeff",
+   "git_blob": "80c2a473a71ea7a636f7ef31cf8cef58291cd479",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-522_PV_module_20_W_cells_glass.step",
+   "size_bytes": 129776,
+   "sha256": "10f637b0ebc4774437ffbf4f8ff409bd56d6ec797f0804ea51acd6ef487f5682",
+   "git_blob": "29b56ca42dbc3418fcd1c3d6ca93250abb8a68e4",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-522_PV_module_20_W_cells_glass.stl",
+   "size_bytes": 14484,
+   "sha256": "4b2f8725395fdb951c633d8be55b7ec9029c615bbacdf758c3cb64aaedad4581",
+   "git_blob": "a807582e2a2d4cd28ffca8f0343cacef2578ac9b",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-523_Canopy_stanchions_hinge_pin_blocks.step",
+   "size_bytes": 589226,
+   "sha256": "0c6be226882da1e28cd9c777767800c6e241912f308ddc588cb0b006ac9beceb",
+   "git_blob": "e6b6f97ce2f33dc5a9a8cd48ae85af85dee39497",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-523_Canopy_stanchions_hinge_pin_blocks.stl",
+   "size_bytes": 68884,
+   "sha256": "c58b287a7c089c9fcf2d6b644199842609eaa8b2e32c7266a701d0572c9ba512",
+   "git_blob": "0d2e9e0647f4142aa47678af834225bb1bee8b05",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-601_Autosampler_cassette_insulated_body.step",
+   "size_bytes": 160185,
+   "sha256": "1baf10293d20cfad74868eb7dd67a88c984d16af15bf19d3669c426f47595369",
+   "git_blob": "40dbf879bc9e06495650216faed1adc151b54e92",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-601_Autosampler_cassette_insulated_body.stl",
+   "size_bytes": 19684,
+   "sha256": "d3444e79b8fa513b9c54067a2ba3f82207076a13e0d3b6cbf8701215919022d2",
+   "git_blob": "0ab7c4ba3a7e782f1748ad4bef27993145b32231",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-602_Autosampler_lid_hinged_tamper_seal_hasp.step",
+   "size_bytes": 357027,
+   "sha256": "b8e3ad3c9d9d364bceca91326cac05c5fde26d314eb1a314856d11bd2dd58fe8",
+   "git_blob": "a344e63af7bf186910dfbc15586a665419e59245",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-602_Autosampler_lid_hinged_tamper_seal_hasp.stl",
+   "size_bytes": 38084,
+   "sha256": "e7c56705ba8974d6b84ed32abc49af783bd5d11706be27e74a2fa6ed91ff8344",
+   "git_blob": "1bb3eba04f2da7eeba80099291ab39573a3631c9",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-603_Bottle_carousel_lift_out_cassette.step",
+   "size_bytes": 80971,
+   "sha256": "08a2d5e236a0fc72c98450eec65c3a1766b5b27b1c7e2ed27b75411f62262b7e",
+   "git_blob": "5100df42cdec8440f049d136068eaecb2dc74c11",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-603_Bottle_carousel_lift_out_cassette.stl",
+   "size_bytes": 13284,
+   "sha256": "f734147a0e92912b21281dc19ceb506792a0aea456976db7c320782530a8549a",
+   "git_blob": "4aff11c462ab97481eca78bd1c4634483fe22989",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-604_Sample_bottle_250_mL_HDPE_lab_supplied.step",
+   "size_bytes": 167804,
+   "sha256": "d3c3b931205c4c9e7f13af52d18b06c4109be48992302709523ef4463ad29f22",
+   "git_blob": "1e461447163ab48c974e961f8767eb17c284e120",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-604_Sample_bottle_250_mL_HDPE_lab_supplied.stl",
+   "size_bytes": 21484,
+   "sha256": "8e52955570f4f2f8289ca0289fcfb8ec1c0eb63151dfb5777ee13c7cb340c9cf",
+   "git_blob": "17b366a8b70e1fa89e890db8804ca3f506d781dd",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-605_Bottle_cap_septum.step",
+   "size_bytes": 33122,
+   "sha256": "8c205d62c54eec50f616b7e044579bdc3ce5531115f71f9b9940d05faf9a15be",
+   "git_blob": "514da0a65aa42ec3d99f969ac2af532eb28ab5b3",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-605_Bottle_cap_septum.stl",
+   "size_bytes": 5484,
+   "sha256": "af529b4f8eaddbee2ad1106b0e51ac9d79d9278a9253d131e52ba4fd06e73ad9",
+   "git_blob": "6850630de85a3d09ea36559b1d9b5c754fe5c05b",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-606_Peristaltic_pump_12_V_reversible.step",
+   "size_bytes": 66889,
+   "sha256": "0c30bdb45264319eccff5ef767f44eb91d86344fd0faf959efe15a57adc798d3",
+   "git_blob": "754eb51858b31aed52bb52690bd6b448cc1e7c47",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-606_Peristaltic_pump_12_V_reversible.stl",
+   "size_bytes": 10884,
+   "sha256": "588b6bda9086a8f31ded83da42013f3f63996654cc58d6cbf19901b29eeb4a41",
+   "git_blob": "9d6226a1fdc38b48b5e5c005892e24471a1323bd",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-701_Beacon_mast.step",
+   "size_bytes": 148151,
+   "sha256": "4327bf291280bd0b99806d09eb129feeb042daf4c3cf6db02f537aac97ea0ab0",
+   "git_blob": "6b6617892b3c196bd50de2ca767f355f2fcdfde7",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-701_Beacon_mast.stl",
+   "size_bytes": 19084,
+   "sha256": "73696e9a4441e5622aaeae6c347b8ff2a0f38cd80b8711462faae402ca0fa6c2",
+   "git_blob": "b4a48f7734ada01dc066803f7282d2f2db236b35",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-702_Jal_Deep_beacon_base.step",
+   "size_bytes": 47377,
+   "sha256": "5821ae1718e76d47aed900225d9c8be421e8131360e66bd08e42606d8cc0d165",
+   "git_blob": "cf44c1f99b0551942374e227acced90ccd14d935",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-702_Jal_Deep_beacon_base.stl",
+   "size_bytes": 7884,
+   "sha256": "68b428515342462cf41d665e9c77324164bbe4bbe9b4470d5b91e2350db8c09b",
+   "git_blob": "4837b5522f22ddc54aabc2ad3fc921a2a83408db",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-703_Jal_Deep_360_deg_LED_lens_green_normal_red_alert.step",
+   "size_bytes": 118306,
+   "sha256": "1f37dc8d7f6397655b1b43c8d3dd246656d0776156afe60b204ac8c859a2466a",
+   "git_blob": "62af9bd4f5fd03b3dd8920f1d3f4df6e058f5577",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-703_Jal_Deep_360_deg_LED_lens_green_normal_red_alert.stl",
+   "size_bytes": 15884,
+   "sha256": "42bf1b299f32211078f7473a342ceb8a60a434bbd9dee07b465a6457a36a98ed",
+   "git_blob": "65a0462965219d842480878a7b1d27c9d35855a7",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-711_LTE_antenna_whip_N_type.step",
+   "size_bytes": 77625,
+   "sha256": "57336dcf689249b2c3afc9acc24560aaed7a3a0de18af8b5b047eeeb64dcfb95",
+   "git_blob": "0ce8de24f1a4fc5980352086b996a2acf5bfaaf5",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-711_LTE_antenna_whip_N_type.stl",
+   "size_bytes": 12284,
+   "sha256": "b6ddc5df93317391ab6452a2a71e7260842b055d0a9ba28cf6353a59e6206691",
+   "git_blob": "f52c7c6fe55e2095f0a1db7534216c71ef039bd5",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-712_Stage_sensor_waterproof_ultrasonic_looking_up.step",
+   "size_bytes": 71586,
+   "sha256": "1a46c06ca1c9edfffb1802feae02a8a63398beee14286060410e0f83a5c55ac1",
+   "git_blob": "bc07125f6f3659d5b5366216d186aa3cc3873a46",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-712_Stage_sensor_waterproof_ultrasonic_looking_up.stl",
+   "size_bytes": 11684,
+   "sha256": "ac7d6a5808290cf6cc58a8425185014b288f28b9b3b8a44e170bf4bfff3ec9f5",
+   "git_blob": "e98fa78560a23e206474c8744753316aeb36de92",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-801_Grab_handle_two_person_carry.step",
+   "size_bytes": 366282,
+   "sha256": "534e887ea4faaa37884c12b7a0b5f230b86f4fc320901b943218213d9786cd01",
+   "git_blob": "0bb24eade435630327bb3598a94a4f0148356cc5",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-801_Grab_handle_two_person_carry.stl",
+   "size_bytes": 37884,
+   "sha256": "470d808eaa39da9bc669c02e27eab3f9cb90b9720e1c7d6eea295f6fbe52dddb",
+   "git_blob": "095837d8af448e26d2dedf6b938692d0f3902a77",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-802_Lifting_eye_bolt_M12_DIN_580.step",
+   "size_bytes": 387976,
+   "sha256": "0fb698f55d13c44446668f086296ea7e7185e50a5325bf0ce95e6435d94c328d",
+   "git_blob": "6536e5b14db0da73f7ff18fa823202a9dcbc7575",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-802_Lifting_eye_bolt_M12_DIN_580.stl",
+   "size_bytes": 46084,
+   "sha256": "dd045490cff6bdff381b934275fe1738306f593a0b0053c3c92e65af01b9442a",
+   "git_blob": "a00416beab5f2343b46d0a36035bdb0a31d416ab",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-811_Cable_harness_probes_stage_sensor_PV_beacon.step",
+   "size_bytes": 1376143,
+   "sha256": "38475f6be4485cf69634307847d69f142df1f554f6206649b4745e2501e5e186",
+   "git_blob": "28ba1c61ff536e3149975cf8b6358ab1629261b7",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-811_Cable_harness_probes_stage_sensor_PV_beacon.stl",
+   "size_bytes": 106484,
+   "sha256": "c3487dafa2f4fe95d5af401316808736580df29cfd44e70578cd9ccdcc8e33fe",
+   "git_blob": "03e656934881ee7ef36045a9aa88069d9e759ac9",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-812_Sampler_hoses_intake_purge_to_waste.step",
+   "size_bytes": 614171,
+   "sha256": "1f455bd36bf671d82f9470558fdb8bb903471d28a71dbebf5fac8b2efdf078b5",
+   "git_blob": "fb948e985de390f6234734dfc73d792c16604423",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-812_Sampler_hoses_intake_purge_to_waste.stl",
+   "size_bytes": 46484,
+   "sha256": "71a1452c6c9688f87fd3e44f5c1b2a72a2185375ee13d7fee60ece975c8002f0",
+   "git_blob": "90936d35095a8c35c49ce9a07275dab6f381b7b4",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-901_Bolt_M8_x_60_A4_washer.step",
+   "size_bytes": 55110,
+   "sha256": "a64ab926c8a2054f97a821763c9d1184c13c6cf5e2bf3f132ed9a350c90aa565",
+   "git_blob": "173c5d543252ad18cc23e7b08478439ba1ab3a8f",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-901_Bolt_M8_x_60_A4_washer.stl",
+   "size_bytes": 8684,
+   "sha256": "058dae0cedbb3f2f845e395012d6d49a75be4d4e10ac8d8760e5e0c1851156c6",
+   "git_blob": "56b9401a7875fc9423e6aba0289ee8f48ae47735",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-902_Bolt_M10_x_70_A4_washer.step",
+   "size_bytes": 54930,
+   "sha256": "ec8b36268677bf389506aad9aa0b51c7bd17122d63c250a349b2fbb02b024c18",
+   "git_blob": "d7a942c4fb064562a60cc3fcbd18d7a3318e3db3",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-902_Bolt_M10_x_70_A4_washer.stl",
+   "size_bytes": 8684,
+   "sha256": "b07ac321d5355db50fdf89c5eec42b4644b8084ba4033d03def849ba7a27f2a8",
+   "git_blob": "6509270a29eafe50eba7a485b84ef9948e537ffd",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-903_Screw_M6_x_25_A4.step",
+   "size_bytes": 55025,
+   "sha256": "800d844e3e78a322b13e3775015ba6edebd80c235a630a24695e6165a6d620c6",
+   "git_blob": "ecf20d2caa1493f7e3f764d5739d004912f05664",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-903_Screw_M6_x_25_A4.stl",
+   "size_bytes": 8684,
+   "sha256": "bbe2f8b94f10fc8717b73b9d9635fe30a1a5ca1eb06cd84f9e383c943f1828e8",
+   "git_blob": "4ac4cecc85f6845083a6bad91869397d67a2e56d",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-904_Chemical_anchor_M12_x_130_A4.step",
+   "size_bytes": 55167,
+   "sha256": "350f22b2137a90a02904b11d33f638428d16e3e9538bbe812bcccf084c11199c",
+   "git_blob": "0425957688869884f5f641f18e0a28d8b807e5f3",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-904_Chemical_anchor_M12_x_130_A4.stl",
+   "size_bytes": 8684,
+   "sha256": "c0743f03b02c01ad265f516158b83850e63efaeced7d464f51164518cc131c36",
+   "git_blob": "3af0d049e494cadbd39a92bce0d02b80a7cffd0f",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-905_Bolt_M10_x_40_A4_washer.step",
+   "size_bytes": 54930,
+   "sha256": "71139a2a3e0c7790f4f1cea930701d6930b00d71ce425c6c0e24a564ac34dbe5",
+   "git_blob": "e3d20a26337bd5aa465b5118846806edf894fcb9",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/cad/parts/AS3-905_Bolt_M10_x_40_A4_washer.stl",
+   "size_bytes": 8684,
+   "sha256": "38748cd7988382534eb62458f9b3cbcc02b01123d94fd639a63c58b86ff3a0c8",
+   "git_blob": "814630b2c23448e26d47e2a8b2f209d22f02f255",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/checks/AquaSentinel_R3_Design_Check_Sheet.png",
+   "size_bytes": 428747,
+   "sha256": "957defc1961e762492fe62e01887dcef5757095d52216f3c50d3f5812fdc3b5e",
+   "git_blob": "6cdba70d48f5b8a7a72d2978f5bf35e32ba6c217",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/checks/design_checks.json",
+   "size_bytes": 24082,
+   "sha256": "6bd052e3aebbfb9cfb598a983c5229fb5e7b1c9459a1c0800b9ddd613c1179a5",
+   "git_blob": "f0b0d621e12885293977416784805f004586171c",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/checks/step_validation.json",
+   "size_bytes": 20463,
+   "sha256": "e7fab3c74400a505988e6b168bc1c9ce7fee3112d94476b6363277cc1109fc09",
+   "git_blob": "5a4f900fea26fe3ce30c76b007c6b3fa7f1cc120",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/drawings/AS3-DWG-01_General_Arrangement.png",
+   "size_bytes": 497657,
+   "sha256": "9bd79a8f9bcb91676a1b8b3e6c06c286d98d1fb079a1d8e4c89ac789f4efb64f",
+   "git_blob": "036629f1c61abc6e176ff90efa4c995747625d34",
+   "status": "reviewed"
+  },
+  {
+   "path": "mechanical/drawings/AS3-DWG-02_Installation_and_Stage_Envelope.png",
+   "size_bytes": 317690,
+   "sha256": "20023dee7fba048756d8369d59155ee20d7f5bbdb5541500ad7a4c2d6053e636",
+   "git_blob": "91c93352f8007882303b07af1d4d6a9dcb8e58a2",
+   "status": "reviewed"
+  },
+  {
+   "path": "mechanical/drawings/AS3-DWG-03_Guide_Carriage.png",
+   "size_bytes": 329497,
+   "sha256": "dd825096d56288dc303d49fd4a3887e9643c6dd0dbeb78c21f3bf6b88608ec1e",
+   "git_blob": "a7b9bdacbf11e100a2e5c94ab4bd29d249edd91e",
+   "status": "reviewed"
+  },
+  {
+   "path": "mechanical/drawings/AS3-DWG-04_Sensor_Well_and_Cartridge.png",
+   "size_bytes": 350420,
+   "sha256": "e46a289752ff52c9e016920b65b888198c22bddfb097b261b69fc1127f14211c",
+   "git_blob": "cd1142e6f1f14c093bf2321ec41069d7119182c3",
+   "status": "reviewed"
+  },
+  {
+   "path": "mechanical/drawings/AS3-DWG-05_Pontoon_Hull.png",
+   "size_bytes": 217007,
+   "sha256": "0418a61a9ff4c965f50431e567b7cfe73576fa46475591d93b8e85cd505bb797",
+   "git_blob": "243a724e25999858c38d14aed188bfc5db47aa44",
+   "status": "reviewed"
+  },
+  {
+   "path": "mechanical/drawings/AS3-DWG-06_Pier_Bracket.png",
+   "size_bytes": 244992,
+   "sha256": "b833888c5952c56e14b23dcb14e77e14daee06b3a40c0047c38932b7a54ffb98",
+   "git_blob": "2c5a1104bad16c6b37ea29e0248e7217a453a188",
+   "status": "reviewed"
+  },
+  {
+   "path": "mechanical/drawings/AquaSentinel_R3_Drawing_Set.pdf",
+   "size_bytes": 876569,
+   "sha256": "3aae09aa6b2f8ca42f381ce9312946fc3a96247e6afdeea5ba12832e7d0b89a4",
+   "git_blob": "0934e7f7ae0c0fa0cbc2be1d812a16dd3ba5ee59",
+   "status": "reviewed"
+  },
+  {
+   "path": "mechanical/simulation/AquaSentinel_Guide_Pole_Simulation.SLDPRT",
+   "size_bytes": 124139,
+   "sha256": "30047d96a3a7ca1e4c39634ad49fa5eeee3cde5a1ef379a5a01f453dc9592f21",
+   "git_blob": "207b16920b946e7ceeb82704873e9541fdad1ade",
+   "status": "inaccessible"
+  },
+  {
+   "path": "mechanical/simulation/AquaSentinel_Pier_Bracket_Simulation.SLDPRT",
+   "size_bytes": 235280,
+   "sha256": "9798aa94563b7b3a092b8c9dbcb04c741cd13d82b67f1d33a608f26e3ba2c7ec",
+   "git_blob": "986408d34db54999815b9795326ce81895e8dda1",
+   "status": "inaccessible"
+  },
+  {
+   "path": "mechanical/simulation/Bracket_Displacement.png",
+   "size_bytes": 160016,
+   "sha256": "acc1c1addb03a68ca47eb97d88568f30f78b7467d802a77cdfca42f371194c95",
+   "git_blob": "be9c405730ed3276f3d5b4ce026a222cec2801da",
+   "status": "reviewed"
+  },
+  {
+   "path": "mechanical/simulation/Bracket_Static_Study_Report.docx",
+   "size_bytes": 1683121,
+   "sha256": "5e6c223e4ad1e63df34b00a52b68923099d6288fed8d8a011a3a5d68b017de97",
+   "git_blob": "8c6f9c3176f088904c46ac4f16887007b2945649",
+   "status": "reviewed"
+  },
+  {
+   "path": "mechanical/simulation/Bracket_vonMises_Stress.png",
+   "size_bytes": 184853,
+   "sha256": "38bb007e328e8998dad7bf5adde448d40de391225f7f6c40b0bdb416758858a4",
+   "git_blob": "0549cafcd349d49351c21d37fc48d71c848ab062",
+   "status": "reviewed"
+  },
+  {
+   "path": "mechanical/simulation/Pole_Displacement.png",
+   "size_bytes": 154315,
+   "sha256": "40d4c77cf768c45733d10f1f95670454778b1119cab08b48f5d7bc2a0bce4aec",
+   "git_blob": "5474b96aad2e18c806606268e6a01a722dfc6ef7",
+   "status": "reviewed"
+  },
+  {
+   "path": "mechanical/simulation/Pole_Static_Study_Report.docx",
+   "size_bytes": 1733779,
+   "sha256": "fa59c501064755dd3f68e06cd270f99398071b11d4f5f7d19a148734828ff7c6",
+   "git_blob": "5ef0ae1c9325e24266f448e8e33193afa933208f",
+   "status": "reviewed"
+  },
+  {
+   "path": "mechanical/simulation/Pole_vonMises_Stress.png",
+   "size_bytes": 157903,
+   "sha256": "1315ccfbf7bff0238ce0b8fd8c96d66901b2a6719cdc9b96523eeafceacdabd9",
+   "git_blob": "1fcfb476648081151adbb9fbfaaa32269846de11",
+   "status": "reviewed"
+  },
+  {
+   "path": "mechanical/solidworks/AquaSentinel_R3_SOLIDWORKS_PackAndGo.zip",
+   "size_bytes": 17127636,
+   "sha256": "d662fe25d2610267d954424a338e116089020719f26a3a9bd3f3432669bf9e61",
+   "git_blob": "0885448e56a62b20bf1f83c49710f81bb495001c",
+   "status": "inaccessible"
+  },
+  {
+   "path": "mechanical/src/analysis.py",
+   "size_bytes": 11524,
+   "sha256": "80f2c6f00ac349ecdfdd973b2ae92bb73015576aa51fb74e63e1ea5800cfe5e9",
+   "git_blob": "231f860e2d24a6303e043620593461e1c9bebd16",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/src/build.py",
+   "size_bytes": 22951,
+   "sha256": "d774c630b74fee7d6a6595f2e32a0eb0cd9c035fd044bd7ffc813ec87ad12279",
+   "git_blob": "315f88496f7b6f6c6cfcb306db3b01e4564081e8",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/src/check_sheet.py",
+   "size_bytes": 6823,
+   "sha256": "12c38a861c9a79b95801704be82b3365ab5db9d07c05d1a49f6a061972ca8032",
+   "git_blob": "72edf0136d2a8e7febb3a20e07acba5e8fe0f6a7",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/src/drafting.py",
+   "size_bytes": 12018,
+   "sha256": "1e8ef2e26db8419e02bc3cb7c4363d42f5fa19fbced77a880a7c8950ad9dacab",
+   "git_blob": "30cbee0cdde4fabb25595326621efb310fae8828",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/src/drawings.py",
+   "size_bytes": 29047,
+   "sha256": "48bbadda76063481f7d8950b3cbef6ff73db2f375cc3d9456bac0d2293d0ec50",
+   "git_blob": "a0109ad39fa68307d313e18992e62e257a4e963b",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/src/export.py",
+   "size_bytes": 17444,
+   "sha256": "9c13964d2670a774cb7b7993840557a0ef6cbd5f7fd4d8d6743d5195bab418c4",
+   "git_blob": "c1b273544013cb2d575474a18654b2b13a2107f9",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/src/geom.py",
+   "size_bytes": 16955,
+   "sha256": "8fbf2d140dfa5a652b43fff1a70234a52c1c05ef44b4c2e5dd4d532fb7cf1165",
+   "git_blob": "2f07ad9181b814364f22bf51572001d29b83bfa2",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/src/params.py",
+   "size_bytes": 7613,
+   "sha256": "8de4e820c6b605ea5966c0ce201fa1896e36f1b679b674d5d9e0c199e2a0d2eb",
+   "git_blob": "fe2145d30ebbcce7516f144733914fcba186c0e9",
+   "status": "reviewed"
+  },
+  {
+   "path": "mechanical/src/parts.py",
+   "size_bytes": 47286,
+   "sha256": "77cc333eec12cf64ca5aebe41402b8e3ac7467b714592d36c65dd5e662c6d153",
+   "git_blob": "e5dec7aa40b06180102edb99b57266fbe44bfc70",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/src/publish.py",
+   "size_bytes": 3820,
+   "sha256": "9247d30fb6d782a43ff322bc349a131a3a24d2f92be924a55c7eea27313183b4",
+   "git_blob": "165cb11cff705f95a1796682227dd6a8b429f549",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/tools/drawing_shots.js",
+   "size_bytes": 2885,
+   "sha256": "de322c2995e3e333cd22f5d3b1769e7c6d7ff1b918f3c7b7ddb6a25ee50cde5f",
+   "git_blob": "4e6ee10e4dd8269b78d186510ede9a3fb502be89",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/tools/serve.py",
+   "size_bytes": 1894,
+   "sha256": "03b64ce83a3d61abe25ca69bc874687a6d8ed38ff0322953fbb88dfe0fd61dd9",
+   "git_blob": "22de102611a8605e417c12f98f3b380b3d0b5b07",
+   "status": "reviewed"
+  },
+  {
+   "path": "mechanical/tools/step_check.html",
+   "size_bytes": 5398,
+   "sha256": "224efdf9f3d036e1cd795c57d51e01ffcd328b20cf9386291a34055792561e46",
+   "git_blob": "8d42ade57060e5214f311aaf62a126f6e0a4e7d9",
+   "status": "tested"
+  },
+  {
+   "path": "mechanical/viewer/template.html",
+   "size_bytes": 52566,
+   "sha256": "b285cf03a9eb67a39e9aef0ef317d1ca1ff49106a4b3200e1d6b09083a8e9ee3",
+   "git_blob": "beb71a2fcd3fbe5aba6dce3d4354f3414fb08ecb",
+   "status": "tested"
+  },
+  {
+   "path": "project-management/Gantt_Chart.png",
+   "size_bytes": 125521,
+   "sha256": "09e22b080bf2190a94f00de665f3b2a0f758ab64306be54b2c219a0ca8b5402a",
+   "git_blob": "16eb69423709e0fb0c0829fdcb83b6c27188031f",
+   "status": "reviewed"
+  },
+  {
+   "path": "project-management/Project_Summary.png",
+   "size_bytes": 72875,
+   "sha256": "be829687ebf576ffafcdf4ad3081276be6e9fba77602493e144eef777d592951",
+   "git_blob": "2bfaeb2b053392c94df02df2eca0216698821cdc",
+   "status": "reviewed"
+  },
+  {
+   "path": "project-management/README.md",
+   "size_bytes": 323,
+   "sha256": "cceb105b9b7221dcec94861e9ea432a00a9ab275b34e705ea236a5ad609d484e",
+   "git_blob": "a657bccd940e3a0a713edda88dbd9e6c2db6d4fe",
+   "status": "reviewed"
+  }
+ ],
+ "audit_outputs": {
+  "note": "New, uncommitted files created by the 2026-10-18 audit on branch audit/engineering-knowledge-base; no tracked file was modified",
+  "tracked_files_modified": [],
+  "files": [
+   {
+    "path": "README_PROJECT_CONTEXT.md",
+    "size_bytes": 8702,
+    "sha256": "5705bf1f2bf793f0fe15c337a68837403c8a268a8a59d4f69a492fd479076428"
+   },
+   {
+    "path": "docs/analytics/ANALYTICS_AND_DATA_REVIEW.md",
+    "size_bytes": 12948,
+    "sha256": "87fb20df6d488c8cba4a8681c5157ce0246f6ea8a4ea498a49f2db233fb06d45"
+   },
+   {
+    "path": "docs/architecture/DATA_FLOW.md",
+    "size_bytes": 8332,
+    "sha256": "dd130a18a2e71ddc0ceb930a28b6bbc853b5925f0b59c120bdebb68b14e8c819"
+   },
+   {
+    "path": "docs/architecture/INTERFACE_REGISTER.md",
+    "size_bytes": 11173,
+    "sha256": "1f446c9d446533f3a4a9f1f193883ef7bd29fbe1bc0ea9b5a6c1f579536059a7"
+   },
+   {
+    "path": "docs/architecture/SYSTEM_ARCHITECTURE.md",
+    "size_bytes": 12246,
+    "sha256": "2552d237b70f797328c8f5698ccd3bddb6b75cb0cd6d4c7d5c304edab01c7936"
+   },
+   {
+    "path": "docs/audit/AUDIT_PROGRESS_LOG.md",
+    "size_bytes": 6699,
+    "sha256": "26abd78f8659e07bd690fabcc51348ff09507bc3de7d106f50e3c62f5676fefb"
+   },
+   {
+    "path": "docs/audit/CODE_REVIEW.md",
+    "size_bytes": 33756,
+    "sha256": "84244096cb43764b0237b9b4bd69f7bce170693bfe0695414748f523f4ee7a96"
+   },
+   {
+    "path": "docs/audit/FILE_REVIEW_TRACKER.csv",
+    "size_bytes": 83992,
+    "sha256": "d1ce0d49f1ab222c293184148f3028a364e48a6bd842c839158a3c3f8cd76b2a"
+   },
+   {
+    "path": "docs/audit/OPEN_QUESTIONS_AND_NEXT_STEPS.md",
+    "size_bytes": 9025,
+    "sha256": "04fbde031ae19b2d9f8919a7afa9faf7c94f39832ef34857b45ec831d8860b6a"
+   },
+   {
+    "path": "docs/audit/REPOSITORY_INVENTORY.md",
+    "size_bytes": 29205,
+    "sha256": "d363586d2e3fc9f0236461e64c81d059bcf4d77a055d303ace61185f5012c21e"
+   },
+   {
+    "path": "docs/audit/SECURITY_AND_RISK_REGISTER.md",
+    "size_bytes": 13278,
+    "sha256": "76c6d69dbdbd9c7d335e7ced5877ecbf05d55db63fdf2c5832861128389fc4c3"
+   },
+   {
+    "path": "docs/audit/VISUAL_ASSET_CATALOGUE.md",
+    "size_bytes": 17882,
+    "sha256": "1cda83ef1933aa19c2bcae53ab0359c494b609671a63dbf62e389a29f6271cbe"
+   },
+   {
+    "path": "docs/audit/verification/README.md",
+    "size_bytes": 2363,
+    "sha256": "506da484906d33ec4acc86c038dfd96a14d7b15b3d8f1061e83a05d9ccab12c6"
+   },
+   {
+    "path": "docs/audit/verification/data_integrity_checks.py",
+    "size_bytes": 5152,
+    "sha256": "b73d5aa2c38862a73427e98dd619af931b65eaf1c6bfa62a3bedabbfe083b961"
+   },
+   {
+    "path": "docs/audit/verification/detector_event_metrics.py",
+    "size_bytes": 5035,
+    "sha256": "1dcbe939c5c46f7e7dfa0d95f65b998baf1a6e2dbf89ae31636e9791c62e6aef"
+   },
+   {
+    "path": "docs/audit/verification/dispersion_check.py",
+    "size_bytes": 2737,
+    "sha256": "b80f6b26b5481721633d31e02729c38020bc6d951e2d422ee1b7416481d39ea2"
+   },
+   {
+    "path": "docs/audit/verification/firmware_engine_port.py",
+    "size_bytes": 7306,
+    "sha256": "f105fdead06aa6c819e17669503dc96d3d843ff258c41596c86d91f46c629ff2"
+   },
+   {
+    "path": "docs/audit/verification/pole_carriage_couple.py",
+    "size_bytes": 3531,
+    "sha256": "5f4cf7f2a5601b9c483ce561b1fb84b1a4e5b88101cc79b352b2860721ffd67e"
+   },
+   {
+    "path": "docs/audit/verification/stage_sensor_geometry.py",
+    "size_bytes": 2315,
+    "sha256": "dbcd91a4eb7e47ce0bf64f2d59935a049dc734c099fb6abe8af3f55d95c4606e"
+   },
+   {
+    "path": "docs/audit/visual_catalogue/sheet_assets_misc.jpg",
+    "size_bytes": 242839,
+    "sha256": "37d5d0bbcfebff2a653ce3efb59f13fda33fc6eb07da5a28bb9f4e730fd2b6d3"
+   },
+   {
+    "path": "docs/audit/visual_catalogue/sheet_drawings_checks_sim.jpg",
+    "size_bytes": 177011,
+    "sha256": "7adf85dfa456883c447b359025e1af7238072819db4bc226787283fe143a0b8d"
+   },
+   {
+    "path": "docs/audit/visual_catalogue/sheet_index.json",
+    "size_bytes": 4052,
+    "sha256": "af92a9d03b16fcdf9f43bfe56ca2247263d3572524ff169e85f4f83f2f438fbc"
+   },
+   {
+    "path": "docs/audit/visual_catalogue/sheet_media_pm_analytics.jpg",
+    "size_bytes": 158315,
+    "sha256": "c35eb5b8b8963f3f4d268a904b6b9cd388d2332ccfe4b94798dd7856dfcf4efc"
+   },
+   {
+    "path": "docs/audit/visual_catalogue/sheet_renders.jpg",
+    "size_bytes": 175506,
+    "sha256": "54c28dc0a7f5b162e8a63f2f7179635ceb0ab783eda408a386788d869034f5c7"
+   },
+   {
+    "path": "docs/audit/visual_catalogue/sheet_slides.jpg",
+    "size_bytes": 262102,
+    "sha256": "6d75e3e1b722d67d0f28530cf01dbab75bd02e322459a3aa6fb035ebc9fca0e4"
+   },
+   {
+    "path": "docs/audit/visual_catalogue/sheet_ui.jpg",
+    "size_bytes": 250234,
+    "sha256": "26e9b99b2be4b5fe5f66e4a19dbe82ece883475179034177f58b6fa6e910c1e1"
+   },
+   {
+    "path": "docs/audit/visual_catalogue/sheet_video_keyframes.jpg",
+    "size_bytes": 509200,
+    "sha256": "8c552932ac36a124371f8fb77fe77c5913db9ad50507980607c65c25b02c8f1e"
+   },
+   {
+    "path": "docs/learning/ENGINEERING_KNOWLEDGE_BASE.md",
+    "size_bytes": 19996,
+    "sha256": "33f81bf62da0160272340a597dfa645345367e3aab7312dca39af25ec7c91671"
+   },
+   {
+    "path": "docs/mechanical/MECHANICAL_DESIGN_REVIEW.md",
+    "size_bytes": 21854,
+    "sha256": "472fef1dbfe4c20f9e20ede8e478c07d9f06f34490c4604ef62283411a32e710"
+   },
+   {
+    "path": "docs/operations/SETUP_AND_REPRODUCIBILITY.md",
+    "size_bytes": 8111,
+    "sha256": "18b6650aa59e4f82b5cf4e579cb84218d0d600d6e22359c0bcc53b7a382c9c6e"
+   },
+   {
+    "path": "docs/research/TECHNICAL_RESEARCH.md",
+    "size_bytes": 15708,
+    "sha256": "5cb452d61fd2b150fb3912376914de7aef73ea5aaa47fd26a5ec16c03e4b7e24"
+   }
+  ]
+ }
+}
