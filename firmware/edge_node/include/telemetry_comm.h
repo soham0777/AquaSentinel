@@ -9,7 +9,7 @@ class TelemetryManager {
 public:
     TelemetryManager();
     void init();
-    String serializePayload(const SensorReadings& r, const AnomalyResult& anom, uint32_t boot_count,
+    String serializePayload(const SensorReadings& r, const AnomalyResult& anom, uint32_t cycle,
                             uint8_t bottles_filled);
     bool transmit(const String& payload, bool is_emergency);
 

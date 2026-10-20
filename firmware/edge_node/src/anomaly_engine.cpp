@@ -6,6 +6,7 @@
  */
 
 #include "anomaly_engine.h"
+#include <Preferences.h>
 #include <math.h>
 
 // -----------------------------------------------------------------------------
@@ -22,6 +23,12 @@ RTC_DATA_ATTR static uint8_t rtc_outlier_history = 0; // Last 3 cycles bitmask
 RTC_DATA_ATTR static uint8_t rtc_normal_consecutive = 0;
 RTC_DATA_ATTR static RiskLevel rtc_current_risk = RISK_NORMAL;
 RTC_DATA_ATTR static uint8_t rtc_prev_fault_mask = 0; // channels faulted on the previous cycle
+RTC_DATA_ATTR static bool rtc_learning_done = false;  // first post-learning cycle has run (audit F11)
+
+// What the flash copy last held, so persist() can tell when the state changed
+RTC_DATA_ATTR static RiskLevel rtc_saved_risk = RISK_NORMAL;
+RTC_DATA_ATTR static uint8_t rtc_saved_fault_mask = 0;
+RTC_DATA_ATTR static bool rtc_saved_learning_done = false;
 
 RTC_DATA_ATTR static SensorReadings rtc_prev_reading;
 RTC_DATA_ATTR static bool rtc_has_prev = false;
@@ -29,12 +36,35 @@ RTC_DATA_ATTR static bool rtc_has_prev = false;
 static const float ALPHA = 1.0f / 96.0f; // Daily EWMA smoothing factor
 static const char* const CHANNEL_NAMES[6] = { "pH", "EC", "DO", "turbidity", "temperature", "stage" };
 
+// Flash copy of the learned state (audit F5). Bump the version when the layout changes: a stored copy with
+// another version is ignored and learning starts again from the defaults.
+static const uint16_t ENGINE_STATE_VERSION = 1;
+struct EngineState {
+    uint16_t version;
+    BaselineBin ph_bins[24];
+    BaselineBin do_bins[24];
+    BaselineBin temp_bins[24];
+    BaselineBin ec_baseline;
+    BaselineBin turb_baseline;
+    uint8_t outlier_history;
+    uint8_t normal_consecutive;
+    uint8_t current_risk;
+    uint8_t prev_fault_mask;
+    bool learning_done;
+};
+
 AnomalyEngine::AnomalyEngine() {}
 
-void AnomalyEngine::init() {
-    if (!rtc_baselines_initialized) {
-        resetBaselines();
+bool AnomalyEngine::init(bool rtc_state_valid) {
+    if (rtc_state_valid && rtc_baselines_initialized) {
+        return true; // deep-sleep wake: RTC memory is the newest copy
     }
+    // Power-on, brown-out, watchdog or crash: RTC memory can't be trusted, so restore from flash
+    if (loadState()) {
+        return true;
+    }
+    resetBaselines();
+    return false;
 }
 
 void AnomalyEngine::resetBaselines() {
@@ -51,6 +81,7 @@ void AnomalyEngine::resetBaselines() {
     rtc_normal_consecutive = 0;
     rtc_current_risk = RISK_NORMAL;
     rtc_prev_fault_mask = 0;
+    rtc_learning_done = false;
     rtc_has_prev = false;
 }
 
@@ -108,7 +139,7 @@ AnomalyResult AnomalyEngine::evaluate(const SensorReadings& r, uint8_t hour_of_d
     if (checkHardLimits(r, res)) {
         res.level = RISK_EVENT;
         res.max_score = 99.0f;
-        res.autosampler_trigger = true;
+        res.autosampler_trigger = (rtc_current_risk != RISK_EVENT); // one sample per event (audit F7)
         rtc_current_risk = RISK_EVENT;
         rtc_normal_consecutive = 0;
         return res;
@@ -131,13 +162,31 @@ AnomalyResult AnomalyEngine::evaluate(const SensorReadings& r, uint8_t hour_of_d
     res.max_score = max_z;
     res.contributing_flags = flags;
 
-    // 3. Learning Period Bypass (First 7 days = 672 cycles): No statistical events
-    if (total_cycles < 672) {
-        snprintf(res.reason, sizeof(res.reason), "LEARNING_PERIOD: Baseline learning active (%u/672 cycles)", total_cycles);
-        res.level = RISK_NORMAL;
-        updateBaselines(r, hour_of_day);
+    // 3. Learning Period Bypass (first 7 days): no statistical events. A hard-limit event still ends after
+    //    4 clean cycles, as it does afterwards, so it can't stay latched into the first post-learning cycles
+    //    or block the sample for the next event (audit F7, F11). Once finished (saved in flash with the
+    //    baselines), learning does not start again unless the learned state is lost.
+    if (total_cycles < LEARNING_CYCLES && !rtc_learning_done) {
+        if (rtc_current_risk == RISK_EVENT && ++rtc_normal_consecutive >= 4) {
+            rtc_current_risk = RISK_NORMAL;
+        }
+        res.level = (rtc_current_risk == RISK_EVENT) ? RISK_EVENT : RISK_NORMAL;
+        if (res.level == RISK_EVENT) {
+            snprintf(res.reason, sizeof(res.reason), "EVENT_CLEARING: %u/4 clean cycles (learning %lu/%lu cycles)",
+                     rtc_normal_consecutive, (unsigned long)total_cycles, (unsigned long)LEARNING_CYCLES);
+        } else {
+            snprintf(res.reason, sizeof(res.reason), "LEARNING_PERIOD: Baseline learning active (%lu/%lu cycles)",
+                     (unsigned long)total_cycles, (unsigned long)LEARNING_CYCLES);
+            updateBaselines(r, hour_of_day); // never from readings inside an event
+        }
         applyFaultOverlay(res);
         return res;
+    }
+
+    // 3b. First cycle after learning: the statistical track starts from a clean history (audit F11)
+    if (!rtc_learning_done) {
+        rtc_learning_done = true;
+        rtc_outlier_history = 0;
     }
 
     // 4. Persistence Window Logic (Appendix B: >= 2 outliers in last 3 cycles = EVENT)
@@ -156,10 +205,18 @@ AnomalyResult AnomalyEngine::evaluate(const SensorReadings& r, uint8_t hour_of_d
         rtc_normal_consecutive = 0;
         snprintf(res.reason, sizeof(res.reason), "STAT_EVENT: Persistent multi-parameter outlier (Z_max=%.2f, flags=0x%02X)", max_z, flags);
     } else if (outlier_count == 1) {
-        res.level = RISK_WATCH;
-        rtc_current_risk = RISK_WATCH;
+        // An event ends only after 4 clean cycles: dropping it to WATCH here let one flickering event, or the
+        // tail of a hard-limit event, start a "new" event and take a second bottle (audit F7)
+        if (rtc_current_risk != RISK_EVENT) {
+            rtc_current_risk = RISK_WATCH;
+        }
+        res.level = rtc_current_risk;
         rtc_normal_consecutive = 0;
-        snprintf(res.reason, sizeof(res.reason), "STAT_WATCH: Single-cycle anomaly detected (Z_max=%.2f)", max_z, flags);
+        if (res.level == RISK_EVENT) {
+            snprintf(res.reason, sizeof(res.reason), "STAT_EVENT: Event continuing, waiting for 4 clean cycles (Z_max=%.2f)", max_z);
+        } else {
+            snprintf(res.reason, sizeof(res.reason), "STAT_WATCH: Single-cycle anomaly detected (Z_max=%.2f)", max_z);
+        }
     } else {
         // Normal cycle
         rtc_normal_consecutive++;
@@ -212,6 +269,74 @@ void AnomalyEngine::applyFaultOverlay(AnomalyResult& res) {
             n += snprintf(res.reason + n, sizeof(res.reason) - n, " %s", CHANNEL_NAMES[i]);
         }
     }
+}
+
+bool AnomalyEngine::persist(uint32_t cycle) {
+    bool changed = (rtc_current_risk != rtc_saved_risk) || (rtc_prev_fault_mask != rtc_saved_fault_mask) ||
+                   (rtc_learning_done != rtc_saved_learning_done);
+    if (!changed && (cycle % NVS_SAVE_INTERVAL_CYCLES) != 0) {
+        return false;
+    }
+    return saveState();
+}
+
+bool AnomalyEngine::saveState() {
+    EngineState st;
+    memset(&st, 0, sizeof(st));
+    st.version = ENGINE_STATE_VERSION;
+    memcpy(st.ph_bins, rtc_ph_bins, sizeof(st.ph_bins));
+    memcpy(st.do_bins, rtc_do_bins, sizeof(st.do_bins));
+    memcpy(st.temp_bins, rtc_temp_bins, sizeof(st.temp_bins));
+    st.ec_baseline = rtc_ec_baseline;
+    st.turb_baseline = rtc_turb_baseline;
+    st.outlier_history = rtc_outlier_history;
+    st.normal_consecutive = rtc_normal_consecutive;
+    st.current_risk = (uint8_t)rtc_current_risk;
+    st.prev_fault_mask = rtc_prev_fault_mask;
+    st.learning_done = rtc_learning_done;
+
+    Preferences prefs;
+    if (!prefs.begin(ENGINE_NVS_NAMESPACE, false)) {
+        return false;
+    }
+    size_t written = prefs.putBytes("state", &st, sizeof(st));
+    prefs.end();
+    if (written != sizeof(st)) {
+        return false;
+    }
+    rtc_saved_risk = rtc_current_risk;
+    rtc_saved_fault_mask = rtc_prev_fault_mask;
+    rtc_saved_learning_done = rtc_learning_done;
+    return true;
+}
+
+bool AnomalyEngine::loadState() {
+    EngineState st;
+    Preferences prefs;
+    if (!prefs.begin(ENGINE_NVS_NAMESPACE, true)) {
+        return false; // nothing saved yet
+    }
+    size_t got = prefs.getBytes("state", &st, sizeof(st));
+    prefs.end();
+    if (got != sizeof(st) || st.version != ENGINE_STATE_VERSION || st.current_risk > RISK_EVENT) {
+        return false;
+    }
+    memcpy(rtc_ph_bins, st.ph_bins, sizeof(st.ph_bins));
+    memcpy(rtc_do_bins, st.do_bins, sizeof(st.do_bins));
+    memcpy(rtc_temp_bins, st.temp_bins, sizeof(st.temp_bins));
+    rtc_ec_baseline = st.ec_baseline;
+    rtc_turb_baseline = st.turb_baseline;
+    rtc_outlier_history = st.outlier_history;
+    rtc_normal_consecutive = st.normal_consecutive;
+    rtc_current_risk = (RiskLevel)st.current_risk;
+    rtc_prev_fault_mask = st.prev_fault_mask;
+    rtc_learning_done = st.learning_done;
+    rtc_baselines_initialized = true;
+    rtc_has_prev = false;
+    rtc_saved_risk = rtc_current_risk;
+    rtc_saved_fault_mask = rtc_prev_fault_mask;
+    rtc_saved_learning_done = rtc_learning_done;
+    return true;
 }
 
 void AnomalyEngine::getBaseline(uint8_t param_idx, uint8_t hour, float& out_mu, float& out_scale) {

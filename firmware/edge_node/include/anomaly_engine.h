@@ -61,9 +61,18 @@ struct BaselineBin {
 class AnomalyEngine {
 public:
     AnomalyEngine();
-    void init();
+    // rtc_state_valid: true after a deep-sleep wake (RTC memory kept). After any other reset the learned
+    // baselines and risk state are restored from flash (audit F5). Returns false when there was nothing to
+    // restore and the engine starts from the defaults: learning must then start again from cycle 1.
+    bool init(bool rtc_state_valid);
     AnomalyResult evaluate(const SensorReadings& r, uint8_t hour_of_day, uint32_t total_cycles);
     void resetBaselines(); // forget learned baselines and history (cold-boot defaults)
+
+    // Flash copy of the learned state: persist() saves it on a risk, fault or learning change, and at
+    // least every NVS_SAVE_INTERVAL_CYCLES cycles. Each returns true when flash was read or written.
+    bool persist(uint32_t cycle);
+    bool saveState();
+    bool loadState();
 
     void getBaseline(uint8_t param_idx, uint8_t hour, float& out_mu, float& out_scale);
 
