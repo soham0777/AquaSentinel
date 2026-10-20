@@ -20,7 +20,7 @@ void MicroSDLogger::writeHeaderIfNew() {
     if (!SD.exists(log_filename)) {
         File f = SD.open(log_filename, FILE_WRITE);
         if (f) {
-            f.println("timestamp,ph,ec_us_cm,do_mg_l,turbidity_ntu,temp_c,stage_m,valid_mask,risk_level,max_score,flags,sampler_trigger,reason");
+            f.println("timestamp,ph,ec_us_cm,do_mg_l,turbidity_ntu,temp_c,stage_m,valid_mask,risk_level,max_score,flags,fault_mask,sampler_trigger,reason");
             f.flush();
             f.close();
             Serial.println("[SD] Created new log file with header.");
@@ -42,7 +42,7 @@ bool MicroSDLogger::logReading(const SensorReadings& r, const AnomalyResult& ano
         if (r.valid[i]) valid_mask |= (1 << i);
     }
 
-    f.printf("%lu,%.2f,%.1f,%.2f,%.1f,%.1f,%.2f,0x%02X,%d,%.2f,0x%02X,%d,\"%s\"\n",
+    f.printf("%lu,%.2f,%.1f,%.2f,%.1f,%.1f,%.2f,0x%02X,%d,%.2f,0x%02X,0x%02X,%d,\"%s\"\n",
         (unsigned long)r.timestamp,
         r.ph,
         r.ec,
@@ -54,6 +54,7 @@ bool MicroSDLogger::logReading(const SensorReadings& r, const AnomalyResult& ano
         (int)anom.level,
         anom.max_score,
         anom.contributing_flags,
+        anom.fault_mask,
         anom.autosampler_trigger ? 1 : 0,
         anom.reason
     );

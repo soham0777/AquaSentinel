@@ -24,6 +24,8 @@
 #include "microsd_logger.h"
 #include "telemetry_comm.h"
 
+#ifndef PIO_UNIT_TESTING // unit tests (pio test) bring their own setup() and loop()
+
 // Preserved across 15-minute deep sleep cycles
 RTC_DATA_ATTR static uint32_t boot_counter = 0;
 RTC_DATA_ATTR static uint32_t wiper_hour_counter = 0;
@@ -45,6 +47,9 @@ void setVisualBeacon(RiskLevel level) {
             break;
         case RISK_EVENT:
             Serial.println("[BEACON-JALDEEP] Visual Beacon -> FLASHING HIGH-INTENSITY RED (CRITICAL CONTAMINATION ALERT!)");
+            break;
+        case RISK_SENSOR_FAULT:
+            Serial.println("[BEACON-JALDEEP] Visual Beacon -> BLINKING WHITE (SENSOR FAULT: readings cannot be trusted, check the probes)");
             break;
     }
 }
@@ -103,8 +108,8 @@ void setup() {
     // 7. ACT: MicroSD Atomic Persistence & 4G LTE Telemetry
     sdLogger.logReading(readings, anomaly);
 
-    // Upload immediately on EVENT, otherwise hourly batch (every 4 cycles)
-    if (anomaly.level == RISK_EVENT || (boot_counter % 4 == 0)) {
+    // Upload immediately on EVENT or a new sensor fault, otherwise hourly batch (every 4 cycles)
+    if (anomaly.level == RISK_EVENT || anomaly.fault_onset || (boot_counter % 4 == 0)) {
         String frame = telemetryMgr.serializePayload(readings, anomaly, boot_counter,
                                                      autoSampler.getFilledBottlesCount());
         telemetryMgr.transmit(frame, anomaly.level == RISK_EVENT);
@@ -121,3 +126,5 @@ void setup() {
 void loop() {
     // Unreachable due to deep sleep
 }
+
+#endif // PIO_UNIT_TESTING

@@ -11,7 +11,36 @@
 
 static HardwareSerial RS485Serial(1); // UART1 for RS485 bus
 
-SensorManager::SensorManager() {
+// Three reads per probe; the median suppresses bubbles and turbulence
+static const uint8_t READS_PER_CHANNEL = 3;
+
+static float median3(float a, float b, float c) {
+    if ((a >= b && a <= c) || (a <= b && a >= c)) return a;
+    if ((b >= a && b <= c) || (b <= a && b >= c)) return b;
+    return c;
+}
+
+// Plausibility check for a value that arrived intact
+static uint8_t checkRange(float v, float lo, float hi) {
+    return (isnan(v) || v < lo || v > hi) ? HEALTH_OUT_OF_BOUNDS : HEALTH_OK;
+}
+
+void combineReads(const float* values, const uint8_t* codes, uint8_t n, float& out_value, uint8_t& out_health) {
+    float good[READS_PER_CHANNEL];
+    uint8_t k = 0;
+    if (n > READS_PER_CHANNEL) n = READS_PER_CHANNEL;
+    out_health = (n == 0) ? HEALTH_TIMEOUT : HEALTH_OK;
+    for (uint8_t i = 0; i < n; i++) {
+        out_health |= codes[i];
+        if (codes[i] == HEALTH_OK) good[k++] = values[i];
+    }
+    if (k == 0)      out_value = NAN;
+    else if (k == 1) out_value = good[0];
+    else if (k == 2) out_value = (good[0] + good[1]) / 2.0f;
+    else             out_value = median3(good[0], good[1], good[2]);
+}
+
+SensorManager::SensorManager() : last_poll_ms(0) {
     for (int i = 0; i < 6; i++) health_flags[i] = HEALTH_OK;
 }
 
@@ -55,7 +84,19 @@ uint16_t SensorManager::calculateCRC16(const uint8_t* buffer, uint16_t length) {
     return crc;
 }
 
-bool SensorManager::queryModbusRegisters(uint8_t slave_id, uint16_t reg_addr, uint16_t reg_count, uint16_t* dest) {
+uint8_t SensorManager::queryModbusRegisters(uint8_t slave_id, uint16_t reg_addr, uint16_t reg_count, uint16_t* dest) {
+    const uint8_t expected_bytes = 5 + 2 * reg_count; // address, function, byte count, data, CRC (2)
+    uint8_t rx_buf[32];
+    if (reg_count == 0 || expected_bytes > sizeof(rx_buf)) {
+        return HEALTH_CRC_ERROR; // request this function cannot frame
+    }
+
+    // DFRobot probes need more than 200 ms between polls
+    uint32_t since_last = millis() - last_poll_ms;
+    if (since_last < MODBUS_POLL_GAP_MS) {
+        delay(MODBUS_POLL_GAP_MS - since_last);
+    }
+
     uint8_t req[8];
     req[0] = slave_id;
     req[1] = 0x03; // Read Holding Registers
@@ -67,135 +108,154 @@ bool SensorManager::queryModbusRegisters(uint8_t slave_id, uint16_t reg_addr, ui
     req[6] = crc & 0xFF;
     req[7] = (crc >> 8) & 0xFF;
 
+    // Drop stale bytes, such as a late reply to an earlier request
+    while (RS485Serial.available()) {
+        RS485Serial.read();
+    }
+
     // Transmit Request
     digitalWrite(PIN_RS485_DE_RE, HIGH); // Driver Enable
     RS485Serial.write(req, 8);
     RS485Serial.flush();
     digitalWrite(PIN_RS485_DE_RE, LOW);  // Receiver Enable
 
-    // Await Response with 200ms timeout
+    // Await Response (DFRobot: wait more than 200 ms)
     uint32_t start_ms = millis();
-    uint8_t expected_bytes = 5 + 2 * reg_count;
-    uint8_t rx_buf[32];
     uint8_t rx_len = 0;
+    bool exception_reply = false;
 
-    while (millis() - start_ms < 200) {
+    while (millis() - start_ms < MODBUS_RESPONSE_TIMEOUT_MS && rx_len < expected_bytes) {
         if (RS485Serial.available()) {
             rx_buf[rx_len++] = RS485Serial.read();
-            if (rx_len >= expected_bytes) break;
+            // An exception reply is 5 bytes: address, function | 0x80, exception code, CRC (2)
+            if (rx_len == 5 && rx_buf[1] == (0x03 | 0x80)) {
+                exception_reply = true;
+                break;
+            }
         }
     }
+    last_poll_ms = millis();
 
+    if (exception_reply) {
+        uint16_t ex_crc = (rx_buf[4] << 8) | rx_buf[3];
+        bool ours = (rx_buf[0] == slave_id) && (calculateCRC16(rx_buf, 3) == ex_crc);
+        return ours ? HEALTH_MODBUS_EXCEPTION : HEALTH_CRC_ERROR;
+    }
     if (rx_len < expected_bytes) {
-        return false; // Timeout
+        return HEALTH_TIMEOUT;
     }
 
-    // Verify CRC
+    // Verify CRC, then that the reply answers this request
     uint16_t rx_crc = (rx_buf[rx_len - 1] << 8) | rx_buf[rx_len - 2];
     if (calculateCRC16(rx_buf, rx_len - 2) != rx_crc) {
-        return false; // CRC Error
+        return HEALTH_CRC_ERROR;
+    }
+    if (rx_buf[0] != slave_id || rx_buf[1] != 0x03 || rx_buf[2] != 2 * reg_count) {
+        return HEALTH_CRC_ERROR; // malformed, or another device's reply
     }
 
     // Unpack 16-bit register values
     for (uint16_t i = 0; i < reg_count; i++) {
         dest[i] = (rx_buf[3 + 2 * i] << 8) | rx_buf[4 + 2 * i];
     }
-    return true;
+    return HEALTH_OK;
 }
 
-float SensorManager::computeMedian(float a, float b, float c) {
-    if ((a >= b && a <= c) || (a <= b && a >= c)) return a;
-    if ((b >= a && b <= c) || (b <= a && b >= c)) return b;
-    return c;
-}
-
-float SensorManager::readModbusPH(float& out_temp) {
+// Register maps and scaling below follow the DFRobot documents; confirm them on the bench (audit Q5)
+uint8_t SensorManager::readModbusPH(float& out_ph, float& out_temp) {
     uint16_t regs[2];
-    if (!queryModbusRegisters(MODBUS_ID_PH, 0x0000, 2, regs)) {
-        health_flags[0] = HEALTH_TIMEOUT;
-        // In simulation / bench fallback mode without physical probes:
-        out_temp = 24.5f;
-        return 7.42f; // Return baseline with flag
+    uint8_t h = queryModbusRegisters(MODBUS_ID_PH, 0x0000, 2, regs);
+    if (h != HEALTH_OK) {
+        out_ph = NAN;
+        out_temp = NAN;
+        return h;
     }
-    health_flags[0] = HEALTH_OK;
-    out_temp = regs[1] / 10.0f;
-    return regs[0] / 100.0f; // SEN0708: pH x 100
+    out_ph = regs[0] / 100.0f;   // SEN0708: pH x 100
+    out_temp = regs[1] / 10.0f;  // water temperature x 10
+    return HEALTH_OK;
 }
 
-float SensorManager::readModbusEC() {
+uint8_t SensorManager::readModbusEC(float& out_ec) {
     uint16_t regs[1];
-    if (!queryModbusRegisters(MODBUS_ID_EC, 0x0000, 1, regs)) {
-        health_flags[1] = HEALTH_TIMEOUT;
-        return 380.0f; // Baseline fallback
-    }
-    health_flags[1] = HEALTH_OK;
-    return (float)regs[0]; // SEN0707: EC in µS/cm
+    uint8_t h = queryModbusRegisters(MODBUS_ID_EC, 0x0000, 1, regs);
+    out_ec = (h == HEALTH_OK) ? (float)regs[0] : NAN; // SEN0707: EC in µS/cm
+    return h;
 }
 
-float SensorManager::readModbusDO() {
+uint8_t SensorManager::readModbusDO(float& out_do) {
     uint16_t regs[1];
-    if (!queryModbusRegisters(MODBUS_ID_DO, 0x0000, 1, regs)) {
-        health_flags[2] = HEALTH_TIMEOUT;
-        return 6.85f; // Baseline fallback
-    }
-    health_flags[2] = HEALTH_OK;
-    return regs[0] / 100.0f; // SEN0680: DO in mg/L x 100
+    uint8_t h = queryModbusRegisters(MODBUS_ID_DO, 0x0000, 1, regs);
+    out_do = (h == HEALTH_OK) ? regs[0] / 100.0f : NAN; // SEN0680: DO in mg/L x 100
+    return h;
 }
 
-float SensorManager::readModbusTurbidity() {
+uint8_t SensorManager::readModbusTurbidity(float& out_turb) {
     uint16_t regs[1];
-    if (!queryModbusRegisters(MODBUS_ID_TURBIDITY, 0x0000, 1, regs)) {
-        health_flags[3] = HEALTH_TIMEOUT;
-        return 8.2f; // Baseline fallback
-    }
-    health_flags[3] = HEALTH_OK;
-    return regs[0] / 10.0f; // SEN0710: Turbidity in NTU x 10
+    uint8_t h = queryModbusRegisters(MODBUS_ID_TURBIDITY, 0x0000, 1, regs);
+    out_turb = (h == HEALTH_OK) ? regs[0] / 10.0f : NAN; // SEN0710: Turbidity in NTU x 10
+    return h;
 }
 
-float SensorManager::readUltrasonicStage() {
-    // Ultrasonic stage formula: stage = H_bracket - distance - offset
-    // H_bracket = 3.40m, offset = 0.20m
-    const float H_BRACKET = 3.40f;
-    const float OFFSET = 0.20f;
-    float measured_dist = 1.85f; // Simulation benchmark
-    float stage = H_BRACKET - measured_dist - OFFSET;
-    health_flags[5] = HEALTH_OK;
-    return stage; // ~1.35m (Mid water stage)
+uint8_t SensorManager::readUltrasonicStage(float& out_stage) {
+    // No driver yet (audit F4): the JSN-SR04T frame on PIN_STAGE_RX is not read. Report no reading
+    // instead of a made-up stage; the channel stays unfitted in config.h until a driver exists.
+    out_stage = NAN;
+    return HEALTH_TIMEOUT;
 }
 
 SensorReadings SensorManager::acquireReadings() {
     SensorReadings r;
     r.timestamp = (uint32_t)time(NULL);
-
-    float temp_c = 24.5f;
-
-    // Perform 3-sample median acquisition to suppress bubbles and turbulence
-    float ph1 = readModbusPH(temp_c);
-    float ph2 = readModbusPH(temp_c);
-    float ph3 = readModbusPH(temp_c);
-    r.ph = computeMedian(ph1, ph2, ph3);
-
-    float ec1 = readModbusEC();
-    float ec2 = readModbusEC();
-    float ec3 = readModbusEC();
-    r.ec = computeMedian(ec1, ec2, ec3);
-
-    float do1 = readModbusDO();
-    float do2 = readModbusDO();
-    float do3 = readModbusDO();
-    r.do_val = computeMedian(do1, do2, do3);
-
-    float turb1 = readModbusTurbidity();
-    float turb2 = readModbusTurbidity();
-    float turb3 = readModbusTurbidity();
-    r.turbidity = computeMedian(turb1, turb2, turb3);
-
-    r.temperature = temp_c;
-    r.stage = readUltrasonicStage();
-
+    r.ph = r.ec = r.do_val = r.turbidity = r.temperature = r.stage = NAN;
     for (int i = 0; i < 6; i++) {
-        r.valid[i] = (health_flags[i] == HEALTH_OK);
+        r.health[i] = HEALTH_NOT_FITTED;
     }
 
+    float v[READS_PER_CHANNEL], t[READS_PER_CHANNEL];
+    uint8_t c[READS_PER_CHANNEL], ct[READS_PER_CHANNEL];
+
+    // pH probe: pH and water temperature arrive in the same reply
+    if (SENSORS_FITTED & (SENSOR_BIT_PH | SENSOR_BIT_TEMP)) {
+        for (uint8_t i = 0; i < READS_PER_CHANNEL; i++) {
+            uint8_t h = readModbusPH(v[i], t[i]);
+            c[i] = (h != HEALTH_OK) ? h : checkRange(v[i], RANGE_PH_MIN, RANGE_PH_MAX);
+            ct[i] = (h != HEALTH_OK) ? h : checkRange(t[i], RANGE_TEMP_MIN, RANGE_TEMP_MAX);
+        }
+        if (SENSORS_FITTED & SENSOR_BIT_PH) combineReads(v, c, READS_PER_CHANNEL, r.ph, r.health[0]);
+        if (SENSORS_FITTED & SENSOR_BIT_TEMP) combineReads(t, ct, READS_PER_CHANNEL, r.temperature, r.health[4]);
+    }
+
+    if (SENSORS_FITTED & SENSOR_BIT_EC) {
+        for (uint8_t i = 0; i < READS_PER_CHANNEL; i++) {
+            uint8_t h = readModbusEC(v[i]);
+            c[i] = (h != HEALTH_OK) ? h : checkRange(v[i], RANGE_EC_MIN, RANGE_EC_MAX);
+        }
+        combineReads(v, c, READS_PER_CHANNEL, r.ec, r.health[1]);
+    }
+
+    if (SENSORS_FITTED & SENSOR_BIT_DO) {
+        for (uint8_t i = 0; i < READS_PER_CHANNEL; i++) {
+            uint8_t h = readModbusDO(v[i]);
+            c[i] = (h != HEALTH_OK) ? h : checkRange(v[i], RANGE_DO_MIN, RANGE_DO_MAX);
+        }
+        combineReads(v, c, READS_PER_CHANNEL, r.do_val, r.health[2]);
+    }
+
+    if (SENSORS_FITTED & SENSOR_BIT_TURB) {
+        for (uint8_t i = 0; i < READS_PER_CHANNEL; i++) {
+            uint8_t h = readModbusTurbidity(v[i]);
+            c[i] = (h != HEALTH_OK) ? h : checkRange(v[i], RANGE_TURB_MIN, RANGE_TURB_MAX);
+        }
+        combineReads(v, c, READS_PER_CHANNEL, r.turbidity, r.health[3]);
+    }
+
+    if (SENSORS_FITTED & SENSOR_BIT_STAGE) {
+        r.health[5] = readUltrasonicStage(r.stage);
+    }
+
+    for (int i = 0; i < 6; i++) {
+        r.valid[i] = (r.health[i] == HEALTH_OK);
+        health_flags[i] = r.health[i];
+    }
     return r;
 }
