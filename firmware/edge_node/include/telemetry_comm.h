@@ -2,13 +2,15 @@
 #define TELEMETRY_COMM_H
 
 #include "config.h"
+#include "anomaly_engine.h" // SensorReadings, AnomalyResult
 #include <ArduinoJson.h>
 
 class TelemetryManager {
 public:
     TelemetryManager();
     void init();
-    String serializePayload(const WaterQualityReading& r, const AnomalyReport& anom, uint32_t boot_count);
+    String serializePayload(const SensorReadings& r, const AnomalyResult& anom, uint32_t boot_count,
+                            uint8_t bottles_filled);
     bool transmit(const String& payload, bool is_emergency);
 
 private:

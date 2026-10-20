@@ -85,4 +85,18 @@
 #define LIMIT_DO_MIN          4.0f  // mg/L minimum dissolved oxygen
 #define LIMIT_EC_MAX          2250.0f // µS/cm maximum conductivity
 
+// -----------------------------------------------------------------------------
+// 6. Device Identity (telemetry frames and the evidence log)
+// Override per float with build flags, e.g. -D DEVICE_ID='"AQS-02"'
+// -----------------------------------------------------------------------------
+#ifndef FIRMWARE_VERSION
+#define FIRMWARE_VERSION      "2.1.0-dev"          // 2.1 = first version that compiles (audit P0-1)
+#endif
+#ifndef DEVICE_ID
+#define DEVICE_ID             "AQS-DEV-01"         // set before deployment
+#endif
+#ifndef RIVER_STRETCH_ID
+#define RIVER_STRETCH_ID      "GODAVARI-KOPARGAON" // monitored river stretch
+#endif
+
 #endif // CONFIG_H

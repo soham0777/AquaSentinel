@@ -3,7 +3,7 @@
 MicroSDLogger::MicroSDLogger() : is_available(false) {}
 
 bool MicroSDLogger::init() {
-    SPI.begin(PIN_SPI_SCK, PIN_SPI_MISO, PIN_SPI_MOSI, PIN_SD_CS);
+    SPI.begin(PIN_SD_SCK, PIN_SD_MISO, PIN_SD_MOSI, PIN_SD_CS);
     if (!SD.begin(PIN_SD_CS)) {
         Serial.println("[SD] Failed to mount MicroSD filesystem! Operating in memory-only fallback.");
         is_available = false;
@@ -20,7 +20,7 @@ void MicroSDLogger::writeHeaderIfNew() {
     if (!SD.exists(log_filename)) {
         File f = SD.open(log_filename, FILE_WRITE);
         if (f) {
-            f.println("epoch_timestamp,ph,turbidity_ntu,temp_c,ec_us_cm,do_mg_l,depth_m,battery_v,anomaly_score,is_anomaly,alert_desc");
+            f.println("timestamp,ph,ec_us_cm,do_mg_l,turbidity_ntu,temp_c,stage_m,valid_mask,risk_level,max_score,flags,sampler_trigger,reason");
             f.flush();
             f.close();
             Serial.println("[SD] Created new log file with header.");
@@ -28,7 +28,7 @@ void MicroSDLogger::writeHeaderIfNew() {
     }
 }
 
-bool MicroSDLogger::logReading(const WaterQualityReading& r, const AnomalyReport& anom) {
+bool MicroSDLogger::logReading(const SensorReadings& r, const AnomalyResult& anom) {
     if (!is_available) return false;
 
     File f = SD.open(log_filename, FILE_APPEND);
@@ -37,21 +37,28 @@ bool MicroSDLogger::logReading(const WaterQualityReading& r, const AnomalyReport
         return false;
     }
 
-    f.printf("%u,%.3f,%.2f,%.2f,%.1f,%.2f,%.3f,%.2f,%.3f,%d,%s\n",
-        r.timestamp_epoch,
+    uint8_t valid_mask = 0; // bit0 pH, bit1 EC, bit2 DO, bit3 turbidity, bit4 temperature, bit5 stage
+    for (int i = 0; i < 6; i++) {
+        if (r.valid[i]) valid_mask |= (1 << i);
+    }
+
+    f.printf("%lu,%.2f,%.1f,%.2f,%.1f,%.1f,%.2f,0x%02X,%d,%.2f,0x%02X,%d,\"%s\"\n",
+        (unsigned long)r.timestamp,
         r.ph,
-        r.turbidity_ntu,
-        r.temp_c,
-        r.ec_us_cm,
-        r.do_mg_l,
-        r.depth_m,
-        r.battery_voltage,
-        anom.anomaly_score,
-        anom.is_anomaly ? 1 : 0,
-        anom.alert_description
+        r.ec,
+        r.do_val,
+        r.turbidity,
+        r.temperature,
+        r.stage,
+        valid_mask,
+        (int)anom.level,
+        anom.max_score,
+        anom.contributing_flags,
+        anom.autosampler_trigger ? 1 : 0,
+        anom.reason
     );
 
-    f.flush(); // Atomic sector commit
+    f.flush(); // Push the line to the card; FAT writes are not atomic
     f.close();
     return true;
 }

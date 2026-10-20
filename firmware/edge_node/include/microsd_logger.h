@@ -2,6 +2,7 @@
 #define MICROSD_LOGGER_H
 
 #include "config.h"
+#include "anomaly_engine.h" // SensorReadings, AnomalyResult
 #include <SPI.h>
 #include <FS.h>
 #include <SD.h>
@@ -10,7 +11,7 @@ class MicroSDLogger {
 public:
     MicroSDLogger();
     bool init();
-    bool logReading(const WaterQualityReading& r, const AnomalyReport& anom);
+    bool logReading(const SensorReadings& r, const AnomalyResult& anom);
     bool queueBacklog(const char* json_payload);
     int getBacklogCount();
     String popBacklogRecord();
