@@ -1,9 +1,8 @@
 # Electronics bench demo: plan for the 19–20 Nov finale
 
-**Status: plan for review, 20 Oct 2026. No code has been changed.** It is based on a fresh read of every file in
-`firmware/edge_node`, the audit ([CODE_REVIEW.md](../docs/audit/CODE_REVIEW.md),
-[OPEN_QUESTIONS_AND_NEXT_STEPS.md](../docs/audit/OPEN_QUESTIONS_AND_NEXT_STEPS.md),
-[SECURITY_AND_RISK_REGISTER.md](../docs/audit/SECURITY_AND_RISK_REGISTER.md)), the cost sheet in `hardware/`, and the
+**Status: plan written 20 Oct 2026, before any code changed. P0-1 to P0-3 below are now done; see
+[README.md](README.md).** It is based on a fresh read of every file in `firmware/edge_node`, our internal audit of
+18 Oct 2026 (code review, open questions, risk register; not yet published), the cost sheet in `hardware/`, and the
 DFRobot wiki for the EC probe.
 
 ## 1. What the demo has to show
@@ -75,7 +74,7 @@ the last three rows need the parts on a table.
 The Telegram alert uses the core's own `WiFiClientSecure` and `HTTPClient`.
 
 **How each fix is tested.** This PC has no host C/C++ compiler, so tests run **on the ESP32** with `pio test` (Unity). The
-audit's Python replay, [firmware_engine_port.py](../docs/audit/verification/firmware_engine_port.py), checks the decisions
+audit's Python replay of the firmware engine (not yet published) checks the decisions
 match. The bench checks are the demo's own steps:
 - probe unplugged → SENSOR FAULT;
 - salt held in → exactly one bottle;
@@ -209,6 +208,6 @@ wait for the real board.
 3. **Install:** OK to install VS Code and PlatformIO on this PC (downloads of several hundred MB).
 4. **Code:** after 1–3, I start P0-1 on a new branch and show you the diff before anything is committed.
 
-*Sources: firmware files as of commit 840f1a6; [docs/audit](../docs/audit/) (F1–F18, R2–R12, P0/P1 list);
+*Sources: firmware files as of commit 840f1a6; the internal audit of 18 Oct 2026 (F1–F18, R2–R12, P0/P1 list);
 `hardware/AquaSentinel_Cost_Estimate_BOM.csv` (lines E-02, G-01); [DFRobot SEN0707 wiki](https://wiki.dfrobot.com/sen0707/)
 (supply, defaults, wire colours, polling interval, range, accuracy).*
