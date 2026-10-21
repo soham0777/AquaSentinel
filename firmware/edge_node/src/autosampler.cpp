@@ -7,7 +7,7 @@
 
 #include "autosampler.h"
 
-AutoSampler::AutoSampler() : current_bottle_index(0), last_sample_timestamp(0) {}
+AutoSampler::AutoSampler() : current_bottle_index(0), last_sample_cycle(0) {}
 
 void AutoSampler::init() {
     pinMode(PIN_EN_12V_PUMP, OUTPUT);
@@ -18,11 +18,20 @@ void AutoSampler::init() {
     // Load persistent bottle index and lockout state from ESP32 NVS
     prefs.begin("aquasampler", false);
     current_bottle_index = prefs.getUChar("bottle_idx", 0);
-    last_sample_timestamp = prefs.getUInt("last_ts", 0);
+    last_sample_cycle = prefs.getUInt("last_cyc", 0);
     prefs.end();
 
-    Serial.printf("[AUTOSAMPLER-INIT] Persistent State: %u/4 Bottles Filled, Last Sample: %u UTC\n",
-                  current_bottle_index, last_sample_timestamp);
+    Serial.printf("[AUTOSAMPLER-INIT] Persistent State: %u/4 Bottles Filled, Last Sample: cycle %lu\n",
+                  current_bottle_index, (unsigned long)last_sample_cycle);
+}
+
+bool AutoSampler::lockoutActive(uint32_t cycle, uint32_t last_sample_cycle) {
+    // Counted in decision cycles, which survive power cuts. The old check compared clock times, but the clock
+    // is never set (audit F4): after a power loss the difference wrapped round and the lockout was skipped
+    if (last_sample_cycle == 0 || cycle < last_sample_cycle) {
+        return false; // no sample yet, or the counter was cleared
+    }
+    return (cycle - last_sample_cycle) < SAMPLE_LOCKOUT_CYCLES;
 }
 
 uint8_t AutoSampler::getFilledBottlesCount() {
@@ -56,15 +65,13 @@ bool AutoSampler::rotateCarouselToNextBottle() {
     return true;
 }
 
-bool AutoSampler::executeSamplingSequence(const char* reason, uint32_t timestamp_utc,
+bool AutoSampler::executeSamplingSequence(const char* reason, uint32_t timestamp_utc, uint32_t cycle,
                                          float ph, float ec, float do_val, float turb) {
-    // 1. Lockout Check: 60 minutes between physical captures
-    if (timestamp_utc > 0 && last_sample_timestamp > 0) {
-        uint32_t elapsed = timestamp_utc - last_sample_timestamp;
-        if (elapsed < (SAMPLE_LOCKOUT_MIN * 60)) {
-            Serial.printf("[AUTOSAMPLER-LOCKOUT] Sample skipped: %u s elapsed (< 3600 s lockout)\n", elapsed);
-            return false;
-        }
+    // 1. Lockout Check: 60 minutes (SAMPLE_LOCKOUT_CYCLES decision cycles) between physical captures
+    if (lockoutActive(cycle, last_sample_cycle)) {
+        Serial.printf("[AUTOSAMPLER-LOCKOUT] Sample skipped: %lu cycles since the last one (< %u cycle lockout)\n",
+                      (unsigned long)(cycle - last_sample_cycle), (unsigned)SAMPLE_LOCKOUT_CYCLES);
+        return false;
     }
 
     // 2. Capacity Check
@@ -94,6 +101,7 @@ bool AutoSampler::executeSamplingSequence(const char* reason, uint32_t timestamp
     // 6. Step 4: Stop, seal, and record forensic sample data to NVS
     SampleRecord rec;
     rec.bottle_index = current_bottle_index;
+    rec.cycle = cycle;
     rec.timestamp_utc = timestamp_utc;
     rec.ph = ph;
     rec.ec = ec;
@@ -109,9 +117,9 @@ bool AutoSampler::executeSamplingSequence(const char* reason, uint32_t timestamp
     prefs.putBytes(key, &rec, sizeof(SampleRecord));
 
     current_bottle_index++;
-    last_sample_timestamp = timestamp_utc;
+    last_sample_cycle = cycle;
     prefs.putUChar("bottle_idx", current_bottle_index);
-    prefs.putUInt("last_ts", last_sample_timestamp);
+    prefs.putUInt("last_cyc", last_sample_cycle);
     prefs.end();
 
     Serial.printf("[AUTOSAMPLER-SUCCESS] Bottle #%u Sealed! 250mL sample preserved for NABL lab.\n", current_bottle_index);
@@ -132,9 +140,9 @@ bool AutoSampler::getSampleRecord(uint8_t bottle_idx, SampleRecord& rec) {
 void AutoSampler::resetCarouselAfterCollection() {
     prefs.begin("aquasampler", false);
     prefs.putUChar("bottle_idx", 0);
-    prefs.putUInt("last_ts", 0);
+    prefs.putUInt("last_cyc", 0);
     current_bottle_index = 0;
-    last_sample_timestamp = 0;
+    last_sample_cycle = 0;
     prefs.end();
     Serial.println("[AUTOSAMPLER] Carousel reset to Bottle #1 after physical laboratory collection.");
 }

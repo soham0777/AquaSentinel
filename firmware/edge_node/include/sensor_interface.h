@@ -11,16 +11,12 @@
 
 #include <Arduino.h>
 #include "config.h"
-#include "anomaly_engine.h"
+#include "anomaly_engine.h" // SensorReadings and the SensorHealthCode bits
 
-enum SensorHealthCode {
-    HEALTH_OK               = 0x00,
-    HEALTH_TIMEOUT          = 0x01,
-    HEALTH_CRC_ERROR        = 0x02,
-    HEALTH_OUT_OF_BOUNDS    = 0x04,
-    HEALTH_FLATLINE         = 0x08,
-    HEALTH_DRIFT_AFTER_WIPE = 0x10
-};
+// Combine repeated reads of one channel (audit F2). The value is the median of the reads that succeeded
+// (NaN if none did); the health is the union of every read's error bits, so the channel is valid only when
+// all reads succeeded. A fallback value is never marked valid.
+void combineReads(const float* values, const uint8_t* codes, uint8_t n, float& out_value, uint8_t& out_health);
 
 class SensorManager {
 public:
@@ -36,16 +32,17 @@ public:
 
 private:
     uint8_t health_flags[6]; // pH, EC, DO, Turbidity, Temp, Stage
+    uint32_t last_poll_ms;   // end of the previous Modbus transaction (enforces the poll gap)
 
     uint16_t calculateCRC16(const uint8_t* buffer, uint16_t length);
-    bool queryModbusRegisters(uint8_t slave_id, uint16_t reg_addr, uint16_t reg_count, uint16_t* dest);
-    
-    float readModbusPH(float& out_temp);
-    float readModbusEC();
-    float readModbusDO();
-    float readModbusTurbidity();
-    float readUltrasonicStage();
-    float computeMedian(float a, float b, float c);
+    // Each returns a SensorHealthCode; on failure the value is NaN, never a stand-in constant
+    uint8_t queryModbusRegisters(uint8_t slave_id, uint16_t reg_addr, uint16_t reg_count, uint16_t* dest);
+
+    uint8_t readModbusPH(float& out_ph, float& out_temp);
+    uint8_t readModbusEC(float& out_ec);
+    uint8_t readModbusDO(float& out_do);
+    uint8_t readModbusTurbidity(float& out_turb);
+    uint8_t readUltrasonicStage(float& out_stage);
 };
 
 #endif // SENSOR_INTERFACE_H
