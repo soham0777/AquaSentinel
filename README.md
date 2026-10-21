@@ -219,7 +219,7 @@ cd mechanical && python src/build.py
 ```
 
 ```bash
-# build the firmware (PlatformIO; not yet compiled and run on the real hardware)
+# build the firmware (PlatformIO; compiles, but has not yet run on the real hardware)
 cd firmware/edge_node && pio run
 ```
 
@@ -233,7 +233,8 @@ To open the CAD, unzip `mechanical/solidworks/AquaSentinel_R3_SOLIDWORKS_PackAnd
 | Complete R3 design: 66 parts, drawings, BOM | Tank test: draft, 2 m travel, roller friction |
 | SOLIDWORKS Simulation of the pole and pier bracket | Weigh the real components, update the mass budget |
 | Hydrostatics, stability, anti-jamming and clash checks | 30-day Godavari pilot at Kopargaon (permits needed) |
-| Firmware architecture and decision logic | Bench-run the firmware on the real probes and modem |
+| Firmware compiles; a dead probe raises a fault, never "clean water"; one bottle per event; learned state survives power cuts | Bench-run the firmware on the real probes and modem |
+| Printable 1:5 scale model and display stand ([`mechanical/scale_model_1to5`](mechanical/scale_model_1to5)) | Print the 1:5 model and float it |
 | Decision logic on synthetic data: 4/4 spills flagged | Validate on field data with a certified lab |
 | Dashboard demo in three languages | Dated supplier quotes for the cost estimate |
 
