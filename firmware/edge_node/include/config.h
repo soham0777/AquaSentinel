@@ -85,4 +85,74 @@
 #define LIMIT_DO_MIN          4.0f  // mg/L minimum dissolved oxygen
 #define LIMIT_EC_MAX          2250.0f // µS/cm maximum conductivity
 
+// -----------------------------------------------------------------------------
+// 6. Device Identity (telemetry frames and the evidence log)
+// Override per float with build flags, e.g. -D DEVICE_ID='"AQS-02"'
+// -----------------------------------------------------------------------------
+#ifndef FIRMWARE_VERSION
+#define FIRMWARE_VERSION      "2.1.0-dev"          // 2.1 = first version that compiles (audit P0-1)
+#endif
+#ifndef DEVICE_ID
+#define DEVICE_ID             "AQS-DEV-01"         // set before deployment
+#endif
+#ifndef RIVER_STRETCH_ID
+#define RIVER_STRETCH_ID      "GODAVARI-KOPARGAON" // monitored river stretch
+#endif
+
+// -----------------------------------------------------------------------------
+// 7. Fitted Sensor Channels (bit order shared with SensorReadings.health[])
+// A channel that is not fitted is not polled and never raises a sensor fault.
+// Water temperature comes from the pH probe's reply.
+// -----------------------------------------------------------------------------
+#define SENSOR_BIT_PH         (1 << 0)
+#define SENSOR_BIT_EC         (1 << 1)
+#define SENSOR_BIT_DO         (1 << 2)
+#define SENSOR_BIT_TURB       (1 << 3)
+#define SENSOR_BIT_TEMP       (1 << 4)
+#define SENSOR_BIT_STAGE      (1 << 5)  // no stage driver yet (audit F4): leave unfitted
+
+#ifndef SENSORS_FITTED
+#ifdef BENCH_DEMO
+#define SENSORS_FITTED        (SENSOR_BIT_EC) // bench demo: the EC probe only
+#else
+#define SENSORS_FITTED        (SENSOR_BIT_PH | SENSOR_BIT_EC | SENSOR_BIT_DO | SENSOR_BIT_TURB | SENSOR_BIT_TEMP)
+#endif
+#endif
+
+// -----------------------------------------------------------------------------
+// 8. Modbus-RTU Timing (DFRobot: polling interval and response wait both above 200 ms)
+// -----------------------------------------------------------------------------
+#define MODBUS_RESPONSE_TIMEOUT_MS 300
+#define MODBUS_POLL_GAP_MS         250
+
+// -----------------------------------------------------------------------------
+// 9. Plausible Ranges: a reading outside them is flagged HEALTH_OUT_OF_BOUNDS and never used.
+// Confirm each against its datasheet when the probes are commissioned (BENCH_DEMO_PLAN.md, P1-8).
+// -----------------------------------------------------------------------------
+#define RANGE_PH_MIN          0.0f     // pH scale
+#define RANGE_PH_MAX          14.0f
+#define RANGE_EC_MIN          10.0f    // µS/cm; SEN0707 (K=10) measures 10-20,000. Lower: out of water, or pure water
+#define RANGE_EC_MAX          20000.0f
+#define RANGE_DO_MIN          0.0f     // mg/L
+#define RANGE_DO_MAX          20.0f    // saturation is about 14.6 mg/L at 0 °C; margin for supersaturation
+#define RANGE_TURB_MIN        0.0f     // NTU; SEN0710 measures 0-1000
+#define RANGE_TURB_MAX        1000.0f
+#define RANGE_TEMP_MIN        -20.0f   // °C; probe operating range -20 to +60
+#define RANGE_TEMP_MAX        60.0f
+
+// -----------------------------------------------------------------------------
+// 10. Decision State and Flash Persistence (audit F5, F7, F11)
+// Counted in decision cycles, which are kept in flash: the clock is not reliable yet (audit F4).
+// -----------------------------------------------------------------------------
+#define LEARNING_CYCLES          (7UL * 24 * 60 / SAMPLING_INTERVAL_MIN)            // 7 days: 672 at 15 min
+#define SAMPLE_LOCKOUT_CYCLES    (SAMPLE_LOCKOUT_MIN / SAMPLING_INTERVAL_MIN)       // 60 min: 4 cycles
+#define WIPER_INTERVAL_CYCLES    (WIPER_INTERVAL_HOURS * 60 / SAMPLING_INTERVAL_MIN) // 6 h: 24 cycles
+#define NVS_SAVE_INTERVAL_CYCLES 4   // learned state saved at least hourly, and at once on a risk or fault change
+#define NODE_NVS_NAMESPACE       "aquanode"   // decision cycle counter
+#ifdef PIO_UNIT_TESTING
+#define ENGINE_NVS_NAMESPACE     "aqeng_test" // unit tests never overwrite the real learned state
+#else
+#define ENGINE_NVS_NAMESPACE     "aquaengine" // baselines, learning progress, risk state
+#endif
+
 #endif // CONFIG_H
