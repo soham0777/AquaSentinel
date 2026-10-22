@@ -1,0 +1,168 @@
+{
+ "printer": "Bambu Lab A1, 256 x 256 x 256 mm",
+ "parts": {
+  "S01": {
+   "file": "parts/S01_display_base_A1_250mm.stl",
+   "size_mm": [
+    250.0,
+    170.0,
+    8.0
+   ],
+   "triangles": 10480,
+   "open_or_bad_edges": 0,
+   "volume_cm3": 236.85,
+   "watertight": true
+  },
+  "S02a": {
+   "file": "parts/S02a_pier_column_bottom_half_A1.stl",
+   "size_mm": [
+    60.0,
+    152.1,
+    22.1
+   ],
+   "triangles": 1596,
+   "open_or_bad_edges": 0,
+   "volume_cm3": 179.31,
+   "watertight": true
+  },
+  "S02b": {
+   "file": "parts/S02b_pier_column_top_half_A1.stl",
+   "size_mm": [
+    60.0,
+    152.1,
+    22.1
+   ],
+   "triangles": 1580,
+   "open_or_bad_edges": 0,
+   "volume_cm3": 181.88,
+   "watertight": true
+  },
+  "S07": {
+   "file": "parts/S07_column_splice_plate_A1.stl",
+   "size_mm": [
+    50.0,
+    40.0,
+    2.4
+   ],
+   "triangles": 12,
+   "open_or_bad_edges": 0,
+   "volume_cm3": 4.8,
+   "watertight": true
+  },
+  "S03": {
+   "file": "parts/S03_pier_bracket_lower.stl",
+   "size_mm": [
+    36.0,
+    44.0,
+    84.0
+   ],
+   "triangles": 2340,
+   "open_or_bad_edges": 0,
+   "volume_cm3": 17.17,
+   "watertight": true
+  },
+  "S04": {
+   "file": "parts/S04_pier_bracket_upper.stl",
+   "size_mm": [
+    36.0,
+    44.0,
+    109.0
+   ],
+   "triangles": 2362,
+   "open_or_bad_edges": 0,
+   "volume_cm3": 18.02,
+   "watertight": true
+  },
+  "S05a": {
+   "file": "parts/S05a_stop_collar_lower.stl",
+   "size_mm": [
+    22.4,
+    20.0,
+    10.0
+   ],
+   "triangles": 1336,
+   "open_or_bad_edges": 0,
+   "volume_cm3": 1.87,
+   "watertight": true
+  },
+  "S05b": {
+   "file": "parts/S05b_stop_collar_upper.stl",
+   "size_mm": [
+    22.4,
+    20.0,
+    10.0
+   ],
+   "triangles": 1336,
+   "open_or_bad_edges": 0,
+   "volume_cm3": 1.87,
+   "watertight": true
+  },
+  "S06": {
+   "file": "parts/S06_pole_cap.stl",
+   "size_mm": [
+    14.8,
+    14.8,
+    7.5
+   ],
+   "triangles": 1262,
+   "open_or_bad_edges": 0,
+   "volume_cm3": 0.66,
+   "watertight": true
+  }
+ },
+ "plates": {
+  "AquaSentinel_R3_1to5_STAND_A1_plate1.stl": {
+   "triangles": 19116,
+   "footprint_mm": [
+    250.0,
+    170.0,
+    109.0
+   ],
+   "xy_from": [
+    3.0,
+    43.0
+   ],
+   "xy_to": [
+    253.0,
+    213.0
+   ],
+   "fits_a1": true,
+   "parts_closer_than_2mm": [],
+   "small_parts_inside_window": {
+    "S03": true,
+    "S04": true,
+    "S05a": true,
+    "S05b": true,
+    "S06": true
+   }
+  },
+  "AquaSentinel_R3_1to5_STAND_A1_plate2.stl": {
+   "triangles": 3188,
+   "footprint_mm": [
+    194.0,
+    152.1,
+    22.1
+   ],
+   "xy_from": [
+    31.0,
+    51.9
+   ],
+   "xy_to": [
+    225.0,
+    204.1
+   ],
+   "fits_a1": true,
+   "parts_closer_than_2mm": []
+  }
+ },
+ "cut_caps_mm2": {
+  "base_ends": [
+   1350.6,
+   1350.6
+  ],
+  "column_joint": [
+   1195.5,
+   1195.5
+  ]
+ }
+}

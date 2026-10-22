@@ -29,12 +29,14 @@ pole and how the sensor cartridge comes out. It isn't a working prototype; the e
 |---|---|
 | [`AquaSentinel_R3_1to5_FLOAT.stl`](AquaSentinel_R3_1to5_FLOAT.stl) | **The one file to print first.** All 18 float parts on one plate, each already turned the right way up for printing |
 | [`AquaSentinel_R3_1to5_STAND.stl`](AquaSentinel_R3_1to5_STAND.stl) | Second plate: the display stand (base, pier column, 2 brackets, 2 stop collars, pole cap) |
+| [`AquaSentinel_R3_1to5_STAND_A1_plate1.stl`](AquaSentinel_R3_1to5_STAND_A1_plate1.stl), [`..._plate2.stl`](AquaSentinel_R3_1to5_STAND_A1_plate2.stl) | The same stand split for a **Bambu Lab A1** (256 mm bed): see "Printing the stand on an A1" below |
 | [`AquaSentinel_R3_1to5_ASSEMBLED_view.stl`](AquaSentinel_R3_1to5_ASSEMBLED_view.stl) | The assembled model, for viewing only (don't print it) |
 | [`parts/`](parts/) | Every part as its own STL, for printing in different colours or reprinting one part |
 | [`parts/OPT_rod_half_print_2.stl`](parts/OPT_rod_half_print_2.stl) | Only if you can't get a 12 mm rod: print two halves and glue them together |
 | [`previews/`](previews/) | Renders: assembled views, exploded assembly, the two print plates, low and high positions. `08_slide_render.png` is the picture on deck v2's backup slide A9 |
 | [`build_report.json`](build_report.json) | Every check: sizes, volumes, watertightness, overhangs, fits, clearances, mass and draft estimate |
 | `make_scale_model.py`, `render_previews.py` | The scripts that make everything above (see the end of this file) |
+| `make_stand_a1.py`, `build_report_A1.json` | The script that makes the A1 stand plates from the part files, and its checks |
 
 ## Printing on the H2D
 
@@ -60,6 +62,34 @@ inside 300 × 320, and the tallest part is 139 mm.
    and about 270 g for plate 2.
 5. **Time plan:** the semi-final is online (24–25 Oct), so print plate 1 first, assemble it by 22 Oct and take photos. The stand
    (plate 2) matters for the in-person finale (20 Nov).
+
+## Printing the stand on an A1
+
+The H2D stand plate is 236 × 304 mm. Two of its parts are longer than an A1's 256 × 256 mm bed in any direction: the base
+(260 mm) and the pier column (304 mm). The A1 version changes only those two parts:
+
+- **The base is 250 mm long.** 5 mm is cut off each plain end. The window, rod socket, column slot and engraving are unchanged.
+- **The column comes in two halves** of 152 mm, cut halfway between the two brackets' pins:
+  - **S02a** is the bottom half, with the tenon that goes into the base;
+  - **S02b** is the top half, with the keyed pin pattern of the upper bracket.
+- **S07 splice plate** (50 × 40 × 2.4 mm) goes across the joint.
+
+| Plate | File | What's on it |
+|---|---|---|
+| A1 plate 1 | `AquaSentinel_R3_1to5_STAND_A1_plate1.stl` | base, both brackets, both stop collars and the pole cap, standing inside the base's window (250 × 170 mm, 109 mm high) |
+| A1 plate 2 | `AquaSentinel_R3_1to5_STAND_A1_plate2.stl` | the two column halves and the splice plate (194 × 152 mm, 22 mm high) |
+
+1. In Bambu Studio pick **Bambu Lab A1, 0.4 mm nozzle**. Use the same settings as the table above (PLA, 0.20 mm, 2 walls, 15 %
+   gyroid, supports off, brim auto).
+2. Import plate 1 and slice it. Don't rotate or scale it: it fits with 3 mm to spare on each side. Then print plate 2.
+3. **Glue the column:** put both halves on a flat table with the smooth back face down, the face that was on the print bed.
+   The tenon goes at one end. Push the cut ends together and glue them with super glue (CA); the table keeps them straight.
+   When the glue has set, turn the column over and glue the splice plate across the joint on the back face: centred, with
+   20 mm on each half.
+4. Assemble the stand as below.
+
+All A1 parts are watertight, and the two halves together have exactly the volume of the original column
+(`build_report_A1.json`). To remake them: `python -I make_stand_a1.py`.
 
 **Colours.** One colour (light grey or white) looks clean, like an architectural model. To use the H2D's two nozzles, put the
 hulls (F01, F02) on yellow and everything else on grey. For more colours, print the parts from `parts/` in batches.
