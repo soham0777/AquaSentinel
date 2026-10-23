@@ -14,7 +14,7 @@
 * Wording: "designed", not "built"; "a sample for the lab", not "evidence"; pole safety factor 2.66 (conservative case).
 
 ## Large files and Git LFS (note only: history has **not** been converted)
-The repository holds about 130 MB of videos, STEP files and a Pack-and-Go zip in ordinary Git (largest: `docs/media/*.mp4`,
+The repository holds about 100 MB of videos, STEP files and a Pack-and-Go zip in ordinary Git (largest: `docs/media/*.mp4`,
 `mechanical/solidworks/*.zip`, the STEP assembly). `.gitattributes` only marks them binary; it has no LFS filter. If you want LFS
 for **new** large files, run `git lfs install` and `git lfs track "*.mp4"` before adding them (this changes `.gitattributes`
 and affects everyone who clones). Do not rewrite existing history to LFS without agreeing it with the whole team first: it changes every commit hash.

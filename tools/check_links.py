@@ -30,6 +30,7 @@ REPO = "soham0777/AquaSentinel"
 # Paths that docs legitimately mention although Git does not track them (git-ignored secrets, generated output).
 # Referenced but genuinely missing; documented as a to-do in calculations/README.md. Reported separately, never hidden.
 KNOWN_MISSING = ("calculations/verified_design_calcs.json", "calculations/verified_design_calcs.py")
+OLD_PATH_DOCS = ("docs/REORG_NOTES.md",)
 KNOWN_UNTRACKED_SUFFIXES = ("include/secrets.h", "secrets.h", "mechanical/AquaSentinel_R3_Viewer.html")
 
 RE_MD_LINK = re.compile(r"!?\[[^\]]*\]\(\s*<?([^)\s>]+)>?(?:\s+\"[^\"]*\")?\s*\)")
@@ -133,6 +134,8 @@ def main():
                 rr = os.path.normpath(r).replace(os.sep, "/")
                 rel = os.path.normpath(os.path.join(d, r)).replace(os.sep, "/")
                 if r.endswith(KNOWN_UNTRACKED_SUFFIXES):
+                    continue
+                if f in OLD_PATH_DOCS:  # these files list paths as they were before the move, on purpose
                     continue
                 if r in KNOWN_MISSING and not exists(rr):
                     known_missing.append((f, r))
