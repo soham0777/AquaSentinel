@@ -1,0 +1,8 @@
+# Python packages for the analytics, the mechanical design engine and tools/ (Python 3.10+).
+# Tested on Python 3.13 with numpy 2.5, matplotlib 3.11, Pillow 13 (23 Oct 2026).
+numpy>=1.24
+matplotlib>=3.7
+Pillow>=10.0
+# Optional: firmware build (bash tools/verify_all.sh --pio) and a C++ compiler for tools/parity if you have no g++/clang++
+# platformio>=6.1
+# ziglang
