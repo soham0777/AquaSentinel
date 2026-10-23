@@ -81,7 +81,7 @@ layout (R3 re-costing pending). `DESIGN ESTIMATE` from catalogue prices; dated s
 
 | Claim | Value |
 |---|---|
-| Prototype bill of materials | ≈ **₹1,38,000**, the sum of the sheet's lines (its TOTAL row says ₹1,34,000) |
+| Prototype bill of materials | ≈ **₹1,38,000**, the sum of the sheet's lines (its TOTAL row said ₹1,34,000 and was corrected to the sum on branch `reorg/organized-structure`; the submitted FDC deck and release PPTX still show the old figure) |
 | Share of the four probes | ₹81,100, 59 % |
 | At 100 units | ≈ ₹0.95 lakh per float (the sheet's 100-unit column) |
 | Service fee, market size | ₹0.8–1 lakh per float per year; 3 floats per polluted stretch. `ASSUMPTION`: proposals to validate in the pilot |

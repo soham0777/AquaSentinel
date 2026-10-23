@@ -53,7 +53,7 @@ void AutoSampler::runPeristalticPump(uint32_t duration_ms, bool reverse) {
 
 bool AutoSampler::rotateCarouselToNextBottle() {
     if (current_bottle_index >= 4) {
-        Serial.println("[AUTOSAMPLER-ERR] All 4 forensic sample bottles are full!");
+        Serial.println("[AUTOSAMPLER-ERR] All 4 sample bottles are full!");
         return false;
     }
 
@@ -98,7 +98,7 @@ bool AutoSampler::executeSamplingSequence(const char* reason, uint32_t timestamp
     setPurgeValve(false);
     runPeristalticPump(FILL_DURATION_MS, false);
 
-    // 6. Step 4: Stop, seal, and record forensic sample data to NVS
+    // 6. Step 4: Stop, close, and record sample data to NVS
     SampleRecord rec;
     rec.bottle_index = current_bottle_index;
     rec.cycle = cycle;
@@ -122,7 +122,7 @@ bool AutoSampler::executeSamplingSequence(const char* reason, uint32_t timestamp
     prefs.putUInt("last_cyc", last_sample_cycle);
     prefs.end();
 
-    Serial.printf("[AUTOSAMPLER-SUCCESS] Bottle #%u Sealed! 250mL sample preserved for NABL lab.\n", current_bottle_index);
+    Serial.printf("[AUTOSAMPLER-SUCCESS] Bottle #%u filled! 250mL sample kept for lab analysis.\n", current_bottle_index);
     Serial.println(" Dispatching collection alert to local Jal Suraksha Samiti (Max 24h holding limit)!\n");
     return true;
 }

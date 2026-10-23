@@ -86,7 +86,7 @@
 #define LIMIT_EC_MAX          2250.0f // µS/cm maximum conductivity
 
 // -----------------------------------------------------------------------------
-// 6. Device Identity (telemetry frames and the evidence log)
+// 6. Device Identity (telemetry frames and the event log)
 // Override per float with build flags, e.g. -D DEVICE_ID='"AQS-02"'
 // -----------------------------------------------------------------------------
 #ifndef FIRMWARE_VERSION

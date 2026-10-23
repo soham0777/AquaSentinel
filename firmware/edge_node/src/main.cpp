@@ -7,7 +7,7 @@
  * ROBOTICS CLOSED-LOOP ARCHITECTURE (Sense–Decide–Act):
  * 1. SENSE:  Power-gated RS485 Modbus probes (pH, EC, DO, Turbidity) + Stage
  * 2. DECIDE: Onboard Appendix B Diurnal EWMA + CPCB Class C Hard Limit Engine
- * 3. ACT:    - Automated Forensic Autosampler (Physical sample capture for NABL)
+ * 3. ACT:    - Automated Autosampler (bottles a water sample for lab analysis)
  *            - Motorized Optical Wiper (Biofouling elimination)
  *            - 360° Visual Safety Beacon (Jal-Deep riverbank warning)
  *            - 4G LTE Telemetry & Downstream Intake Pump Lockout
