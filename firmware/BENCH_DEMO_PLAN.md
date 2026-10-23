@@ -153,7 +153,7 @@ either way.
 
 ## 6. Bench wiring
 
-The pin numbers are the ones in `include/config.h`.
+The pin numbers are the ones in `edge_node/include/config.h`.
 
 | From | To | Notes |
 |---|---|---|

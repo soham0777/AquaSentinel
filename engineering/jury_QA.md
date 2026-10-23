@@ -60,6 +60,8 @@ Below is the definitive, fact-checked defense manual for the team.
 ### Q3: "In monsoon flood conditions, river currents reach 1.5 m/s. Won't your vertical guide pole bend or snap?"
 > **Key Trap:** Probing whether structural sizing was guessed or engineered.
 
+**Team note (reorg, 23 Oct):** the figures in this answer are the v2 hand calculations (42.1 N drag, 63.1 MPa, SF 2.70 / 5.07). The R3 numbers are in the [claims register](claims_register.md): 142 N float drag, 64.0 MPa and SF 2.66 (pinned ends + carriage moment), 54.8 MPa and SF 3.1 as printed by `mechanical/src/build.py`. `verified_design_calcs.py` is not in this repository yet ([`../calculations/README.md`](../calculations/README.md)). Reconcile before quoting.
+
 **Defense Response:**
 > "We derived the exact mechanics of the guide pole in `verified_design_calcs.py` and validated the stresses against ASME B36.19M and ASTM A312 standards.
 >

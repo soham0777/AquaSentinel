@@ -14,12 +14,12 @@ It runs the **sense → decide → act** loop on a 15-minute deep-sleep cycle, s
 | `microsd_logger` | reading log on microSD (time stamps need the clock driver, still to write) |
 | `telemetry_comm` | builds the JSON telemetry frame and passes it to the LTE modem UART, with an emergency-priority flag (the full A7670C AT-command driver for upload and SMS is still to be written) |
 
-Pin map and power rails are in [`include/config.h`](edge_node/include/config.h); the matching schematic is in
+Pin map and power rails are in [`edge_node/include/config.h`](edge_node/include/config.h); the matching schematic is in
 [`../hardware/kicad`](../hardware/kicad). The decision step was written from the Python reference in
 [`../analytics/detector.py`](../analytics/detector.py), which now carries the same state machine (one sample per event, the
 learning-period event clearing); sensor faults are firmware-only, because the synthetic dataset has no failed reads.
 [`../analytics/train_proxy_anomaly_engine.py`](../analytics/train_proxy_anomaly_engine.py) regenerates
-`include/exported_anomaly_weights.h` from the dataset.
+`edge_node/include/exported_anomaly_weights.h` from the dataset (the firmware does not include that header today: the shipping engine is rule-based).
 
 ```bash
 cd edge_node

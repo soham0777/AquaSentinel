@@ -1,0 +1,39 @@
+# Checks only. This workflow never deploys anything: the website is published by GitHub's own
+# "pages-build-deployment" workflow, which is independent of this file.
+name: checks
+
+on:
+  pull_request:
+  push:
+    branches: [main, "reorg/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install Python packages and PlatformIO
+        run: pip install -r requirements.txt platformio
+
+      - name: Cache PlatformIO toolchains
+        uses: actions/cache@v4
+        with:
+          path: ~/.platformio
+          key: pio-${{ hashFiles('firmware/edge_node/platformio.ini') }}
+
+      # links + detector replay (4 of 4 events) + mechanical rebuild (14/14 checks) + C++ vs Python decision parity
+      # + firmware compile of both environments (esp32dev, bench). Builds run on temporary copies.
+      - name: Verify
+        run: bash tools/verify_all.sh --pio

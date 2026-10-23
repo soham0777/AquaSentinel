@@ -1,7 +1,7 @@
 # Hardware Validation: 72-Hour Bench Energy Logging Procedure
 **Device:** AquaSentinel v2.0 Smart Edge Node  
 **Subsystem:** Power Architecture & Energy Autonomy  
-**Target Metric:** Total Daily Consumption $\le 4.07\text{ Wh/day}$ (matching `verified_design_calcs.json`)
+**Target Metric:** Total Daily Consumption $\le 4.07\text{ Wh/day}$ (the v2 hand-calc target; `verified_design_calcs.json` is not in this repository yet, see [`../calculations/README.md`](../calculations/README.md); the power budget in [`power_budget.csv`](power_budget.csv) says about 3.4 Wh/day, so reconcile the two before quoting)
 
 ---
 
@@ -46,7 +46,7 @@
 
 ### Phase 1: Zero-State Quiescent Calibration (T = 0 to 1 Hour)
 1. Disconnect all external sensor probes and actuators.
-2. Flash diagnostic firmware `firmware/edge_node/test/test_sleep_current.cpp` onto the ESP32.
+2. Flash the diagnostic firmware `test_sleep_current.cpp` onto the ESP32 (**TODO: this diagnostic sketch has not been written yet; it is meant to live in `firmware/edge_node/test/`**).
 3. Power the mainboard from the calibrated 12.80 V source.
 4. Record quiescent current with all P-MOSFET gates disabled.
    - **Pass Criterion:** Measured current must be $\le 0.60\text{ mA}$ at $12.8\text{ V}$ ($7.68\text{ mW}$ standby floor).

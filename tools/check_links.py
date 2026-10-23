@@ -27,6 +27,10 @@ TEXT_EXT = {".md", ".html", ".htm", ".css", ".js", ".py", ".ini", ".yml", ".yaml
             ".cpp", ".c", ".sh", ".bat", ".ps1", ".toml", ".kicad_sch"}
 PATH_EXT = r"(?:md|html|htm|css|js|py|ini|yml|yaml|json|csv|txt|h|cpp|png|jpg|jpeg|gif|mp4|pdf|zip|glb|stl|step|docx|sldprt|kicad_sch|sh)"
 REPO = "soham0777/AquaSentinel"
+# Paths that docs legitimately mention although Git does not track them (git-ignored secrets, generated output).
+# Referenced but genuinely missing; documented as a to-do in calculations/README.md. Reported separately, never hidden.
+KNOWN_MISSING = ("calculations/verified_design_calcs.json", "calculations/verified_design_calcs.py")
+KNOWN_UNTRACKED_SUFFIXES = ("include/secrets.h", "secrets.h", "mechanical/AquaSentinel_R3_Viewer.html")
 
 RE_MD_LINK = re.compile(r"!?\[[^\]]*\]\(\s*<?([^)\s>]+)>?(?:\s+\"[^\"]*\")?\s*\)")
 RE_ATTR = re.compile(r"""(?:href|src|data-src|poster|data)\s*=\s*["']([^"']+)["']""", re.I)
@@ -81,6 +85,7 @@ def main():
         return p in fileset or p in dirset
 
     broken = []
+    known_missing = []
 
     def check(src, kind, ref, base_dir=None, repo_rooted=False):
         ref0 = ref
@@ -127,6 +132,11 @@ def main():
                 # backticked paths are written either from the repo root or relative to the file
                 rr = os.path.normpath(r).replace(os.sep, "/")
                 rel = os.path.normpath(os.path.join(d, r)).replace(os.sep, "/")
+                if r.endswith(KNOWN_UNTRACKED_SUFFIXES):
+                    continue
+                if r in KNOWN_MISSING and not exists(rr):
+                    known_missing.append((f, r))
+                    continue
                 if not (exists(rr) or exists(rel)):
                     broken.append((f, "backtick-path", r, "not at repo root or relative to file"))
         elif ext in {".html", ".htm"}:
@@ -182,7 +192,10 @@ def main():
     if not quiet:
         for b in broken:
             print(f"BROKEN [{b[1]}] {b[0]}: {b[2]}  ->  {b[3]}")
-    print(f"checked {len(files)} tracked files; broken references: {len(broken)}")
+    for f, r in sorted(set(known_missing)):
+        print(f"KNOWN-MISSING (documented to-do, see calculations/README.md) {f}: {r}")
+    print(f"checked {len(files)} tracked files; broken references: {len(broken)}; "
+          f"known-missing (documented): {len(set(known_missing))}")
     return 1 if broken else 0
 
 
