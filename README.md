@@ -46,7 +46,7 @@ Kopargaon, and for every river like it: not to replace those stations, but as a 
 
 ## How it works
 
-<img src="docs/assets/ui/sense-decide-act.png" alt="Sense every 15 minutes, decide on the float, act: beacon, alert and sealed sample" width="100%">
+<img src="docs/assets/ui/sense-decide-act.png" alt="Sense every 15 minutes, decide on the float, act: beacon, alert and bottled sample for the lab" width="100%">
 
 <br>
 
@@ -97,7 +97,7 @@ Kopargaon, and for every river like it: not to replace those stations, but as a 
 | Size · mass | 1.0 × 0.8 × 0.9 m · **48.5 kg** | CAD mass properties ([design_checks.json](mechanical/checks/design_checks.json)) |
 | Freeboard · reserve buoyancy | **143 mm** · **2.27×** | hand calcs on the CAD geometry |
 | Stability | GM<sub>T</sub> **0.55 m**, righting arm positive to **60°** (max 180 mm at 25°) | hand calcs on the CAD geometry |
-| Guide pole, flood + debris | **64 MPa**, safety factor **2.66** (conservative: pinned ends + carriage moment) | hand calc on the CAD geometry; SOLIDWORKS Simulation with both ends fixed gives 38.3 MPa, SF 4.4 |
+| Guide pole, flood + debris | **64 MPa**, safety factor **2.66** (conservative: pinned ends + carriage moment) | hand calc on the CAD geometry; SOLIDWORKS Simulation with both ends fixed gives 38.3 MPa, a stiffer idealisation that is not the figure we quote |
 | Pier bracket | 3.7 MPa, safety factor 46 | SOLIDWORKS Simulation |
 | Carriage jamming | **8.6×** margin, 1.7× even with seized rollers | hand calcs |
 | Clashes over the full 2 m travel | **0** | voxel interference on the real meshes, 101 part pairs |
@@ -152,7 +152,7 @@ Not written yet: the beacon, valve, carousel and wiper drivers (today they log w
 modem's AT-command driver. Nothing has run on hardware yet; the bench demo is next.
 
 Python reference of the decision step: [`analytics/detector.py`](analytics/detector.py) ·
-electronics: [KiCad schematic](hardware/kicad), [power budget](hardware/power_budget.csv) (≈ 3.4 Wh/day estimated).
+electronics: [KiCad mainboard notes](hardware/kicad) (a text description, not yet a drawn schematic), [power budget](hardware/power_budget.csv) (3.4 Wh/day in that sheet; the bench test sheet uses 4.07, to be reconciled).
 </details>
 
 ## Try it
@@ -203,14 +203,21 @@ to the bow fixed the clash, and it turned a problem into a feature: the float no
 
 ## What's in the repository
 
-| | |
-|---|---|
-| [`mechanical/`](mechanical) | R3 parametric design engine, **SOLIDWORKS Pack and Go**, STEP/STL/GLB, BOM, 6 × A3 drawings, design checks, SOLIDWORKS Simulation |
-| [`firmware/`](firmware) | ESP32 edge controller (PlatformIO) |
-| [`analytics/`](analytics) | detection engine reference, synthetic benchmark, plume travel-time model |
-| [`hardware/`](hardware) | KiCad schematic, power budget, cost estimate, bench test procedure |
-| [`docs/`](docs) | the project site: 3D viewer, dashboard, presentation, videos, engineering notes |
-| [`project-management/`](project-management) | ENOVIA project plan |
+New here? Open [`START_HERE.md`](START_HERE.md). Every folder has its own `README.md` with what is inside and the command to run it.
+
+| Folder | What is inside | Open first |
+|---|---|---|
+| [`START_HERE.md`](START_HERE.md) | "I want to…" guide and the folder map | this file |
+| [`mechanical/`](mechanical) | R3 parametric design engine, SOLIDWORKS Pack and Go, STEP/STL/GLB, BOM, 6 × A3 drawings, design checks, SOLIDWORKS Simulation, 1:5 print model | [`mechanical/README.md`](mechanical/README.md) |
+| [`firmware/`](firmware) | ESP32 edge controller (PlatformIO), bench demo plan | [`firmware/README.md`](firmware/README.md) |
+| [`analytics/`](analytics) | detection engine reference, synthetic benchmark, plume travel-time model | [`analytics/README.md`](analytics/README.md) |
+| [`hardware/`](hardware) | KiCad mainboard notes, power budget, cost estimate, bench test procedure | [`hardware/README.md`](hardware/README.md) |
+| [`engineering/`](engineering) | claims register (every number and its source), jury Q&A | [`engineering/claims_register.md`](engineering/claims_register.md) |
+| [`calculations/`](calculations) | where the hand-calculation numbers come from (the scripts are not in the repo yet) | [`calculations/README.md`](calculations/README.md) |
+| [`docs/`](docs) | the GitHub Pages website only: 3D viewer, dashboard, presentation PDF, videos, images | [`docs/README.md`](docs/README.md) |
+| [`project-management/`](project-management) | ENOVIA project plan | [`project-management/README.md`](project-management/README.md) |
+| [`tools/`](tools) | read-only checkers: link checker, C++ vs Python parity test, `verify_all.sh` | [`tools/README.md`](tools/README.md) |
+| [`archive/`](archive) | superseded documents, kept for history (nothing is deleted) | [`archive/README.md`](archive/README.md) |
 
 <details>
 <summary><b>Run it yourself</b></summary>
@@ -228,6 +235,11 @@ cd mechanical && python src/build.py
 ```bash
 # build the firmware (PlatformIO; compiles, but has not yet run on the real hardware)
 cd firmware/edge_node && pio run
+```
+
+```bash
+# check everything at once: links, detector replay, mechanical rebuild, C++/Python parity (add --pio to compile the firmware)
+bash tools/verify_all.sh
 ```
 
 To open the CAD, unzip `mechanical/solidworks/AquaSentinel_R3_SOLIDWORKS_PackAndGo.zip` and open `AquaSentinel_R3_Assembly.SLDASM` in SOLIDWORKS.
