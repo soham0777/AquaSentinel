@@ -1,7 +1,7 @@
 > [!WARNING]
 > **Superseded (v2, September 2026).** This specification describes the v2 design and was written before our audit of
 > 18 Oct. Its numbers are for the v2 layout, and several statements overclaimed what the system does. The current R3 values
-> and the claims we no longer make are in the [claims register](claims_register.md). In short: the sample is a triage
+> and the claims we no longer make are in the [claims register](../../engineering/claims_register.md). In short: the sample is a triage
 > sample for the lab, not legal evidence; the float alerts the water-works but does not switch their pumps; carry-over and
 > beacon visibility are not yet measured; and the firmware's actuator drivers, clock and record hashing are not written yet.
 > Kept for the record of how the design developed.

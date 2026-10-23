@@ -107,7 +107,7 @@ Kopargaon, and for every river like it: not to replace those stations, but as a 
 > [!IMPORTANT]
 > These are **design-stage estimates**: AquaSentinel has **not been tested in water yet**, and the tank test is next.
 > Catalogue masses still need weighing, and the 2 m stage range, 1.5 m/s current and 500 N debris load are assumptions
-> to confirm at the site. Every claim is traced in the [claims register](docs/engineering/claims_register.md).
+> to confirm at the site. Every claim is traced in the [claims register](engineering/claims_register.md).
 
 <table>
 <tr>
