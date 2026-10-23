@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/assets/banner.png" alt="AquaSentinel: watches the river, warns the bank, keeps the evidence" width="100%">
+<img src="docs/assets/banner.png" alt="AquaSentinel: watches the river, warns the bank, keeps a sample for the lab" width="100%">
 
 <br><br>
 
@@ -24,15 +24,15 @@
 <br>
 
 <p align="center">
-<b>AquaSentinel</b> is a solar-powered float that rides a stainless guide pole clamped to a bridge pier.<br>
+<b>AquaSentinel</b> is a solar-powered float designed to ride a stainless guide pole clamped to a bridge pier.<br>
 Every 15 minutes it reads the river. When a spill passes, it decides on the float itself, turns its beacon red<br>
-for the people at the ghat, alerts the water-works, and <b>seals a time-stamped water sample</b> for a certified lab.<br>
-<sub>The river moves it, not a motor.</sub>
+for the people at the ghat, alerts the water-works, and <b>bottles a water sample</b> that tells a certified lab where to look.<br>
+<sub>The river moves it, not a motor. Designed and simulated; not yet built or tested in water.</sub>
 </p>
 
 <br>
 
-<img src="docs/assets/ui/kpis.png" alt="96 readings a day; 4 of 4 synthetic spills flagged within 30 minutes; 250 mL sample sealed on alert; 0 W to hold station; 4.4 guide-pole safety factor; one twenty-fifth the cost of a real-time station" width="100%">
+<img src="docs/assets/ui/kpis.png" alt="96 readings a day; 4 of 4 synthetic spills flagged within 30 minutes; one 250 mL sample per event for the lab; 0 W to hold station; guide-pole safety factor 2.66 in the conservative case; about 1.38 lakh rupees for the prototype" width="100%">
 
 <br>
 
@@ -40,8 +40,9 @@ for the people at the ghat, alerts the water-works, and <b>seals a time-stamped 
 
 <img src="docs/assets/ui/problem.png" alt="A spill passes in hours while the river is sampled once a month; the spike slips between two normal monthly samples" width="100%">
 
-Real-time stations exist, but at ₹35 lakh+ each a river gets very few, and nothing on the market combines
-**continuous monitoring, low cost and proof**. AquaSentinel is built for the Godavari at Kopargaon, and for every river like it.
+Real-time stations exist, but their instruments alone cost ₹35–40 lakh, so a river gets very few. We haven't found one
+that combines **continuous monitoring, low cost and a physical sample**. AquaSentinel is designed for the Godavari at
+Kopargaon, and for every river like it: not to replace those stations, but as a dense, low-cost early-warning layer between them.
 
 ## How it works
 
@@ -95,13 +96,13 @@ Real-time stations exist, but at ₹35 lakh+ each a river gets very few, and not
 |---|---|---|
 | Size · mass | 1.0 × 0.8 × 0.9 m · **48.5 kg** | CAD mass properties ([design_checks.json](mechanical/checks/design_checks.json)) |
 | Freeboard · reserve buoyancy | **143 mm** · **2.27×** | hand calcs on the CAD geometry |
-| Stability | GM<sub>T</sub> **0.55 m**, rights itself to **60°** | hand calcs on the CAD geometry |
-| Guide pole, flood + debris | **38.3 MPa**, safety factor **4.4**, **1.3 mm** sway | SOLIDWORKS Simulation (pinned hand calc: 54.8 MPa, SF 3.1) |
+| Stability | GM<sub>T</sub> **0.55 m**, righting arm positive to **60°** (max 180 mm at 25°) | hand calcs on the CAD geometry |
+| Guide pole, flood + debris | **64 MPa**, safety factor **2.66** (conservative: pinned ends + carriage moment) | hand calc on the CAD geometry; SOLIDWORKS Simulation with both ends fixed gives 38.3 MPa, SF 4.4 |
 | Pier bracket | 3.7 MPa, safety factor 46 | SOLIDWORKS Simulation |
 | Carriage jamming | **8.6×** margin, 1.7× even with seized rollers | hand calcs |
 | Clashes over the full 2 m travel | **0** | voxel interference on the real meshes, 101 part pairs |
 | Spill detection | **4 / 4** flagged, each within **30 min** | decision logic on 30 days of **synthetic** river data |
-| Cost | **≈ ₹1.34 lakh** prototype vs ₹35 lakh+ per station | catalogue prices ([cost BOM](hardware/AquaSentinel_Cost_Estimate_BOM.csv)) |
+| Cost | **≈ ₹1.38 lakh** prototype; the four probes are 59 % of it | sum of the [cost sheet](hardware/AquaSentinel_Cost_Estimate_BOM.csv) lines, v2 layout (R3 re-costing pending). For comparison, a real-time station's instruments cost ₹35–40 lakh (CSE), but stations measure more parameters |
 
 > [!IMPORTANT]
 > These are **design-stage estimates**: AquaSentinel has **not been tested in water yet**, and the tank test is next.
@@ -122,13 +123,14 @@ Real-time stations exist, but at ₹35 lakh+ each a river gets very few, and not
 
 <img src="docs/assets/ui/architecture.png" alt="System architecture: probes and stage sensor into the ESP32; beacon, LTE, autosampler, wiper and microSD out; solar power chain" width="100%">
 
-Two tracks run on every reading. **Hard limits act immediately**: anything outside CPCB Class C (pH 6.0–9.0, DO ≥ 4 mg/L,
-EC ≤ 2250 µS/cm) is an alert. **A learned baseline catches the rest**: for the first 7 days the float learns what normal
-looks like at that site, hour by hour, and then acts when **2 of the last 3** readings are unusual, so a single splash can't
-trigger a sample.
+Two tracks run on every reading. **Hard limits act immediately**, on a single reading: pH outside 6.0–9.0 or DO below
+4 mg/L (CPCB Class C), or EC above 2250 µS/cm (an alarm level adopted from CPCB Class E). **A learned baseline catches the
+rest**: for the first 7 days the float learns what normal looks like at that site, hour by hour, and then acts when
+**2 of the last 3** readings are unusual. Each event takes **one bottle**, and it ends only after four clean readings, so four
+bottles cover four separate events. A probe that stops answering raises a **sensor fault**; it never reads as clean water.
 
 <img src="docs/assets/detector-evaluation.jpg" alt="Detection replayed on 30 days of synthetic river data" width="100%">
-<p align="center"><sub>The decision logic replayed on 30 days of synthetic river data with four injected spills: all four flagged, each within 30 minutes. Synthetic benchmark, not field data.</sub></p>
+<p align="center"><sub>The decision logic replayed on 30 days of synthetic river data with four injected spills: all four flagged, each within 30 minutes, one sample each. Synthetic benchmark, not field data; the spills are large compared with the noise, so the real false-alarm rate needs pilot data.</sub></p>
 
 <details>
 <summary><b>Firmware modules</b></summary>
@@ -139,12 +141,15 @@ The firmware in [`firmware/edge_node`](firmware/edge_node) is a PlatformIO proje
 
 | Module | Job |
 |---|---|
-| `sensor_interface` | power-gated RS485 Modbus reads of the four probes + stage |
-| `dsp_filters` | exponential smoothing of each probe before any decision |
-| `anomaly_engine` | CPCB Class C hard limits + robust z-score against a 24-bin diurnal baseline |
-| `autosampler` | 20 s purge to waste, 30 s fill, carousel indexing; bottle state survives deep sleep |
+| `sensor_interface` | power-gated RS485 Modbus reads of the four probes, median of three reads; a failed read is never used (stage-sensor driver still to write) |
+| `anomaly_engine` | hard limits + robust z-score against a 24-bin diurnal baseline; SENSOR_FAULT state; one sample per event; learned state saved to flash |
+| `autosampler` | 20 s purge to waste, 30 s fill, carousel indexing, 60-min lockout; bottle state survives power cuts |
 | `wiper_actuator` | anti-fouling sweeps of the optical faces |
-| `microsd_logger` · `telemetry_comm` | time-stamped evidence log; JSON telemetry frame handed to the LTE modem (AT-command driver still to be written) |
+| `microsd_logger` · `telemetry_comm` | reading log on microSD; JSON telemetry frame handed to the LTE modem |
+| `dsp_filters` | median and exponential smoothing helpers, not yet wired in |
+
+Not written yet: the beacon, valve, carousel and wiper drivers (today they log what they would do), the clock, and the
+modem's AT-command driver. Nothing has run on hardware yet; the bench demo is next.
 
 Python reference of the decision step: [`analytics/detector.py`](analytics/detector.py) ·
 electronics: [KiCad schematic](hardware/kicad), [power budget](hardware/power_budget.csv) (≈ 3.4 Wh/day estimated).
@@ -167,19 +172,21 @@ electronics: [KiCad schematic](hardware/kicad), [power budget](hardware/power_bu
 
 <table>
 <tr>
-<td width="33%"><a href="https://soham0777.github.io/AquaSentinel/#videos"><img src="docs/assets/ui/video-pitch.png" alt="Pitch video, 1:50"></a></td>
+<td width="33%"><a href="https://soham0777.github.io/AquaSentinel/#videos"><img src="docs/assets/ui/video-marketing.png" alt="AquaSentinel in 60 seconds, 1:00"></a></td>
 <td width="33%"><a href="https://soham0777.github.io/AquaSentinel/#videos"><img src="docs/assets/ui/video-journey.png" alt="Journey video, 1:58"></a></td>
 <td width="33%"><a href="https://soham0777.github.io/AquaSentinel/#videos"><img src="docs/assets/ui/video-assembly-and-operation.png" alt="Assembly and operation, 1:47"></a></td>
 </tr>
 </table>
 
-<p align="center"><sub>Watch in the browser on the <a href="https://soham0777.github.io/AquaSentinel/#videos">project site</a> · full-quality 1080p files on the <a href="https://github.com/soham0777/AquaSentinel/releases/latest">latest release</a></sub></p>
+<p align="center"><sub>Watch in the browser on the <a href="https://soham0777.github.io/AquaSentinel/#videos">project site</a> · full-quality 1080p files on the <a href="https://github.com/soham0777/AquaSentinel/releases/latest">latest release</a>.
+The journey video was made for the Final Design Concept (5 Oct), before our audit; AquaSentinel has not yet been built or tested in water.</sub></p>
 
 ## The presentation
 
 <a href="docs/presentation/AquaSentinel_FDC_AAKRUTI_2026.pdf"><img src="docs/assets/deck-overview.jpg" alt="All 13 slides of the Final Design Concept deck" width="100%"></a>
 
-<p align="center"><sub>The 13-slide Final Design Concept on the official AAKRUTI template · <a href="docs/presentation/AquaSentinel_FDC_AAKRUTI_2026.pdf">PDF</a> · PowerPoint in the <a href="https://github.com/soham0777/AquaSentinel/releases/latest">release</a></sub></p>
+<p align="center"><sub>The 13-slide Final Design Concept on the official AAKRUTI template, as submitted on 5 Oct · <a href="docs/presentation/AquaSentinel_FDC_AAKRUTI_2026.pdf">PDF</a> · PowerPoint in the <a href="https://github.com/soham0777/AquaSentinel/releases/latest">release</a>.
+Since then our audit has revised a few figures: we now quote the pole's conservative safety factor (2.66, not 4.4) and the cost-sheet line sum (₹1.38 lakh, not ₹1.34 lakh), and we call the sample a triage sample for the lab, not evidence.</sub></p>
 
 ## The design journey
 
@@ -238,7 +245,8 @@ To open the CAD, unzip `mechanical/solidworks/AquaSentinel_R3_SOLIDWORKS_PackAnd
 | Decision logic on synthetic data: 4/4 spills flagged | Validate on field data with a certified lab |
 | Dashboard demo in three languages | Dated supplier quotes for the cost estimate |
 
-Probes give clues, not lab results: the float flags a likely spill and seals the evidence, and a certified lab confirms it.
+Probes give clues, not lab results: the float flags a likely spill and keeps a sample, and a certified lab confirms it.
+The bottle is a triage sample, not legal evidence: it tells the pollution board when and where to take its own formal sample.
 
 ## Team
 

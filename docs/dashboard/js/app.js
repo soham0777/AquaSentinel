@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
       modeOperator: "Command Center",
       modeCommunity: "Community Portal (लोकसहभाग)",
       demoBadge: "DEMO MODE",
-      demoBanner: "⚠️ DEMO MODE ACTIVE — Replaying Synthetic Godavari River Pollution Scenario for Evaluation",
-      pillNode: "NODE 01: ACTIVE",
+      demoBanner: "⚠️ DEMO — synthetic scenario, not a live station. AquaSentinel has not been deployed yet.",
+      pillNode: "NODE 01: DEMO DATA",
       sensorHeader: "In-Situ RS485 Submerged Sensor Array (15-Minute Epoch)",
       sensorBadge: "4 Industrial Probes + Ultrasonic Stage",
       lblPh: "pH Level (Glass Probe)",
@@ -22,35 +22,37 @@ document.addEventListener('DOMContentLoaded', () => {
       lblTemp: "Water Temperature",
       lblStage: "River Water Level (Stage)",
       roboticsHeader: "Robotics Closed-Loop Actuation Status",
-      btnCoc: "View Chain-of-Custody Card",
+      btnCoc: "View Sample Record (demo)",
       btnWipe: "Trigger Manual Wiper Sweep",
-      wiperSub: "Interval: Every 6 Hours | Next Sweep: 3h 42m | Drift Auto-Trigger: Active",
+      wiperSub: "Interval: Every 6 Hours | Next Sweep: 3h 42m",
       commTitle: "Godavari River Water Safety Advisory (गोदावरी जलसुरक्षा सूचना)",
-      commSub: "Location: Kopargaon Bridge to Puntamba Reach (19.0 km)",
+      commSub: "Location: Kopargaon Bridge to Puntamba Reach (19.0 km) · demo scenario",
       beaconSafeState: "BEACON STATUS: SAFE (जलदीप: सुरक्षित)",
       beaconSafeHead: "River Water is Safe for Community Use",
       beaconSafeSub: "Water quality is within normal biological baseline. Normal activities permitted.",
       beaconAlertState: "BEACON STATUS: DANGER (जलदीप: धोक्याची सूचना)",
       beaconAlertHead: "CONTAMINATION ALERT — DO NOT USE RIVER WATER",
-      beaconAlertSub: "Upstream pollution spike detected. Water intake pumps isolated.",
+      beaconAlertSub: "Likely pollution flagged upstream. The water-works has been alerted.",
       guideDrinkTitle: "Drinking Water Supply (पिण्याचे पाणी)",
       guideDrinkSafe: "Municipal piped water from storage reservoirs is safe. Raw river water must be boiled.",
-      guideDrinkAlert: "DO NOT DRINK RAW RIVER WATER. Downstream treatment plants have been alerted to isolate intakes.",
+      guideDrinkAlert: "DO NOT DRINK RAW RIVER WATER. Downstream water-works have been alerted.",
       guideBathTitle: "Bathing & Ghat Activities (स्नान व घाट वापर)",
       guideBathSafe: "River ghats at Puntamba and Kopargaon are safe for regular washing and rituals.",
       guideBathAlert: "AVOID DIRECT CONTACT AT GHATS. Toxic / organic plume is advancing downstream.",
       guideFarmTitle: "Agriculture & Cattle (शेती व पशुधन)",
       guideFarmSafe: "Lift irrigation schemes operating normally. Electrical conductivity is within permissible agricultural limits.",
       guideFarmAlert: "SUSPEND LIFT IRRIGATION PUMPS. Protect crops and cattle from chemical shock load.",
-      hotlineTitle: "Kopargaon Municipal Emergency Water Cell:",
-      btnSms: "Subscribe to Free SMS Alerts",
+      hotlineTitle: "Emergency water contact (to be agreed with the local body)",
+      btnSms: "SMS alerts (planned)",
+      smsDemo: "Demo only: no number is collected. SMS alerts would start with the local body after the pilot.",
       transportTitle: "1-D River Plume Transport & Warning Horizon",
-      btnLockout: "EMERGENCY INTAKE LOCKOUT (TRIP PUMPS)",
-      btnLockoutActive: "LOCKOUT ENGAGED: ALL INTAKES ISOLATED",
+      btnLockout: "ALERT WATER-WORKS TO CLOSE INTAKE (DEMO)",
+      btnLockoutActive: "WATER-WORKS ALERTED (DEMO): THE INTAKE IS THEIR DECISION",
+      lockoutDemo: "Demo only: nothing is sent. In the design, AquaSentinel alerts the water-works; closing an intake stays their decision.",
       simTitle: "Event Simulation & Demonstration Controls",
-      simDesc: "Click below to inject simulated lotic contamination plumes into the live model and observe downstream advance warning countdowns:",
+      simDesc: "Click below to inject a simulated contamination plume into the demo model and see the downstream warning countdowns:",
       simBtnAcid: "Simulate Industrial Acid Dump",
-      simBtnSewage: "Simulate 9.98 MLD Sewage Spill",
+      simBtnSewage: "Simulate Raw Sewage Spill",
       simBtnReset: "Reset to Clean Baseline"
     },
     mr: {
@@ -59,8 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
       modeOperator: "तांत्रिक नियंत्रण कक्ष",
       modeCommunity: "लोकसहभाग माहिती पोर्टल",
       demoBadge: "डेमो मोड सक्रिय",
-      demoBanner: "⚠️ डेमो मोड सुरू आहे — गोदावरी नदी प्रदूषण परिस्थितीचे थेट सादरीकरण",
-      pillNode: "केंद्र ०१: सक्रिय",
+      demoBanner: "⚠️ डेमो — सिम्युलेटेड परिस्थिती, हे प्रत्यक्ष केंद्र नाही. अ‍ॅक्वासेंटिनेल अजून नदीत बसवलेले नाही.",
+      pillNode: "केंद्र ०१: डेमो डेटा",
       sensorHeader: "स्थानिक RS485 सेन्सर प्रणाली (प्रत्येक १५ मिनिटांची नोंद)",
       sensorBadge: "४ औद्योगिक सेन्सर्स + अल्ट्रासॉनिक जलपातळी",
       lblPh: "सामू / pH पातळी (ग्लास प्रोब)",
@@ -70,35 +72,37 @@ document.addEventListener('DOMContentLoaded', () => {
       lblTemp: "नदीच्या पाण्याचे तापमान",
       lblStage: "नदीतील पाण्याची पातळी (मीटर)",
       roboticsHeader: "स्वयंचलित नमुना व स्वच्छता यंत्रणा",
-      btnCoc: "कायदेशीर पुरावा कार्ड पहा (CoC)",
+      btnCoc: "नमुना नोंद पहा (डेमो)",
       btnWipe: "स्वच्छता वायपर सुरू करा",
       wiperSub: "कालावधी: दर ६ तासांनी | पुढील स्वच्छता: ३ तास ४२ मिनिटांनी",
       commTitle: "गोदावरी नदी जलसुरक्षा सूचना (लोकसहभाग)",
-      commSub: "स्थान: कोपरगाव पूल ते पुणतांबा घाट (१९.० किमी पट्टा)",
+      commSub: "स्थान: कोपरगाव पूल ते पुणतांबा घाट (१९.० किमी पट्टा) · डेमो परिस्थिती",
       beaconSafeState: "जलदीप स्थिती: सुरक्षित (हिरवा दिवा)",
       beaconSafeHead: "नदीचे पाणी वापरासाठी सुरक्षित आहे",
       beaconSafeSub: "पाण्याची गुणवत्ता सामान्य मर्यादेत आहे. नेहमीप्रमाणे वापर करता येईल.",
       beaconAlertState: "जलदीप स्थिती: धोकादायक (लाल दिवा)",
       beaconAlertHead: "धोका! नदीचे पाणी तात्काळ वापरणे थांबवा",
-      beaconAlertSub: "वरच्या भागात अचानक प्रदूषण आढळले आहे. पाणी उपसा तात्काळ थांबवण्यात आला आहे.",
+      beaconAlertSub: "वरच्या भागात संभाव्य प्रदूषण आढळले आहे. जलशुद्धीकरण केंद्राला सूचना दिली आहे.",
       guideDrinkTitle: "पिण्याचे पाणी (Drinking Supply)",
       guideDrinkSafe: "साठवण तलावातील नळाचे पाणी सुरक्षित आहे. नदीचे कच्चे पाणी उकळूनच वापरावे.",
-      guideDrinkAlert: "नदीचे पाणी अजिबात पिऊ नका! जलशुद्धीकरण केंद्रांना उपसा बंद करण्याचे आदेश दिले आहेत.",
+      guideDrinkAlert: "नदीचे पाणी अजिबात पिऊ नका! जलशुद्धीकरण केंद्रांना सूचना देण्यात आली आहे.",
       guideBathTitle: "स्नान व कपडे धुणे (Bathing & Ghats)",
       guideBathSafe: "पुणतांबा व कोपरगाव घाटावर नेहमीप्रमाणे वापर सुरक्षित आहे.",
       guideBathAlert: "घाटावर पाण्याचा संपर्क टाळा! रासायनिक किंवा दूषित पाण्याचा लोट खाली येत आहे.",
       guideFarmTitle: "शेती व पशुधन (Agriculture & Cattle)",
       guideFarmSafe: "उपसा सिंचन योजना चालू ठेवण्यास हरकत नाही. क्षारता सामान्य आहे.",
       guideFarmAlert: "शेतीसाठी पाणी उपसा त्वरित थांबवा! जनावरांना नदीवर पाणी पाजू नका.",
-      hotlineTitle: "कोपरगाव नगरपरिषद आपत्कालीन पाणी नियंत्रण कक्ष:",
-      btnSms: "मोफत SMS सूचना सुरू करा",
+      hotlineTitle: "आपत्कालीन पाणी संपर्क (स्थानिक संस्थेशी ठरवायचा)",
+      btnSms: "SMS सूचना (नियोजित)",
+      smsDemo: "डेमो: कोणताही नंबर घेतला जात नाही. SMS सूचना पायलटनंतर स्थानिक संस्थेसोबत सुरू होतील.",
       transportTitle: "नदी प्रवाह व आगाऊ धोक्याचा इशारा (ETA)",
-      btnLockout: "आपत्कालीन पंप लॉकआउट (सर्व उपसा बंद करा)",
-      btnLockoutActive: "लॉकआउट सक्रिय: सर्व उपसा पंप बंद केले आहेत",
+      btnLockout: "जलशुद्धीकरण केंद्राला उपसा बंद करण्याची सूचना द्या (डेमो)",
+      btnLockoutActive: "सूचना दिली (डेमो): उपसा बंद करण्याचा निर्णय त्यांचा",
+      lockoutDemo: "डेमो: काहीही पाठवले जात नाही. प्रत्यक्ष रचनेत अ‍ॅक्वासेंटिनेल जलशुद्धीकरण केंद्राला सूचना देते; उपसा बंद करण्याचा निर्णय त्यांचाच असतो.",
       simTitle: "प्रात्यक्षिक व प्रदूषण चाचणी नियंत्रक",
       simDesc: "गोदावरी नदीत प्रदूषण उद्भवल्यास काय होते हे पाहण्यासाठी खालील बटणे दाबा:",
       simBtnAcid: "कारखान्याचे रासायनिक आम्ल गळती चाचणी",
-      simBtnSewage: "९.९८ MLD सांडपाणी गळती चाचणी",
+      simBtnSewage: "कच्च्या सांडपाण्याची गळती चाचणी",
       simBtnReset: "सर्व पूर्ववत सामान्य करा"
     },
     hi: {
@@ -107,8 +111,8 @@ document.addEventListener('DOMContentLoaded', () => {
       modeOperator: "तकनीकी कमांड सेंटर",
       modeCommunity: "जनसंवाद / नागरिक पोर्टल",
       demoBadge: "डेमो मोड",
-      demoBanner: "⚠️ डेमो मोड सक्रिय — गोदावरी नदी प्रदूषण सिमुलेशन का प्रदर्शन",
-      pillNode: "नोड ०१: सक्रिय",
+      demoBanner: "⚠️ डेमो — सिम्युलेटेड परिदृश्य, यह कोई चालू स्टेशन नहीं है। एक्वासेंटिनल अभी नदी में स्थापित नहीं हुआ है।",
+      pillNode: "नोड ०१: डेमो डेटा",
       sensorHeader: "स्वचालित RS485 सेंसर प्रणाली (प्रत्येक १५ मिनट)",
       sensorBadge: "४ औद्योगिक सेंसर + अल्ट्रासोनिक जल स्तर",
       lblPh: "पीएच स्तर (pH Probe)",
@@ -118,35 +122,37 @@ document.addEventListener('DOMContentLoaded', () => {
       lblTemp: "जल तापमान",
       lblStage: "नदी जल स्तर (मीटर)",
       roboticsHeader: "रोबोटिक सैंपल संग्रह एवं वाइपर स्थिति",
-      btnCoc: "विधिक साक्ष्य कार्ड देखें (CoC)",
+      btnCoc: "नमूना रिकॉर्ड देखें (डेमो)",
       btnWipe: "वाइपर सफाई शुरू करें",
       wiperSub: "अंतराल: हर ६ घंटे | अगली सफाई: ३ घंटे ४२ मिनट बाद",
       commTitle: "गोदावरी नदी जल सुरक्षा परामर्श",
-      commSub: "स्थान: कोपरगांव पुल से पुणतांबा घाट (१९.० किमी)",
+      commSub: "स्थान: कोपरगांव पुल से पुणतांबा घाट (१९.० किमी) · डेमो परिदृश्य",
       beaconSafeState: "जलदीप स्थिति: सुरक्षित (हरा संकेत)",
       beaconSafeHead: "नदी का जल उपयोग के लिए सुरक्षित है",
       beaconSafeSub: "पानी की गुणवत्ता सामान्य मानकों के भीतर है।",
       beaconAlertState: "जलदीप स्थिति: चेतावनी / खतरा (लाल संकेत)",
       beaconAlertHead: "चेतावनी! नदी का जल उपयोग तुरंत बंद करें",
-      beaconAlertSub: "ऊपरी हिस्से में रासायनिक या सीवेज प्रदूषण दर्ज किया गया है।",
+      beaconAlertSub: "ऊपरी हिस्से में संभावित प्रदूषण दर्ज किया गया है। जल-शोधन केंद्र को सूचित किया गया है।",
       guideDrinkTitle: "पेयजल आपूर्ति (Drinking Water)",
       guideDrinkSafe: "नगरपालिका का जलापूर्ति सुरक्षित है। नदी का कच्चा पानी उबाल कर पिएं।",
-      guideDrinkAlert: "नदी का कच्चा पानी न पिएं! डाउनस्ट्रीम पम्पिंग स्टेशन बंद कर दिए गए हैं।",
+      guideDrinkAlert: "नदी का कच्चा पानी न पिएं! जल-शोधन केंद्रों को सूचित किया गया है।",
       guideBathTitle: "स्नान व घाट उपयोग (Ghats & Bathing)",
       guideBathSafe: "घाटों पर स्नान और सामान्य उपयोग सुरक्षित है।",
       guideBathAlert: "घाटों पर नदी के सीधे संपर्क से बचें! प्रदूषित धारा आगे बढ़ रही है।",
       guideFarmTitle: "कृषि एवं मवेशी (Farming & Cattle)",
       guideFarmSafe: "सिंचाई लिफ्ट योजनाएं सामान्य रूप से चल रही हैं।",
       guideFarmAlert: "खेतों में नदी का पानी खींचना तुरंत बंद करें! मवेशियों को दूर रखें।",
-      hotlineTitle: "कोपरगांव नगर परिषद आपातकालीन जल नियंत्रण कक्ष:",
-      btnSms: "मुफ्त एसएमएस अलर्ट चालू करें",
+      hotlineTitle: "आपातकालीन जल संपर्क (स्थानीय निकाय के साथ तय होना है)",
+      btnSms: "एसएमएस अलर्ट (नियोजित)",
+      smsDemo: "डेमो: कोई नंबर नहीं लिया जाता। एसएमएस अलर्ट पायलट के बाद स्थानीय निकाय के साथ शुरू होंगे।",
       transportTitle: "नदी जल प्रवाह एवं अग्रिम चेतावनी समय (ETA)",
-      btnLockout: "आपातकालीन पंप लॉकआउट (पानी खींचना बंद करें)",
-      btnLockoutActive: "लॉकआउट सक्रिय: सभी पंप बंद किए गए हैं",
+      btnLockout: "जल-शोधन केंद्र को इनटेक बंद करने की सूचना दें (डेमो)",
+      btnLockoutActive: "सूचना दी गई (डेमो): इनटेक बंद करने का निर्णय उनका",
+      lockoutDemo: "डेमो: कुछ भी नहीं भेजा जाता। वास्तविक डिज़ाइन में एक्वासेंटिनल जल-शोधन केंद्र को सूचित करता है; इनटेक बंद करने का निर्णय उन्हीं का होता है।",
       simTitle: "प्रदूषण सिमुलेशन एवं परीक्षण नियंत्रण",
       simDesc: "प्रदूषण का प्रभाव और अग्रिम चेतावनी समय देखने के लिए नीचे क्लिक करें:",
       simBtnAcid: "औद्योगिक अपशिष्ट / एसिड रिसाव टेस्ट",
-      simBtnSewage: "९.९८ MLD सीवेज रिसाव टेस्ट",
+      simBtnSewage: "कच्चा सीवेज रिसाव टेस्ट",
       simBtnReset: "सामान्य स्थिति पर रीसेट करें"
     }
   };
@@ -155,7 +161,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const state = {
     lang: 'en',
     mode: 'operator', // 'operator' or 'community'
-    demoActive: true,
     isAlert: false,
     alertReason: 'NONE',
     sensors: {
@@ -172,13 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
       velocityKmh: 2.7, // 0.75 m/s = 2.7 km/h
       widthKm: 1.2
     },
-    lockoutActive: false,
-    autosampler: {
-      vial1: "SEALED (250mL)",
-      vial2: "READY (Sterile)",
-      vial3: "READY (Sterile)",
-      vial4: "READY (Sterile)"
-    }
+    lockoutActive: false
   };
 
   // --- DOM CACHE ---
@@ -191,11 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Language buttons
     langBtns: document.querySelectorAll('.lang-btn'),
-    
-    // Demo toggle
-    demoToggle: document.getElementById('demo-mode-toggle'),
-    demoBanner: document.getElementById('demo-banner'),
-    
+
     // Alert Banner
     alertBanner: document.getElementById('alert-banner'),
     alertTitle: document.getElementById('txt-alert-title-text'),
@@ -346,11 +341,11 @@ document.addEventListener('DOMContentLoaded', () => {
     dom.barTemp.style.width = Math.min(100, (state.sensors.temp / 50.0) * 100) + '%';
     dom.barStage.style.width = Math.min(100, (state.sensors.stage / 3.0) * 100) + '%';
 
-    // Color accents for anomalies
-    const isPhBad = (state.sensors.ph < 6.5 || state.sensors.ph > 8.5);
+    // Color accents: the firmware's hard limits for pH, DO and EC; turbidity has no hard limit, so 25 NTU is a display cue only
+    const isPhBad = (state.sensors.ph < 6.0 || state.sensors.ph > 9.0);
     const isDoBad = (state.sensors.do < 4.0);
     const isTurbBad = (state.sensors.turb > 25.0);
-    const isEcBad = (state.sensors.ec > 800);
+    const isEcBad = (state.sensors.ec > 2250);
 
     dom.valPh.style.color = isPhBad ? 'var(--accent-rose)' : 'var(--text-main)';
     dom.barPh.style.backgroundColor = isPhBad ? 'var(--accent-rose)' : 'var(--accent-cyan)';
@@ -383,8 +378,8 @@ document.addEventListener('DOMContentLoaded', () => {
       dom.guideFarmDesc.innerText = t.guideFarmAlert;
 
       dom.alertBanner.style.display = "block";
-      dom.alertTitle.innerText = "CRITICAL CONTAMINATION SPIKE FLAGGED: " + state.alertReason;
-      dom.alertDesc.innerText = `Upstream plume detected at Kopargaon Bridge Outfall. Downstream community warning horizon activated!`;
+      dom.alertTitle.innerText = "LIKELY SPILL FLAGGED (DEMO): " + state.alertReason;
+      dom.alertDesc.innerText = `Likely spill flagged at the Kopargaon bridge station (demo). Downstream warning horizon shown below.`;
     } else {
       dom.beaconHalo.className = "beacon-halo-glow safe";
       dom.txtBeaconState.innerText = t.beaconSafeState;
@@ -424,13 +419,13 @@ document.addEventListener('DOMContentLoaded', () => {
         dom.tagA.className = "eta-tag danger";
         dom.tagA.innerText = "PLUME ARRIVED";
         dom.timeA.innerText = "00:00:00";
-        dom.descA.innerText = "🚨 Emergency trip engaged; intake isolated.";
+        dom.descA.innerText = "🚨 Water-works alerted to close the intake.";
       } else {
         const minsA = Math.round((remA / state.plume.velocityKmh) * 60);
         dom.tagA.className = "eta-tag danger";
         dom.tagA.innerText = "WARNING";
         dom.timeA.innerText = `ETA: ${minsA} mins`;
-        dom.descA.innerText = `Plume advancing at 2.7 km/h. Advance notice provided!`;
+        dom.descA.innerText = `Plume modelled at 2.7 km/h (0.75 m/s).`;
       }
 
       // ETA 2: Puntamba Ghats at 19.0 km
@@ -439,7 +434,7 @@ document.addEventListener('DOMContentLoaded', () => {
         dom.tagB.className = "eta-tag danger";
         dom.tagB.innerText = "PLUME ARRIVED";
         dom.timeB.innerText = "00:00:00";
-        dom.descB.innerText = "🚨 Ghat advisories broadcasted; riverbank cleared.";
+        dom.descB.innerText = "🚨 Plume at the ghats; the beacon is red upstream.";
       } else {
         const hrsB = (remB / state.plume.velocityKmh);
         const minsB = Math.round(hrsB * 60);
@@ -460,7 +455,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- SIMULATION TRIGGERS ---
   dom.btnSimAcid.addEventListener('click', () => {
     state.isAlert = true;
-    state.alertReason = "INDUSTRIAL ACID / HEAVY METAL DUMP";
+    state.alertReason = "INDUSTRIAL ACID DUMP";
     state.sensors.ph = 4.12;
     state.sensors.ec = 1480;
     state.sensors.turb = 45.0;
@@ -470,9 +465,9 @@ document.addEventListener('DOMContentLoaded', () => {
     state.plume.posKm = 0.5;
     state.plume.widthKm = 1.0;
 
-    // Activate autosampler vial 2
+    // One bottle per event: bottle 2
     dom.vial2.className = "vial-slot active";
-    dom.vial2.querySelector('.vial-status').innerText = "SEALED (250mL)";
+    dom.vial2.querySelector('.vial-status').innerText = "FILLED (250 mL)";
 
     renderSensors();
     renderBeacon();
@@ -480,7 +475,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   dom.btnSimSewage.addEventListener('click', () => {
     state.isAlert = true;
-    state.alertReason = "9.98 MLD RAW MUNICIPAL SEWAGE SHOCK LOAD";
+    state.alertReason = "RAW SEWAGE SHOCK LOAD";
     state.sensors.do = 1.85;
     state.sensors.turb = 185.0;
     state.sensors.ec = 890;
@@ -490,9 +485,9 @@ document.addEventListener('DOMContentLoaded', () => {
     state.plume.posKm = 0.5;
     state.plume.widthKm = 1.4;
 
-    // Activate autosampler vial 3
+    // One bottle per event: bottle 3
     dom.vial3.className = "vial-slot active";
-    dom.vial3.querySelector('.vial-status').innerText = "SEALED (250mL)";
+    dom.vial3.querySelector('.vial-status').innerText = "FILLED (250 mL)";
 
     renderSensors();
     renderBeacon();
@@ -523,9 +518,9 @@ document.addEventListener('DOMContentLoaded', () => {
     dom.descB.innerText = "Riverbank water in clean baseline";
 
     dom.vial2.className = "vial-slot ready";
-    dom.vial2.querySelector('.vial-status').innerText = "READY (Sterile)";
+    dom.vial2.querySelector('.vial-status').innerText = "READY (clean)";
     dom.vial3.className = "vial-slot ready";
-    dom.vial3.querySelector('.vial-status').innerText = "READY (Sterile)";
+    dom.vial3.querySelector('.vial-status').innerText = "READY (clean)";
 
     renderSensors();
     renderBeacon();
@@ -541,7 +536,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 3000);
   });
 
-  // --- EMERGENCY INTAKE LOCKOUT ---
+  // --- WATER-WORKS ALERT (demo: nothing is sent, and no pump is switched) ---
   dom.btnLockout.addEventListener('click', () => {
     state.lockoutActive = !state.lockoutActive;
     const t = i18n[state.lang];
@@ -549,7 +544,7 @@ document.addEventListener('DOMContentLoaded', () => {
       dom.btnLockout.style.backgroundColor = "#059669";
       dom.btnLockout.style.borderColor = "#10b981";
       dom.txtBtnLockout.innerText = t.btnLockoutActive;
-      alert("⚠️ EMERGENCY SIGNAL SENT: Remote telemetry trip issued to Rural Lift Irrigation & Municipal Water Intake pumps!");
+      alert(t.lockoutDemo);
     } else {
       dom.btnLockout.style.backgroundColor = "#e11d48";
       dom.btnLockout.style.borderColor = "#f43f5e";
@@ -557,7 +552,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // --- CHAIN OF CUSTODY MODAL ---
+  // --- SAMPLE RECORD MODAL ---
   dom.btnOpenCoc.addEventListener('click', () => {
     dom.cocTime.innerText = new Date().toUTCString();
     dom.modalCoc.style.display = 'flex';
@@ -571,12 +566,9 @@ document.addEventListener('DOMContentLoaded', () => {
     dom.modalCoc.style.display = 'none';
   });
 
-  // --- SMS SUBSCRIPTION ---
+  // --- SMS ALERTS (planned; the demo collects no phone numbers) ---
   dom.btnSubscribeSms.addEventListener('click', () => {
-    const mobile = prompt("कृपया आपला १० अंकी मोबाईल नंबर प्रविष्ट करा (Enter your 10-digit mobile number for SMS alerts):");
-    if (mobile && mobile.trim().length >= 10) {
-      alert("✅ धन्यवाद! आपला नंबर नोंदवला गेला आहे. नदीत कोणतीही अचानक रासायनिक गळती किंवा धोका निर्माण झाल्यास आपल्याला तात्काळ SMS येईल.");
-    }
+    alert(i18n[state.lang].smsDemo);
   });
 
   // --- EVENT LISTENERS FOR CONTROLS ---
@@ -587,11 +579,6 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', (e) => {
       applyLanguage(e.target.dataset.lang);
     });
-  });
-
-  dom.demoToggle.addEventListener('change', (e) => {
-    state.demoActive = e.target.checked;
-    dom.demoBanner.style.display = state.demoActive ? 'block' : 'none';
   });
 
   // Initial setup

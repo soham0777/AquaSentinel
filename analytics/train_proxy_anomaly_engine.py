@@ -75,7 +75,7 @@ def train_and_export(csv_path, header_out_path):
         f.write("/**\n")
         f.write(" * AquaSentinel ESP32 Edge Firmware - Exported Anomaly Weights\n")
         f.write(" * Multi-Parameter Lotic Proxy Anomaly Engine\n")
-        f.write(" * Automatically generated from validated Maharashtra river timeseries.\n")
+        f.write(" * Automatically generated from the synthetic benchmark dataset (analytics/dataset); experimental, not used by the firmware.\n")
         f.write(" */\n\n")
         f.write("#ifndef EXPORTED_ANOMALY_WEIGHTS_H\n")
         f.write("#define EXPORTED_ANOMALY_WEIGHTS_H\n\n")

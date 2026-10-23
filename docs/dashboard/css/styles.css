@@ -955,7 +955,7 @@ main {
   gap: 0.75rem;
 }
 
-/* Chain of Custody Styling */
+/* Sample Record Styling */
 .coc-header-block {
   text-align: center;
   border-bottom: 2px solid var(--border-color);

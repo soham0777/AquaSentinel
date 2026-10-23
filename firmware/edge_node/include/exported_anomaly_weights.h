@@ -1,7 +1,7 @@
 /**
  * AquaSentinel ESP32 Edge Firmware - Exported Anomaly Weights
  * Multi-Parameter Lotic Proxy Anomaly Engine
- * Automatically generated from validated Maharashtra river timeseries.
+ * Automatically generated from the synthetic benchmark dataset (analytics/dataset); experimental, not used by the firmware.
  */
 
 #ifndef EXPORTED_ANOMALY_WEIGHTS_H
