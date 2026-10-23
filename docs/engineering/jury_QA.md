@@ -1,3 +1,11 @@
+> [!WARNING]
+> **Superseded (v2, September 2026).** This defence manual was written for the v2 design, before our audit of 18 Oct.
+> Its mechanical numbers are for the v2 layout (25.4 kg, 250 mm roller span, pole through the centre), and several of its
+> statements overclaimed. The current R3 values and the claims we no longer make are in the
+> [claims register](claims_register.md). In short: the bottle is a triage sample for the lab, not legal evidence; the float
+> alerts the water-works but does not switch their pumps; the beacon's visibility is not yet measured; and the prototype
+> estimate is ≈ ₹1.38 lakh. Kept for the record of how the design developed.
+
 # AquaSentinel v2.0 — Comprehensive Jury Defense & Technical Q&A
 **Theme:** Robotics | **Competition:** AAKRUTI Innovation Competition (AIC) 2026 (Dassault Systèmes / SOLIDWORKS)  
 **Institution:** Sanjivani University, School of Engineering & Technology, Kopargaon  
@@ -23,15 +31,15 @@ Below is the definitive, fact-checked defense manual for the team.
 > **Key Trap:** The jury suspects this is a standard student Arduino/ESP32 sensor project wrapped in buzzwords.
 
 **Defense Response:**
-> "A conventional IoT buoy is purely **passive**—it observes pollution flowing past, sends a wireless packet, and sits helplessly. By the time a manual team arrives 48 hours later, the pollution plume has dissolved, diluted, or entered community drinking water intakes, leaving zero physical evidence to hold polluters accountable.
+> "A conventional IoT buoy is purely **passive**—it observes pollution flowing past, sends a wireless packet, and sits helplessly. By the time a manual team arrives 48 hours later, the pollution plume has dissolved, diluted, or entered community drinking water intakes, leaving nothing to test.
 >
 > **AquaSentinel is an Active Mechatronic Robotic System operating on a closed Sense–Decide–Actuate loop:**
 > 1. **Sense:** Multiparameter surrogate array (RS485 Modbus) and ultrasonic stage sensing.
 > 2. **Decide:** FreeRTOS dual-core edge node running real-time Diurnal EWMA baseline anomaly detection.
 > 3. **Actuate (3 Autonomous Mechatronic Actuators):**
->    - **Actuator A (Forensic Autosampler):** A reversible peristaltic pump and 4-position precision indexing carousel that executes a 20s line pre-purge ($50\text{ mL}$) and physically seals $250\text{ mL}$ of river water in sterile borosilicate vials for legal NABL analysis under the *Water Act, 1974*.
+>    - **Actuator A (Autosampler):** A reversible peristaltic pump and 4-position indexing carousel that executes a 20s line pre-purge and bottles $250\text{ mL}$ of river water, one bottle per event, as a triage sample that tells the pollution board's laboratory when and where to sample. (It is not legal evidence: a legal sample needs the Board's own procedure under §21 of the *Water Act, 1974*.)
 >    - **Actuator B (Active Anti-Biofouling Wiper):** A waterproof servo executing a 180° bidirectional optical cleaning sweep across optical DO and turbidity probe lenses every 6 hours, parking into a hydrodynamic anti-snag recess.
->    - **Actuator C (Riverbank Visual Beacon & Remote Lockout Trip):** The 360° omnidirectional **Jal-Deep** visual safety beacon providing zero-device warnings to riverbank populations, paired with automated telemetry trips to downstream rural water lift pumps.
+>    - **Actuator C (Riverbank Visual Beacon & Alert):** The 360° omnidirectional **Jal-Deep** visual safety beacon providing zero-device warnings to riverbank populations, paired with an LTE alert to the water-works, who decide whether to close their intake.
 >
 > This active physical intervention and mechatronic kinematics firmly place AquaSentinel in the **Robotics** category."
 
@@ -43,9 +51,9 @@ Below is the definitive, fact-checked defense manual for the team.
 **Defense Response:**
 > "No, and any claim that inexpensive in-situ electronic probes can directly identify specific microscopic pathogens or trace heavy metals at parts-per-billion levels is scientifically false.
 >
-> AquaSentinel solves this through a **two-tier Surrogate-to-Forensic architecture**:
+> AquaSentinel solves this through a **two-tier surrogate-then-laboratory architecture**:
 > 1. **High-Frequency In-Situ Surrogates:** We monitor six physical-chemical master variables (pH, Optical Dissolved Oxygen, 90° Nephelometric Turbidity, Bipolar Electrical Conductivity, Temperature, and Ultrasonic Stage). In lotic freshwater, sudden unannounced industrial acid discharges produce sharp concurrent drops in pH ($< 6.5$) and surges in EC ($> 800\ \mu\text{S/cm}$). Conversely, municipal sewage discharges or distillery spent wash trigger massive spikes in turbidity and rapid oxygen depletion ($\text{DO} < 4.0\text{ mg/L}$).
-> 2. **Physical Forensic Confirmation:** When our edge EWMA algorithm detects an anomalous multivariant breach ($Z_{\text{score}} > 3.0$), AquaSentinel **physically captures and seals the water sample in borosilicate vials**. That captured sample provides the physical evidence needed by government NABL laboratories to perform definitive ICP-MS (for heavy metals) and membrane filtration culture (for *E. coli*), establishing a legal Chain-of-Custody under *IS 3025*."
+> 2. **Laboratory Confirmation:** When our edge EWMA algorithm detects an anomaly ($Z_{\text{score}} > 3.0$ in 2 of the last 3 readings, or a hard limit), AquaSentinel **bottles a water sample**, one per event. The sample is a triage sample: it tells the pollution board when and where to take its own formal sample, and gives an accredited laboratory a first look. Definitive tests such as ICP-MS (heavy metals) and membrane filtration (*E. coli*) stay with the laboratory."
 
 ---
 
@@ -124,7 +132,7 @@ Below is the definitive, fact-checked defense manual for the team.
 > 1. **Extreme Energy Waste:** In a $1.0\text{ m/s}$ flowing river, a motorized USV must constantly run electric thrusters to keep station. Over $85\%$ of battery power is burned purely overcoming river current, limiting runtime to 2 to 6 hours before requiring battery swapping or docking.
 > 2. **Zero-Power Station Keeping:** AquaSentinel uses a passive 316L guide pole, achieving **0 Watts power consumption for station-keeping**.
 > 3. **Propeller Fouling:** River hyacinth and fishing nylon wrap around marine propellers within hours, causing motor stall. AquaSentinel has no exposed propellers.
-> 4. **Capital Cost:** A commercial water-quality USV costs between ₹15 Lakhs and ₹40 Lakhs ($18,000 to $48,000 USD). AquaSentinel's complete build cost is **₹1,34,000 INR (~$1,400 USD)**, making permanent watershed network deployment economically viable."
+> 4. **Capital Cost:** AquaSentinel's prototype bill of materials is estimated at **≈ ₹1,38,000 INR** (catalogue prices, v2 layout), which makes a dense network of floats plausible."
 
 ---
 
@@ -135,11 +143,11 @@ Below is the definitive, fact-checked defense manual for the team.
 > "This was our central realization when studying the Godavari riverbanks between Kopargaon and Puntamba. Technology that stays trapped on an operator's dashboard does not protect a farmer leading his cattle into the water at 5:00 AM.
 >
 > We introduced two direct human-centric interventions:
-> 1. **The 'Jal-Deep' (जलदीप) 360° Visual Safety Beacon:** Mounted at $+0.85\text{ m}$ elevation on the central mast, this high-candela omnidirectional light is visible up to **800 meters across riverbanks in broad daylight** and **2.5 km at night**.
+> 1. **The 'Jal-Deep' (जलदीप) 360° Visual Safety Beacon:** Mounted on the mast, this omnidirectional light is meant to be readable from the riverbank; its visibility and power draw are still to be measured, and its colours must be agreed with the waterway authority, because red and green are navigation colours.
 >    - **Breathing Green:** River water is within normal baseline. Safe for washing, cattle, and ghat use.
 >    - **Flashing Amber:** Silt/monsoon advisory. Boil water.
 >    - **High-Intensity Red Strobe:** Dangerous contamination spike detected. Stay out of the water.
-> 2. **Trilingual Community Portal & SMS Gateway:** A dedicated citizen interface available in **Marathi (मराठी), Hindi (हिन्दी), and English**, translating technical parameters into clear public health advice (*'Is river water safe for cattle right now?'*), coupled with automated SMS alerts sent directly to registered village sarpanches and lift irrigation pump operators."
+> 2. **Trilingual Community Portal & SMS Gateway:** A dedicated citizen interface available in **Marathi (मराठी), Hindi (हिन्दी), and English**, translating technical parameters into clear public health advice (*'Is river water safe for cattle right now?'*). SMS alerts to village sarpanches and lift-irrigation operators are planned with the local body after the pilot."
 
 ---
 
@@ -147,10 +155,10 @@ Below is the definitive, fact-checked defense manual for the team.
 > **Key Trap:** Financial credibility and manufacturing realism.
 
 **Defense Response:**
-> "Our fully itemized Bill of Materials (`hardware/bom/AquaSentinel_BOM.csv`) totals **₹1,34,000 INR (~$1,400 USD)**:
+> "Our itemized cost estimate (`hardware/AquaSentinel_Cost_Estimate_BOM.csv`) adds up to **≈ ₹1,38,000 INR** (v2 layout; the subsystem split below is from the v2 version of this manual):
 > - **Submerged Sensor Array:** ₹81,100 (60.5% of cost, reflecting genuine industrial RS485 probes for pH, optical DO, nephelometric turbidity, and bipolar EC).
 > - **Robotics & Actuation Subsystems:** ₹16,500 (peristaltic pump, 4-vial stepper carousel, optical wiper servo, 3-way diverter).
 > - **Mechanical Chassis & Flotation:** ₹19,800 (twin rotomolded HDPE pontoons, 6061-T6 aluminum crossbars, Delrin rollers, 316L cage).
 > - **Power & Electronics:** ₹16,600 (20W mono PV, 12.8V 6Ah LiFePO4 pack, MPPT buck, ESP32 carrier board, INA226 monitor, IP67 enclosures).
 >
-> Compared to government CPCB Real-Time Continuous Water Quality Monitoring Stations (which cost ₹80 Lakhs to ₹1.5 Crore per station and require air-conditioned landside cabins), AquaSentinel can be deployed at **$1/60\text{th}$ of the cost**, enabling dense river corridor monitoring at every bridge and municipal intake."
+> A CPCB real-time station's 10-parameter instruments cost ₹35–40 lakh (CSE), about ₹50–84 lakh per station with its systems. Stations measure more parameters with lab-grade instruments, so AquaSentinel does not replace them: it is a low-cost early-warning layer between them, at a fraction of a station's cost."

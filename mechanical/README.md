@@ -28,8 +28,10 @@ electronics and battery, an autosampler stores water samples, and a beacon shows
 ## Key numbers (from [`checks/design_checks.json`](checks/design_checks.json))
 
 Mass 48.5 kg · draft 117 mm · freeboard 143 mm · reserve buoyancy 2.27× · GM<sub>T</sub> 0.55 m · GZ positive to 60°
-(max 180 mm at 25°) · float drag at 1.5 m/s 142 N · pole 54.8 MPa pinned hand calc (SF 3.1); 38.3 MPa in SOLIDWORKS
-Simulation (SF 4.4) · carriage jam margin 8.6× (1.7× with seized rollers) · 0 clashes over the full 2 m travel.
+(max 180 mm at 25°) · float drag at 1.5 m/s 142 N · pole **64.0 MPa, SF 2.66** with pinned ends and the carriage moment
+(the conservative case we quote); 54.8 MPa (SF 3.1) pinned without the moment, which is what `build.py` checks; 38.3 MPa
+(SF 4.4) in SOLIDWORKS Simulation with both ends fixed · carriage jam margin 8.6× (1.7× with seized rollers) · 0 clashes
+over the full 2 m travel.
 
 > **Design estimates, not test results.** Probe, battery, PV and pump masses are catalogue-class values and should be
 > replaced with weighed ones. The 2.0 m stage range, 1.5 m/s current and 500 N debris load are design assumptions; confirm

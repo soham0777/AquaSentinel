@@ -1,3 +1,10 @@
+> [!WARNING]
+> **Superseded (v2, September 2026).** This guide describes how the v2 model was built (pole through the centre, 250 mm
+> roller span, 25.4 kg). The R3 design is generated from [`mechanical/src/params.py`](../../mechanical/src/params.py) and
+> delivered as a SOLIDWORKS Pack and Go in [`mechanical/solidworks/`](../../mechanical/solidworks); see the
+> [mechanical README](../../mechanical/README.md) and the [claims register](claims_register.md). Kept for the record of
+> how the design developed.
+
 # AquaSentinel v2.0: SOLIDWORKS Build, Simulation & Motion Study Guide
 **Project: AquaRight | Device: AquaSentinel**  
 **Role: System Design & CAD Modeling (Shriraj Kamble)**  
@@ -65,7 +72,7 @@ All dimensions in millimeters (MMGS unit system). Materials assigned from the de
   * 8x Concave pile-guide rollers machined from virgin UHMW-PE (`Density = 940 kg/m^3`, $\mu = 0.05$).
   * 8x 316L precision shoulder bolts ($\varnothing 10\text{ mm}$) with sealed stainless ball bearings.
 
-### 7. Modular Forensic Autosampler Cassette (`AQ-07-Autosampler.sldasm`)
+### 7. Modular Autosampler Cassette (`AQ-07-Autosampler.sldasm`)
 * **Sub-Assembly Components:**
   * Insulated carousel housing with carrying handle.
   * 4-position rotary carousel holding 4x $250\text{ mL}$ borosilicate bottles with captive silicone septa.

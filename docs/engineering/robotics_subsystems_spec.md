@@ -1,3 +1,11 @@
+> [!WARNING]
+> **Superseded (v2, September 2026).** This specification describes the v2 design and was written before our audit of
+> 18 Oct. Its numbers are for the v2 layout, and several statements overclaimed what the system does. The current R3 values
+> and the claims we no longer make are in the [claims register](claims_register.md). In short: the sample is a triage
+> sample for the lab, not legal evidence; the float alerts the water-works but does not switch their pumps; carry-over and
+> beacon visibility are not yet measured; and the firmware's actuator drivers, clock and record hashing are not written yet.
+> Kept for the record of how the design developed.
+
 # AquaSentinel v2.0 — Robotics Subsystems Engineering Specification
 **Theme:** Robotics | **Competition:** AAKRUTI Innovation Competition (AIC) 2026 (Dassault Systèmes / SOLIDWORKS)  
 **Institution:** Sanjivani University, School of Engineering & Technology, Kopargaon  
@@ -8,17 +16,17 @@
 
 ## 1. Executive Summary & Robotics Classification
 
-In conventional river monitoring, floating sensor buoys operate strictly as **passive telemetry nodes**—they observe water degradation, transmit periodic data, and sit helplessly as the pollution plume flows past. When an unannounced chemical discharge or municipal sewage breach occurs, the plume passes downstream before manual lab teams can mobilize. By the time human technicians arrive (typically 24 to 72 hours later), the plume has dissolved, diluted, or entered community drinking water intakes, leaving **zero physical evidence** to legally hold polluters accountable under the *Water (Prevention and Control of Pollution) Act, 1974*.
+In conventional river monitoring, floating sensor buoys operate strictly as **passive telemetry nodes**—they observe water degradation, transmit periodic data, and sit helplessly as the pollution plume flows past. When an unannounced chemical discharge or municipal sewage breach occurs, the plume passes downstream before manual lab teams can mobilize. By the time human technicians arrive (typically 24 to 72 hours later), the plume has dissolved, diluted, or entered community drinking water intakes, leaving nothing for the pollution board to sample.
 
 **AquaSentinel transforms water monitoring into an Active Mechatronic Robotic System.**  
 Classified under the **Robotics** theme of AIC 2026, AquaSentinel executes closed-loop **Sense–Decide–Actuate** autonomy directly at the edge:
 
 1. **Sense:** Continuous multiparameter surrogate acquisition (pH, Optical DO, Turbidity, Bipolar EC, Temperature, Ultrasonic Stage) via isolated industrial RS485 Modbus transceivers.
-2. **Decide:** Onboard edge algorithmic state machine evaluating Diurnal Exponentially Weighted Moving Average (EWMA) dynamic baselines and Central Pollution Control Board (CPCB) Class C regulatory boundaries.
+2. **Decide:** Onboard edge algorithmic state machine evaluating Diurnal Exponentially Weighted Moving Average (EWMA) dynamic baselines and hard limits (pH and DO from CPCB Class C; the EC alarm level adopted from Class E).
 3. **Actuate (3 Robotic Actuators):**
-   - **Actuator A (Forensic Autosampler):** Closed-loop reversible peristaltic hydraulic pump and 4-position precision indexing carousel that physically captures, seals, and preserves four 250 mL borosilicate evidence vials during contamination shock loads.
+   - **Actuator A (Autosampler):** Reversible peristaltic pump and 4-position indexing carousel that bottles one 250 mL triage sample per contamination event, for the laboratory.
    - **Actuator B (Active Anti-Fouling Wiper):** Mechatronic silicone squeegee executing 180° bidirectional optical lens cleaning every 6 hours and parking into a hydrodynamic anti-snag recess.
-   - **Actuator C (Riverbank Visual Beacon & Remote Lockout Trip):** 360° omnidirectional high-luminance LED safety beacon (**जलदीप - Jal-Deep**) providing zero-device visual warning to riverbank populations, paired with automated telemetry lockout trip signals sent to downstream rural lift-irrigation pumps.
+   - **Actuator C (Riverbank Visual Beacon & Alert):** 360° omnidirectional LED safety beacon (**जलदीप - Jal-Deep**) providing zero-device visual warning to riverbank populations, paired with an LTE alert to the water-works, who decide whether to close their intake.
 
 ```
 +-----------------------------------------------------------------------------------+
@@ -41,7 +49,7 @@ Classified under the **Robotics** theme of AIC 2026, AquaSentinel executes close
                        | IF (Anomaly Score > 3.0 || Emergency) |
                        v                                       v
 +-------------------------------------------+ +-------------------------------------+
-| [ ACTUATOR A: FORENSIC AUTOSAMPLER ]      | | [ ACTUATOR B: ANTI-FOULING WIPER ]  |
+| [ ACTUATOR A: AUTOSAMPLER ]               | | [ ACTUATOR B: ANTI-FOULING WIPER ]  |
 | - Step 1: Advance Carousel to clean vial  | | - Periodic: Every 6 hours           |
 | - Step 2: 20s Line Purge-to-Waste         | | - Event: Triggered on DO/Turb drift |
 | - Step 3: 30s Physical Sample Draw (250mL)| | - Action: 180° bidirectional sweep  |
@@ -59,12 +67,12 @@ Classified under the **Robotics** theme of AIC 2026, AquaSentinel executes close
 
 ---
 
-## 2. Forensic Physical Autosampler Subsystem (Actuator A)
+## 2. Physical Autosampler Subsystem (Actuator A)
 
-### 2.1 Problem Definition & Legal Evidence Requirements
-Under Indian environmental jurisprudence (*National Green Tribunal, Western Zone Bench* and *Maharashtra Pollution Control Board* guidelines), data from electronic sensors is treated as **circumstantial / surrogate evidence**. To issue legal stop-work notices, seal unpermitted industrial outfalls, or levy environmental damage compensation, state pollution authorities require **physical laboratory analysis** conducted in NABL-accredited facilities adhering to *IS 3025 / APHA Standard Methods*.
+### 2.1 Problem Definition & What the Sample Is For
+Readings from electronic sensors are surrogates: they show that something changed, not what it was. Pollution authorities act on **laboratory analysis** in accredited facilities (*IS 3025 / APHA Standard Methods*), and a sample that can be used as legal evidence must be taken under the Board's own procedure (Water Act 1974, §21: notice to the occupier, splitting and sealing in their presence).
 
-The AquaSentinel Autosampler automates this physical evidence collection without requiring human operators to stand on treacherous riverbanks at 2:00 AM.
+An unattended float cannot follow that procedure, so the AquaSentinel autosampler takes a **triage sample**: it captures the water while the spill is passing, at 2:00 AM if need be, and tells the Board when and where to take its formal sample.
 
 ### 2.2 Fluidic Circuit Architecture
 The hydraulic circuit comprises:
@@ -122,20 +130,20 @@ Including the pump head chamber and internal fittings, the total dead volume is:
 $$V_{\text{dead, total}} = 14.5\text{ mL}$$
 
 #### Purge-to-Waste Flush Cycle:
-Before dispensing liquid into an evidence vial, the firmware engages the 3-way valve to `PURGE_TO_WASTE` and runs the pump forward for $t_{\text{purge}} = 20.0\text{ seconds}$:
+Before dispensing liquid into a sample bottle, the firmware engages the 3-way valve to `PURGE_TO_WASTE` and runs the pump forward for $t_{\text{purge}} = 20.0\text{ seconds}$:
 $$V_{\text{flushed}} = Q \cdot t_{\text{purge}} = 2.5\text{ mL/s} \cdot 20.0\text{ s} = 50.0\text{ mL}$$
 
 #### Flush Ratio:
 $$\text{Flush Ratio} = \frac{V_{\text{flushed}}}{V_{\text{dead, total}}} = \frac{50.0\text{ mL}}{14.5\text{ mL}} = 3.45\times \text{ line volumes}$$
 
-Under plug flow with Taylor dispersion in laminar tubing flow, flushing with $>3.4\times$ line volumes achieves **$< 0.8\%$ residual carry-over contamination**, well below the EPA standard ($< 1.0\%$).
+Flushing with $>3.4\times$ line volumes is expected to keep carry-over from the previous sample low; the actual carry-over has not been measured and is a bench test.
 
 #### Complete Sampling State Machine:
 1. **Carousel Indexing ($t = 0\text{ to }3\text{ s}$):** Stepper motor advances the turntable to align the next sterile borosilicate vial under the dispensing needle. Optical photo-interrupter verifies position notch.
 2. **Forward Purge ($t = 3\text{ to }23\text{ s}$):** Valve in Waste position; pump runs forward at $150\text{ mL/min}$ for 20s. $50\text{ mL}$ of river water flushes the tube and discharges into the downstream wake.
-3. **Evidence Fill ($t = 23\text{ to }123\text{ s}$):** Valve switches to Fill position; pump delivers $250\text{ mL}$ of water into the borosilicate vial over 100 seconds.
+3. **Sample Fill ($t = 23\text{ to }123\text{ s}$):** Valve switches to Fill position; pump delivers $250\text{ mL}$ of water into the borosilicate vial over 100 seconds.
 4. **Reverse Air Purge ($t = 123\text{ to }140\text{ s}$):** Valve returns to Waste; pump reverses direction for 17s. The entire intake tube is evacuated of liquid and filled with air, preventing biological growth, biofilm deposition, or stagnation inside the lines while standing idle.
-5. **Lock & Timestamp ($t = 140\text{ s}$):** Vial index is committed to non-volatile storage (`Preferences` NVS). Cryptographic hash of sensor readings (pH, EC, DO, Turbidity, Stage, GPS coordinates, UTC timestamp) is generated and written to MicroSD and cloud telemetry.
+5. **Record ($t = 140\text{ s}$):** Bottle index and the readings at the time of sampling are committed to non-volatile storage (`Preferences` NVS). A time stamp needs the clock driver, and a hash of the record is a planned addition; neither is implemented yet.
 
 ### 2.4 Carousel Mechanical Indexing System
 - **Drive:** NEMA 17 high-torque planetary stepper motor with 5.18:1 gearbox (step angle 0.35°), driven by an Allegro A4988 / TMC2208 microstepping driver operating in silent 1/16-step mode.
@@ -190,8 +198,8 @@ The sensor mounting block features an **upstream hydrodynamic wedge recess** (re
 Riverbank populations in rural Maharashtra (farmers irrigating sugarcane, washerwomen at Kopargaon ghats, fishermen, pilgrims performing holy ablutions at Puntamba) **do not continuously monitor smartphone apps or government web portals**. If an upstream chemical spill occurs, a digital alert on a server does not protect a farmer stepping into the water with his buffaloes.
 
 **AquaSentinel integrates the "Jal-Deep" (जलदीप) 360° Visual Safety Beacon:**
-- A high-luminance, 360-degree omnidirectional LED beacon mounted at the top of the central mast ($+0.85\text{ m}$ elevation above water level).
-- Visible up to **800 meters across riverbanks and ghats in broad daylight**, and **> 2.5 kilometers at night**.
+- A 360-degree omnidirectional LED beacon mounted at the top of the mast.
+- Visibility from the bank and power draw are still to be measured; the colours must be agreed with the waterway authority, because red and green are navigation colours.
 
 ### 4.2 Beacon Operational States
 
@@ -199,12 +207,12 @@ Riverbank populations in rural Maharashtra (farmers irrigating sugarcane, washer
 |:---|:---|:---|:---|:---|
 | **SAFE (सुरक्षित)** | Solid Green (525 nm) | Slow breathing glow (2s period) | Water quality strictly within CPCB Class C nominal baseline. | Normal river use permitted: bathing, cattle, lift irrigation. |
 | **ADVISORY (सावधान)** | Amber / Yellow (590 nm) | Pulsing flash (1 Hz, 50% duty) | Elevated turbidity (monsoon sediment) or mild organic loading. | Boil river water before drinking; inspect intake filters. |
-| **DANGER (धोकादायक)** | Vivid Red (625 nm) + Strobe | High-frequency dual strobe (3 Hz) | Critical anomaly: Acute toxic spill, extreme acid load ($\text{pH} < 6.0$), or severe hypoxia ($\text{DO} < 2.0\text{ mg/L}$). | **DO NOT ENTER WATER.** Stop cattle watering; lift irrigation pumps remotely isolated. |
+| **DANGER (धोकादायक)** | Vivid Red (625 nm) + Strobe | High-frequency dual strobe (3 Hz) | Critical anomaly: Acute toxic spill, extreme acid load ($\text{pH} < 6.0$), or severe hypoxia ($\text{DO} < 2.0\text{ mg/L}$). | **DO NOT ENTER WATER.** Stop cattle watering; water-works and lift-irrigation operators alerted. |
 
-### 4.3 Downstream Automated Intake Lockout Trip
-Coupled with the visual beacon, Node 01 automatically issues an emergency lockout command over cellular MQTT / LoRaWAN:
-- Target: Municipal water pumping stations at Kopargaon and rural lift schemes at Puntamba.
-- Action: Trips high-power contactors on raw water intake pumps, preventing contaminated water from entering municipal settling basins or agricultural canal networks.
+### 4.3 Downstream Alert to the Water-Works
+Coupled with the visual beacon, Node 01 sends an alert over LTE (SMS as the fallback) to the people who run the intakes:
+- Recipients: the municipal water-works and lift-irrigation operators downstream, as agreed with them before a pilot.
+- Action: they decide whether to close their intake. AquaSentinel does not switch anyone's pumps; who may trigger public warnings is still to be agreed with the authorities.
 
 ---
 
@@ -282,9 +290,11 @@ AquaSentinel's continuous load is an ultra-low **$3.39\text{ Wh/day}$** ($11.7\t
 
 ---
 
-## 7. Forensic Chain-of-Custody (CoC) Protocol
+## 7. Sample Handover Record (planned)
 
-When an autosampler vial is filled, the edge firmware generates a **tamper-evident forensic record**:
+When an autosampler bottle is filled, the edge firmware is meant to generate a **sample record** like the one below. The
+GPS position, bottle barcode, UTC time stamp and hash are planned fields; today's firmware stores the bottle index, the
+decision cycle and the readings only.
 
 1. **Digital Record Creation:**
    ```json
@@ -309,15 +319,15 @@ When an autosampler vial is filled, the edge firmware generates a **tamper-evide
    ```
 2. **Physical Collection Protocol:**
    - Field technician receives automated SMS alert with GPS coordinates and Vial ID.
-   - Technician extracts sealed borosilicate bottle from the quick-release IP67 pod.
-   - Technician scans the bottle QR code, attaches physical tamper-evident seal tape, and places the vial in a portable $4^\circ\text{C}$ insulated cooler box.
-   - Sample is dispatched to an authorized NABL / MPCB analytical laboratory within 24 hours for formal testing under *IS 3025 (Parts 11, 16, 38, 44)*.
+   - Technician removes the bottle from the insulated (not cooled) sampler cassette within hours of the alert.
+   - Technician labels it and places it in a cooler box at $\le 6^\circ\text{C}$.
+   - The bottle goes to an accredited laboratory, which sets the holding time per analyte (for BOD, analysis within 48 h). The pollution board takes its own formal sample if the result calls for it.
 
 ---
 
 ## 8. Summary of Engineering Innovations (AAKRUTI Defense)
 
-1. **Active Robotic Intervention:** Unlike passive IoT buoys, AquaSentinel actively collects physical legal evidence and protects downstream populations via visual beacons and pump lockout trips.
+1. **Active Robotic Intervention:** Unlike passive IoT buoys, AquaSentinel is designed to take a physical sample for the lab and to warn people downstream with a visual beacon and an alert to the water-works.
 2. **Anti-Biofouling Innovation:** Hydrodynamic recess parking protects the wiper blade from floating hyacinth and debris, solving the primary mechanical failure mode of river robotics.
-3. **Forensic Grade Assurance:** $3.45\times$ pre-purge line flushing guarantees $<0.8\%$ sample carry-over, meeting legal prosecution standards.
-4. **Zero-Power Quiescent Architecture:** Switched P-MOSFET rails enable $>20$ days of zero-sun dark autonomy on a compact 6 Ah LiFePO4 battery.
+3. **Clean Samples:** $3.45\times$ pre-purge line flushing before every fill; carry-over is still to be measured on the bench.
+4. **Low-Power Architecture:** Switched P-MOSFET rails give about 15 days of zero-sun autonomy on a compact 6 Ah LiFePO4 battery (design estimate; the beacon is not yet in the budget).

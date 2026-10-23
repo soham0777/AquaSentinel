@@ -83,7 +83,7 @@
 <div id="gauge"><div class="s">River stage (relative to low design level)</div><div class="v" id="gv">0.00 m</div><div class="s" id="gs"></div></div>
 <div id="caption"><div class="k" id="ck"></div><div class="t" id="ct"></div><div class="c" id="cc"></div></div>
 <div id="stepbar"></div>
-<div id="card"><div class="in"><h3>AquaSentinel R3</h3><p>Rides the river on a guide pole. Senses, warns, and keeps the evidence.</p><div class="nums" id="nums"></div></div></div>
+<div id="card"><div class="in"><h3>AquaSentinel R3</h3><p>Rides the river on a guide pole. Senses, warns, and keeps a sample for the lab.</p><div class="nums" id="nums"></div></div></div>
 <div id="panel">
   <h2>Animation</h2>
   <div class="row"><button class="primary" id="play">&#9654; Play full animation</button><button id="stop">Stop</button></div>
@@ -528,7 +528,7 @@ function compose(overlay = true) {
     const w = 900 * s, h = 330 * s, x = (W - w) / 2, y = (H - h) / 2 - 40 * s;
     cx.fillStyle = 'rgba(255,255,255,0.94)'; rrectPath(cx, x, y, w, h, 16 * s); cx.fill();
     cx.textAlign = 'center'; cx.fillStyle = '#13202b'; cx.font = F(700, 46); cx.fillText('AquaSentinel R3', W / 2, y + 70 * s);
-    cx.fillStyle = '#4b5b68'; cx.font = F(500, 22); cx.fillText('Rides the river on a guide pole. Senses, warns, and keeps the evidence.', W / 2, y + 108 * s);
+    cx.fillStyle = '#4b5b68'; cx.font = F(500, 22); cx.fillText('Rides the river on a guide pole. Senses, warns, and keeps a sample for the lab.', W / 2, y + 108 * s);
     const n = META.key_numbers; const items = [['Mass (CAD)', n.mass_kg + ' kg'], ['Draft / freeboard', n.draft_mm + ' / ' + n.freeboard_mm + ' mm'],
       ['Reserve buoyancy', n.reserve + ' x'], ['GM transverse', n.gm_t + ' m'], ['Pole safety factor', String(n.pole_sf)], ['Carriage jam margin', n.jam + ' x']];
     items.forEach(([a, b], i) => { const cxp = x + w * (0.2 + 0.3 * (i % 3)), cy = y + (175 + 85 * Math.floor(i / 3)) * s;

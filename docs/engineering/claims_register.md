@@ -1,64 +1,104 @@
-# AquaSentinel — Master Claims Register & Traceability Matrix
-**AAKRUTI Innovation Competition (AIC) 2026 — Theme: Robotics**  
-**Institution: Sanjivani University, School of Engineering & Technology, Kopargaon**
+# AquaSentinel R3: claims register
 
-This register catalogs every factual claim, numerical dimension, physical property, and regulatory citation used in the AquaSentinel presentation, documentation, firmware, and code. No number may appear in this project unless it is cross-referenced here.
+Every number we use in the presentation, the README and the project site, where it comes from, and how sure it is.
+Updated 23 Oct 2026 for the R3 design, after our internal audit of 18 Oct. The earlier v2 register (September 2026) is in
+the git history; several of its values were for the v2 layout and are no longer used.
 
----
+**Status key:** `COMPUTED` from the R3 CAD by the design engine · `SIMULATED` in SOLIDWORKS Simulation or on synthetic data ·
+`DESIGN ESTIMATE` from catalogue values · `ASSUMPTION` to confirm at the site or by test · `EXTERNAL` from a published source ·
+`NOT YET MEASURED`. Nothing has been built, weighed or tested in water yet.
 
-## 1. Public Health & Regulatory Ground Truth
+## 1. The problem and the market
 
-| Claim / Fact | Exact Value / Statement | Authoritative Source Citation | Verification Status |
-| :--- | :--- | :--- | :--- |
-| **National Water Sampling Frequency** | Indian rivers under NWMP sampled monthly or quarterly; trace metals/pesticides 2x/year | CPCB National Water Quality Monitoring Programme (`cpcb.nic.in/nwmp-data`) | `VERIFIED` |
-| **BOD Laboratory Incubation Delay** | 3-day incubation at 27 °C ($\text{BOD}_3^{27^\circ\text{C}}$) | Bureau of Indian Standards IS 3025 (Part 44) | `VERIFIED` |
-| **Global WASH Burden of Disease** | 1.4 million annual deaths attributable to unsafe Water, Sanitation, and Hygiene (2019 data) | World Health Organization (WHO), 28 June 2023 (`who.int/publications/i/item/9789240075610`) | `VERIFIED` |
-| **Maharashtra Polluted River Stretches**| Maharashtra has the highest count of polluted river stretches in India: 55 stretches | CPCB 2022, *Polluted River Stretches for Restoration of Water Quality* | `VERIFIED` |
-| **Kopargaon Municipal Sewage Discharge** | 9.98 MLD of untreated municipal sewage discharged directly into Godavari River | Govt. of Maharashtra Compliance Affidavit to National Green Tribunal (NGT), EA 35/2023 in OA 673/2018 | `VERIFIED` |
-| **Kopargaon Municipal Water Supply** | Drinking water is drawn from storage tanks at Yesgaon (~10 km north) fed by Left Bank Canal | Sanap et al., *International Journal of Research - GRANTHAALAYAH*, 8(9), 2020 | `VERIFIED` |
-| **Godavari River Corridor Geography** | Niphad is UPSTREAM near Nashik; Puntamba is DOWNSTREAM (~19 km straight-line reach) | Survey of India / Maharashtra WRD Basin Atlas | `VERIFIED` |
-| **Commercial RTWQMS Station Cost** | Real-time continuous water quality stations cost ₹35–40 Lakhs ($>\$42,000$) each (10 parameters) | Centre for Science and Environment (CSE) Analysis of CPCB RTWQMS Tenders | `VERIFIED` |
-| **Surrogate Detection Efficacy** | Continuous multi-sensor proxies + event detection identified >90% of illicit discharge events | Burkhardt et al., *RSC Environmental Science: Advances*, 2022 | `VERIFIED` |
-| **Designated Best Use Class C Limits** | Drinking water source after conventional treatment: $\text{pH } 6.0–9.0$, $\text{DO} \ge 4.0\text{ mg/L}$, $\text{EC} \le 2250\ \mu\text{S/cm}$ | Central Pollution Control Board (CPCB) Water Quality Criteria | `VERIFIED` |
+| Claim | Value | Source | Status |
+|---|---|---|---|
+| Polluted river stretches in India | 311 stretches on 279 rivers (2022) | CPCB report, quoted in [Lok Sabha reply AU2546](https://eparlib.nic.in/bitstream/123456789/1467192/1/AU2546.pdf) | `EXTERNAL` |
+| Maharashtra's share | 55, the most of any state (2022); 54 in the 2023 assessment (296 nationally) | as above; 2023 figures from secondary reports | `EXTERNAL` |
+| National monitoring network | ≈ 4,922 locations, 2,265 on rivers, mostly manual grab sampling | [CPCB reply to the NGT, OA 413 of 2025](https://www.greentribunal.gov.in/sites/default/files/news_updates/RESPONSE%20BY%20R-5%20CPCB%20IN%20OA%20NO.%20413%20of%202025%20ABHISHT%20KUSUM%20GUPTA%20VS%20UNION%20OF%20INDIA%20AND%20ORS..pdf) | `EXTERNAL` |
+| Real-time station cost | ₹35–40 lakh for a 10-parameter instrument set; ≈ ₹50–84 lakh per station with systems | [CSE](https://www.cseindia.org/cpcbs-real-time-water-quality-monitoring-4587); [Lok Sabha reply 5115](https://eparlib.nic.in/bitstream/123456789/700028/1/5115.pdf) | `EXTERNAL`. Not like-for-like: stations measure more parameters with lab-grade instruments |
+| Hard limits | pH 6.0–9.0 and DO ≥ 4 mg/L | CPCB designated-best-use criteria, **Class C** | `EXTERNAL` |
+| EC alarm level | 2250 µS/cm | CPCB criteria, **Class E** (irrigation, industrial cooling); adopted as our alarm level | `EXTERNAL` |
+| Status of the sample | A triage sample, not legal evidence: a legal sample needs the Board's own procedure | Water (Prevention and Control of Pollution) Act 1974, §21 | `EXTERNAL` |
+| Sample holding time | BOD: cool to ≤ 6 °C, analyse within 48 h | 40 CFR 136, Table II | `EXTERNAL` |
 
----
+## 2. Float: size, mass and hydrostatics
 
-## 2. Mechanical, Hydrostatic & Structural Parameters
+Source for every row: [`mechanical/checks/design_checks.json`](../../mechanical/checks/design_checks.json), regenerated by
+`mechanical/src/build.py` from [`params.py`](../../mechanical/src/params.py).
 
-All values generated by `calculations/verified_design_calcs.py` and exported to `calculations/verified_design_calcs.json`.
+| Claim | Value | Status |
+|---|---|---|
+| Envelope | 1016 × 770 × 896 mm (drawing AS3-DWG-01) | `COMPUTED` |
+| Mass, bottles full | 48.54 kg (dry transport 43.6 kg); about 20 % of it from catalogue or assumed masses | `COMPUTED` + `DESIGN ESTIMATE` |
+| Draft · freeboard | 116.8 mm · 143.2 mm (requirement ≥ 100 mm) | `COMPUTED` |
+| Reserve buoyancy | 2.27 × (110.3 L of hull for 48.5 L displaced; requirement ≥ 2.0) | `COMPUTED` |
+| Transverse stability | GM<sub>T</sub> 0.551 m; righting arm max 180 mm at 25°, positive at every computed angle up to 60° (angle of vanishing stability not computed) | `COMPUTED` |
+| Weathervane | lateral-area centre 351 mm aft of the pole | `COMPUTED` |
+| Design checks | 14 of 14 pass | `COMPUTED` |
 
-| Parameter | Design Value | Governing Equation / Formula | Verification Status |
-| :--- | :--- | :--- | :--- |
-| **Total Platform Mass** | $25.4\text{ kg}$ | Sum of all component masses in CAD budget | `DESIGN ESTIMATE` (To be verified by CAD/scale) |
-| **Pontoon Dimensions (Each of 2)**| $900\text{ mm (L)} \times 200\text{ mm (W)} \times 220\text{ mm (H)}$ | Selected for reserve buoyancy & 300mm central bay | `DESIGN ESTIMATE` |
-| **Operating Draft & Freeboard** | Draft = $78.3\text{ mm}$, Freeboard = $141.7\text{ mm}$ | $T_{\text{draft}} = \frac{V_{\text{disp}}}{A_{\text{wp}}}$; Freeboard = $H - T_{\text{draft}}$ | `DESIGN ESTIMATE` (Reserve SF = 2.81) |
-| **Transverse Metacentric Height ($GM_T$)**| $+0.66\text{ m}$ | $GM_T = KB + BM_T - KG$; $BM_T = \frac{I_T}{V_{\text{disp}}}$ | `DESIGN ESTIMATE` (4.4x above IMO 0.15m ref) |
-| **Deck Edge Immersion Angle** | $22.0^\circ$ | $\theta_{\text{deck}} = \arctan\left(\frac{\text{Freeboard}}{\text{Half-Beam}}\right)$ | `DESIGN ESTIMATE` |
-| **Design River Flood Velocity** | $1.5\text{ m/s}$ ($5.4\text{ km/h}$) | Operating envelope limit; higher flows require storm park | `ASSUMPTION - TO BE VERIFIED AT SITE` |
-| **Floating Debris Snag Load** | $500.0\text{ N}$ | Hyacinth mat / tree branch snagging force at water surface | `ASSUMPTION - TO BE VERIFIED` |
-| **Guide Pole Material & Spec** | 2-inch Schedule 40S 316L Pipe ($OD = 60.3\text{ mm}$, $t = 3.91\text{ mm}$) | ASME B36.19M Stainless Steel Pipe Standard | `VERIFIED SPECIFICATION` |
-| **316L Stainless Steel Yield Strength**| $170.0\text{ MPa}$ ($24.65\text{ ksi}$) | ASTM A240 / A312 TP316L Minimum Annealed Yield | `VERIFIED MATERIAL PROPERTY` |
-| **Guide Pole Bending Stress (Pinned)** | $63.1\text{ MPa}$ ($\mathbf{Safety\ Factor} = \mathbf{2.69\times}$) | Pinned-pinned beam under 593.7 N mid-span + 81.4 N/m | `DESIGN ESTIMATE` |
-| **Guide Pole Bending Stress (Clamped)**| $33.5\text{ MPa}$ ($\mathbf{Safety\ Factor} = \mathbf{5.08\times}$) | Fixed-fixed beam under 593.7 N mid-span + 81.4 N/m | `DESIGN ESTIMATE` |
-| **Guide Pole Mid-Span Deflection** | $9.7\text{ mm}$ (across $3.2\text{ m}$ bracket span) | $\delta_{\text{max}} \le \frac{\text{Span}}{200} = 16.0\text{ mm}$ (Passes stiffness limit) | `DESIGN ESTIMATE` |
-| **Roller Carriage Span** | $250.0\text{ mm}$ ($0.25\text{ m}$) | Set to exceed drawer anti-jamming criterion | `DESIGN ESTIMATE` |
-| **Anti-Jamming Margin (Rollers)** | $\mathbf{38.2\times\text{ margin}}$ ($\mu = 0.05$) | $e_{\text{max}} = \frac{L}{2\mu} = 2.5\text{ m}$ vs actual offset $0.065\text{ m}$ | `DESIGN ESTIMATE` (Jamming impossible) |
-| **Float Vertical Lag under Flood** | $18.7\text{ mm}$ (water rise required to slide) | $\Delta h = \frac{F_{\text{friction}}}{\rho_w g A_{\text{wp}}}$; well below 141.7mm freeboard | `DESIGN ESTIMATE` |
+## 3. Loads and structure
 
----
+| Claim | Value | Source | Status |
+|---|---|---|---|
+| Design current · debris · stage range | 1.5 m/s · 500 N · 2.0 m | `params.py`, `build.py` | `ASSUMPTION` (site gauge data needed) |
+| Float drag at 1.5 m/s | 142 N (C<sub>d</sub> 1.05, frontal area 0.120 m²); 642 N with the debris load | design_checks.json | `COMPUTED` |
+| **Guide pole, the value we quote** | **64.0 MPa, safety factor 2.66** (pinned ends + the carriage's two-tier couple) | hand calculation from our 18 Oct audit, on build.py's load case (642 N at the float, 81.4 N/m on the pole, 2,678 mm span, 316L yield 170 MPa) | `COMPUTED` |
+| Guide pole, other idealisations | pinned without the couple 54.8 MPa (SF 3.10, the value build.py checks); fixed ends 28.7 MPa (SF 5.92), 38.5 MPa with the couple (SF 4.41) | design_checks.json; the same audit calculation | `COMPUTED` |
+| Guide pole, FEA | 38.3 MPa (SF 4.4), 1.26 mm, **both clamp faces fixed** | [SOLIDWORKS Simulation report](../../mechanical/simulation/Pole_Static_Study_Report.docx) | `SIMULATED` (a stiff idealisation; we quote 2.66) |
+| Pole deflection, pinned | 5.8 mm (limit span/200 = 13.4 mm) | design_checks.json | `COMPUTED` |
+| Pier bracket, FEA | 3.65 MPa under the 430 N reaction + pole weight; anchors, welds and debris impact not analysed | [SOLIDWORKS Simulation report](../../mechanical/simulation/Bracket_Static_Study_Report.docx) | `SIMULATED` |
+| Carriage anti-jam margin | 8.62 at μ 0.05; 1.72 if the rollers seize (μ 0.25); tiers 350 mm apart, load 406 mm from the pole | design_checks.json (drawer rule e < s / 2μ) | `COMPUTED` |
+| Float lag under full load | 17.7 mm at μ 0.05 (limit 30 mm); 88.7 mm with seized rollers (no criterion yet) | design_checks.json | `COMPUTED` |
+| Clashes over 2 m of travel | 0; 101 part pairs checked with 2 mm voxels | design_checks.json | `COMPUTED` |
+| Not analysed yet | debris impact factor, fatigue, vortex shedding, gate pins and lugs, canopy wind load, flood over-topping | audit, mechanical review | — |
 
-## 3. Power, Energy & Sensor Specifications
+## 4. Decision logic and firmware
 
-| Parameter | Design Value | Source / Governing Model | Verification Status |
-| :--- | :--- | :--- | :--- |
-| **Daily Energy Consumption** | $3.39\text{ Wh/day}$ (Nominal) / $4.07\text{ Wh/day}$ (+20%) | Duty-cycle sum: 1.3W x 45s sensors (96x), 0.4W x 50s MCU | `DESIGN ESTIMATE` (To be verified by INA226 log) |
-| **Battery Usable Capacity** | $61.4\text{ Wh}$ ($12.8\text{V } 6000\text{ mAh LiFePO}_4$) | $76.8\text{ Wh} \times 80\%$ Depth of Discharge (DoD) | `VERIFIED COMPONENT RATING` |
-| **Continuous Dark Autonomy** | $\mathbf{15.1\text{ Days}}$ without solar replenishment | $T_{\text{dark}} = \frac{61.4\text{ Wh}}{4.07\text{ Wh/day}}$ | `DESIGN ESTIMATE` |
-| **Monsoon Daily Solar Generation** | $39.0\text{ Wh/day}$ ($9.6\times$ load surplus) | 20W PV @ 3.0 kWh/m²/day design monsoon day, $\eta = 65\%$ | `ASSUMPTION - TO BE CONFIRMED BY NASA POWER` |
-| **Annual Daily Solar Generation** | $68.9\text{ Wh/day}$ ($16.9\times$ load surplus) | 20W PV @ 5.3 kWh/m²/day annual average insolation | `ASSUMPTION - TO BE CONFIRMED BY NASA POWER` |
-| **Submerged Sensor Selection** | DFRobot Industrial RS485 Modbus Probes | SEN0708 (pH), SEN0707 (EC K=10), SEN0680 (DO), SEN0710 (Turb) | `VERIFIED COTS PRODUCT SPECS` |
-| **Autosampler Delivery Rate** | $500\text{ mL/min}$ ($250\text{ mL}$ vial filled in 30s) | 12V DC food-grade peristaltic pump delivery test | `DESIGN ESTIMATE` |
-| **Prototype Build Cost** | **₹1,34,000 INR ($1,400 USD)** | Detailed BOM itemizing ₹81.1k for 4 probes + ₹53.4k local build | `DESIGN ESTIMATE` (Dated quotes needed) |
+| Claim | Value | Source | Status |
+|---|---|---|---|
+| Readings | every 15 minutes, 96 a day nominal (the timer restarts after each wake, so slightly fewer) | `firmware/edge_node/include/config.h` | design |
+| Detection on the benchmark | 4 of 4 injected spills flagged, each within 30 min of the event's start; one sample each; no alarms outside the events | [`analytics/evaluate.py`](../../analytics/evaluate.py) on the [synthetic dataset](../../analytics/dataset/README.md) | `SIMULATED` on synthetic data. The spills are large compared with the noise; the real false-alarm rate needs pilot data |
+| Sensor faults | a fitted probe without a valid reading raises SENSOR_FAULT, never "normal" | `anomaly_engine.cpp`, `test/test_fail_safe` (12 tests) | written; compiles; tests not yet run on a board |
+| One bottle per event; state survives power cuts | as stated | `anomaly_engine.cpp`, `test/test_state_machine` (14 tests) | written; compiles; tests not yet run on a board |
+| Firmware build | compiles in the field and bench builds with 0 warnings (espressif32 6.13.0) | [`firmware/README.md`](../../firmware/README.md) | verified on 20 Oct |
+| Still to write | beacon, valve, carousel and wiper drivers; clock; stage sensor; LTE modem AT-command driver | firmware README | — |
 
----
-*Maintained under strict engineering honesty. Any changes to calculations must update `verified_design_calcs.py` first.*
+## 5. Power
+
+Source: [`hardware/power_budget.csv`](../../hardware/power_budget.csv). All `DESIGN ESTIMATE`; nothing measured.
+
+| Claim | Value |
+|---|---|
+| Daily energy | 3.39 Wh/day nominal, 4.07 Wh/day with a 20 % margin. **The beacon is not in the budget yet** |
+| Battery | 12.8 V 6 Ah LiFePO4, 61.4 Wh usable at 80 % depth of discharge |
+| Autonomy without sun | ≈ 15 days |
+| Solar | 20 W panel, ≈ 39 Wh on a cloudy monsoon design day (3.0 kWh/m²/day) |
+
+## 6. Cost
+
+Source: [`hardware/AquaSentinel_Cost_Estimate_BOM.csv`](../../hardware/AquaSentinel_Cost_Estimate_BOM.csv), priced on the v2
+layout (R3 re-costing pending). `DESIGN ESTIMATE` from catalogue prices; dated supplier quotes are still needed.
+
+| Claim | Value |
+|---|---|
+| Prototype bill of materials | ≈ **₹1,38,000**, the sum of the sheet's lines (its TOTAL row says ₹1,34,000) |
+| Share of the four probes | ₹81,100, 59 % |
+| At 100 units | ≈ ₹0.95 lakh per float (the sheet's 100-unit column) |
+| Service fee, market size | ₹0.8–1 lakh per float per year; 3 floats per polluted stretch. `ASSUMPTION`: proposals to validate in the pilot |
+
+## 7. Claims we no longer make
+
+| Earlier wording | Why it changed | What we say now |
+|---|---|---|
+| "Guide-pole safety factor 4.4" as the headline | 4.4 is the FEA with both ends fixed; real clamps are not rigid | 2.66, the conservative case |
+| "Keeps the evidence", "forensic", "legal chain of custody" | a sample taken by an unattended float cannot follow the Water Act §21 procedure | a triage sample that tells the Board when and where to sample |
+| "1/25th" or "1/60th of the cost of a station" | stations measure more parameters, so it is not like-for-like | a fraction of a station's cost; a complementary early-warning layer |
+| "₹1.34 lakh" | the cost-sheet lines add up to ₹1.38 lakh | ≈ ₹1.38 lakh |
+| "9.98 MLD of untreated sewage at Kopargaon" | we could not find the cited affidavit publicly | not used |
+| EC ≤ 2250 µS/cm as a "CPCB Class C" limit | it is the Class E criterion | an alarm level adopted from Class E |
+| "A single splash can't trigger a sample" | hard limits act on a single reading | each track described as it works |
+| "Deployment ready" | nothing is built or tested in water | designed and simulated |
+| "Visible 800 m in daylight" (beacon) | no optical design or measurement exists | to be measured |
+| "Automatic lock-out of intake pumps" | the float alerts; closing an intake is the water-works' decision | an alert to the water-works |
+| "< 0.8 % carry-over, meeting legal standards" | not measured | carry-over is a bench test |
+| "> 90 % of illicit discharges detected" (Burkhardt et al., 2022) | the figure was not confirmed in the paper | not used |
