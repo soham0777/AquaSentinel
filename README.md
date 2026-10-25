@@ -2,260 +2,74 @@
 
 <img src="docs/assets/banner.png" alt="AquaSentinel: watches the river, warns the bank, keeps a sample for the lab" width="100%">
 
-<br><br>
+# AquaSentinel R3: a river water-quality robot on a guide pole
 
-<a href="https://soham0777.github.io/AquaSentinel/#videos"><img src="docs/assets/ui/btn-pitch.png" alt="Watch the pitch" width="24%"></a>
-<a href="https://soham0777.github.io/AquaSentinel/viewer.html"><img src="docs/assets/ui/btn-3d.png" alt="Explore in 3D" width="24%"></a>
-<a href="docs/presentation/AquaSentinel_FDC_AAKRUTI_2026.pdf"><img src="docs/assets/ui/btn-deck.png" alt="Read the deck" width="24%"></a>
-<a href="https://soham0777.github.io/AquaSentinel/"><img src="docs/assets/ui/btn-site.png" alt="Project website" width="24%"></a>
+**Team Sanjivani Hero's Journey** · Sanjivani University, Kopargaon · AAKRUTI Innovation Competition 2026 (Robotics) · India Semi-Final
 
-<br>
-
-![AAKRUTI 2026](https://img.shields.io/badge/AAKRUTI-2026-C8102E?style=flat-square)
-![Robotics](https://img.shields.io/badge/theme-Robotics-005686?style=flat-square)
-![SOLIDWORKS](https://img.shields.io/badge/CAD-SOLIDWORKS-DA291C?style=flat-square&logo=dassaultsystemes&logoColor=white)
-![ESP32](https://img.shields.io/badge/firmware-ESP32-E7352C?style=flat-square&logo=espressif&logoColor=white)
-![Python](https://img.shields.io/badge/design_engine-Python-3776AB?style=flat-square&logo=python&logoColor=white)
-![three.js](https://img.shields.io/badge/3D-three.js-111111?style=flat-square&logo=threedotjs&logoColor=white)
-[![MIT](https://img.shields.io/badge/code-MIT-6f93a6?style=flat-square)](LICENSE)
+**Website, 3D viewer and dashboard:** https://soham0777.github.io/AquaSentinel/
 
 </div>
 
-<br>
+AquaSentinel is a solar float that rides a stainless guide pole clamped to a bridge pier. It is designed to:
+- read pH, conductivity, dissolved oxygen, turbidity, temperature and river level every 15 minutes;
+- decide on board, on an ESP32;
+- when a spill passes, turn its beacon red, send an LTE alert and bottle one sample for the lab.
 
-<p align="center">
-<b>AquaSentinel</b> is a solar-powered float designed to ride a stainless guide pole clamped to a bridge pier.<br>
-Every 15 minutes it reads the river. When a spill passes, it decides on the float itself, turns its beacon red<br>
-for the people at the ghat, alerts the water-works, and <b>bottles a water sample</b> that tells a certified lab where to look.<br>
-<sub>The river moves it, not a motor. Designed and simulated; not yet built or tested in water.</sub>
-</p>
+The river lifts the float up and down the pole, so there is no drive motor.
 
-<br>
+> **Status, honestly:** designed, calculated and simulated. It has not yet been built at full size or tested in water. The detection
+> logic has been tested on synthetic data only. Every figure below is a design estimate unless it says otherwise.
 
-<img src="docs/assets/ui/kpis.png" alt="96 readings a day; 4 of 4 synthetic spills flagged within 30 minutes; one 250 mL sample per event for the lab; 0 W to hold station; guide-pole safety factor 2.66 in the conservative case; about 1.38 lakh rupees for the prototype" width="100%">
+## Start here
 
-<br>
+| Want to… | Open |
+|---|---|
+| Read everything in one place | [`AquaSentinel_Complete_Project_Dossier.pdf`](AquaSentinel_Complete_Project_Dossier.pdf): design, checks, electronics, costs, business case, prior art, pitch script, jury Q&A, sources |
+| See the semi-final presentation | [`02_PRESENTATION_SEMIFINAL`](02_PRESENTATION_SEMIFINAL): deck (.pptx and .pdf), 8-minute script, video |
+| Open the CAD | [`01_DESIGN_CAD_AND_DRAWINGS`](01_DESIGN_CAD_AND_DRAWINGS) |
 
-## The problem
+## Folder map
 
-<img src="docs/assets/ui/problem.png" alt="A spill passes in hours while the river is sampled once a month; the spike slips between two normal monthly samples" width="100%">
+| Folder | What's inside |
+|---|---|
+| [`01_DESIGN_CAD_AND_DRAWINGS`](01_DESIGN_CAD_AND_DRAWINGS) | SOLIDWORKS Pack and Go (66 parts + assembly), assembly STEP and GLB, STEP/STL of every part, 6 × A3 drawings, the 14 design checks, renders, `BOM_R3.csv` |
+| [`02_PRESENTATION_SEMIFINAL`](02_PRESENTATION_SEMIFINAL) | final deck, PDF backup, 8-minute pitch script, video |
+| [`03_BUSINESS_COSTING_AND_BOM`](03_BUSINESS_COSTING_AND_BOM) | costed bill of materials (every line with its Indian price, source and basis) |
+| [`04_SIMULATION_AND_ANALYSIS`](04_SIMULATION_AND_ANALYSIS) | SOLIDWORKS Simulation models and reports (pole, bracket), detector and plume plots, power budget, design-check data |
+| [`05_SCALE_MODEL_1to5`](05_SCALE_MODEL_1to5) | 3D-print files and guide for the 1:5 model (float, stand, parts), and the scripts that generate them |
+| [`06_ELECTRONICS_AND_FIRMWARE`](06_ELECTRONICS_AND_FIRMWARE) | ESP32 firmware (PlatformIO, with an Arduino IDE viewing copy), hardware notes, schematic, power budget, bench-demo plan |
+| [`07_VIDEOS`](07_VIDEOS) | where each video is |
+| [`09_SOURCE_CODE_AND_WEBSITE`](09_SOURCE_CODE_AND_WEBSITE) | the CAD generator, analytics and benchmark, project plan |
+| [`docs`](docs) | the website (GitHub Pages), dashboard and 3D viewer |
 
-Real-time stations exist, but their instruments alone cost ₹35–40 lakh, so a river gets very few. We haven't found one
-that combines **continuous monitoring, low cost and a physical sample**. AquaSentinel is designed for the Godavari at
-Kopargaon, and for every river like it: not to replace those stations, but as a dense, low-cost early-warning layer between them.
+**Opening the CAD:**
+- The Pack and Go was saved in 3DEXPERIENCE SOLIDWORKS, so older desktop versions (for example 2019) can't open it.
+- Use [`AquaSentinel_R3_Assembly_MidWater.step`](01_DESIGN_CAD_AND_DRAWINGS/Assembly_STEP_GLB) in any CAD tool.
+- Or open the `.glb` in the Windows 3D Viewer.
 
-## How it works
+## Key figures
 
-<img src="docs/assets/ui/sense-decide-act.png" alt="Sense every 15 minutes, decide on the float, act: beacon, alert and sealed sample" width="100%">
-
-<br>
-
-<img src="docs/assets/ui/anatomy.png" alt="Annotated AquaSentinel: beacon, solar canopy, pod, autosampler, hulls, guide pole, stage sensor, 8-roller carriage, sensor cartridge, probe cage" width="100%">
-
-<table>
-<tr>
-<td width="50%"><img src="docs/assets/rides-the-river.gif" alt="The float rides the river up and down its guide pole" width="100%"></td>
-<td width="50%"><img src="docs/assets/assembly.gif" alt="Assembly sequence" width="100%"></td>
-</tr>
-<tr>
-<td><b>A float on a pole, not a boat.</b> Eight concave rollers let it ride 2 m of river level. The pole sits at the bow, so the current turns it like a weathervane and the pole carries no torque.</td>
-<td><b>66 parts, every one with a reason.</b> The carriage gate opens on two T-handle pins, so the float comes off before a flood without tools. The sensor cartridge lifts out through a deck hatch.</td>
-</tr>
-</table>
-
-## Gallery
-
-<table>
-<tr>
-<td width="33%"><img src="docs/assets/renders/hero-river.jpg" alt="Clamped to a bridge pier"></td>
-<td width="33%"><img src="docs/assets/renders/alert-red.jpg" alt="Alert: beacon red, bottle fills"></td>
-<td width="33%"><img src="docs/assets/renders/exploded.jpg" alt="Exploded and labelled"></td>
-</tr>
-<tr>
-<td align="center"><sub>Clamped to a bridge pier</sub></td>
-<td align="center"><sub>Alert: beacon red, bottle fills</sub></td>
-<td align="center"><sub>Exploded, every part numbered</sub></td>
-</tr>
-<tr>
-<td><img src="docs/assets/renders/gate-open.jpg" alt="Carriage gate open"></td>
-<td><img src="docs/assets/renders/underwater.jpg" alt="Probes under the hull"></td>
-<td><img src="docs/assets/renders/weathervane.jpg" alt="Weathervane from above"></td>
-</tr>
-<tr>
-<td align="center"><sub>Gate open: the float comes off the pole</sub></td>
-<td align="center"><sub>Probes in a guarded well</sub></td>
-<td align="center"><sub>Trails the current like a vane</sub></td>
-</tr>
-</table>
-
-<img src="docs/assets/renders/motion-study.jpg" alt="Motion study: low water, normal, flood" width="100%">
-
-## Engineering
-
-| | Value | How we know |
+| Topic | Figure | Support |
 |---|---|---|
-| Size · mass | 1.0 × 0.8 × 0.9 m · **48.5 kg** | CAD mass properties ([design_checks.json](mechanical/checks/design_checks.json)) |
-| Freeboard · reserve buoyancy | **143 mm** · **2.27×** | hand calcs on the CAD geometry |
-| Stability | GM<sub>T</sub> **0.55 m**, righting arm positive to **60°** (max 180 mm at 25°) | hand calcs on the CAD geometry |
-| Guide pole, flood + debris | **64 MPa**, safety factor **2.66** (conservative: pinned ends + carriage moment) | hand calc on the CAD geometry; SOLIDWORKS Simulation with both ends fixed gives 38.3 MPa, SF 4.4 |
-| Pier bracket | 3.7 MPa, safety factor 46 | SOLIDWORKS Simulation |
-| Carriage jamming | **8.6×** margin, 1.7× even with seized rollers | hand calcs |
-| Clashes over the full 2 m travel | **0** | voxel interference on the real meshes, 101 part pairs |
-| Spill detection | **4 / 4** flagged, each within **30 min** | decision logic on 30 days of **synthetic** river data |
-| Cost | **≈ ₹1.38 lakh** prototype; the four probes are 59 % of it | sum of the [cost sheet](hardware/AquaSentinel_Cost_Estimate_BOM.csv) lines, v2 layout (R3 re-costing pending). For comparison, a real-time station's instruments cost ₹35–40 lakh (CSE), but stations measure more parameters |
+| Float | 48.5 kg (CAD estimate), freeboard 143 mm, reserve buoyancy 2.27×, righting arm positive to 60° | calculated from the CAD |
+| Level tracking | rides 2 m of river rise on 8 UHMW rollers; anti-jam margin 8.6 | calculated |
+| Structure | pole safety factor **2.66**, our most conservative **static** load case (1.5 m/s current + 500 N debris); FEA with fixed ends gives 4.4. Dynamic impact and anchors are still to verify | calculated + SOLIDWORKS Simulation |
+| Power | ≈ 12 days without sun, including an assumed beacon load | preliminary estimate |
+| Detection | 4 of 4 injected spills flagged within 30 minutes | synthetic data only |
+| Alarm limits | our operating limits, tunable per site: pH outside 6–9; DO below 4 mg/L (the CPCB Class C/D criterion); EC above 2,250 µS/cm (the CPCB Class E limit) | design |
+| Cost (ex-GST, Indian prices of 23 Oct 2026) | prototype float ₹1,57,492 + bridge kit ₹29,218 = ₹1,86,710; ≈ ₹1,48,055 at 100 units | estimate |
+| Proposed service | ₹12,000 a month per float on a 5-year contract; hardware paid back in ≈ 20 months; ≈ 46 % margin over the contract | proposal |
+| Problem | 296 polluted river stretches/locations in India; Maharashtra 54, the most (CPCB, published 2025) | published |
 
-> [!IMPORTANT]
-> These are **design-stage estimates**: AquaSentinel has **not been tested in water yet**, and the tank test is next.
-> Catalogue masses still need weighing, and the 2 m stage range, 1.5 m/s current and 500 N debris load are assumptions
-> to confirm at the site. Every claim is traced in the [claims register](docs/engineering/claims_register.md).
+## Not in this repository
 
-<table>
-<tr>
-<td width="25%"><img src="docs/assets/pole-vonmises-stress.jpg" alt="Guide pole stress"></td>
-<td width="25%"><img src="docs/assets/pole-displacement.jpg" alt="Guide pole displacement"></td>
-<td width="25%"><img src="docs/assets/bracket-vonmises-stress.jpg" alt="Bracket stress"></td>
-<td width="25%"><img src="docs/assets/bracket-displacement.jpg" alt="Bracket displacement"></td>
-</tr>
-<tr><td colspan="4" align="center"><sub>SOLIDWORKS Simulation: guide pole and pier bracket, von Mises stress and displacement. <a href="mechanical/simulation">Full reports →</a></sub></td></tr>
-</table>
-
-## Electronics and decision logic
-
-<img src="docs/assets/ui/architecture.png" alt="System architecture: probes and stage sensor into the ESP32; beacon, LTE, autosampler, wiper and microSD out; solar power chain" width="100%">
-
-Two tracks run on every reading. **Hard limits act immediately**, on a single reading: pH outside 6.0–9.0 or DO below
-4 mg/L (CPCB Class C), or EC above 2250 µS/cm (an alarm level adopted from CPCB Class E). **A learned baseline catches the
-rest**: for the first 7 days the float learns what normal looks like at that site, hour by hour, and then acts when
-**2 of the last 3** readings are unusual. Each event takes **one bottle**, and it ends only after four clean readings, so four
-bottles cover four separate events. A probe that stops answering raises a **sensor fault**; it never reads as clean water.
-
-<img src="docs/assets/detector-evaluation.jpg" alt="Detection replayed on 30 days of synthetic river data" width="100%">
-<p align="center"><sub>The decision logic replayed on 30 days of synthetic river data with four injected spills: all four flagged, each within 30 minutes, one sample each. Synthetic benchmark, not field data; the spills are large compared with the noise, so the real false-alarm rate needs pilot data.</sub></p>
-
-<details>
-<summary><b>Firmware modules</b></summary>
-
-<br>
-
-The firmware in [`firmware/edge_node`](firmware/edge_node) is a PlatformIO project (Arduino framework).
-
-| Module | Job |
-|---|---|
-| `sensor_interface` | power-gated RS485 Modbus reads of the four probes, median of three reads; a failed read is never used (stage-sensor driver still to write) |
-| `anomaly_engine` | hard limits + robust z-score against a 24-bin diurnal baseline; SENSOR_FAULT state; one sample per event; learned state saved to flash |
-| `autosampler` | 20 s purge to waste, 30 s fill, carousel indexing, 60-min lockout; bottle state survives power cuts |
-| `wiper_actuator` | anti-fouling sweeps of the optical faces |
-| `microsd_logger` · `telemetry_comm` | reading log on microSD; JSON telemetry frame handed to the LTE modem |
-| `dsp_filters` | median and exponential smoothing helpers, not yet wired in |
-
-Not written yet: the beacon, valve, carousel and wiper drivers (today they log what they would do), the clock, and the
-modem's AT-command driver. Nothing has run on hardware yet; the bench demo is next.
-
-Python reference of the decision step: [`analytics/detector.py`](analytics/detector.py) ·
-electronics: [KiCad schematic](hardware/kicad), [power budget](hardware/power_budget.csv) (≈ 3.4 Wh/day estimated).
-</details>
-
-## Try it
-
-<table>
-<tr>
-<td width="50%"><a href="https://soham0777.github.io/AquaSentinel/viewer.html"><img src="docs/assets/ui/frame-viewer.png" alt="Interactive 3D model"></a></td>
-<td width="50%"><a href="https://soham0777.github.io/AquaSentinel/dashboard/"><img src="docs/assets/ui/frame-dashboard.png" alt="Command dashboard demo"></a></td>
-</tr>
-<tr>
-<td><b><a href="https://soham0777.github.io/AquaSentinel/viewer.html">Interactive 3D model →</a></b><br><sub>Raise the river, open the gate, lift the cartridge, trigger a pollution event, explode it, click any part.</sub></td>
-<td><b><a href="https://soham0777.github.io/AquaSentinel/dashboard/">Command dashboard →</a></b><br><sub>For the water-works and pollution board, in English, मराठी and हिंदी. Demo mode, synthetic scenario.</sub></td>
-</tr>
-</table>
-
-## Videos
-
-<table>
-<tr>
-<td width="33%"><a href="https://soham0777.github.io/AquaSentinel/#videos"><img src="docs/assets/ui/video-marketing.png" alt="AquaSentinel in 60 seconds, 1:00"></a></td>
-<td width="33%"><a href="https://soham0777.github.io/AquaSentinel/#videos"><img src="docs/assets/ui/video-journey.png" alt="Journey video, 1:58"></a></td>
-<td width="33%"><a href="https://soham0777.github.io/AquaSentinel/#videos"><img src="docs/assets/ui/video-assembly-and-operation.png" alt="Assembly and operation, 1:47"></a></td>
-</tr>
-</table>
-
-<p align="center"><sub>Watch in the browser on the <a href="https://soham0777.github.io/AquaSentinel/#videos">project site</a> · full-quality 1080p files on the <a href="https://github.com/soham0777/AquaSentinel/releases/latest">latest release</a>.
-The journey video was made for the Final Design Concept (5 Oct), before our audit; AquaSentinel has not yet been built or tested in water.</sub></p>
-
-## The presentation
-
-<a href="docs/presentation/AquaSentinel_FDC_AAKRUTI_2026.pdf"><img src="docs/assets/deck-overview.jpg" alt="All 13 slides of the Final Design Concept deck" width="100%"></a>
-
-<p align="center"><sub>The 13-slide Final Design Concept on the official AAKRUTI template, as submitted on 5 Oct · <a href="docs/presentation/AquaSentinel_FDC_AAKRUTI_2026.pdf">PDF</a> · PowerPoint in the <a href="https://github.com/soham0777/AquaSentinel/releases/latest">release</a>.
-Since then our audit has revised a few figures: we now quote the pole's conservative safety factor (2.66, not 4.4) and the cost-sheet line sum (₹1.38 lakh, not ₹1.34 lakh), and we call the sample a triage sample for the lab, not evidence.</sub></p>
-
-## The design journey
-
-<img src="docs/assets/ui/timeline.png" alt="Design journey: idea, research, calculations, CAD v2, clash found, R3 redesign, validated, next: tank test and Godavari pilot" width="100%">
-
-The biggest lesson came from our own CAD: in v2 the guide pole ran straight through the electronics box. Moving the pole
-to the bow fixed the clash, and it turned a problem into a feature: the float now weathervanes with the current.
-
-<details>
-<summary><b>Planned in ENOVIA</b></summary>
-<br>
-<img src="docs/assets/enovia-gantt.jpg" alt="ENOVIA project plan" width="100%">
-</details>
-
-## What's in the repository
-
-| | |
-|---|---|
-| [`mechanical/`](mechanical) | R3 parametric design engine, **SOLIDWORKS Pack and Go**, STEP/STL/GLB, BOM, 6 × A3 drawings, design checks, SOLIDWORKS Simulation |
-| [`firmware/`](firmware) | ESP32 edge controller (PlatformIO) |
-| [`analytics/`](analytics) | detection engine reference, synthetic benchmark, plume travel-time model |
-| [`hardware/`](hardware) | KiCad schematic, power budget, cost estimate, bench test procedure |
-| [`docs/`](docs) | the project site: 3D viewer, dashboard, presentation, videos, engineering notes |
-| [`project-management/`](project-management) | ENOVIA project plan |
-
-<details>
-<summary><b>Run it yourself</b></summary>
-
-```bash
-# replay the detection engine on the synthetic dataset (Python 3 + numpy, matplotlib)
-cd analytics && python evaluate.py
-```
-
-```bash
-# rebuild the whole mechanical design: geometry, checks, STEP/STL/GLB, BOM (Python 3 + numpy, matplotlib, Pillow)
-cd mechanical && python src/build.py
-```
-
-```bash
-# build the firmware (PlatformIO; compiles, but has not yet run on the real hardware)
-cd firmware/edge_node && pio run
-```
-
-To open the CAD, unzip `mechanical/solidworks/AquaSentinel_R3_SOLIDWORKS_PackAndGo.zip` and open `AquaSentinel_R3_Assembly.SLDASM` in SOLIDWORKS.
-</details>
-
-## Status
-
-| Done | Next |
-|---|---|
-| Complete R3 design: 66 parts, drawings, BOM | Tank test: draft, 2 m travel, roller friction |
-| SOLIDWORKS Simulation of the pole and pier bracket | Weigh the real components, update the mass budget |
-| Hydrostatics, stability, anti-jamming and clash checks | 30-day Godavari pilot at Kopargaon (permits needed) |
-| Firmware compiles; a dead probe raises a fault, never "clean water"; one bottle per event; learned state survives power cuts | Bench-run the firmware on the real probes and modem |
-| Printable 1:5 scale model and display stand ([`mechanical/scale_model_1to5`](mechanical/scale_model_1to5)) | Print the 1:5 model and float it |
-| Decision logic on synthetic data: 4/4 spills flagged | Validate on field data with a certified lab |
-| Dashboard demo in three languages | Dated supplier quotes for the cost estimate |
-
-Probes give clues, not lab results: the float flags a likely spill and keeps a sample, and a certified lab confirms it.
-The bottle is a triage sample, not legal evidence: it tells the pollution board when and where to take its own formal sample.
+- Private competition notes.
+- Official evaluation reports.
+- Personal contact details.
+- The two 1080p video masters, which are too large for GitHub.
 
 ## Team
 
-<img src="docs/assets/ui/team.png" alt="Team Sanjivani Hero's Journey: Soham Kadu, Shriraj Kamble, Bhakti Kadam, Tanmay Pendbhaje, mentor Dr. Kiran Wakchaure" width="100%">
+Soham Kadu (Project Lead) · Shriraj Kamble (System Design) · Bhakti Kadam (Electronics Lead) · Tanmay Pendbhaje (Software Lead) · Mentor: Dr. Kiran Wakchaure
 
-Our Final Design Concept entry for the **AAKRUTI Innovation Competition 2026** (Robotics theme), run with **Dassault Systèmes**
-on the 3DEXPERIENCE platform: designed in **SOLIDWORKS**, validated in **SOLIDWORKS Simulation**, planned in **ENOVIA**.
-
-<sub>Code (design engine, firmware, analytics, dashboard, viewer) is released under the [MIT License](LICENSE). The presentation, videos,
-renders and drawings are © 2026 Team Sanjivani Hero's Journey; please ask before reusing them.</sub>
-
-<div align="center"><br><sub>Made on the banks of the Godavari 🌊</sub></div>
+Released under the [LICENSE](LICENSE) in this repository.

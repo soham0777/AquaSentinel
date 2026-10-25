@@ -377,7 +377,7 @@ function buildTimeline() {
   const V = (p, q) => [m2t(...p), m2t(...q)];
   T.push({ t: 0, dur: 3.5, fn: () => { S.env = 'studio'; S.pier = true; }, view: V([3400, 2400, 2100], [-200, 0, 1250]) });
   cap('AquaRight  |  AAKRUTI 2026  |  Robotics', 'AquaSentinel R3',
-      'A river water-quality station that rides a guide pole: no motor, no propeller, no GPS.', 0, 3.5);
+      'A river water-quality station that rides a guide pole: no drive motor, no propeller, no GPS.', 0, 3.5);
   t = 3.5;
   const stepDur = { 1: 3.2, 2: 3.6, 3: 3.0, 4: 3.4, 5: 5.0, 6: 3.8, 7: 3.4, 8: 3.0, 9: 3.4, 10: 3.2, 11: 4.4, 12: 3.2 };
   const stepView = {

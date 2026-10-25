@@ -1,0 +1,16 @@
+Subsystem,Operating_State,Voltage_V,Current_mA,Power_W,Duration_sec,Cycles_Per_Day,Daily_Time_sec,Daily_Energy_Wh,Engineering_Notes
+Sensor_Array,Sensing_Warmup_Active,12.0,108.3,1.30,45,96,4320,1.560,4x RS485 Modbus probes active during 15-min duty cycle
+Edge_MCU_Core,Active_Compute_DSP,3.3,121.2,0.40,50,96,4800,0.533,ESP32 dual-core active for sampling & anomaly detection
+Cellular_Modem,LTE_Batch_Upload,4.0,500.0,2.00,45,24,1080,0.600,Hourly batch MQTT telemetry dispatch via SIMCom A7670C
+Robotics_Wiper,Motorized_Optical_Sweep,5.0,600.0,3.00,6,4,24,0.020,4 sweeps/day (every 6h) clearing optical turbidity & DO face
+Robotics_Autosampler,Plume_Physical_Capture,12.0,1000.0,12.00,25,0.14,3.5,0.012,Triggered on anomaly (1 event/week average ~300 J)
+Microcontroller_Sleep,Deep_Sleep_RTC_ULP,3.3,0.015,0.00005,850,96,81600,0.001,ESP32 in deep sleep; RTC slow timer maintains schedule
+Hardware_Standby_Floor,Quiescent_Current_Floor,12.8,0.60,0.00768,86400,1,86400,0.184,INA226 + buck regulator + BMS supervisory quiescent floor
+Power_Conversion_Loss,Buck_Regulator_Losses,12.8,-,-,-,-,-,0.480,85% average conversion efficiency across buck regulators
+TOTAL_NOMINAL,Normal_Operating_Cycle,-,-,-,-,-,86400,3.390,Total daily baseline consumption (3.39 Wh/day)
+DESIGN_TARGET_MARGIN,Safety_Design_Target,-,-,-,-,-,86400,4.070,Design baseline including 20% engineering safety margin
+BATTERY_CAPACITY,LiFePO4_12.8V_6000mAh,12.8,6000,76.8,-,-,-,61.440,Usable energy at 80% Depth-of-Discharge (DoD)
+DARK_AUTONOMY_DAYS,Zero_Sunlight_Endurance,-,-,-,-,-,-,15.1,15.1 days continuous operation without solar charging
+PV_MONSOON_GENERATION,Overcast_Monsoon_Day,18.0,-,20.0,-,-,-,39.000,20W PV @ 3.0 kWh/m2/day design monsoon day (9.6x surplus)
+PV_ANNUAL_GENERATION,Annual_Average_Day,18.0,-,20.0,-,-,-,68.900,20W PV @ 5.3 kWh/m2/day annual insolation (16.9x surplus)
+CRISIS_MODE_EXTRA,Continuous_5Min_Sampling,12.8,-,-,-,-,-,4.930,Additional consumption during prolonged chemical pollution event

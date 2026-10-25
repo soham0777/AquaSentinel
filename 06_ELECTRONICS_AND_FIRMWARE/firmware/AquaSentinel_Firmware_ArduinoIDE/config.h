@@ -78,7 +78,7 @@
 #define SAMPLE_LOCKOUT_MIN    60   // 60-minute lockout between physical captures
 
 // -----------------------------------------------------------------------------
-// 5. CPCB Designated Best Use Class C Hard Limit Tripwires
+// 5. Hard-limit tripwires: our operating limits, tunable per site (DO >= 4 mg/L is the CPCB Class C/D criterion; EC <= 2250 uS/cm is the CPCB Class E limit)
 // -----------------------------------------------------------------------------
 #define LIMIT_PH_MIN          6.0f
 #define LIMIT_PH_MAX          9.0f
