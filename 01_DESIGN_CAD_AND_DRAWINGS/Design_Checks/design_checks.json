@@ -1,0 +1,1054 @@
+{
+  "status": "DESIGN ESTIMATE from the R3 CAD geometry - not measured. Replace catalogue masses with weighed values.",
+  "mass": {
+    "total_kg": 48.54,
+    "cg_mm": [
+      395.1,
+      1.3,
+      250.3
+    ],
+    "by_group": {
+      "canopy": 2.0,
+      "cartridge": 3.95,
+      "float": 38.8,
+      "gate": 2.55,
+      "podlid": 0.8,
+      "samplerlid": 0.45
+    },
+    "basis_counts": {
+      "CAD area x 5 mm wall + fill": 2,
+      "CAD volume x density": 79,
+      "catalogue / assumed": 36,
+      "CAD area x 3.5 mm wall": 2,
+      "CAD area x 6 mm wall + fill": 1,
+      "CAD area x 4 mm wall": 1
+    }
+  },
+  "hydrostatics": {
+    "draft_mm": 116.8,
+    "freeboard_mm": 143.2,
+    "displaced_L": 48.54,
+    "hull_volume_L": 110.3,
+    "reserve_buoyancy_sf": 2.27,
+    "dry_transport_mass_kg": 43.6,
+    "waterplane_area_m2": 0.4517,
+    "LCF_from_pole_mm": 406.2,
+    "LCB_mm": 424.2,
+    "LCG_mm": 395.1,
+    "KG_mm": 250.3,
+    "KB_mm": 53.2,
+    "GM_T_m": 0.551,
+    "GM_L_m": 2.19,
+    "trim_moment_Nm": -13.82,
+    "free_trim_if_detached_deg": -0.76,
+    "GZ_curve_mm": {
+      "0": 1.3,
+      "5": 46.1,
+      "10": 91.3,
+      "15": 137.4,
+      "20": 172.4,
+      "25": 180.2,
+      "30": 161.5,
+      "35": 140.5,
+      "40": 118.5,
+      "45": 96.0,
+      "50": 72.7,
+      "55": 49.5,
+      "60": 26.7
+    },
+    "GZ_max_mm": 180.2,
+    "angle_of_GZ_max_deg": 25,
+    "deck_edge_immersion_deg": 20.4
+  },
+  "hydrodynamics": {
+    "design_velocity_m_s": 1.5,
+    "debris_snag_N": 500.0,
+    "Cd_float": 1.05,
+    "frontal_area_m2": 0.1202,
+    "frontal_centroid_z_mm": -36.4,
+    "lateral_area_m2": 0.1649,
+    "centre_of_lateral_resistance_x_mm": 351.4,
+    "float_drag_N": 142.0,
+    "weathervane_stable": true,
+    "note": "The float pivots on the pole at its bow; its lateral area centre is aft of the pole, so it trails downstream like a vane and turns no torque into the guide."
+  },
+  "pole": {
+    "section": "2 in Sch 40S SS316L",
+    "length_mm": 2978,
+    "bracket_span_mm": 2678,
+    "load_at_float_N": 642.0,
+    "pole_drag_N_per_m": 81.4,
+    "stress_pinned_MPa": 54.8,
+    "SF_pinned": 3.1,
+    "stress_fixed_MPa": 28.7,
+    "SF_fixed": 5.92,
+    "deflection_pinned_mm": 5.8,
+    "bracket_reaction_N": 430.0,
+    "yield_MPa": 170,
+    "note": "v2 method; span set by the R3 stage geometry"
+  },
+  "carriage": {
+    "roller_tier_spacing_mm": 350,
+    "eccentricity_LCF_mm": 406.2,
+    "load_height_below_carriage_mid_mm": 428.4,
+    "rollers_mu_0_05": {
+      "roller_loads_N": [
+        1106.9,
+        464.8
+      ],
+      "friction_N": 78.6,
+      "float_lag_mm": 17.7,
+      "static_trim_roller_N": 39.5,
+      "static_lag_mm": 0.89,
+      "jam_eccentricity_limit_m": 3.5,
+      "jam_margin": 8.62
+    },
+    "seized_rollers_sliding_mu_0_25": {
+      "roller_loads_N": [
+        1106.9,
+        464.8
+      ],
+      "friction_N": 392.9,
+      "float_lag_mm": 88.7,
+      "static_trim_roller_N": 39.5,
+      "static_lag_mm": 4.46,
+      "jam_eccentricity_limit_m": 0.7,
+      "jam_margin": 1.72
+    },
+    "rule": "drawer rule: no self-locking while e < s / (2 mu)"
+  },
+  "clearances": {
+    "pole_corridor": {
+      "pole_radius_mm": 30.15,
+      "required_clearance_mm": 5.0,
+      "closest_parts": [
+        {
+          "instance": "Carriage_Fixed",
+          "radial_mm": 39.8,
+          "gap_mm": 9.7
+        },
+        {
+          "instance": "Carriage_Gate",
+          "radial_mm": 39.8,
+          "gap_mm": 9.7
+        },
+        {
+          "instance": "Axle_1",
+          "radial_mm": 47.1,
+          "gap_mm": 16.9
+        },
+        {
+          "instance": "Axle_2",
+          "radial_mm": 47.1,
+          "gap_mm": 16.9
+        },
+        {
+          "instance": "Axle_3",
+          "radial_mm": 47.1,
+          "gap_mm": 16.9
+        },
+        {
+          "instance": "Axle_4",
+          "radial_mm": 47.1,
+          "gap_mm": 16.9
+        }
+      ],
+      "roller_contact_radius_mm": 31.6,
+      "pass_": true
+    },
+    "float_vs_fixed_over_travel": {
+      "conflicts": [],
+      "pass_": true
+    },
+    "yaw_contact": {
+      "outermost_equipment_y_mm": 379.0,
+      "rub_rail_y_mm": 391.0,
+      "pass_": true
+    },
+    "part_interference": {
+      "pairs_checked": 101,
+      "voxel_mm": 2.0,
+      "interferences": [],
+      "pass_": true,
+      "excluded": "fasteners and cables (designed penetrations); contents inside the pod and sampler"
+    }
+  },
+  "levels_world_mm": {
+    "keel_low": -116.8,
+    "keel_high": 1883.2,
+    "keel_mid": 883.2,
+    "low_top": 43.2,
+    "up_bot": 2541.2,
+    "zb_low": -46.8,
+    "zb_up": 2631.2,
+    "pole_z0": -196.8,
+    "pole_z1": 2781.2,
+    "water_low": 0.0,
+    "water_high": 2000.0
+  },
+  "checks": {
+    "Reserve buoyancy >= 2.0": true,
+    "Freeboard >= 100 mm": true,
+    "GM_T >= 0.15 m (IMO reference only)": true,
+    "GZ positive to 60 deg": true,
+    "Pole SF (pinned) >= 2.0": true,
+    "Pole deflection <= span/200": true,
+    "No jamming with rollers (mu 0.05)": true,
+    "No jamming even with seized rollers (mu 0.25)": true,
+    "Float lag under full design load <= 30 mm": true,
+    "Weathervane stable (CLR aft of pole)": true,
+    "Pole corridor clearance >= 5 mm": true,
+    "No float/fixed clash over 2 m travel": true,
+    "Only rub rails can touch the pier": true,
+    "No part-to-part interference": true
+  },
+  "mass_table": [
+    {
+      "instance": "Pontoon_Starboard",
+      "part_no": "AS3-201",
+      "kg": 6.821,
+      "basis": "CAD area x 5 mm wall + fill",
+      "group": "float"
+    },
+    {
+      "instance": "Pontoon_Port",
+      "part_no": "AS3-201",
+      "kg": 6.821,
+      "basis": "CAD area x 5 mm wall + fill",
+      "group": "float"
+    },
+    {
+      "instance": "Bow_Bumper_S",
+      "part_no": "AS3-202",
+      "kg": 0.075,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Bow_Bumper_P",
+      "part_no": "AS3-202",
+      "kg": 0.075,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Hull_Plug_S",
+      "part_no": "AS3-203",
+      "kg": 0.012,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Hull_Plug_P",
+      "part_no": "AS3-203",
+      "kg": 0.012,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Crossbeam_1",
+      "part_no": "AS3-211",
+      "kg": 0.871,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Crossbeam_2",
+      "part_no": "AS3-211",
+      "kg": 0.871,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Crossbeam_3",
+      "part_no": "AS3-211",
+      "kg": 0.871,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Crossbeam_4",
+      "part_no": "AS3-211",
+      "kg": 0.871,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Beam_Cap_1S",
+      "part_no": "AS3-212",
+      "kg": 0.009,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Beam_Cap_1P",
+      "part_no": "AS3-212",
+      "kg": 0.009,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Beam_Cap_2S",
+      "part_no": "AS3-212",
+      "kg": 0.009,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Beam_Cap_2P",
+      "part_no": "AS3-212",
+      "kg": 0.009,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Beam_Cap_3S",
+      "part_no": "AS3-212",
+      "kg": 0.009,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Beam_Cap_3P",
+      "part_no": "AS3-212",
+      "kg": 0.009,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Beam_Cap_4S",
+      "part_no": "AS3-212",
+      "kg": 0.009,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Beam_Cap_4P",
+      "part_no": "AS3-212",
+      "kg": 0.009,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Deck_Plate",
+      "part_no": "AS3-213",
+      "kg": 1.99,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "M8_B1_Sa",
+      "part_no": "AS3-901",
+      "kg": 0.032,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "M8_B1_Sb",
+      "part_no": "AS3-901",
+      "kg": 0.032,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "M8_B1_Pa",
+      "part_no": "AS3-901",
+      "kg": 0.032,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "M8_B1_Pb",
+      "part_no": "AS3-901",
+      "kg": 0.032,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "M8_B2_Sa",
+      "part_no": "AS3-901",
+      "kg": 0.032,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "M8_B2_Sb",
+      "part_no": "AS3-901",
+      "kg": 0.032,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "M8_B2_Pa",
+      "part_no": "AS3-901",
+      "kg": 0.032,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "M8_B2_Pb",
+      "part_no": "AS3-901",
+      "kg": 0.032,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "M8_B3_Sa",
+      "part_no": "AS3-901",
+      "kg": 0.032,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "M8_B3_Sb",
+      "part_no": "AS3-901",
+      "kg": 0.032,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "M8_B3_Pa",
+      "part_no": "AS3-901",
+      "kg": 0.032,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "M8_B3_Pb",
+      "part_no": "AS3-901",
+      "kg": 0.032,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "M8_B4_Sa",
+      "part_no": "AS3-901",
+      "kg": 0.032,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "M8_B4_Sb",
+      "part_no": "AS3-901",
+      "kg": 0.032,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "M8_B4_Pa",
+      "part_no": "AS3-901",
+      "kg": 0.032,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "M8_B4_Pb",
+      "part_no": "AS3-901",
+      "kg": 0.032,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Carriage_Fixed",
+      "part_no": "AS3-301",
+      "kg": 2.806,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Carriage_Gate",
+      "part_no": "AS3-302",
+      "kg": 1.914,
+      "basis": "CAD volume x density",
+      "group": "gate"
+    },
+    {
+      "instance": "Roller_1",
+      "part_no": "AS3-311",
+      "kg": 0.057,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Axle_1",
+      "part_no": "AS3-312",
+      "kg": 0.065,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Roller_2",
+      "part_no": "AS3-311",
+      "kg": 0.057,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Axle_2",
+      "part_no": "AS3-312",
+      "kg": 0.065,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Roller_3",
+      "part_no": "AS3-311",
+      "kg": 0.057,
+      "basis": "CAD volume x density",
+      "group": "gate"
+    },
+    {
+      "instance": "Axle_3",
+      "part_no": "AS3-312",
+      "kg": 0.065,
+      "basis": "CAD volume x density",
+      "group": "gate"
+    },
+    {
+      "instance": "Roller_4",
+      "part_no": "AS3-311",
+      "kg": 0.057,
+      "basis": "CAD volume x density",
+      "group": "gate"
+    },
+    {
+      "instance": "Axle_4",
+      "part_no": "AS3-312",
+      "kg": 0.065,
+      "basis": "CAD volume x density",
+      "group": "gate"
+    },
+    {
+      "instance": "Roller_5",
+      "part_no": "AS3-311",
+      "kg": 0.057,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Axle_5",
+      "part_no": "AS3-312",
+      "kg": 0.065,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Roller_6",
+      "part_no": "AS3-311",
+      "kg": 0.057,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Axle_6",
+      "part_no": "AS3-312",
+      "kg": 0.065,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Roller_7",
+      "part_no": "AS3-311",
+      "kg": 0.057,
+      "basis": "CAD volume x density",
+      "group": "gate"
+    },
+    {
+      "instance": "Axle_7",
+      "part_no": "AS3-312",
+      "kg": 0.065,
+      "basis": "CAD volume x density",
+      "group": "gate"
+    },
+    {
+      "instance": "Roller_8",
+      "part_no": "AS3-311",
+      "kg": 0.057,
+      "basis": "CAD volume x density",
+      "group": "gate"
+    },
+    {
+      "instance": "Axle_8",
+      "part_no": "AS3-312",
+      "kg": 0.065,
+      "basis": "CAD volume x density",
+      "group": "gate"
+    },
+    {
+      "instance": "Hinge_Pin",
+      "part_no": "AS3-313",
+      "kg": 0.189,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Latch_Pin_1",
+      "part_no": "AS3-314",
+      "kg": 0.072,
+      "basis": "CAD volume x density",
+      "group": "gate"
+    },
+    {
+      "instance": "Latch_Pin_2",
+      "part_no": "AS3-314",
+      "kg": 0.072,
+      "basis": "CAD volume x density",
+      "group": "gate"
+    },
+    {
+      "instance": "M10_Carriage_1",
+      "part_no": "AS3-902",
+      "kg": 0.06,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "M10_Carriage_2",
+      "part_no": "AS3-902",
+      "kg": 0.06,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Carriage_Struts",
+      "part_no": "AS3-321",
+      "kg": 0.85,
+      "basis": "catalogue / assumed",
+      "group": "float"
+    },
+    {
+      "instance": "Sensor_Well",
+      "part_no": "AS3-401",
+      "kg": 1.053,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Hatch_Flange",
+      "part_no": "AS3-402",
+      "kg": 0.394,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "M6_Flange_1",
+      "part_no": "AS3-903",
+      "kg": 0.01,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "M6_Flange_2",
+      "part_no": "AS3-903",
+      "kg": 0.01,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "M6_Flange_3",
+      "part_no": "AS3-903",
+      "kg": 0.01,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "M6_Flange_4",
+      "part_no": "AS3-903",
+      "kg": 0.01,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "M6_Flange_5",
+      "part_no": "AS3-903",
+      "kg": 0.01,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "M6_Flange_6",
+      "part_no": "AS3-903",
+      "kg": 0.01,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Sensor_Cage",
+      "part_no": "AS3-403",
+      "kg": 1.82,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Debris_Deflector",
+      "part_no": "AS3-404",
+      "kg": 0.718,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Cartridge_Cap",
+      "part_no": "AS3-411",
+      "kg": 0.752,
+      "basis": "CAD volume x density",
+      "group": "cartridge"
+    },
+    {
+      "instance": "Cartridge_Handle",
+      "part_no": "AS3-412",
+      "kg": 0.15,
+      "basis": "catalogue / assumed",
+      "group": "cartridge"
+    },
+    {
+      "instance": "Cartridge_Spine",
+      "part_no": "AS3-413",
+      "kg": 0.837,
+      "basis": "CAD volume x density",
+      "group": "cartridge"
+    },
+    {
+      "instance": "Cartridge_Holders",
+      "part_no": "AS3-414",
+      "kg": 0.117,
+      "basis": "CAD volume x density",
+      "group": "cartridge"
+    },
+    {
+      "instance": "Probe_PH",
+      "part_no": "AS3-420",
+      "kg": 0.45,
+      "basis": "catalogue / assumed",
+      "group": "cartridge"
+    },
+    {
+      "instance": "Probe_Band_PH",
+      "part_no": "AS3-421",
+      "kg": 0.005,
+      "basis": "catalogue / assumed",
+      "group": "cartridge"
+    },
+    {
+      "instance": "Probe_EC",
+      "part_no": "AS3-420",
+      "kg": 0.45,
+      "basis": "catalogue / assumed",
+      "group": "cartridge"
+    },
+    {
+      "instance": "Probe_Band_EC",
+      "part_no": "AS3-422",
+      "kg": 0.005,
+      "basis": "catalogue / assumed",
+      "group": "cartridge"
+    },
+    {
+      "instance": "Probe_DO",
+      "part_no": "AS3-420",
+      "kg": 0.45,
+      "basis": "catalogue / assumed",
+      "group": "cartridge"
+    },
+    {
+      "instance": "Probe_Band_DO",
+      "part_no": "AS3-423",
+      "kg": 0.005,
+      "basis": "catalogue / assumed",
+      "group": "cartridge"
+    },
+    {
+      "instance": "Probe_TU",
+      "part_no": "AS3-420",
+      "kg": 0.45,
+      "basis": "catalogue / assumed",
+      "group": "cartridge"
+    },
+    {
+      "instance": "Probe_Band_TU",
+      "part_no": "AS3-424",
+      "kg": 0.005,
+      "basis": "catalogue / assumed",
+      "group": "cartridge"
+    },
+    {
+      "instance": "Wiper_Arm",
+      "part_no": "AS3-415",
+      "kg": 0.123,
+      "basis": "CAD volume x density",
+      "group": "cartridge"
+    },
+    {
+      "instance": "Probe_Cables",
+      "part_no": "AS3-416",
+      "kg": 0.0,
+      "basis": "catalogue / assumed",
+      "group": "cartridge"
+    },
+    {
+      "instance": "Sampler_Intake",
+      "part_no": "AS3-417",
+      "kg": 0.15,
+      "basis": "catalogue / assumed",
+      "group": "cartridge"
+    },
+    {
+      "instance": "Pod_Rails",
+      "part_no": "AS3-501",
+      "kg": 0.451,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Pod_Body",
+      "part_no": "AS3-511",
+      "kg": 1.433,
+      "basis": "CAD area x 3.5 mm wall",
+      "group": "float"
+    },
+    {
+      "instance": "Pod_Lid",
+      "part_no": "AS3-512",
+      "kg": 0.798,
+      "basis": "CAD area x 3.5 mm wall",
+      "group": "podlid"
+    },
+    {
+      "instance": "Pod_Plate",
+      "part_no": "AS3-513",
+      "kg": 0.358,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Battery",
+      "part_no": "AS3-514",
+      "kg": 0.8,
+      "basis": "catalogue / assumed",
+      "group": "float"
+    },
+    {
+      "instance": "Controller_Board",
+      "part_no": "AS3-515",
+      "kg": 0.2,
+      "basis": "catalogue / assumed",
+      "group": "float"
+    },
+    {
+      "instance": "MPPT",
+      "part_no": "AS3-516",
+      "kg": 0.15,
+      "basis": "catalogue / assumed",
+      "group": "float"
+    },
+    {
+      "instance": "PV_Module_Frame",
+      "part_no": "AS3-521",
+      "kg": 1.55,
+      "basis": "catalogue / assumed",
+      "group": "canopy"
+    },
+    {
+      "instance": "PV_Module_Cells",
+      "part_no": "AS3-522",
+      "kg": 0.45,
+      "basis": "catalogue / assumed",
+      "group": "canopy"
+    },
+    {
+      "instance": "Canopy_Stanchions",
+      "part_no": "AS3-523",
+      "kg": 0.512,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Sampler_Body",
+      "part_no": "AS3-601",
+      "kg": 1.904,
+      "basis": "CAD area x 6 mm wall + fill",
+      "group": "float"
+    },
+    {
+      "instance": "Sampler_Lid",
+      "part_no": "AS3-602",
+      "kg": 0.445,
+      "basis": "CAD area x 4 mm wall",
+      "group": "samplerlid"
+    },
+    {
+      "instance": "Bottle_Carousel",
+      "part_no": "AS3-603",
+      "kg": 0.199,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Bottle_1",
+      "part_no": "AS3-604",
+      "kg": 0.29,
+      "basis": "catalogue / assumed",
+      "group": "float"
+    },
+    {
+      "instance": "Bottle_Cap_1",
+      "part_no": "AS3-605",
+      "kg": 0.005,
+      "basis": "catalogue / assumed",
+      "group": "float"
+    },
+    {
+      "instance": "Bottle_2",
+      "part_no": "AS3-604",
+      "kg": 0.29,
+      "basis": "catalogue / assumed",
+      "group": "float"
+    },
+    {
+      "instance": "Bottle_Cap_2",
+      "part_no": "AS3-605",
+      "kg": 0.005,
+      "basis": "catalogue / assumed",
+      "group": "float"
+    },
+    {
+      "instance": "Bottle_3",
+      "part_no": "AS3-604",
+      "kg": 0.29,
+      "basis": "catalogue / assumed",
+      "group": "float"
+    },
+    {
+      "instance": "Bottle_Cap_3",
+      "part_no": "AS3-605",
+      "kg": 0.005,
+      "basis": "catalogue / assumed",
+      "group": "float"
+    },
+    {
+      "instance": "Bottle_4",
+      "part_no": "AS3-604",
+      "kg": 0.29,
+      "basis": "catalogue / assumed",
+      "group": "float"
+    },
+    {
+      "instance": "Bottle_Cap_4",
+      "part_no": "AS3-605",
+      "kg": 0.005,
+      "basis": "catalogue / assumed",
+      "group": "float"
+    },
+    {
+      "instance": "Peristaltic_Pump",
+      "part_no": "AS3-606",
+      "kg": 0.35,
+      "basis": "catalogue / assumed",
+      "group": "float"
+    },
+    {
+      "instance": "Beacon_Mast",
+      "part_no": "AS3-701",
+      "kg": 0.366,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Beacon_Base",
+      "part_no": "AS3-702",
+      "kg": 0.18,
+      "basis": "catalogue / assumed",
+      "group": "float"
+    },
+    {
+      "instance": "Beacon_Lens",
+      "part_no": "AS3-703",
+      "kg": 0.08,
+      "basis": "catalogue / assumed",
+      "group": "float"
+    },
+    {
+      "instance": "LTE_Antenna",
+      "part_no": "AS3-711",
+      "kg": 0.12,
+      "basis": "catalogue / assumed",
+      "group": "float"
+    },
+    {
+      "instance": "Stage_Sensor",
+      "part_no": "AS3-712",
+      "kg": 0.06,
+      "basis": "catalogue / assumed",
+      "group": "float"
+    },
+    {
+      "instance": "Grab_Handle_Bow_S",
+      "part_no": "AS3-801",
+      "kg": 0.23,
+      "basis": "catalogue / assumed",
+      "group": "float"
+    },
+    {
+      "instance": "Grab_Handle_Bow_P",
+      "part_no": "AS3-801",
+      "kg": 0.23,
+      "basis": "catalogue / assumed",
+      "group": "float"
+    },
+    {
+      "instance": "Grab_Handle_Stern_S",
+      "part_no": "AS3-801",
+      "kg": 0.23,
+      "basis": "catalogue / assumed",
+      "group": "float"
+    },
+    {
+      "instance": "Grab_Handle_Stern_P",
+      "part_no": "AS3-801",
+      "kg": 0.23,
+      "basis": "catalogue / assumed",
+      "group": "float"
+    },
+    {
+      "instance": "Lift_Eye_2S",
+      "part_no": "AS3-802",
+      "kg": 0.101,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Lift_Eye_2P",
+      "part_no": "AS3-802",
+      "kg": 0.101,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Lift_Eye_3S",
+      "part_no": "AS3-802",
+      "kg": 0.101,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Lift_Eye_3P",
+      "part_no": "AS3-802",
+      "kg": 0.101,
+      "basis": "CAD volume x density",
+      "group": "float"
+    },
+    {
+      "instance": "Cable_Harness",
+      "part_no": "AS3-811",
+      "kg": 0.6,
+      "basis": "catalogue / assumed",
+      "group": "float"
+    },
+    {
+      "instance": "Sampler_Hoses",
+      "part_no": "AS3-812",
+      "kg": 0.15,
+      "basis": "catalogue / assumed",
+      "group": "float"
+    }
+  ]
+}

@@ -1,8 +1,8 @@
 > [!WARNING]
 > **Superseded (v2, September 2026).** This guide describes how the v2 model was built (pole through the centre, 250 mm
-> roller span, 25.4 kg). The R3 design is generated from [`mechanical/src/params.py`](../../mechanical/src/params.py) and
-> delivered as a SOLIDWORKS Pack and Go in [`mechanical/solidworks/`](../../mechanical/solidworks); see the
-> [mechanical README](../../mechanical/README.md) and the [claims register](claims_register.md). Kept for the record of
+> roller span, 25.4 kg). The R3 design is generated from [`mechanical/src/params.py`](../../09_SOURCE_CODE_AND_WEBSITE/mechanical/src/params.py) and
+> delivered as a SOLIDWORKS Pack and Go in [`mechanical/solidworks/`](../../01_DESIGN_CAD_AND_DRAWINGS/SOLIDWORKS); see the
+> [mechanical README](../../09_SOURCE_CODE_AND_WEBSITE/mechanical/README.md) and the [claims register](claims_register.md). Kept for the record of
 > how the design developed.
 
 # AquaSentinel v2.0: SOLIDWORKS Build, Simulation & Motion Study Guide

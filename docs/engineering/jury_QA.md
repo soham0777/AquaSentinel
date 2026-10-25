@@ -4,7 +4,7 @@
 > statements overclaimed. The current R3 values and the claims we no longer make are in the
 > [claims register](claims_register.md). In short: the bottle is a triage sample for the lab, not legal evidence; the float
 > alerts the water-works but does not switch their pumps; the beacon's visibility is not yet measured; and the prototype
-> estimate is ≈ ₹1.38 lakh. Kept for the record of how the design developed.
+> estimate (researched 23 Oct 2026) is ≈ ₹1.57 lakh a float + ₹29k bridge kit, ex-GST. Kept for the record of how the design developed.
 
 # AquaSentinel v2.0 — Comprehensive Jury Defense & Technical Q&A
 **Theme:** Robotics | **Competition:** AAKRUTI Innovation Competition (AIC) 2026 (Dassault Systèmes / SOLIDWORKS)  
