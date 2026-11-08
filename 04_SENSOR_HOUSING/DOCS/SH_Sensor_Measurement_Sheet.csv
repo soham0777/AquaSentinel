@@ -1,0 +1,13 @@
+Parameter,Current value (mm),Source,What to measure,Measured (mm),Design rule
+PhD,12,placeholder,pH probe (SEN0161-V2) body OD where it passes the collet,,O-ring ID about PhD - 0.5
+PhL,150,placeholder,pH probe length from glass tip to top of body (cable exit),,TipY + PhL <= -15 (cable bend room under the cap)
+EcD,12,placeholder,EC probe (DFR0300) body OD,,O-ring ID about EcD - 0.5
+EcL,140,placeholder,EC probe length from tip to top of body,,TipY + EcL <= -15
+TuFitD,30,placeholder,Turbidity probe (SEN0189) OD over its top 12 mm,,SocketD (38) >= TuFitD + 5.4
+TuH,40,placeholder,Turbidity probe height,,
+PhCapD,20,placeholder,pH storage cap OD,,
+PhCapH,30,placeholder,pH storage cap height,,
+CableW,4.6,placeholder,Thickest probe cable OD + 0.6,,Temperature collet bore and cap cable slots
+TeD,6,DFR0198 datasheet,DS18B20 steel tube OD,,O-ring ID about TeD - 0.5
+TeL,35,DFR0198 datasheet,DS18B20 steel tube length,,
+KeyholeD,17,design,Largest connector that must pass the cap (BNC plug about 14.5),,KeyholeD >= connector + 2

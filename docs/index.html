@@ -3,391 +3,604 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AquaSentinel · River Sentinel</title>
-<meta name="description" content="AquaSentinel: a solar-powered float on a guide pole, designed to read the river every 15 minutes, light up on a spill and bottle a water sample for the lab. AAKRUTI Innovation Competition 2026, Team Sanjivani Hero's Journey.">
-<meta property="og:title" content="AquaSentinel: watches the river, warns the bank, keeps a sample for the lab">
-<meta property="og:description" content="Solar float on a guide pole, designed to sense every 15 min, decide on board, light a beacon and bottle a sample. AAKRUTI 2026 · Robotics.">
-<meta property="og:image" content="https://soham0777.github.io/AquaSentinel/assets/banner.png">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23061a2c'/%3E%3Cpath d='M10 40c6-6 12-6 18 0s12 6 18 0 8-4 8-4' stroke='%235ed6c4' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='32' cy='22' r='7' fill='%23ffd23f'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<title>AquaSentinel · A river that raises its own alarm</title>
+<meta name="description" content="AquaSentinel: a floating river sentinel that reads the water every 15 minutes, decides on board and, when a spill passes, turns its beacon red, sends an SMS and bottles a sample. AAKRUTI 2026 India Geo Finalist.">
+<meta property="og:title" content="AquaSentinel · A river that raises its own alarm">
+<meta property="og:description" content="Reads the water every 15 minutes · decides on board · warns the bank · bottles the spill. Team Sanjivani Hero's Journey, AAKRUTI 2026.">
+<meta property="og:image" content="https://soham0777.github.io/AquaSentinel/media/pitch-video-poster.jpg">
+<meta name="theme-color" content="#06141f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2306141f'/%3E%3Cpath d='M8 40c8-6 16 6 24 0s16 6 24 0v16H8z' fill='%2335d0ba'/%3E%3Ccircle cx='32' cy='20' r='9' fill='%23ff4d4d'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
 <style>
-  :root {
-    --bg: #04131f; --bg2: #072338; --panel: #0b2c45; --line: rgba(141, 199, 224, .16);
-    --ink: #eaf6fb; --muted: #9dbdcd; --dim: #6f93a6;
-    --teal: #5ed6c4; --blue: #3aa0d8; --red: #ff5a5f; --yellow: #ffd23f;
-    --max: 1180px; --r: 18px;
-  }
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 Inter, system-ui, -apple-system, "Segoe UI", sans-serif; }
-  a { color: var(--teal); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  img, video { max-width: 100%; height: auto; display: block; }
-  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
-  h1, h2, h3 { font-family: "Barlow Condensed", "Bahnschrift", sans-serif; letter-spacing: .01em; margin: 0; line-height: 1.05; }
-  h2 { font-size: clamp(34px, 5vw, 52px); }
-  .kicker { color: var(--teal); font: 600 13px/1 Inter, sans-serif; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 14px; }
-  section { padding: 96px 0; border-top: 1px solid var(--line); }
-  .lead { color: var(--muted); font-size: 19px; max-width: 760px; }
+:root{
+  --bg:#f4f8fb;--bg2:#ffffff;--ink:#06212f;--sub:#476879;--line:#d6e4ea;--card:#ffffff;
+  --teal:#0a9c88;--teal2:#35d0ba;--red:#e5383b;--amber:#e69500;--green:#22a55b;--navy:#0b3d62;
+  --glass:rgba(255,255,255,.78);--shadow:0 18px 50px -22px rgba(6,33,47,.35);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#05121c;--bg2:#081b29;--ink:#e9f6ff;--sub:#8fb0c2;--line:#173447;--card:#0b2232;
+  --teal:#35d0ba;--teal2:#35d0ba;--red:#ff4d4d;--amber:#ffb020;--green:#33d17a;--navy:#8fd3ff;
+  --glass:rgba(5,18,28,.72);--shadow:0 18px 50px -20px rgba(0,0,0,.7);}}
+:root[data-theme="dark"]{
+  --bg:#05121c;--bg2:#081b29;--ink:#e9f6ff;--sub:#8fb0c2;--line:#173447;--card:#0b2232;
+  --teal:#35d0ba;--teal2:#35d0ba;--red:#ff4d4d;--amber:#ffb020;--green:#33d17a;--navy:#8fd3ff;
+  --glass:rgba(5,18,28,.72);--shadow:0 18px 50px -20px rgba(0,0,0,.7);}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,"Segoe UI",system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,.display{font-family:"Space Grotesk",Inter,sans-serif;letter-spacing:-.02em;line-height:1.1;margin:0}
+a{color:var(--teal)}
+img{max-width:100%;display:block}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+section{padding:96px 0;position:relative}
+.eyebrow{font:700 13px/1 Inter,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
+.lead{font-size:19px;color:var(--sub);max-width:760px;margin:16px 0 0}
+h2{font-size:clamp(32px,4.4vw,54px)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow)}
+.grid{display:grid;gap:22px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:900px){.g2,.g3,.g4{grid-template-columns:1fr}section{padding:70px 0}}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:999px;font-weight:600;text-decoration:none;border:1px solid transparent;transition:transform .2s,box-shadow .2s;cursor:pointer;font-size:15px}
+.btn:hover{transform:translateY(-2px)}
+.btn.primary{background:var(--teal2);color:#04211c;box-shadow:0 10px 30px -10px #35d0ba}
+.btn.ghost{border-color:rgba(255,255,255,.4);color:#fff;background:rgba(255,255,255,.08);backdrop-filter:blur(6px)}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 
-  /* nav */
-  nav { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(14px); background: rgba(4, 19, 31, .78); border-bottom: 1px solid var(--line); }
-  nav .wrap { display: flex; align-items: center; gap: 28px; height: 62px; }
-  nav .brand { font: 700 24px/1 "Barlow Condensed", sans-serif; color: var(--ink); display: flex; align-items: center; gap: 10px; }
-  nav .brand i { width: 12px; height: 12px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 14px var(--teal); }
-  nav .links { display: flex; gap: 22px; margin-left: auto; font-size: 14px; }
-  nav .links a { color: var(--muted); }
-  nav .links a:hover { color: var(--ink); text-decoration: none; }
-  @media (max-width: 860px) { nav .links a:not(.gh) { display: none; } }
+/* nav */
+nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:6px;padding:7px 8px 7px 16px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--line);box-shadow:var(--shadow);max-width:calc(100% - 24px)}
+nav .brand{font:700 15px "Space Grotesk";color:var(--ink);text-decoration:none;margin-right:6px;display:flex;align-items:center;gap:8px;white-space:nowrap}
+nav .brand i{width:10px;height:10px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:beat 4s infinite}
+@keyframes beat{0%,60%{background:var(--green);box-shadow:0 0 10px var(--green)}66%,92%{background:var(--red);box-shadow:0 0 14px var(--red)}100%{background:var(--green)}}
+nav .links{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav .links a{color:var(--sub);text-decoration:none;font-size:14px;font-weight:600;padding:7px 12px;border-radius:999px;white-space:nowrap}
+nav .links a:hover{background:rgba(53,208,186,.14);color:var(--ink)}
+nav button{border:0;background:transparent;color:var(--ink);font-size:17px;cursor:pointer;padding:6px 10px;border-radius:999px}
+@media (max-width:760px){nav .links{display:none}}
 
-  /* hero */
-  .hero { position: relative; overflow: hidden; padding: 0 0 72px; border: 0; background: var(--bg); }
-  .hero-stage { position: relative; min-height: min(86vh, 820px); display: flex; align-items: center; }
-  .hero-stage video, .hero-stage .poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; }
-  .hero-stage::after { content: ""; position: absolute; inset: 0;
-    background: linear-gradient(90deg, rgba(4, 19, 31, .96) 0%, rgba(4, 19, 31, .86) 34%, rgba(4, 19, 31, .25) 64%, rgba(4, 19, 31, .05) 100%),
-                linear-gradient(180deg, rgba(4, 19, 31, 0) 70%, var(--bg) 100%); }
-  .hero-stage .wrap { position: relative; z-index: 1; width: 100%; padding-top: 40px; padding-bottom: 40px; }
-  .hero-copy { max-width: 620px; }
-  .scroll-cue { position: absolute; z-index: 1; left: 50%; bottom: 26px; transform: translateX(-50%); color: var(--muted); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; }
-  @media (max-width: 760px) { .hero-stage::after { background: linear-gradient(180deg, rgba(4, 19, 31, .55) 0%, rgba(4, 19, 31, .9) 55%, var(--bg) 100%); } .hero-stage { align-items: flex-end; } }
-  .hero h1 { font-size: clamp(64px, 10vw, 124px); }
-  .hero .tag { font: 600 clamp(22px, 2.6vw, 30px)/1.3 Inter, sans-serif; margin: 18px 0 18px; }
-  .hero .tag span { color: var(--teal); }
-  .hero p { color: var(--muted); font-size: 18px; max-width: 540px; }
-  .pills { display: flex; flex-wrap: wrap; gap: 10px; margin: 24px 0 30px; }
-  .pill { border: 1.5px solid rgba(94, 214, 196, .55); color: #d9f3f7; padding: 6px 14px; border-radius: 99px; font-size: 13px; font-weight: 600; }
-  .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
-  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 20px; border-radius: 12px; font-weight: 600; font-size: 15px; color: var(--ink); background: var(--panel); border: 1px solid var(--line); }
-  .btn:hover { text-decoration: none; border-color: var(--teal); }
-  .btn.primary { background: var(--teal); color: #032027; border-color: var(--teal); }
-  .wide-img { margin-top: 40px; border-radius: 22px; overflow: hidden; }
-  .wide-img img { width: 100%; }
-  .reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .8s ease; }
-  .reveal.in { opacity: 1; transform: none; }
-  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } .hero-stage video { display: none; } }
+/* hero */
+.hero{min-height:100vh;display:flex;align-items:flex-end;padding:0 0 70px;color:#fff;overflow:hidden;background:#041019}
+.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:35% 50%;opacity:.9}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(3,12,20,.55) 0%,rgba(3,12,20,.15) 35%,rgba(3,12,20,.88) 100%);z-index:1}
+.hero .wrap{position:relative;z-index:2;width:100%}
+.hero h1{font-size:clamp(56px,10vw,128px);font-weight:700;letter-spacing:-.045em}
+.hero .tag{font:600 clamp(20px,2.6vw,30px)/1.25 "Space Grotesk";margin-top:10px}
+.hero .tag em{font-style:normal;color:#ff6b6b}
+.hero p{color:#cfe2ec;max-width:640px;font-size:18px}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.ticker{display:inline-flex;align-items:center;gap:12px;margin-top:30px;padding:10px 18px;border-radius:999px;background:rgba(4,20,30,.7);border:1px solid rgba(255,255,255,.18);font:600 14px Inter;backdrop-filter:blur(8px)}
+.ticker .dot{width:11px;height:11px;border-radius:50%;background:#33d17a;box-shadow:0 0 12px #33d17a;transition:.3s}
+.ticker.alarm .dot{background:#ff4d4d;box-shadow:0 0 16px #ff4d4d}
+.ticker b{color:#33d17a}.ticker.alarm b{color:#ff6b6b}
+.scrollhint{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);z-index:2;color:#cfe2ec;font-size:12px;letter-spacing:.2em;text-transform:uppercase;opacity:.8}
 
-  /* stats */
-  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; margin-top: -8px; position: relative; z-index: 2; }
-  .stat { background: var(--bg2); padding: 26px 24px; }
-  .stat b { display: block; font: 700 46px/1 "Barlow Condensed", sans-serif; color: var(--ink); }
-  .stat span { color: var(--muted); font-size: 14px; }
-  @media (max-width: 760px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+/* stats */
+.stat{padding:26px}
+.stat .n{font:700 clamp(38px,4.6vw,56px)/1 "Space Grotesk";color:var(--ink)}
+.stat .l{color:var(--sub);margin-top:10px;font-size:15px}
+.src{font-size:12.5px;color:var(--sub);margin-top:18px}
+.svgcard{border-radius:22px;overflow:hidden;box-shadow:var(--shadow);margin-top:40px}
 
-  /* loop */
-  .loop { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 44px; }
-  .card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); padding: 28px; }
-  .card h3 { font-size: 32px; margin-bottom: 10px; }
-  .card .ic { width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; font-size: 26px; margin-bottom: 18px; background: rgba(94, 214, 196, .12); }
-  .card.act .ic { background: rgba(255, 90, 95, .14); }
-  .card.act h3 { color: #ff8a8d; }
-  .card p, .card li { color: var(--muted); font-size: 15px; }
-  .card ul { padding-left: 18px; margin: 8px 0 0; }
-  @media (max-width: 860px) { .loop { grid-template-columns: 1fr; } }
+/* sda */
+.sda .card{padding:30px;position:relative;overflow:hidden}
+.sda .num{font:700 72px/1 "Space Grotesk";color:var(--teal);opacity:.18;position:absolute;right:20px;top:12px}
+.sda h3{font-size:26px;margin-bottom:10px}
+.sda p{color:var(--sub);margin:0}
+.sda .card:nth-child(3) h3{color:var(--red)}
 
-  /* split */
-  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-top: 40px; }
-  .split img { border-radius: var(--r); border: 1px solid var(--line); }
-  .split ul { color: var(--muted); padding-left: 20px; }
-  .split li { margin-bottom: 10px; }
-  .split li b { color: var(--ink); }
-  @media (max-width: 860px) { .split { grid-template-columns: 1fr; } }
+/* simulator */
+#sim{background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%)}
+.simgrid{display:grid;grid-template-columns:330px minmax(0,1fr) 330px;gap:22px;margin-top:40px;align-items:stretch}
+@media (max-width:1060px){.simgrid{grid-template-columns:1fr}}
+.panel{padding:22px}
+.panel h4{margin:0 0 14px;font:700 13px Inter;letter-spacing:.14em;text-transform:uppercase;color:var(--sub)}
+.presets{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px}
+.presets button{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:12px;padding:10px 8px;font:600 13.5px Inter;cursor:pointer;text-align:left;transition:.2s}
+.presets button:hover,.presets button.on{border-color:var(--teal);background:rgba(53,208,186,.12)}
+.presets button span{display:block;font-size:20px;line-height:1.1;margin-bottom:3px}
+.ctl{margin:14px 0}
+.ctl label{display:flex;justify-content:space-between;font-size:14px;font-weight:600}
+.ctl label output{color:var(--teal);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--teal2)}
+.toggles{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.toggles label{display:flex;gap:8px;align-items:center;font-size:14px;font-weight:600;border:1px solid var(--line);border-radius:999px;padding:7px 12px;cursor:pointer}
+.stage{position:relative;min-height:440px;display:flex;flex-direction:column;overflow:hidden}
+.stage svg{width:100%;flex:1;min-height:360px}
+.verdict{position:absolute;left:18px;top:16px;right:18px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;pointer-events:none}
+.badge{font:700 clamp(20px,2.4vw,28px) "Space Grotesk";padding:8px 16px;border-radius:14px;background:rgba(0,0,0,.35);color:#fff;backdrop-filter:blur(6px);transition:.3s}
+.clock{font:600 14px Inter;color:#fff;background:rgba(0,0,0,.35);padding:8px 12px;border-radius:12px;backdrop-filter:blur(6px);font-variant-numeric:tabular-nums}
+.why{padding:14px 18px;border-top:1px solid var(--line);font-size:14.5px;color:var(--sub);min-height:72px}
+.phone{border-radius:30px;border:8px solid #10161c;background:#0c141b;color:#e9f6ff;padding:18px 14px;min-height:300px;position:relative}
+.phone::before{content:"";position:absolute;top:8px;left:50%;transform:translateX(-50%);width:70px;height:6px;border-radius:9px;background:#24303a}
+.phone .time{text-align:center;font:600 34px "Space Grotesk";margin:14px 0 2px}
+.phone .date{text-align:center;color:#8fa3b0;font-size:13px;margin-bottom:16px}
+.notif{background:rgba(255,255,255,.1);border-radius:16px;padding:12px 14px;margin-top:10px;font-size:13.5px;animation:pop .45s cubic-bezier(.2,1.4,.4,1)}
+.notif b{display:block;font-size:12px;letter-spacing:.06em;color:#ff8080;margin-bottom:3px}
+@keyframes pop{from{transform:translateY(-14px) scale(.95);opacity:0}to{transform:none;opacity:1}}
+.quiet{color:#8fa3b0;font-size:13.5px;text-align:center;margin-top:30px}
+.log{margin-top:16px;font-size:13px}
+.log div{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed var(--line);font-variant-numeric:tabular-nums}
+.log i{font-style:normal;font-weight:700}
+.note{font-size:12.5px;color:var(--sub);margin-top:14px}
 
-  /* model */
-  .model { margin-top: 36px; border-radius: 22px; overflow: hidden; border: 1px solid var(--line); background: #0a2236; aspect-ratio: 16 / 9; position: relative; }
-  .model iframe { width: 100%; height: 100%; border: 0; display: block; }
-  .model .launch { position: absolute; inset: 0; display: grid; place-items: center; background: center/cover no-repeat url("assets/viewer.jpg"); cursor: pointer; }
-  .model .launch::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(4, 19, 31, .05), rgba(4, 19, 31, .55)); }
-  .model .launch span { position: relative; z-index: 1; }
+/* models */
+.tabs{display:flex;gap:8px;margin-top:30px;flex-wrap:wrap}
+.tabs button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:10px 18px;font:600 15px Inter;cursor:pointer}
+.tabs button.on{background:var(--teal2);color:#04211c;border-color:var(--teal2)}
+model-viewer{width:100%;height:clamp(380px,62vh,640px);background:radial-gradient(ellipse at 50% 40%,#16384d 0%,#06141f 75%);border-radius:22px;--poster-color:transparent}
+.mvwrap{position:relative;margin-top:18px}
+.mvwrap .cap{position:absolute;left:18px;bottom:16px;color:#cfe2ec;font-size:13.5px;background:rgba(0,0,0,.35);padding:8px 12px;border-radius:12px;backdrop-filter:blur(6px);max-width:calc(100% - 36px)}
 
-  /* videos */
-  .vids { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
-  .vid { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
-  .vid video { width: 100%; aspect-ratio: 16 / 9; background: #000; }
-  .vid div { padding: 16px 18px 20px; }
-  .vid b { font: 700 24px/1.1 "Barlow Condensed", sans-serif; }
-  .vid p { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
-  @media (max-width: 920px) { .vids { grid-template-columns: 1fr; } }
+/* media */
+.media{border-radius:22px;overflow:hidden;box-shadow:var(--shadow);background:#000}
+.media video,.media img{width:100%;display:block}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+.facts div{padding:16px;border-radius:16px;background:var(--card);border:1px solid var(--line)}
+.facts b{display:block;font:700 28px "Space Grotesk"}
+.facts span{color:var(--sub);font-size:13.5px}
+@media (max-width:600px){.facts{grid-template-columns:1fr 1fr}}
 
-  /* numbers table */
-  table { width: 100%; border-collapse: collapse; margin-top: 36px; font-size: 15px; }
-  th, td { text-align: left; padding: 14px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
-  th { color: var(--dim); font-weight: 600; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; }
-  td:first-child { color: var(--muted); }
-  td b { color: var(--ink); }
-  .note { margin-top: 22px; padding: 18px 20px; border-radius: 14px; background: rgba(255, 210, 63, .08); border: 1px solid rgba(255, 210, 63, .3); color: #f1e1a6; font-size: 15px; }
+/* pin map */
+.header40{display:grid;grid-template-columns:repeat(20,1fr);gap:6px;padding:20px;border-radius:18px;background:#0a3d23;border:2px solid #155c37;max-width:640px}
+.pin{aspect-ratio:1;border-radius:50%;background:#c8a24a;border:2px solid #8a6d26;cursor:pointer;position:relative;transition:.15s}
+.pin.used{background:#35d0ba;border-color:#c9fff5}
+.pin.gnd{background:#3a4650;border-color:#8d9aa5}
+.pin.pwr{background:#ff6b6b;border-color:#ffd0d0}
+.pin:hover,.pin.sel{transform:scale(1.35);z-index:2;box-shadow:0 0 0 3px #fff}
+.pininfo{margin-top:16px;padding:16px 18px;min-height:86px}
+.pininfo b{font:700 20px "Space Grotesk"}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--sub);margin-top:12px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:-1px}
 
-  /* gallery */
-  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 40px; }
-  .gallery figure { margin: 0; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: #fff; }
-  .gallery figcaption { background: var(--panel); color: var(--muted); font-size: 13px; padding: 10px 14px; }
-  @media (max-width: 760px) { .gallery { grid-template-columns: 1fr 1fr; } }
+/* gallery */
+.gal{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:30px}
+.gal figure{margin:0;border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--line);cursor:zoom-in;transition:transform .25s}
+.gal figure:hover{transform:translateY(-4px)}
+.gal img{aspect-ratio:4/3;object-fit:cover;width:100%}
+.gal figcaption{padding:10px 12px;font-size:13px;color:var(--sub)}
+@media (max-width:900px){.gal{grid-template-columns:1fr 1fr}}
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;z-index:99;padding:30px;cursor:zoom-out}
+#lb img{max-height:90vh;max-width:95vw;border-radius:12px}
+#lb.on{display:flex}
 
-  /* files */
-  .files { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
-  .file { display: block; background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 22px; color: var(--ink); }
-  .file:hover { border-color: var(--teal); text-decoration: none; }
-  .file small { display: block; color: var(--dim); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px; }
-  .file b { font-size: 17px; }
-  .file p { color: var(--muted); font-size: 14px; margin: 6px 0 0; }
-  @media (max-width: 860px) { .files { grid-template-columns: 1fr; } }
+/* cost */
+.bars{margin-top:24px}
+.bar{display:grid;grid-template-columns:minmax(150px,280px) 1fr 80px;gap:14px;align-items:center;margin:10px 0;font-size:14.5px}
+.bar .t{height:16px;border-radius:9px;background:var(--line);overflow:hidden}
+.bar .t i{display:block;height:100%;width:0;border-radius:9px;background:linear-gradient(90deg,var(--teal2),#1d8fbf);transition:width 1.4s cubic-bezier(.2,.8,.2,1)}
+.bar .v{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+@media (max-width:600px){.bar{grid-template-columns:1fr 70px}.bar .t{grid-column:1/-1;order:3}}
 
-  /* team */
-  .team { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 36px; }
-  .member { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 22px 18px; text-align: center; }
-  .member .av { width: 54px; height: 54px; border-radius: 50%; margin: 0 auto 12px; display: grid; place-items: center; font: 700 22px/1 "Barlow Condensed", sans-serif; color: #032027; background: linear-gradient(135deg, var(--teal), var(--blue)); }
-  .member b { display: block; font-size: 15px; }
-  .member span { color: var(--muted); font-size: 13px; }
-  @media (max-width: 860px) { .team { grid-template-columns: repeat(2, 1fr); } }
+/* timeline */
+.tl{position:relative;margin-top:40px;padding-left:34px}
+.tl::before{content:"";position:absolute;left:10px;top:6px;bottom:6px;width:3px;border-radius:3px;background:linear-gradient(var(--teal2),var(--red))}
+.tl .it{position:relative;margin:0 0 26px}
+.tl .it::before{content:"";position:absolute;left:-31px;top:6px;width:15px;height:15px;border-radius:50%;background:var(--bg);border:3px solid var(--teal2)}
+.tl .it.now::before{background:var(--red);border-color:var(--red);box-shadow:0 0 0 6px rgba(255,77,77,.2)}
+.tl .it.next::before{border-style:dashed;border-color:var(--sub)}
+.tl .d{font:700 13px Inter;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)}
+.tl .it.now .d{color:var(--red)}
+.tl h3{font-size:22px;margin:4px 0 2px}
+.tl p{margin:0;color:var(--sub)}
 
-  footer { border-top: 1px solid var(--line); padding: 40px 0 56px; color: var(--dim); font-size: 14px; }
-  footer .wrap { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; }
+/* status */
+.levels{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:30px}
+.lv{padding:18px;border-radius:16px;border:1px solid var(--line);background:var(--card)}
+.lv .s{font:700 12px Inter;letter-spacing:.1em;text-transform:uppercase}
+.lv h3{font-size:18px;margin:8px 0 6px}.lv p{font-size:13.5px;color:var(--sub);margin:0}
+.lv.done .s{color:var(--green)}.lv.doing .s{color:var(--amber)}.lv.plan .s{color:var(--sub)}
+.lv.done{border-top:4px solid var(--green)}.lv.doing{border-top:4px solid var(--amber)}.lv.plan{border-top:4px dashed var(--line)}
+@media (max-width:900px){.levels{grid-template-columns:1fr 1fr}}
+
+/* downloads */
+.dl{display:flex;gap:14px;align-items:center;padding:18px;text-decoration:none;color:var(--ink);transition:.2s}
+.dl:hover{border-color:var(--teal);transform:translateY(-3px)}
+.dl .ic{font-size:30px;width:52px;height:52px;display:grid;place-items:center;border-radius:14px;background:rgba(53,208,186,.12);flex:none}
+.dl b{display:block}.dl span{color:var(--sub);font-size:13.5px}
+
+/* team */
+.team .card{padding:22px;text-align:center}
+.team .av{width:64px;height:64px;border-radius:50%;margin:0 auto 12px;display:grid;place-items:center;font:700 22px "Space Grotesk";color:#04211c;background:linear-gradient(135deg,#35d0ba,#8fd3ff)}
+.team b{display:block}.team span{color:var(--sub);font-size:14px}
+footer{padding:50px 0 70px;color:var(--sub);font-size:14px;text-align:center;border-top:1px solid var(--line)}
+.wave{display:block;width:100%;height:60px}
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="wrap">
-    <a class="brand" href="#top"><i></i>AquaSentinel</a>
-    <div class="links">
-      <a href="#how">How it works</a>
-      <a href="#inside">Inside</a>
-      <a href="#model">3D model</a>
-      <a href="#videos">Videos</a>
-      <a href="#numbers">Engineering</a>
-      <a href="#files">Files</a>
-      <a class="gh" href="https://github.com/soham0777/AquaSentinel">GitHub ↗</a>
-    </div>
+<nav aria-label="Sections">
+  <a class="brand" href="#top"><i></i>AquaSentinel</a>
+  <div class="links">
+    <a href="#problem">Problem</a><a href="#sim">Simulator</a><a href="#models">3D</a><a href="#live">1:5 model</a><a href="#electronics">Electronics</a><a href="#r3">R3</a><a href="#business">Business</a><a href="#watch">Watch</a><a href="#files">Files</a>
   </div>
+  <button id="theme" aria-label="Switch light or dark theme" title="Light / dark">◐</button>
 </nav>
 
+<!-- HERO -->
 <header class="hero" id="top">
-  <div class="hero-stage">
-    <img class="poster" src="media/hero-loop.jpg" alt="">
-    <video autoplay muted loop playsinline preload="auto" poster="media/hero-loop.jpg" aria-hidden="true">
-      <source src="media/hero-loop.mp4" type="video/mp4">
-    </video>
-    <div class="wrap">
-      <div class="hero-copy">
-        <div class="kicker">AAKRUTI Innovation Competition 2026 · Robotics</div>
-        <h1>AquaSentinel</h1>
-        <div class="tag">Watches the river. Warns the bank.<br><span>Keeps a sample for the lab.</span></div>
-        <p>A solar-powered float on a guide pole, clamped to a bridge pier. Every 15 minutes it is designed to read the river; when a
-           spill passes it turns its beacon red, sends an alert and bottles a water sample for the lab. The river moves it, not a motor.</p>
-        <div class="pills"><span class="pill">SOLIDWORKS</span><span class="pill">SOLIDWORKS Simulation</span><span class="pill">ENOVIA</span><span class="pill">ESP32</span><span class="pill">Python</span></div>
-        <div class="ctas">
-          <a class="btn primary" href="#model">Explore the 3D model</a>
-          <a class="btn" href="#videos">&#9654; Watch the 60-second film</a>
-          <a class="btn" href="presentation/AquaSentinel_FDC_AAKRUTI_2026.pdf">Presentation (PDF)</a>
-        </div>
-      </div>
-    </div>
-    <div class="scroll-cue">Scroll</div>
-  </div>
+  <video autoplay muted loop playsinline preload="metadata" poster="media/r3-rides-the-river-poster.jpg" aria-hidden="true">
+    <source src="media/r3-rides-the-river.mp4" type="video/mp4">
+  </video>
   <div class="wrap">
-    <div class="stats reveal">
-      <div class="stat"><b>96</b><span>readings a day, instead of one a month</span></div>
-      <div class="stat"><b>0 drive motors</b><span>the river lifts and turns it</span></div>
-      <div class="stat"><b>≈ ₹1.57 lakh</b><span>prototype float (+ ₹29k bridge kit), ex-GST; a station's instruments cost ₹35–40 lakh</span></div>
-      <div class="stat"><b>66 parts</b><span>designed and checked in SOLIDWORKS</span></div>
+    <div class="eyebrow" style="color:#7fe9d9">AAKRUTI 2026 · India Geo Finalist · Robotics</div>
+    <h1>AquaSentinel</h1>
+    <div class="tag">A river that raises <em>its own alarm.</em></div>
+    <p>A floating sentinel on a bridge pier. Every 15 minutes it reads the water; the moment a spill passes, it turns its beacon red, sends an SMS and bottles a sample for the lab.</p>
+    <div class="ctas">
+      <a class="btn primary" href="#sim">⚡ Try the spill simulator</a>
+      <a class="btn ghost" href="#models">🧊 Spin it in 3D</a>
+      <a class="btn ghost" href="#watch">▶ Watch the pitch</a>
     </div>
+    <div class="ticker" id="ticker"><span class="dot"></span><span id="tickTxt">02:00 · pH 7.4 · TDS 290 ppm · turbidity 14 NTU · <b>NORMAL</b></span></div>
   </div>
+  <div class="scrollhint">scroll</div>
 </header>
 
+<!-- PROBLEM -->
 <section id="problem">
   <div class="wrap">
-    <div class="kicker">The problem</div>
-    <h2>Rivers don&rsquo;t wait<br>for the monthly sample.</h2>
-    <div class="wide-img reveal"><img src="assets/ui/problem.png" alt="A spill passes in hours while the river is sampled once a month" loading="lazy"></div>
-    <div class="loop reveal" style="margin-top:28px">
-      <div class="card"><h3 style="font-size:26px">Water-works</h3><p>need a warning in time to close the intake.</p></div>
-      <div class="card"><h3 style="font-size:26px">Pollution board</h3><p>needs to know when and where to take its own sample.</p></div>
-      <div class="card"><h3 style="font-size:26px">People at the ghat</h3><p>need a signal anyone can read: no phone, no app.</p></div>
+    <div class="reveal">
+      <div class="eyebrow">The hidden crisis</div>
+      <h2>2:00 a.m. A spill passes.<br>By sunrise, the river looks clean.</h2>
+      <p class="lead">Tankers pull up to the bank, a hose goes into the river, and they are gone before sunrise. Families downstream drink from the town intake; farmers irrigate with the same water. Nobody saw it, because rivers are checked about once a month, and spills last hours.</p>
     </div>
+    <div class="grid g4 reveal" style="margin-top:40px">
+      <div class="card stat"><div class="n" data-count="296">0</div><div class="l">polluted river stretches and locations in India</div></div>
+      <div class="card stat"><div class="n" data-count="54">0</div><div class="l">of them in Maharashtra, the most of any state</div></div>
+      <div class="card stat"><div class="n">1 / mo</div><div class="l">manual grab samples, at best, at most monitoring points</div></div>
+      <div class="card stat"><div class="n">₹35–40 L</div><div class="l">for one real-time station, so there are very few</div></div>
+    </div>
+    <div class="svgcard reveal"><img src="assets/spill-gap.svg" alt="A night spill is missed by the monthly sample and caught by AquaSentinel"></div>
+    <div class="src">Sources: CPCB assessment of polluted river stretches (Sept 2025, 2022–23 data) and PIB, 16 Mar 2026; CPCB reply to the NGT in OA 413/2025; CSE for the station cost. The chart is an illustration, not measured data.</div>
   </div>
 </section>
 
-<section id="how">
+<!-- SENSE DECIDE ACT -->
+<section style="padding-top:20px">
   <div class="wrap">
-    <div class="kicker">How it works</div>
-    <h2>Sense. Decide. Act.</h2>
-    <div class="loop reveal">
-      <div class="card"><div class="ic">🔬</div><h3>Sense</h3><p>Every 15 minutes, on the float itself.</p>
-        <ul><li>pH, conductivity, optical DO, turbidity</li><li>temperature and river level</li><li>probes on a pull-up cartridge with a wiper</li></ul></div>
-      <div class="card"><div class="ic">🧠</div><h3>Decide</h3><p>On the ESP32, no cloud needed.</p>
-        <ul><li>CPCB-based hard limits act immediately</li><li>site baseline learned in the first 7 days</li><li>acts when 2 of the last 3 readings are unusual</li></ul></div>
-      <div class="card act"><div class="ic">🚨</div><h3>Act</h3><p>Warn, alert, keep a sample.</p>
-        <ul><li>360° beacon turns red for the bank</li><li>SMS / LTE alert to the water-works</li><li>one 250 mL sample per event, for the lab</li></ul></div>
-    </div>
-    <div class="wide-img reveal"><img src="assets/ui/anatomy.png" alt="Annotated AquaSentinel with every major part labelled" loading="lazy"></div>
-    <div class="split reveal">
-      <img src="assets/rides-the-river.gif" alt="The float rides the river up and down its guide pole" loading="lazy">
-      <ul>
-        <li><b>A float on a pole, not a boat.</b> A 2 in SS316L pole is clamped to the bridge pier; an 8-roller carriage lets the float ride 2 m of river level.</li>
-        <li><b>Weathervane by design.</b> The pole sits at the bow, so the current turns the float and the pole carries no torque.</li>
-        <li><b>Zero watts to hold station.</b> A 20 W solar canopy shades the pod and charges a LiFePO4 battery.</li>
-        <li><b>Off before a flood, no tools.</b> The front of the carriage is a gate held by two T-handle pins.</li>
-      </ul>
+    <div class="reveal"><div class="eyebrow">Our innovation</div><h2>A sentinel that lives in the river<br>and decides on the spot.</h2></div>
+    <div class="grid g3 sda reveal" style="margin-top:36px">
+      <div class="card"><div class="num">01</div><div style="font-size:34px">📡</div><h3>Sense</h3><p>Every 15 minutes: pH, dissolved solids, turbidity and water temperature; rain, light and humidity; and vapour from the sample bottle. 2,880 readings a month instead of one.</p></div>
+      <div class="card"><div class="num">02</div><div style="font-size:34px">🧠</div><h3>Decide</h3><p>On board, no cloud. A Raspberry Pi compares each reading with hard limits and with what is normal for that hour of the day, and names the pattern: industrial, acidic, runoff or solvent.</p></div>
+      <div class="card"><div class="num">03</div><div style="font-size:34px">🚨</div><h3>Act</h3><p>In seconds. A red beacon for anyone on the bank, an SMS to the water-works and the board, and one bottle of the spill for the lab, so the right water gets tested.</p></div>
     </div>
   </div>
 </section>
 
-<section id="model">
+<!-- SIMULATOR -->
+<section id="sim">
   <div class="wrap">
-    <div class="kicker">Interactive</div>
-    <h2>Take it apart in your browser.</h2>
-    <p class="lead" style="margin-top:18px">Raise the river, open the gate, lift the sensor cartridge, trigger a pollution event, explode the assembly, or click any of the 66 parts.</p>
-    <div class="model" id="modelBox">
-      <div class="launch" id="launch" role="button" tabindex="0" aria-label="Load the interactive 3D model"><span class="btn primary">▶ Load the 3D model</span></div>
+    <div class="reveal">
+      <div class="eyebrow">Try it yourself</div>
+      <h2>Pour something into the river.</h2>
+      <p class="lead">Pick a water, or move the sliders. This runs our designed decision rules in your browser: the same limits and patterns we put on the Raspberry Pi.</p>
     </div>
-    <p style="margin-top:14px;font-size:14px;color:var(--dim)">Prefer full screen? <a href="viewer.html">Open the viewer on its own page ↗</a></p>
-  </div>
-</section>
+    <div class="simgrid reveal">
+      <div class="card panel">
+        <h4>The water</h4>
+        <div class="presets" id="presets">
+          <button data-p="clean" class="on"><span>💧</span>Clean water</button>
+          <button data-p="salty"><span>🧂</span>Salty water</button>
+          <button data-p="vinegar"><span>🍋</span>Vinegar</button>
+          <button data-p="muddy"><span>🌧️</span>Muddy, after rain</button>
+          <button data-p="solvent"><span>🧴</span>Sanitiser in the bottle</button>
+          <button data-p="unplug"><span>🔌</span>Unplug a probe</button>
+        </div>
+        <h4>Or set the readings</h4>
+        <div class="ctl"><label>pH <output id="o_ph"></output></label><input type="range" id="ph" min="1" max="13" step="0.1"></div>
+        <div class="ctl"><label>Dissolved solids <output id="o_tds"></output></label><input type="range" id="tds" min="50" max="3000" step="10"></div>
+        <div class="ctl"><label>Turbidity vs normal <output id="o_tu"></output></label><input type="range" id="tu" min="0.5" max="6" step="0.1"></div>
+        <div class="ctl"><label>Vapour in the bottle <output id="o_va"></output></label><input type="range" id="va" min="0" max="100" step="1"></div>
+        <div class="toggles"><label><input type="checkbox" id="rain"> 🌧️ raining</label><label><input type="checkbox" id="probe" checked> 🔌 probes connected</label></div>
+      </div>
 
-<section id="videos">
-  <div class="wrap">
-    <div class="kicker">Videos</div>
-    <h2>See it, then meet the team.</h2>
-    <div class="vids reveal">
-      <div class="vid"><video controls preload="none" poster="media/marketing-60s.jpg" src="media/marketing-60s.mp4"></video>
-        <div><b>AquaSentinel in 60 seconds · 1:00</b><p>A night-time spill, the river lifting the float, and read, decide, act.</p></div></div>
-      <div class="vid"><video controls preload="none" poster="media/journey.jpg" src="media/journey.mp4"></video>
-        <div><b>Our journey · 1:58</b><p>The team, the brainstorming and how the idea grew. Made for the Final Design Concept (5 Oct).</p></div></div>
-      <div class="vid"><video controls preload="none" poster="media/assembly-and-operation.jpg" src="media/assembly-and-operation.mp4"></video>
-        <div><b>Assembly & operation · 1:47</b><p>Every part in place, then a day on the river.</p></div></div>
+      <div class="card stage">
+        <div class="verdict"><span class="badge" id="badge">NORMAL</span><span class="clock" id="clock">02:00</span></div>
+        <svg viewBox="70 0 500 420" preserveAspectRatio="xMidYMid slice" id="scene" aria-label="The float in the river, with its beacon">
+          <defs>
+            <linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#04101c"/><stop offset="1" stop-color="#0d3048"/></linearGradient>
+            <linearGradient id="wt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" id="wt0" stop-color="#1b6b84"/><stop offset="1" id="wt1" stop-color="#062431"/></linearGradient>
+            <radialGradient id="bg1"><stop offset="0" id="bgc" stop-color="#33d17a" stop-opacity=".9"/><stop offset="1" stop-color="#33d17a" stop-opacity="0"/></radialGradient>
+            <filter id="b6"><feGaussianBlur stdDeviation="6"/></filter>
+          </defs>
+          <rect width="600" height="420" fill="url(#sk)"/>
+          <g fill="#fff" opacity=".7"><circle cx="40" cy="40" r="1"/><circle cx="130" cy="80" r="1.3"/><circle cx="220" cy="30" r="1"/><circle cx="330" cy="70" r="1.2"/><circle cx="90" cy="130" r="1"/><circle cx="160" cy="150" r="1"/></g>
+          <rect x="455" y="0" width="145" height="420" fill="#1c2833"/><rect x="440" y="0" width="160" height="22" fill="#121b23"/>
+          <rect x="408" y="18" width="9" height="402" fill="#b9c6cf"/>
+          <rect x="408" y="52" width="48" height="10" fill="#8996a2"/>
+          <rect y="262" width="600" height="158" fill="url(#wt)"/>
+          <g id="plume" opacity="0" filter="url(#b6)"><ellipse cx="170" cy="282" rx="190" ry="22" id="plumeE" fill="#7b4a28"/></g>
+          <g id="floatg">
+            <image href="assets/img/float-cutout.png" x="190" y="40" width="281" height="330"/>
+            <circle cx="275" cy="52" r="34" fill="url(#bg1)"/>
+            <ellipse cx="275" cy="53" rx="8" ry="9" id="lamp" fill="#33d17a" opacity=".9"/>
+            <animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0;0 3;0 0" dur="5s" repeatCount="indefinite"/>
+          </g>
+          <path d="M-60 264 q 30 -7 60 0 t 60 0 t 60 0 t 60 0 t 60 0 t 60 0 t 60 0 t 60 0 t 60 0 t 60 0 t 60 0 t 60 0 V420 H-60Z" fill="#0e5a70" opacity=".72"><animateTransform attributeName="transform" type="translate" values="0 0;-60 0" dur="2.4s" repeatCount="indefinite"/></path>
+          <g id="rainG" opacity="0" stroke="#9fd8ff" stroke-width="1.4"><path d="M60 0 l-8 24 M140 40 l-8 24 M220 10 l-8 24 M300 50 l-8 24 M380 20 l-8 24 M100 120 l-8 24 M260 140 l-8 24 M180 90 l-8 24 M500 60 l-8 24"><animateTransform attributeName="transform" type="translate" values="0 -40;-20 160" dur=".8s" repeatCount="indefinite"/></path></g>
+          <g id="rings" opacity="0" fill="none" stroke="#ff4d4d" stroke-width="3">
+            <circle cx="275" cy="53" r="10"><animate attributeName="r" values="10;60" dur="1.2s" repeatCount="indefinite"/><animate attributeName="stroke-opacity" values="1;0" dur="1.2s" repeatCount="indefinite"/></circle>
+            <circle cx="275" cy="53" r="10"><animate attributeName="r" values="10;60" dur="1.2s" begin=".6s" repeatCount="indefinite"/><animate attributeName="stroke-opacity" values="1;0" dur="1.2s" begin=".6s" repeatCount="indefinite"/></circle>
+          </g>
+          <g transform="translate(26 318)" font-family="Inter,sans-serif">
+            <rect width="118" height="78" rx="12" fill="rgba(0,0,0,.45)"/>
+            <rect x="16" y="14" width="26" height="46" rx="6" fill="none" stroke="#fff" stroke-width="2"/><rect x="22" y="8" width="14" height="7" rx="2" fill="#fff"/>
+            <rect x="18" y="58" width="22" height="0" id="fill" fill="#c08a4a"/>
+            <text x="52" y="34" fill="#fff" font-size="12" font-weight="700">sample</text><text x="52" y="50" fill="#9fb4c2" font-size="11" id="filltxt">empty</text>
+          </g>
+        </svg>
+        <div class="why" id="why">All readings inside their limits and close to the normal for this hour. Logged; the Pi goes back to sleep for 15 minutes.</div>
+      </div>
+
+      <div class="card panel">
+        <h4>The water-works operator's phone</h4>
+        <div class="phone"><div class="time" id="ptime">02:00</div><div class="date">AquaSentinel #01 · Godavari, Kopargaon</div><div id="inbox"><div class="quiet">No alerts. The river is quiet.</div></div></div>
+        <div class="log" id="log"></div>
+        <div class="note">A simulator of our designed rules: pH below 6 or above 9 and dissolved solids above 1,400 ppm act at once; turbidity at 3× its hourly normal; the pattern names the class. The real system also needs 2 of 3 unusual readings for slow changes, and learns its baselines for 7 days.</div>
+      </div>
     </div>
-    <p style="margin-top:14px;font-size:14px;color:var(--dim)">Full-quality 1080p files are on the <a href="https://github.com/soham0777/AquaSentinel/releases/latest">latest release</a>.
-      The journey video predates our audit: AquaSentinel has not yet been built or tested in water.</p>
   </div>
 </section>
 
-<section id="numbers">
+<!-- 3D -->
+<section id="models">
   <div class="wrap">
-    <div class="kicker">Engineering</div>
-    <h2>Numbers, and how we know them.</h2>
-    <table class="reveal">
-      <thead><tr><th>Check</th><th>Value</th><th>Source</th></tr></thead>
-      <tbody>
-        <tr><td>Size · mass</td><td><b>1.0 × 0.8 × 0.9 m · 48.5 kg</b></td><td>CAD mass properties</td></tr>
-        <tr><td>Freeboard · reserve buoyancy</td><td><b>143 mm · 2.27×</b></td><td>Hand calcs on the CAD geometry</td></tr>
-        <tr><td>Stability</td><td><b>GM 0.55 m, righting arm positive to 60°</b> (max 180 mm at 25°)</td><td>Hand calcs on the CAD geometry</td></tr>
-        <tr><td>Guide pole, flood + debris</td><td><b>64 MPa, safety factor 2.66</b> (conservative: pinned ends + carriage moment)</td><td>Hand calc on the CAD geometry; SOLIDWORKS Simulation with both ends fixed gives 38.3 MPa, SF 4.4</td></tr>
-        <tr><td>Pier bracket</td><td><b>3.7 MPa, safety factor 46</b></td><td>SOLIDWORKS Simulation</td></tr>
-        <tr><td>Carriage jamming</td><td><b>8.6× margin</b> (1.7× with seized rollers)</td><td>Hand calcs</td></tr>
-        <tr><td>Clashes over 2 m travel</td><td><b>0</b></td><td>Voxel interference on the real meshes</td></tr>
-        <tr><td>Spill detection</td><td><b>4 / 4 flagged, each within 30 min, one sample each</b></td><td>Decision logic on 30 days of synthetic data</td></tr>
-        <tr><td>Prototype cost</td><td><b>≈ ₹1.57 lakh</b> float + ₹29k bridge kit (ex-GST); ≈ ₹1.48 lakh together at 100 units</td><td>All 66 part numbers priced from Indian listings, 23 Oct 2026: 03_BUSINESS_COSTING_AND_BOM</td></tr>
-      </tbody>
-    </table>
-    <div class="note"><b>Design-stage estimates.</b> AquaSentinel has not been built or tested in water yet. Next: our 1:5 scale model
-      in water and an electronics bench demo, then a full-size tank test. Detection was checked on synthetic data, not field data.</div>
-    <div class="gallery">
-      <figure><img src="assets/pole-vonmises-stress.jpg" alt="Guide pole von Mises stress" loading="lazy"><figcaption>Guide pole: von Mises stress</figcaption></figure>
-      <figure><img src="assets/bracket-vonmises-stress.jpg" alt="Pier bracket von Mises stress" loading="lazy"><figcaption>Pier bracket: von Mises stress</figcaption></figure>
-      <figure><img src="assets/detector-evaluation.jpg" alt="Detection on synthetic data" loading="lazy"><figcaption>Detection replayed on synthetic data</figcaption></figure>
+    <div class="reveal"><div class="eyebrow">In 3D</div><h2>Turn it. Zoom in. Look underneath.</h2>
+      <p class="lead">The full-size R3 (66 parts) and the 1:5 LIVE model we bring to the booth (40 bodies, in its assembled position). Drag to rotate, scroll or pinch to zoom.</p></div>
+    <div class="tabs" role="tablist"><button class="on" data-m="r3">Full-size R3</button><button data-m="live">1:5 LIVE model</button></div>
+    <div class="mvwrap reveal">
+      <model-viewer id="mv" camera-orbit="30deg 75deg 70%" src="models/AquaSentinel_R3_float_on_pole.glb" alt="The AquaSentinel R3 float in 3D" camera-controls auto-rotate auto-rotate-delay="800" rotation-per-second="18deg" shadow-intensity="1" exposure="1.05" environment-image="neutral" touch-action="pan-y" interaction-prompt="auto" loading="lazy"></model-viewer>
+      <div class="cap" id="mvcap">R3 full size · twin rotomoulded hulls, guide carriage on a 2-inch pole, sensor well, pod, 20 W canopy, beacon, sampler</div>
     </div>
   </div>
 </section>
 
-<section id="inside">
-  <div class="wrap">
-    <div class="kicker">Inside</div>
-    <h2>Decides on the float.<br>No cloud needed.</h2>
-    <p class="lead" style="margin-top:18px">Hard limits act immediately, on a single reading: pH outside 6–9 or DO below 4 mg/L (CPCB Class C),
-      or EC above 2250 µS/cm (adopted from Class E). For the first 7 days the float learns what normal looks like at its site, hour
-      by hour, then acts when 2 of the last 3 readings are unusual. Each event takes one bottle, and a dead probe raises a sensor
-      fault instead of reading as clean water.</p>
-    <div class="wide-img reveal"><img src="assets/ui/architecture.png" alt="System architecture" loading="lazy"></div>
+<!-- RIDES THE RIVER -->
+<section id="river" style="padding-top:30px">
+  <div class="wrap grid g2" style="align-items:center">
+    <div class="reveal">
+      <div class="eyebrow">Innovation 1 · It rides the river</div>
+      <h2>No anchors.<br>No motor.<br>The river lifts it.</h2>
+      <p class="lead">A two-inch pole is clamped to a bridge pier, and eight rollers let the float rise and fall two metres with the water. The current turns it like a weathervane, and for service the carriage gate simply opens.</p>
+      <div class="facts"><div><b>2 m</b><span>of river rise</span></div><div><b>14/14</b><span>design checks pass</span></div><div><b>2.66</b><span>pole safety factor, the lowest case</span></div></div>
+    </div>
+    <div class="media reveal"><video autoplay muted loop playsinline preload="none" poster="media/r3-rides-the-river-poster.jpg"><source src="media/r3-rides-the-river.mp4" type="video/mp4"></video></div>
   </div>
 </section>
 
+<!-- LIVE MODEL -->
+<section id="live">
+  <div class="wrap">
+    <div class="reveal"><div class="eyebrow">Proof · our 1:5 LIVE model</div><h2>We printed it at 1:5,<br>around the real sensors.</h2>
+      <p class="lead">Real pH, dissolved-solids, turbidity and temperature probes at full size dip into a dish of water under the float. A Raspberry Pi in the base. Rain, light and humidity on the column, an MQ-3 over the sample bottle, the beacon on the mast. To show a different river, we swap the dish.</p></div>
+    <div class="svgcard reveal"><img src="assets/booth-demo.svg" alt="Booth demo cycle"></div>
+    <div class="grid g2 reveal" style="margin-top:22px">
+      <div class="media" style="background:#fff"><img src="assets/live-1to5-assembly-steps.gif" alt="The 24 assembly steps from our SOLIDWORKS assembly" loading="lazy"></div>
+      <div class="media" style="background:#fff"><img src="assets/img/live-labelled.jpg" alt="Every part of the 1:5 LIVE model, labelled" loading="lazy"></div>
+    </div>
+    <div class="facts reveal" style="grid-template-columns:repeat(4,1fr)"><div><b>37</b><span>printed parts</span></div><div><b>17</b><span>designed new in SOLIDWORKS</span></div><div><b>1:1</b><span>real sensors, not mock-ups</span></div><div><b>24</b><span>steps in the assembly manual</span></div></div>
+  </div>
+</section>
+
+<!-- ELECTRONICS -->
+<section id="electronics" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="reveal"><div class="eyebrow">The electronics</div><h2>One Raspberry Pi. Eight sensors.<br>Three actions.</h2>
+      <p class="lead">Thirteen boards modelled as native SOLIDWORKS parts, assembled on the printed tray, checked for clashes (two found, two fixed, now zero) and documented in drawing AS-LIVE-ELEC-01. Hover a pin on the header to see what it does.</p></div>
+    <div class="grid g2 reveal" style="margin-top:36px;align-items:start">
+      <div>
+        <div class="header40" id="hdr" aria-label="Raspberry Pi 40-pin header"></div>
+        <div class="legend"><span><i style="background:#35d0ba"></i>used by AquaSentinel</span><span><i style="background:#ff6b6b"></i>power</span><span><i style="background:#3a4650"></i>ground</span><span><i style="background:#c8a24a"></i>free</span></div>
+        <div class="card pininfo" id="pininfo"><b>Pin 3 · GPIO2 (SDA)</b><br><span style="color:var(--sub)">I²C data to both ADS1115 converters (0x48, 0x49) and the DS3231 clock (0x68)</span></div>
+      </div>
+      <div class="media" style="background:#fff"><img src="assets/electronics-bay.gif" alt="The electronics bay in SOLIDWORKS" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<!-- R3 -->
+<section id="r3">
+  <div class="wrap">
+    <div class="reveal"><div class="eyebrow">The full-size R3</div><h2>66 parts. 14 checks.<br>2 simulations.</h2>
+      <p class="lead">The R3 geometry comes from our own parametric model; it was assembled, checked and simulated in SOLIDWORKS, with a material and a part number on every part, a Pack and Go, a drawing set and a STEP file for every part.</p></div>
+    <div class="media reveal" style="margin-top:34px"><video controls muted loop playsinline preload="none" poster="assets/img/r3-solidworks-3q.jpg"><source src="media/r3-66-part-build.mp4" type="video/mp4"></video></div>
+    <div class="gal reveal" id="gal">
+      <figure><img src="assets/img/r3-float-studio.jpg" alt="R3 float" loading="lazy"><figcaption>The R3 float</figcaption></figure>
+      <figure><img src="assets/img/r3-at-the-river.jpg" alt="R3 at the river" loading="lazy"><figcaption>At the bridge pier</figcaption></figure>
+      <figure><img src="assets/img/r3-motion-study.jpg" alt="Motion study" loading="lazy"><figcaption>Low, normal and flood water</figcaption></figure>
+      <figure><img src="assets/img/r3-gate-open.jpg" alt="Gate open" loading="lazy"><figcaption>The carriage gate opens</figcaption></figure>
+      <figure><img src="assets/img/r3-cartridge-up.jpg" alt="Cartridge up" loading="lazy"><figcaption>Cartridge up for service</figcaption></figure>
+      <figure><img src="assets/img/r3-underwater.jpg" alt="Under water" loading="lazy"><figcaption>The sensor cage under water</figcaption></figure>
+      <figure><img src="assets/img/sim-pole-stress.jpg" alt="Pole stress" loading="lazy"><figcaption>SOLIDWORKS Simulation: pole</figcaption></figure>
+      <figure><img src="assets/img/sim-bracket-stress.jpg" alt="Bracket stress" loading="lazy"><figcaption>SOLIDWORKS Simulation: bracket</figcaption></figure>
+      <figure><img src="assets/img/r3-drawing-ga.jpg" alt="General arrangement" loading="lazy"><figcaption>Drawing set: general arrangement</figcaption></figure>
+      <figure><img src="assets/img/r3-design-checks.jpg" alt="Design checks" loading="lazy"><figcaption>The 14 design checks</figcaption></figure>
+      <figure><img src="assets/img/r3-section.jpg" alt="Section" loading="lazy"><figcaption>Centre-line section</figcaption></figure>
+      <figure><img src="assets/img/r3-weathervane.jpg" alt="Weathervane" loading="lazy"><figcaption>It weathervanes with the current</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- BUSINESS -->
+<section id="business" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="reveal"><div class="eyebrow">Who it serves, and how it pays</div><h2>≈ 75 sentinels for the price<br>of one real-time station.</h2></div>
+    <div class="grid g4 reveal" style="margin-top:36px">
+      <div class="card stat"><div class="n">₹48k</div><div class="l">to build one sentinel at 100 units, ex-GST (first prototype ≈ ₹65k)</div></div>
+      <div class="card stat"><div class="n">₹8k/mo</div><div class="l">paid by the board or water-works: sentinel, service, alerts, 4 lab samples a year</div></div>
+      <div class="card stat"><div class="n">≈ 12 mo</div><div class="l">to pay back the hardware, then ≈ 40 % margin over 5 years</div></div>
+      <div class="card stat"><div class="n">−47 %</div><div class="l">value engineering: galvanised steel and bolted parts in place of 316L and welds</div></div>
+    </div>
+    <div class="card reveal" style="padding:26px;margin-top:22px">
+      <h3 style="font-size:20px">One sentinel at 100 units, ₹ ex-GST (estimate, 7 Nov 2026)</h3>
+      <div class="bars" id="bars"></div>
+      <div class="src">Line by line in <a href="https://github.com/soham0777/AquaSentinel/tree/main/07_COST_AND_BUSINESS">07_COST_AND_BUSINESS</a>. Estimates, not quotes.</div>
+    </div>
+    <div class="grid g4 reveal" style="margin-top:22px">
+      <div class="card stat"><div style="font-size:28px">🚰</div><b>Water-works operator</b><div class="l">closes the intake before the spill reaches town</div></div>
+      <div class="card stat"><div style="font-size:28px">🧑‍🔬</div><b>Pollution board officer</b><div class="l">knows when and where to sample</div></div>
+      <div class="card stat"><div style="font-size:28px">🌾</div><b>Farmers and irrigation</b><div class="l">a record of the water they use</div></div>
+      <div class="card stat"><div style="font-size:28px">🏭</div><b>Industrial estates</b><div class="l">independent proof of a clean discharge</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY + STATUS -->
 <section id="journey">
-  <div class="wrap">
-    <div class="kicker">The design journey</div>
-    <h2>Our own CAD caught our biggest mistake.</h2>
-    <p class="lead" style="margin-top:18px">In v2 the guide pole ran straight through the electronics box. Moving it to the bow fixed the clash and
-      turned it into a feature: the float now weathervanes with the current and the pole carries no torque.</p>
-    <div class="wide-img reveal"><img src="assets/ui/timeline.png" alt="Design journey timeline" loading="lazy"></div>
-  </div>
-</section>
-
-<section id="gallery">
-  <div class="wrap">
-    <div class="kicker">Gallery</div>
-    <h2>Every part has a reason.</h2>
-    <div class="gallery">
-      <figure><img src="assets/renders/alert-red.jpg" alt="Alert state" loading="lazy"><figcaption>Alert: beacon red, bottle fills</figcaption></figure>
-      <figure><img src="assets/renders/exploded.jpg" alt="Exploded view" loading="lazy"><figcaption>Exploded, every part numbered</figcaption></figure>
-      <figure><img src="assets/renders/cartridge-up.jpg" alt="Sensor cartridge lifted" loading="lazy"><figcaption>Pull-up sensor cartridge</figcaption></figure>
-      <figure><img src="assets/renders/gate-open.jpg" alt="Carriage gate open" loading="lazy"><figcaption>Gate open, float released</figcaption></figure>
-      <figure><img src="assets/renders/underwater.jpg" alt="Underwater sensing" loading="lazy"><figcaption>Probes in a guarded well</figcaption></figure>
-      <figure><img src="assets/renders/weathervane.jpg" alt="Weathervane top view" loading="lazy"><figcaption>Trails the current like a vane</figcaption></figure>
+  <div class="wrap grid g2">
+    <div class="reveal">
+      <div class="eyebrow">Our journey</div><h2>From a night on the Godavari to Pune.</h2>
+      <div class="tl">
+        <div class="it"><div class="d">2026</div><h3>Problem researched</h3><p>CPCB data, 296 sites, the Godavari at Kopargaon.</p></div>
+        <div class="it"><div class="d">5 Oct</div><h3>Final Design Challenge</h3><p>Three design generations, a 66-part R3, 14 checks, 2 simulations.</p></div>
+        <div class="it"><div class="d">24–25 Oct</div><h3>India semi-final: top 10</h3><p>Into the India Geo Finale.</p></div>
+        <div class="it"><div class="d">Nov</div><h3>Raspberry Pi + 1:5 LIVE model</h3><p>Real sensors, printed model, cost down to ≈ ₹48k.</p></div>
+        <div class="it now"><div class="d">19–20 Nov</div><h3>India Geo Finale, Pune</h3><p>Live booth demo and the 7-minute pitch.</p></div>
+        <div class="it next"><div class="d">Next</div><h3>Tank test, then the Godavari pilot</h3><p>2 m travel and roller friction at full size; 30 days at Kopargaon once permits are in place.</p></div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="eyebrow">Where we really are</div><h2>Honest status.</h2>
+      <div class="levels" style="grid-template-columns:1fr">
+        <div class="lv done"><div class="s">● Done</div><h3>0 · Digital design</h3><p>CAD, calculations and FEA; the logic flags 4 of 4 simulated spills.</p></div>
+        <div class="lv doing"><div class="s">● Printed · assembly now</div><h3>1 · 1:5 LIVE model</h3><p>37 printed parts; real sensors at 1:1 in a dish.</p></div>
+        <div class="lv doing"><div class="s">● Before 19 Nov</div><h3>2 · Electronics on the model</h3><p>The Pi reads, decides, acts: beacon, pump, SMS; wet test with 4 samples.</p></div>
+        <div class="lv plan"><div class="s">○ Planned</div><h3>3 · Tank test</h3><p>Full-size float on a 2-inch pole.</p></div>
+        <div class="lv plan"><div class="s">○ After permits</div><h3>4 · Godavari pilot</h3><p>30 days; alerts checked against lab samples.</p></div>
+      </div>
+      <p class="src">Every figure on this page is a design estimate unless it says otherwise.</p>
     </div>
   </div>
 </section>
 
+<!-- WATCH -->
+<section id="watch" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="reveal"><div class="eyebrow">Watch</div><h2>The pitch, in 100 seconds.</h2><p class="lead">Narrated by our team.</p></div>
+    <div class="media reveal" style="margin-top:30px"><video controls playsinline preload="none" poster="media/pitch-video-poster.jpg"><source src="media/pitch-video.mp4" type="video/mp4"></video></div>
+  </div>
+</section>
+
+<!-- FILES -->
 <section id="files">
   <div class="wrap">
-    <div class="kicker">Open everything</div>
-    <h2>The whole project is here.</h2>
-    <div class="files reveal">
-      <a class="file" href="https://github.com/soham0777/AquaSentinel/tree/main/01_DESIGN_CAD_AND_DRAWINGS/SOLIDWORKS"><small>CAD</small><b>SOLIDWORKS Pack and Go</b><p>Assembly + all 66 part files</p></a>
-      <a class="file" href="presentation/AquaSentinel_FDC_AAKRUTI_2026.pdf"><small>Presentation</small><b>Final Design Concept deck</b><p>13 slides, as submitted on 5 Oct; some figures since revised</p></a>
-      <a class="file" href="dashboard/"><small>Demo</small><b>Command dashboard</b><p>English · मराठी · हिंदी, synthetic scenario</p></a>
-      <a class="file" href="https://github.com/soham0777/AquaSentinel/tree/main/04_SIMULATION_AND_ANALYSIS"><small>Validation</small><b>SOLIDWORKS Simulation</b><p>Pole and bracket studies with reports</p></a>
-      <a class="file" href="https://github.com/soham0777/AquaSentinel/tree/main/06_ELECTRONICS_AND_FIRMWARE/firmware/edge_node"><small>Firmware</small><b>ESP32 edge controller</b><p>Sense, decide, act, log, alert; compiles, bench test next</p></a>
-      <a class="file" href="https://github.com/soham0777/AquaSentinel/blob/main/01_DESIGN_CAD_AND_DRAWINGS/Drawings/AquaSentinel_R3_Drawing_Set.pdf"><small>Drawings</small><b>6 × A3 drawing set</b><p>GA, installation, carriage, well, hull, bracket</p></a>
-    </div>
+    <div class="reveal"><div class="eyebrow">Open everything</div><h2>Manuals, CAD, drawings, costs.</h2></div>
+    <div class="grid g3 reveal" style="margin-top:34px" id="dls"></div>
   </div>
 </section>
 
-<section id="team">
+<!-- TEAM -->
+<section class="team" style="padding-top:20px">
   <div class="wrap">
-    <div class="kicker">Team Sanjivani Hero's Journey · AG26-1500$41</div>
-    <h2>Made in Kopargaon, on the Godavari.</h2>
-    <div class="team reveal">
-      <div class="member"><div class="av">SK</div><b>Soham Kadu</b><span>Project Lead</span></div>
-      <div class="member"><div class="av">SK</div><b>Shriraj Kamble</b><span>System Design</span></div>
-      <div class="member"><div class="av">BK</div><b>Bhakti Kadam</b><span>Electronics Lead</span></div>
-      <div class="member"><div class="av">TP</div><b>Tanmay Pendbhaje</b><span>Software Lead</span></div>
-      <div class="member"><div class="av">KW</div><b>Dr. Kiran Wakchaure</b><span>Mentor · Director Projects</span></div>
+    <div class="reveal"><div class="eyebrow">Team Sanjivani Hero's Journey</div><h2>The people behind it.</h2><p class="lead">Sanjivani University, Kopargaon, Maharashtra · AAKRUTI Innovation Competition 2026 by Dassault Systèmes · Team AG26-1500$41</p></div>
+    <div class="grid reveal" style="grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin-top:30px">
+      <div class="card"><div class="av">SK</div><b>Soham Kadu</b><span>Team Leader · Project Lead</span></div>
+      <div class="card"><div class="av">PU</div><b>Prasad Ugale</b><span>System Design</span></div>
+      <div class="card"><div class="av">BK</div><b>Bhakti Kadam</b><span>Electronics Lead</span></div>
+      <div class="card"><div class="av">TP</div><b>Tanmay Pendbhaje</b><span>Software Lead</span></div>
+      <div class="card"><div class="av">KW</div><b>Dr. Kiran Wakchaure</b><span>Mentor · Director Projects</span></div>
     </div>
-    <p class="lead" style="margin-top:28px;font-size:16px">Sanjivani University, Kopargaon, Maharashtra. Made for the AAKRUTI Innovation Competition 2026 with Dassault Systèmes,
-      designed in SOLIDWORKS, validated in SOLIDWORKS Simulation and planned in ENOVIA on the 3DEXPERIENCE platform.</p>
   </div>
 </section>
 
 <footer>
-  <div class="wrap">
-    <span>© 2026 Team Sanjivani Hero's Journey · code under the MIT License</span>
-    <a href="https://github.com/soham0777/AquaSentinel">github.com/soham0777/AquaSentinel</a>
-  </div>
+  <div class="wrap">Watching the river every 15 minutes.<br>
+  Built with SOLIDWORKS 2026 · SOLIDWORKS Simulation · 3DEXPERIENCE · Raspberry Pi · Python ·
+  <a href="https://github.com/soham0777/AquaSentinel">source on GitHub</a> · MIT License</div>
 </footer>
 
+<div id="lb" role="dialog" aria-label="Image"><img alt=""></div>
+
 <script>
-  // Fade sections in as they scroll into view
-  (function () {
-    var els = document.querySelectorAll('.reveal');
-    if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
-    }, { threshold: 0.12 });
-    els.forEach(function (e) { io.observe(e); });
-  })();
-  // Load the heavy 3D viewer only when asked
-  (function () {
-    var box = document.getElementById('modelBox'), btn = document.getElementById('launch');
-    function load() {
-      var f = document.createElement('iframe');
-      f.src = 'viewer.html'; f.title = 'AquaSentinel interactive 3D model'; f.loading = 'lazy'; f.allowFullscreen = true;
-      box.innerHTML = ''; box.appendChild(f);
-    }
-    btn.addEventListener('click', load);
-    btn.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); load(); } });
-  })();
+// theme
+(()=>{const r=document.documentElement,b=document.getElementById('theme');let t=null;try{t=localStorage.getItem('as-theme')}catch(e){}
+if(t)r.dataset.theme=t;b.onclick=()=>{const dark=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.dataset.theme=dark?'light':'dark';try{localStorage.setItem('as-theme',r.dataset.theme)}catch(e){}}})();
+
+// reveal + counters + bars
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('in');
+  e.target.querySelectorAll('[data-count]').forEach(n=>{const to=+n.dataset.count;let s=null;const step=t=>{s=s||t;const p=Math.min(1,(t-s)/1300);n.textContent=Math.round(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(step)};requestAnimationFrame(step)});
+  e.target.querySelectorAll('.bar .t i').forEach(i=>i.style.width=i.dataset.w);io.unobserve(e.target)}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+// fallback: reveal anything on screen even if the observer misses it (fast jumps, background tabs)
+const sweep=()=>document.querySelectorAll('.reveal:not(.in)').forEach(el=>{const r=el.getBoundingClientRect();if(r.top<innerHeight*1.05&&r.bottom>-50){el.classList.add('in');el.querySelectorAll('.bar .t i').forEach(i=>i.style.width=i.dataset.w)}});
+addEventListener('scroll',()=>requestAnimationFrame(sweep),{passive:true});addEventListener('hashchange',()=>setTimeout(sweep,60));setTimeout(sweep,400);setInterval(sweep,1500);
+
+// hero ticker
+(()=>{const T=document.getElementById('ticker'),x=document.getElementById('tickTxt');let k=0;
+const N=['pH 7.4 · TDS 290 ppm · turbidity 14 NTU · <b>NORMAL</b>','pH 7.3 · TDS 302 ppm · turbidity 13 NTU · <b>NORMAL</b>','pH 7.4 · TDS 296 ppm · turbidity 15 NTU · <b>NORMAL</b>','pH 6.6 · TDS 1,620 ppm ▲ · turbidity 31 NTU · <b>INDUSTRIAL · SMS SENT</b>','pH 7.2 · TDS 340 ppm · turbidity 18 NTU · <b>NORMAL</b>'];
+setInterval(()=>{k=(k+1)%N.length;const m=(k*15)%60,h=2+Math.floor(k*15/60);x.innerHTML=`0${h}:${String(m).padStart(2,'0')} · `+N[k];T.classList.toggle('alarm',k===3)},2600)})();
+
+// cost bars
+(()=>{const L=[['Float: hulls, carriage, deck, well',15413],['Electronics + sensors (Raspberry Pi set)',11224],['Bridge kit: GI pole, galvanised brackets',7581],['Assembly, test, freight, mould share',6800],['Fasteners + bought parts',3460],['Power: 20 W solar, 6 Ah LiFePO4',2758],['Sample bottles + tubing',650]];
+const m=L[0][1],b=document.getElementById('bars');b.innerHTML=L.map(([n,v])=>`<div class="bar"><span>${n}</span><div class="t"><i data-w="${(v/m*100).toFixed(1)}%"></i></div><span class="v">₹${v.toLocaleString('en-IN')}</span></div>`).join('')+`<div class="bar" style="font-weight:700"><span>Total</span><span></span><span class="v">≈ ₹47,900</span></div>`})();
+
+// downloads
+(()=>{const G='https://github.com/soham0777/AquaSentinel/blob/main/',T='https://github.com/soham0777/AquaSentinel/tree/main/';
+const D=[['🎤','Finale deck (PDF)','16 pitch slides + 12 Q&A backups',G+'01_FINALE_PRESENTATION/AquaSentinel_Finale_7min.pdf'],
+['🧩','1:5 assembly manual','30 pages, pictures from SOLIDWORKS 2026',G+'02_LIVE_MODEL_1to5/00_ASSEMBLY_MANUAL/AquaSentinel_LIVE_1to5_Assembly_Manual_SOLIDWORKS.pdf'],
+['🖨️','37 print files','STL + parts list for the 1:5 model',T+'02_LIVE_MODEL_1to5/01_FINAL_STL'],
+['⚡','Electronics in SOLIDWORKS','13 parts, bay assembly, drawing AS-LIVE-ELEC-01',G+'03_ELECTRONICS_RASPBERRY_PI/AquaSentinel_Electronics_in_SOLIDWORKS.pdf'],
+['🍓','Raspberry Pi design','pin map, power, decision logic',G+'03_ELECTRONICS_RASPBERRY_PI/AquaSentinel_RPi_Prototype_Design.pdf'],
+['📐','R3 assembly manual','27 pages, full-size float',G+'05_R3_FULL_SIZE_CAD/00_ASSEMBLY_MANUAL/AquaSentinel_R3_Assembly_Manual_SOLIDWORKS.pdf'],
+['📦','R3 SOLIDWORKS Pack and Go','66 parts + assembly',T+'05_R3_FULL_SIZE_CAD/02_SOLIDWORKS_PackAndGo'],
+['🧊','STEP and STL of every part','open in any CAD tool',T+'05_R3_FULL_SIZE_CAD/07_Parts_STEP_STL'],
+['📏','R3 drawing set','6 sheets, from the CAD',G+'05_R3_FULL_SIZE_CAD/04_Drawings/AquaSentinel_R3_Drawing_Set.pdf'],
+['🧮','SOLIDWORKS Simulation','pole and pier bracket studies',T+'06_SIMULATION'],
+['💰','Cost: ≈ ₹48,000','value-engineered, line by line',G+'07_COST_AND_BUSINESS/04_AquaSentinel_Cost_48k_Value_Engineered.pdf'],
+['🗂️','The whole repository','everything above, in one place','https://github.com/soham0777/AquaSentinel']];
+document.getElementById('dls').innerHTML=D.map(([i,t,s,u])=>`<a class="card dl" href="${u}"><span class="ic">${i}</span><span><b>${t}</b><span>${s}</span></span></a>`).join('')})();
+
+// 3D tabs
+(()=>{const mv=document.getElementById('mv'),cap=document.getElementById('mvcap');
+const M={r3:['models/AquaSentinel_R3_float_on_pole.glb','R3 full size · twin rotomoulded hulls, guide carriage on a 2-inch pole, sensor well, pod, 20 W canopy, beacon, sampler'],
+live:['models/AquaSentinel_LIVE_1to5.glb','1:5 LIVE model · plinth with the Raspberry Pi, column and met head, float on its rod, sensor cage in the dish, sample bottle with the MQ-3']};
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===b));mv.src=M[b.dataset.m][0];mv.cameraOrbit=b.dataset.m==='live'?'-35deg 68deg 95%':'30deg 75deg 70%';mv.fieldOfView=b.dataset.m==='live'?'24deg':'auto';cap.textContent=M[b.dataset.m][1]})})();
+
+// pin header
+(()=>{const P={1:['3.3 V','power','ADS1115 × 2, DS3231, DHT11, DS18B20 pull-up, rain and light modules (about 20 mA)'],2:['5 V','power','Pi supply from Buck A, behind an external 3 A fuse'],4:['5 V','power','Pi supply from Buck A'],
+3:['GPIO2 (SDA)','used','I²C data to both ADS1115 converters (0x48, 0x49) and the DS3231 clock (0x68)'],5:['GPIO3 (SCL)','used','I²C clock to both ADS1115 converters and the DS3231 clock'],
+7:['GPIO4','used','DS18B20 water temperature (1-Wire), 4.7 k pull-up to 3.3 V'],8:['GPIO14 (TXD)','used','SIM800L RXD through a 1 k / 2 k divider (3.3 V to 2.2 V)'],10:['GPIO15 (RXD)','used','SIM800L TXD (2.8 V level, read OK)'],
+11:['GPIO17','used','DHT11 air temperature and humidity'],12:['GPIO18','used','SIM800L reset'],13:['GPIO27','used','rain module digital output'],15:['GPIO22','used','rain module power switch: on only while reading, against corrosion'],
+16:['GPIO23','used','MX1508 IN1: the sample pump (IN2 tied low)'],29:['GPIO5','used','light (LDR) module digital output'],31:['GPIO6','used','pH board 5 V high-side switch: never on together with the TDS board'],
+33:['GPIO13','used','TDS board high-side switch'],35:['GPIO19','used','MQ-3 heater MOSFET (about 180 mA)'],36:['GPIO16','used','ACK / reset button, internal pull-up'],37:['GPIO26','used','status LED and the red/green beacon, through a transistor'],
+6:['GND','gnd','star ground at ADS1115 #1'],9:['GND','gnd','star ground at ADS1115 #1'],14:['GND','gnd','star ground at ADS1115 #1'],17:['3.3 V','power','not used'],20:['GND','gnd','ground'],25:['GND','gnd','ground'],30:['GND','gnd','ground'],34:['GND','gnd','ground'],39:['GND','gnd','ground']};
+const h=document.getElementById('hdr'),info=document.getElementById('pininfo');const show=(n,el)=>{const p=P[n];document.querySelectorAll('.pin').forEach(x=>x.classList.toggle('sel',x===el));info.innerHTML=p?`<b>Pin ${n} · ${p[0]}</b><br><span style="color:var(--sub)">${p[2]}</span>`:`<b>Pin ${n}</b><br><span style="color:var(--sub)">free</span>`};
+const order=[];for(let i=0;i<20;i++)order.push(2*i+2);for(let i=0;i<20;i++)order.push(2*i+1);
+order.forEach(n=>{const d=document.createElement('div');const p=P[n];d.className='pin'+(p?' '+p[1]:'');d.title='Pin '+n+(p?' · '+p[0]:'');d.tabIndex=0;d.onmouseenter=d.onfocus=d.onclick=()=>show(n,d);h.appendChild(d)})})();
+
+// lightbox
+(()=>{const lb=document.getElementById('lb'),im=lb.querySelector('img');document.querySelectorAll('#gal img').forEach(i=>i.parentElement.onclick=()=>{im.src=i.src;im.alt=i.alt;lb.classList.add('on')});lb.onclick=()=>lb.classList.remove('on')})();
+
+// simulator
+(()=>{const $=id=>document.getElementById(id);const S={ph:$('ph'),tds:$('tds'),tu:$('tu'),va:$('va'),rain:$('rain'),probe:$('probe')};
+const PRE={clean:[7.4,290,1,5,false,true],salty:[7.1,1650,1.1,5,false,true],vinegar:[3.6,420,1,6,false,true],muddy:[7.2,330,4.2,5,true,true],solvent:[7.3,300,1,85,false,true],unplug:[7.4,290,1,5,false,false]};
+let minute=0,lastState='NORMAL',log=[];
+function set(p){const v=PRE[p];S.ph.value=v[0];S.tds.value=v[1];S.tu.value=v[2];S.va.value=v[3];S.rain.checked=v[4];S.probe.checked=v[5];document.querySelectorAll('#presets button').forEach(b=>b.classList.toggle('on',b.dataset.p===p));tick(true)}
+function decide(r){if(!r.probe)return['SENSOR FAULT','#9aa7b2','The pH probe stopped answering. AquaSentinel reports a fault and asks for a visit; it never shows "normal" on a missing reading.',false];
+ const c=[];if(r.tds>1400)c.push(['INDUSTRIAL',`Dissolved solids ${r.tds.toLocaleString('en-IN')} ppm, above the 1,400 ppm limit (about the CPCB Class E conductivity): a saline or industrial discharge.`,`dissolved solids ${r.tds.toLocaleString('en-IN')} ppm (limit 1,400)`]);
+ if(r.ph<6)c.push(['ACIDIC',`pH ${r.ph.toFixed(1)}, below 6: an acid spill.`,`pH ${r.ph.toFixed(1)} (limit 6)`]);if(r.ph>9)c.push(['ALKALINE',`pH ${r.ph.toFixed(1)}, above 9: an alkaline discharge.`,`pH ${r.ph.toFixed(1)} (limit 9)`]);
+ if(r.tu>=3&&r.tds<=1400)c.push(['RUNOFF',`Turbidity ${r.tu.toFixed(1)}× its normal for this hour while salts stay flat${r.rain?', and the rain plate is wet':''}: runoff.`,`turbidity ${r.tu.toFixed(1)}× normal${r.rain?', raining':''}`]);
+ if(r.va>=50)c.push(['SOLVENT',`Vapour in the sample bottle at ${r.va} %: solvent or fuel.`,`vapour ${r.va} % in the bottle`]);
+ if(!c.length)return['NORMAL','#33d17a','All readings inside their limits and close to the normal for this hour. Logged; the Pi goes back to sleep for 15 minutes.',false];
+ return[c.map(x=>x[0]).join(' + '),c[0][0]==='RUNOFF'?'#ffb020':'#ff4d4d',c.map(x=>x[1]).join(' ')+' Beacon red, SMS out, one bottle filled for the lab.',true,c.map(x=>x[2]).join(', ')]}
+function hhmm(m){const h=2+Math.floor(m/60),mm=m%60;return String(h%24).padStart(2,'0')+':'+String(mm).padStart(2,'0')}
+function tick(advance){if(advance)minute+=15;const r={ph:+S.ph.value,tds:+S.tds.value,tu:+S.tu.value,va:+S.va.value,rain:S.rain.checked,probe:S.probe.checked};
+ $('o_ph').textContent=r.ph.toFixed(1);$('o_tds').textContent=r.tds.toLocaleString('en-IN')+' ppm';$('o_tu').textContent=r.tu.toFixed(1)+'×';$('o_va').textContent=r.va+' %';
+ const [v,col,why,ev,sms]=decide(r);const t=hhmm(minute);$('clock').textContent=t;$('ptime').textContent=t;$('badge').textContent=v;$('badge').style.background=col+'cc';$('why').textContent=why;
+ const lamp=$('lamp'),bgc=$('bgc'),fault=v==='SENSOR FAULT';const lc=ev?'#ff3b3b':fault?'#9aa7b2':'#33d17a';lamp.setAttribute('fill',lc);bgc.setAttribute('stop-color',lc);
+ $('rings').setAttribute('opacity',ev?1:0);$('rainG').setAttribute('opacity',r.rain?.8:0);
+ const tint=r.tds>1400?'#5a6e4a':r.ph<6?'#7a8a2a':r.tu>=3?'#6b4a2a':'#1b6b84';$('wt0').setAttribute('stop-color',tint);
+ $('plume').setAttribute('opacity',ev?.8:0);$('plumeE').setAttribute('fill',r.ph<6?'#a8b83a':r.va>=50?'#b48cff':'#7b4a28');
+ $('fill').setAttribute('height',ev?40:0);$('fill').setAttribute('y',ev?18:58);$('filltxt').textContent=ev?'250 mL kept':'empty';
+ if(ev&&v!==lastState){const n=document.createElement('div');n.className='notif';n.innerHTML=`<b>SMS · AQUASENTINEL #01 · ${t}</b>Spill at the Kopargaon bridge: ${v}, ${sms}. Sample bottled. Beacon red.`;const ib=$('inbox');if(ib.querySelector('.quiet'))ib.innerHTML='';ib.prepend(n);while(ib.children.length>3)ib.lastChild.remove()}
+ if(!ev&&!fault&&lastState!=='NORMAL'&&lastState!=='SENSOR FAULT'){}
+ lastState=v;log.unshift([t,v,col]);log=log.slice(0,4);$('log').innerHTML=log.map(([a,b,c])=>`<div><span>${a}</span><i style="color:${c}">${b}</i></div>`).join('')}
+document.querySelectorAll('#presets button').forEach(b=>b.onclick=()=>set(b.dataset.p));
+Object.values(S).forEach(e=>e.addEventListener('input',()=>{document.querySelectorAll('#presets button').forEach(b=>b.classList.remove('on'));tick(true)}));
+set('clean')})();
 </script>
 </body>
 </html>

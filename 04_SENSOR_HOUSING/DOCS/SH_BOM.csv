@@ -1,0 +1,23 @@
+Item,Description,Qty,Size / spec,Notes
+SH-01,Housing - perforated well with fill lines,1,PETG print 190 x 190 x 210 mm,Print upright on its base; 5 mm brim
+SH-02,Cap with 2-lug bayonet (30 deg twist),1,PETG print 186 x 186 x 26 mm,Print top face down
+SH-03,Upper spider (holds pH / EC collets and snorkel),1,PETG print,Flat
+SH-04,Lower spider (probe guide and temperature collet),1,PETG print,Flat
+SH-05,Upper spacer tube,1,PETG print,Upright
+SH-06,Lower spacer tube,1,PETG print,Upright
+SH-07,Collet - pH probe (O-ring gland),1,PETG print,Flange down
+SH-08,Collet - EC probe (O-ring gland),1,PETG print,Flange down
+SH-09,Collet - DS18B20 temperature probe,1,PETG print,Flange down
+SH-10,Turbidity snorkel (keeps SEN0189 top dry),1,PETG print,Flange down; 5 mm brim
+SH-11,Lift handle,1,PETG print,Lying flat on its side
+SH-12,pH storage-cap cup,1,PETG print,Upright
+HW-01,Threaded rod M6 stainless A4,1,185 mm long,Cut from 1 m rod and deburr
+HW-02,Hex nut M6 A4 (ISO 4032 / DIN 934),1,AF 10 x 5 mm,Sits in the hex pocket on the cap top
+HW-03,Nyloc nut M6 A4 (DIN 985),1,AF 10 x 6 mm,Under the lower spider
+HW-04,Washer M6 A4 (DIN 125),1,6.4 x 12 x 1.6 mm,Under the lower spider
+HW-05,Socket head cap screw M3 x 16 A2/A4 (ISO 4762),2,,Handle - inserted from under the cap
+HW-06,Socket head cap screw M3 x 8 A2/A4 (ISO 4762),2,,Storage cup - inserted from inside the cup
+HW-07,Heat-set insert M3 for 4.0 mm hole,4,approx. 5.7 mm long,2 in handle feet + 2 in cap top
+HW-08,O-ring NBR or EPDM - pH and EC collets,2,11.5 x 2 mm (for 12 mm probe),Groove dia 15.2 mm; re-select after measuring PhD / EcD (ID about probe OD - 0.5)
+HW-09,O-ring NBR or EPDM - DS18B20 collet,1,5.5 x 1.5 mm,Groove dia 8.4 mm
+HW-10,Neutral-cure silicone (aquarium safe),1,1 tube,Turbidity snorkel joint and cable keyholes

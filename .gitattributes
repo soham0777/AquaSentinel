@@ -1,15 +1,17 @@
 * text=auto
 *.step binary
+*.STEP binary
 *.stl binary
+*.STL binary
 *.glb binary
 *.zip binary
 *.docx binary
+*.xlsx binary
+*.pdf binary
 *.SLDPRT binary
 *.SLDASM binary
+*.SLDDRW binary
 *.mp4 binary
 *.gif binary
 *.png binary
 *.jpg binary
-*.pdf binary
-# the viewer embeds the model; keep it out of the language statistics
-docs/viewer.html linguist-generated

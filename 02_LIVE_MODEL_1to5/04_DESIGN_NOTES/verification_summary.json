@@ -1,0 +1,169 @@
+{
+  "status": "CAD concept, geometry-checked; not printed or wet-tested",
+  "new_parts": {
+    "LD-F05_sensor_well_bayonet.stl": {
+      "size_mm": "38.0 x 38.0 x 73.8",
+      "volume_cm3": 12.7,
+      "watertight": true,
+      "bodies": 1,
+      "fits_H2D_single": true,
+      "fits_H2D_dual": true
+    },
+    "LD-F06_debris_deflector_short.stl": {
+      "size_mm": "15.5 x 24.8 x 51.2",
+      "volume_cm3": 3.1,
+      "watertight": true,
+      "bodies": 1,
+      "fits_H2D_single": true,
+      "fits_H2D_dual": true
+    },
+    "LD-F07_cartridge_cap_cable_gland.stl": {
+      "size_mm": "37.2 x 37.2 x 13.8",
+      "volume_cm3": 2.4,
+      "watertight": true,
+      "bodies": 1,
+      "fits_H2D_single": true,
+      "fits_H2D_dual": true
+    },
+    "LD-F12_beacon_mast_LED.stl": {
+      "size_mm": "16.0 x 16.0 x 111.8",
+      "volume_cm3": 3.9,
+      "watertight": true,
+      "bodies": 1,
+      "fits_H2D_single": true,
+      "fits_H2D_dual": true
+    },
+    "LD-F13_beacon_diffuser_lens.stl": {
+      "size_mm": "14.8 x 14.8 x 14.2",
+      "volume_cm3": 1.7,
+      "watertight": true,
+      "bodies": 1,
+      "fits_H2D_single": true,
+      "fits_H2D_dual": true
+    },
+    "LD-F16a_sensor_cage_plate_hub.stl": {
+      "size_mm": "91.9 x 91.8 x 17.5",
+      "volume_cm3": 17.6,
+      "watertight": true,
+      "bodies": 1,
+      "fits_H2D_single": true,
+      "fits_H2D_dual": true
+    },
+    "LD-F16b_sensor_cage_basket.stl": {
+      "size_mm": "92.0 x 92.0 x 42.1",
+      "volume_cm3": 25.0,
+      "watertight": true,
+      "bodies": 1,
+      "fits_H2D_single": true,
+      "fits_H2D_dual": true
+    },
+    "LD-F17_pH_electrode_collar.stl": {
+      "size_mm": "25.0 x 20.0 x 9.0",
+      "volume_cm3": 2.1,
+      "watertight": true,
+      "bodies": 1,
+      "fits_H2D_single": true,
+      "fits_H2D_dual": true
+    },
+    "LD-S01_plinth_electronics_bay.stl": {
+      "size_mm": "300.0 x 200.0 x 72.0",
+      "volume_cm3": 539.3,
+      "watertight": true,
+      "bodies": 1,
+      "fits_H2D_single": true,
+      "fits_H2D_dual": true
+    },
+    "LD-S08_electronics_tray_end_panel.stl": {
+      "size_mm": "143.6 x 199.0 x 71.6",
+      "volume_cm3": 117.9,
+      "watertight": true,
+      "bodies": 1,
+      "fits_H2D_single": true,
+      "fits_H2D_dual": true
+    },
+    "LD-S09_dish_seat.stl": {
+      "size_mm": "123.4 x 123.2 x 5.8",
+      "volume_cm3": 34.7,
+      "watertight": true,
+      "bodies": 1,
+      "fits_H2D_single": true,
+      "fits_H2D_dual": true
+    },
+    "LD-S10a_met_column_cap.stl": {
+      "size_mm": "24.7 x 65.4 x 21.2",
+      "volume_cm3": 9.5,
+      "watertight": true,
+      "bodies": 1,
+      "fits_H2D_single": true,
+      "fits_H2D_dual": true
+    },
+    "LD-S10b_met_plate_rain_LDR_DHT11.stl": {
+      "size_mm": "87.0 x 70.0 x 48.0",
+      "volume_cm3": 50.0,
+      "watertight": true,
+      "bodies": 1,
+      "fits_H2D_single": true,
+      "fits_H2D_dual": true
+    },
+    "LD-S11_bottle_collar.stl": {
+      "size_mm": "69.4 x 69.3 x 20.0",
+      "volume_cm3": 13.3,
+      "watertight": true,
+      "bodies": 1,
+      "fits_H2D_single": true,
+      "fits_H2D_dual": true
+    },
+    "LD-S12_MQ3_headspace_cap.stl": {
+      "size_mm": "58.0 x 58.0 x 27.3",
+      "volume_cm3": 10.9,
+      "watertight": true,
+      "bodies": 1,
+      "fits_H2D_single": true,
+      "fits_H2D_dual": true
+    },
+    "LD-S13_cable_grommets.stl": {
+      "size_mm": "73.0 x 24.0 x 6.2",
+      "volume_cm3": 2.6,
+      "watertight": true,
+      "bodies": 3,
+      "fits_H2D_single": true,
+      "fits_H2D_dual": true
+    },
+    "LD-S15_park_sleeve.stl": {
+      "size_mm": "19.4 x 21.0 x 60.0",
+      "volume_cm3": 10.3,
+      "watertight": true,
+      "bodies": 1,
+      "fits_H2D_single": true,
+      "fits_H2D_dual": true
+    }
+  },
+  "point_probe_checks": "every cut/pocket/slot of every new part probed solid/empty (about 170 probes), all pass",
+  "interference_low_stop": "0 overlaps (0.15 mm inward-offset points) between new parts and original float/stand; only designed contacts",
+  "clearances_mm": {
+    "cage_to_dish_wall_assuming_ID109": 8.5,
+    "cage_bottom_to_dish_inner_floor": 7.0,
+    "keel_to_dish_rim_low_stop": 5.0,
+    "parked_plus60_cage_above_dish_rim": 6.0,
+    "parked_plus60_carriage_below_upper_collar": 5.0,
+    "deflector_LD-F06_to_cage_hub": 2.0,
+    "deflector_tabs_to_well": 0.21,
+    "well_to_pod_F09": 2.79,
+    "cap_to_pod_F09": 2.37,
+    "met_cap_to_upper_bracket_S04": 6.0,
+    "met_plate_to_upper_bracket_S04": 9.0
+  },
+  "water": {
+    "gross_volume_to_water_line_mL": 476,
+    "level_drop_per_50mL_sample_mm": 5.36,
+    "turbidity_gap_top_under_water_after_sample_mm": 1.14,
+    "pump_top_under_water_after_sample_mm": 2.64
+  },
+  "bayonet": {
+    "pins_z": -7.0,
+    "twist_deg": 25,
+    "lock_drop_mm": 2.4,
+    "socket_radial_clearance_mm": 0.25
+  },
+  "yaw_tolerance_deg": "about +-7 before the cage edge reaches the dish wall"
+}

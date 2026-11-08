@@ -1,0 +1,36 @@
+file,qty,material,orientation / notes,size_mm,volume_cm3,watertight,bodies,fits_H2D_single,fits_H2D_dual,down_facing_gt45_mm2
+LD-F05_sensor_well_bayonet.stl,1,PETG,black; flange on the bed,38.0 x 38.0 x 73.8,12.7,True,1,True,True,135.0
+LD-F06_debris_deflector_short.stl,1,PETG or PLA,black; stands on its V footprint,15.5 x 24.8 x 51.2,3.1,True,1,True,True,0.0
+LD-F07_cartridge_cap_cable_gland.stl,1,PETG,black; disc on the bed,37.2 x 37.2 x 13.8,2.4,True,1,True,True,11.0
+LD-F12_beacon_mast_LED.stl,1,PLA,silver; beacon base on the bed (as the original F12),16.0 x 16.0 x 111.8,3.9,True,1,True,True,198.0
+LD-F13_beacon_diffuser_lens.stl,1,PETG/PLA natural or translucent white,base on the bed,14.8 x 14.8 x 14.2,1.7,True,1,True,True,21.0
+LD-F16a_sensor_cage_plate_hub.stl,1,PETG,plate on the bed; wet part,91.9 x 91.8 x 17.5,17.6,True,1,True,True,224.0
+LD-F16b_sensor_cage_basket.stl,1,PETG,floor on the bed; wet part,92.0 x 92.0 x 42.1,25.0,True,1,True,True,64.0
+LD-F17_pH_electrode_collar.stl,1,PETG,ring on the bed,25.0 x 20.0 x 9.0,2.1,True,1,True,True,20.0
+LD-S01_plinth_electronics_bay.stl,1,PLA,top on the bed (upside down); 300 x 200 x 72,300.0 x 200.0 x 72.0,539.3,True,1,True,True,2191.0
+LD-S08_electronics_tray_end_panel.stl,1,PLA,floor on the bed; end panel stands,143.6 x 199.0 x 71.6,117.9,True,1,True,True,343.0
+LD-S09_dish_seat.stl,1,PETG,flat; wet zone,123.4 x 123.2 x 5.8,34.7,True,1,True,True,9.0
+LD-S10a_met_column_cap.stl,1,PLA,top plate on the bed,24.7 x 65.4 x 21.2,9.5,True,1,True,True,0.0
+LD-S10b_met_plate_rain_LDR_DHT11.stl,1,PETG,base on the bed; white or light grey (DHT11 screen),87.0 x 70.0 x 48.0,50.0,True,1,True,True,1693.0
+LD-S11_bottle_collar.stl,1,PLA or PETG,ring on the bed,69.4 x 69.3 x 20.0,13.3,True,1,True,True,0.0
+LD-S12_MQ3_headspace_cap.stl,1,PETG,top plate on the bed; cone points up,58.0 x 58.0 x 27.3,10.9,True,1,True,True,456.0
+LD-S13_cable_grommets.stl,1,TPU 95A (or PETG),set of 3; lips on the bed,73.0 x 24.0 x 6.2,2.6,True,3,True,True,0.0
+LD-S15_park_sleeve.stl,1,PETG or PLA,upright,19.4 x 21.0 x 60.0,10.3,True,1,True,True,0.0
+ORIG-F01_hull_starboard.stl,1,PLA,"yellow (unchanged original, already in print orientation)",203.2 x 48.4 x 52.0,,,,True,True,
+ORIG-F02_hull_port.stl,1,PLA,"yellow (unchanged original, already in print orientation)",203.2 x 48.4 x 52.0,,,,True,True,
+ORIG-F03_frame_deck_struts_stanchions.stl,1,PLA,"grey (unchanged original, already in print orientation)",157.0 x 150.0 x 78.3,,,,True,True,
+ORIG-F04_guide_carriage.stl,1,PLA,"silver (unchanged original, already in print orientation)",52.2 x 47.8 x 92.4,,,,True,True,
+ORIG-F09_control_pod.stl,1,PLA,"light grey (unchanged original, already in print orientation)",66.0 x 56.6 x 38.4,,,,True,True,
+ORIG-F10_autosampler.stl,1,PLA,"white (unchanged original, already in print orientation)",37.4 x 46.8 x 53.2,,,,True,True,
+ORIG-F11_pv_canopy.stl,1,PLA,"dark blue (unchanged original, already in print orientation)",90.0 x 70.0 x 8.6,,,,True,True,
+ORIG-F15a_grab_handle_1.stl,1,PLA,"silver (unchanged original, already in print orientation)",30.8 x 6.8 x 13.2,,,,True,True,
+ORIG-F15b_grab_handle_2.stl,1,PLA,"silver (unchanged original, already in print orientation)",30.8 x 6.8 x 13.2,,,,True,True,
+ORIG-F15c_grab_handle_3.stl,1,PLA,"silver (unchanged original, already in print orientation)",30.8 x 6.8 x 13.2,,,,True,True,
+ORIG-F15d_grab_handle_4.stl,1,PLA,"silver (unchanged original, already in print orientation)",30.8 x 6.8 x 13.2,,,,True,True,
+ORIG-S02_pier_column.stl,1,PLA,"concrete grey; 304 mm tall, fits the H2D (halves S02a/S02b also exist) (unchanged original, already in print orientation)",60.0 x 304.2 x 22.1,,,,True,True,
+ORIG-S03_pier_bracket_lower.stl,1,PLA,"silver (unchanged original, already in print orientation)",36.0 x 44.0 x 84.0,,,,True,True,
+ORIG-S04_pier_bracket_upper.stl,1,PLA,"silver (unchanged original, already in print orientation)",36.0 x 44.0 x 109.0,,,,True,True,
+ORIG-S05a_stop_collar_lower.stl,1,PLA,"silver (unchanged original, already in print orientation)",22.4 x 20.0 x 10.0,,,,True,True,
+ORIG-S05b_stop_collar_upper.stl,1,PLA,"silver (fit upside down) (unchanged original, already in print orientation)",22.4 x 20.0 x 10.0,,,,True,True,
+ORIG-S06_pole_cap.stl,1,PLA,"silver (unchanged original, already in print orientation)",14.8 x 14.8 x 7.5,,,,True,True,
+ORIG-OPT_rod_half_print_2.stl,2,PLA,"only if you print the 12 mm rod instead of using a metal/wood rod (unchanged original, already in print orientation)",12.0 x 310.0 x 6.0,,,,True,True,
