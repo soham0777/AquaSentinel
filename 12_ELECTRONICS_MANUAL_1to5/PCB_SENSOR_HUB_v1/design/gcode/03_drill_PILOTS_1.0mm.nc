@@ -1,0 +1,44 @@
+( AquaSentinel Sensor Hub v1.2 - 03 PILOT holes with the 1.0 mm bit: 2 screw-terminal + 4 mounting )
+( widen by hand afterwards: terminal to 1.3 mm, mounting to 3.2 mm )
+( origin X0 Y0 = lower-left corner of the 104 x 72 BOARD, Z0 = copper surface )
+G21 G90 G94
+G17
+G0 Z15.00
+M3 S10000
+G4 P3
+G0 Z15.00
+G0 X3.500 Y3.500
+G0 Z2.00
+G0 X3.500 Y3.500
+G1 Z-1.000 F60
+G0 Z0.500
+G1 Z-1.900 F60
+G0 Z2.00
+G0 X6.000 Y52.920
+G1 Z-1.000 F60
+G0 Z0.500
+G1 Z-1.900 F60
+G0 Z2.00
+G0 X6.000 Y58.000
+G1 Z-1.000 F60
+G0 Z0.500
+G1 Z-1.900 F60
+G0 Z2.00
+G0 X3.500 Y68.500
+G1 Z-1.000 F60
+G0 Z0.500
+G1 Z-1.900 F60
+G0 Z2.00
+G0 X100.500 Y43.000
+G1 Z-1.000 F60
+G0 Z0.500
+G1 Z-1.900 F60
+G0 Z2.00
+G0 X100.500 Y3.500
+G1 Z-1.000 F60
+G0 Z0.500
+G1 Z-1.900 F60
+G0 Z15.00
+M5
+G0 X52.0 Y36.0
+M30
