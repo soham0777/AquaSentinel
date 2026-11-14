@@ -13,22 +13,27 @@ Git is a history of the text and code, **not** a backup of the 2.2 GB of media, 
 
 ## What git actually tracks
 
-**Tracked (345 files at 14 Nov):**
+**Tracked (79 files at 14 Nov 2026):**
 
-- `README.md`, `LICENSE`, `.gitignore`, `.gitattributes`
-- the old October tree: `mechanical/`, `docs/`, `analytics/`, `firmware/`, `hardware/`, `project-management/`
-  (these files were moved off the visible workspace during the numbered-folder reorganisation, so `git status` lists them as deleted)
-- `14_RASPBERRY_PI_SOFTWARE/aquasentinel/aquasentinel/brain.py`, `config.json`, `tools/self_test.py`
-- `99_ARCHIVE/09_Cleanup_2026-11-14/MANIFEST.md`
+- `README.md`, `LICENSE`, `.gitignore`, `.gitattributes`, `00_START_HERE.md`;
+- `00_PROJECT_CONTROL/` (audit, backup policy, reorg report, move log);
+- one `README.md` per working folder, plus `99_ARCHIVE/00_ARCHIVE_INDEX.md` and the archive manifest;
+- the **complete Raspberry Pi application** in `14_RASPBERRY_PI_SOFTWARE/aquasentinel/` (code, web UI, tools, scripts)
+  and the three wiring diagrams;
+- the **current Sensor Hub PCB v1.2** sources: KiCad board, DRC, design scripts, G-code, firmware, guides
+  (the superseded `older_versions/` layouts are not tracked).
 
-**Not tracked, by design or by the local exclude file:**
+**Not tracked:**
 
-- everything in `01_`–`07_` (blanket rules in `.git/info/exclude`), including the deck, STLs and R3 CAD;
-- `08_`, `09_`, `12_`, `13_` (they are simply untracked);
-- `99_ARCHIVE` contents (except its manifest), `*.zip`, `.claude/worktrees/`, `private/`.
+- the old October tree (`mechanical/`, `docs/`, `analytics/`, `firmware/`, `hardware/`, `project-management/`):
+  it was removed from HEAD in commit `654764d` and remains in history and in the pre-reorg tag/bundle;
+- the deck and presentation assets in `01_`; STLs and SOLIDWORKS in `02_`; R3 CAD in `05_`; cost and simulation binaries in `06_`/`07_`;
+- videos in `08_`, submission packages in `09_`, manual PDF/images/CAD copies in `12_`, assets in `13_`;
+- `99_ARCHIVE` contents (except its index and manifest), `*.zip`, `_SAFETY_SNAPSHOTS/`, `.claude/`, `private/`.
 
-This is why the numbered folder tree does not appear in the public repository. It is a deliberate local-only layout,
-inherited from before this cleanup. **Do not “fix” it by running `git add .`** — that would try to add gigabytes.
+These exclusions come from blanket rules in `.git/info/exclude` (`00_*`–`07_*`) plus plain untracked status. They are the
+reason a fresh clone does not contain the heavy project files. **Do not “fix” it by running `git add .`** — that would try
+to add gigabytes of media and CAD.
 
 ## Why `git status` used to show ~336 deleted files — now fixed
 
