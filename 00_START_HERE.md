@@ -92,7 +92,7 @@ Number gaps (03, 04, 10, 11) are deliberate: those folders were archived and the
 
 ## 4. How this workspace is kept safe
 
-- **Old versions were deleted on 14 Nov 2026** with the project lead's approval. Current work only. A later file audit packed derived files into verified zips: **704 project files / 826.4 MB (788 MiB)**, plus six audit records (see `00_PROJECT_CONTROL/FILE_AUDIT_2026-11-14.md`).
+- **Old versions were deleted on 14 Nov 2026** with the project lead's approval. Current work only. A later file audit packed derived files into verified zips: **704 project files / 826.6 MB (788 MiB)**, plus six audit records (see `00_PROJECT_CONTROL/FILE_AUDIT_2026-11-14.md`).
 - **Every move is logged** in `00_PROJECT_CONTROL/WORKSPACE_REORG_LOG_2026-11-14.csv` (source, destination, size, SHA-256, reason).
 - **A pre-purge fingerprint exists:** `99_ARCHIVE/file_manifest_before_purge_2026-11-14.csv` records SHA-256, size and timestamp of all 4,266 files that existed before the purge.
 - **Git holds the tracked text and code**, on every branch, plus tags `backup/pre-reorg-2026-11-14` and `workspace/reorg-2026-11-14`.

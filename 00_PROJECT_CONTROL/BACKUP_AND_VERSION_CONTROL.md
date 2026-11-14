@@ -71,8 +71,8 @@ would try to add gigabytes of media and CAD.
 
 ## Remote
 
-- `main` is **29 commits ahead / 14 behind** `origin/main`; the tip includes the
-  15 Nov PNG and CAD audits.
+- `main` is **ahead of** `origin/main` by the local audit commits and **14 behind**
+  it; the tip includes the 15 Nov PNG and CAD audits.
 - The public GitHub repository is an older, divergent version. It is not the
   source of truth.
 - Do not push before the finale unless the team has decided how to reconcile
