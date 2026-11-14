@@ -25,7 +25,7 @@ project folder).
 
 ## What git actually tracks
 
-**Tracked (about 86 files at 14 Nov 2026):**
+**Tracked (89 files at 14 Nov 2026):**
 
 - `README.md`, `LICENSE`, `.gitignore`, `.gitattributes`, `00_START_HERE.md`;
 - `00_PROJECT_CONTROL/` — audit, critical path, reorg report, purge report,
@@ -65,12 +65,12 @@ would try to add gigabytes of media and CAD.
    bundles and Claude's two worktrees were permanently deleted. Four unique
    documents were rescued first and hash-checked. Recorded in
    `00_PROJECT_CONTROL/PURGE_REPORT_2026-11-14.md`.
-3. **Result:** 4,281 → 1,032 working files; 2.25 GB → 807 MB (1.1 GB including
+3. **Result:** 4,281 → 1,034 working files; 2.25 GB → 807 MB (1.1 GB including
    `.git`). Nothing was pushed.
 
 ## Remote
 
-- `main` is at `213ab19`, **19 commits ahead / 14 behind** `origin/main`.
+- `main` is at `260aaf5`, **20 commits ahead / 14 behind** `origin/main`.
 - The public GitHub repository is an older, divergent version. It is not the
   source of truth.
 - Do not push before the finale unless the team has decided how to reconcile

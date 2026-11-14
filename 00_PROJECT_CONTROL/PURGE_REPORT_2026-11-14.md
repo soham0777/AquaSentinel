@@ -7,7 +7,7 @@ content so the folder contains only the current project.
 
 | Measure | Before purge (14 Nov, ~22:55) | After purge (14 Nov, ~23:10) | Change |
 |---|---|---|---|
-| Files (excluding `.git`) | 4,281 | **1,032** | −3,249 (−76 %) |
+| Files (excluding `.git`) | 4,281 | **1,034** | −3,247 (−76 %) |
 | Working-folder size | ~2.25 GB | **807 MB** | −1.44 GB (−64 %) |
 | Size including `.git` | ~2.5 GB | **1.1 GB** | −1.4 GB |
 | Empty folders | 0 | 0 | — |
