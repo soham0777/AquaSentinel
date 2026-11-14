@@ -86,7 +86,41 @@ losing a single byte of content.
 | Shell scripts | 3 |
 | Other (3 extensionless, 1 CSS, 1 KiCad PCB) | 5 |
 
-## 4. Can it go below 711?
+Where they sit (714 files, 781.3 MB of file bytes; 784 MB on disk with block
+overhead):
+
+| Folder | Files | Size |
+|---|---|---|
+| `01_FINALE_PRESENTATION` | 5 | 90.7 MB |
+| `02_LIVE_MODEL_1to5` | 190 | 74.2 MB |
+| `05_R3_FULL_SIZE_CAD` | 166 | 111.4 MB |
+| `06_SIMULATION` | 9 | 4.2 MB |
+| `07_COST_AND_BUSINESS` | 5 | 0.2 MB |
+| `08_VIDEOS` | 7 | 355.8 MB |
+| `09_SUBMISSIONS_AND_CERTIFICATES` | 21 | 40.9 MB |
+| `12_ELECTRONICS_MANUAL_1to5` | 188 | 61.4 MB |
+| `13_CREATIVE_EXPERIENCE_STORYTELLING` | 78 | 40.7 MB |
+| `14_RASPBERRY_PI_SOFTWARE` | 26 | 0.7 MB |
+| `00_PROJECT_CONTROL` | 11 | 0.2 MB |
+| `99_ARCHIVE` | 2 | 0.8 MB |
+| Root files (map, README, licence, audit, git config) | 6 | 0.0 MB |
+| **Total** | **714** | **781.3 MB** |
+
+## 4. Post-pack verification
+
+- **All 326 zip entries re-opened and hashed:** 326/326 match the SHA-256 in
+  `PACKED_FILES_2026-11-14.csv` (259 newly packed + 67 Pack-and-Go), 0 failures.
+- **0 zero-byte files** in the tree.
+- **All 711 paths in `FILE_AUDIT_2026-11-14.csv` exist**; the 3 audit records
+  themselves are the only files not listed.
+- **45 byte-identical groups remain, all intentional:** 40 are the CAD working
+  copies in `12_ELECTRONICS_MANUAL_1to5/CAD/` that the current `*_v2`
+  assemblies reference by path; 2 are repeated manual figure images; the
+  remaining 3 are the R3 GLB shared with the storytelling AR scene and the
+  deployed/source copies of two HTML viewers. Removing any of them would break
+  an assembly, a manual or a demo.
+
+## 5. Can it go below 711?
 
 Not without deleting current work. The remaining 711 are the build itself:
 
@@ -103,7 +137,7 @@ Deleting any of these would remove the ability to rebuild a manual, edit an
 assembly or re-cut a video. If the project only needs what is shown at the
 booth, a separate "booth-only" copy is the right move — not deleting the source.
 
-## 5. How to restore anything
+## 6. How to restore anything
 
 - Extract the relevant `.zip` in place; the entry names are the original file
   names, and `PACKED_FILES_2026-11-14.csv` carries the SHA-256 of every entry.
