@@ -2,7 +2,7 @@
 
 AquaSentinel is a **local-first** project: the folder on this laptop (synced by
 OneDrive) is the source of truth. Git is a history of the text and code, **not**
-a backup of the 807 MB of media, CAD, decks and manuals.
+a backup of the 791 MB of media, CAD, decks and manuals.
 
 ## The three layers
 
@@ -25,11 +25,12 @@ project folder).
 
 ## What git actually tracks
 
-**Tracked (92 files at 14 Nov 2026):**
+**Tracked (95 files at 15 Nov 2026):**
 
 - `README.md`, `LICENSE`, `.gitignore`, `.gitattributes`, `00_START_HERE.md`;
 - `00_PROJECT_CONTROL/` — audit, critical path, reorg report, purge report,
-  backup policy, move log, and the two 5 Nov deep audits;
+  backup policy, move log, the two 5 Nov deep audits and the 15 Nov PNG/CAD
+  audits;
 - one `README.md` per working folder, the archive purge note and the pre-purge
   manifest;
 - the **complete Raspberry Pi application** in `14_RASPBERRY_PI_SOFTWARE/aquasentinel/`
@@ -70,7 +71,8 @@ would try to add gigabytes of media and CAD.
 
 ## Remote
 
-- `main` is at `de73ec2`, **24 commits ahead / 14 behind** `origin/main`.
+- `main` is **29 commits ahead / 14 behind** `origin/main`; the tip includes the
+  15 Nov PNG and CAD audits.
 - The public GitHub repository is an older, divergent version. It is not the
   source of truth.
 - Do not push before the finale unless the team has decided how to reconcile
