@@ -154,7 +154,7 @@ Electronics manual p.17 says “Everything verified on the bench 12–13 Nov 202
 - the cost pack (`07_*`),
 - the submission zip (`*.zip`).
 
-Only 345 files are tracked, mostly the older `mechanical/`, `docs/`, `firmware/` and `analytics/` tree. The 14 Nov deck update is outside git, on this laptop and OneDrive. The PDF backup next to it is dated **7 Nov**, so if the venue laptop cannot open the PPTX, the PDF shows the older deck. The 137 MB R3 animation is over GitHub’s 100 MB file limit; a `git add .` would try to add it and fail on push.
+Only **99 files** are tracked (READMEs, audits, the Pi application and the Sensor Hub PCB sources); the deck, CAD, STLs, videos and cost pack are excluded. The list is in `00_PROJECT_CONTROL/BACKUP_AND_VERSION_CONTROL.md`. The 14 Nov deck update is outside git, on this laptop and OneDrive. The PDF backup next to it is dated **7 Nov**, so if the venue laptop cannot open the PPTX, the PDF shows the older deck. The 137 MB R3 animation is over GitHub’s 100 MB file limit; a `git add .` would try to add it and fail on push.
 **Fix:** copy the 14 Nov PPTX and a freshly exported PDF to a USB stick; make a full folder backup; commit the small code/docs selectively; create a git bundle; do not force-push the diverged `main`.
 
 ### P1 — fix before you print, hand over or present
