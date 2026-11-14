@@ -25,7 +25,7 @@ project folder).
 
 ## What git actually tracks
 
-**Tracked (95 files at 15 Nov 2026):**
+**Tracked (99 files at 15 Nov 2026):**
 
 - `README.md`, `LICENSE`, `.gitignore`, `.gitattributes`, `00_START_HERE.md`;
 - `00_PROJECT_CONTROL/` — audit, critical path, reorg report, purge report,

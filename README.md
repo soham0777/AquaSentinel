@@ -21,6 +21,7 @@ SIM800L, and keeps a bottle of that water for the lab. No motor, no anchor — i
 | Brain | **Raspberry Pi 3B+** | decisions (NORMAL / ACIDIC / INDUSTRIAL / RUNOFF / SOLVENT / SENSOR FAULT), dashboard, SIM800L SMS, pump/bottle sampling, CSV logging |
 
 - Electronics build guide: `12_ELECTRONICS_MANUAL_1to5/AquaSentinel_LIVE_1to5_Electronics_Assembly_Manual.pdf` (Rev 2.0)
+- Mechanical build guide: `02_LIVE_MODEL_1to5/00_ASSEMBLY_MANUAL/AquaSentinel_LIVE_1to5_Assembly_Manual_SOLIDWORKS.pdf` (30 pages, 7 Nov) **plus the one-page 15 Nov addendum in the same folder** — read the addendum before wiring; it supersedes the manual's rain pocket and pin map
 - Board design + Nano firmware: `12_ELECTRONICS_MANUAL_1to5/PCB_SENSOR_HUB_v1`
 - Raspberry Pi software: `14_RASPBERRY_PI_SOFTWARE` (auto-start service, dashboard on port 8080, SMS, calibration tools)
 

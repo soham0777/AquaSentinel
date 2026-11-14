@@ -10,7 +10,13 @@ One sub-folder per stage. This is a **record**, not working material.
 | `04_Team_change_Oct2026/` | Team-details sheets (original from 3DS and corrected), apology and reply e-mails |
 | `05_Participation_Certificates/` | Five individual certificates + one combined PDF |
 | `06_Portal_records/` | 3DEXPERIENCE access-request record (ID 41) |
-| `07_Maker_Fest_Vadodara_2027/` | Registration form answers for Maker Fest 2027 |
+| `07_Maker_Fest_Vadodara_2027/` | Registration form answers for Maker Fest 2027 (draft for the 30 Nov 2026 deadline) |
+
+## Frozen records vs live drafts
+
+`03_FDC_Update_7Nov2026/` is the text **as posted on 7 November** and is kept unchanged, including its “rain” wording:
+the rain sensor was dropped on 12 November. `07_Maker_Fest_Vadodara_2027/` is a live draft and was corrected on
+15 November to the final **seven-sensor** build.
 
 ## Which one matters now
 

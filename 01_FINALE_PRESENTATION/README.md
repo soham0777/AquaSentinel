@@ -20,7 +20,10 @@ There is **no current PDF** of the 14 Nov deck. Export one before travelling if 
 The deck was written before the last hardware changes. The three issues to fix are in
 `PROJECT_IDENTIFICATION_AND_CRITICAL_PATH_2026-11-14.md` (§7):
 
-- it says **rain**/“8 sensors”; the final build has **7 sensors and no rain sensor**;
+- it says **rain** on slides **6, 10, 11, 12, 18 and 22**, and **“8 sensors”** on slide **15**; slide 12 even says
+  “Seven sensors” and then lists Rain as an eighth. The 7 Nov PDF export also says **ADS1115/RTC** on page 12 and a
+  **RTC** power line on page 21. The final build has **7 sensors and no rain sensor**, and no ADS1115/RTC. The PPTX has
+  **not** been rewritten yet — it needs a booth edition and a fresh PDF export;
 - it describes some things as **verified** that were not tested end to end (Pi ↔ Nano, SIM800L SMS);
 - six Q&A traps (hourly baseline, “7 days”, baseline persistence, turbidity 3×, “hard limits act at once”, “pH and TDS never powered together”).
 

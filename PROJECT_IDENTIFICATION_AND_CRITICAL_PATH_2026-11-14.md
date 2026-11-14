@@ -130,18 +130,16 @@ This is the table to use when a judge asks “Have you built it?”
 `"ph_calibration": {"calibrated": false, "points": [[2.082, 4.0], [2.279, 9.2]]}`. `brain.py` only applies `pH < 6` / `pH > 9` when `calibrated` is true. Vinegar will still trigger `ACIDIC` through the 1.0 pH drop from baseline, so the demo works — but the pitch’s hard-limit claim does not.
 **Fix:** run `tools/calibrate_ph.py` with pH 4.0 and 7.0 buffers (9.2 optional), confirm `calibrated: true`, and re-run the self-test. Store the electrode in KCl; do not let it dry.
 
-**P0-3. “Rain” and “8 sensors” contradict the real build.**
-The real build has **7 sensor modules**: pH, TDS, turbidity, DS18B20, DHT11, LDR, MQ-3. There is **no rain sensor** in the Nano firmware, no rain input in `brain.py`, and the electronics manual Rev 2.0 explicitly says the rain sensor was dropped. Yet:
-- Deck slide 18: “rain, light and humidity”;
-- Deck slide 31: a “Rain” column in the decision table;
-- Deck slide 34: “Rain, light and humidity sensors”;
-- Deck slide 37: header says “Seven sensors” but the list includes Rain;
-- Deck slide 46: “Raspberry Pi, 8 sensors”;
-- Deck A4 (slide 67): “turbidity↑ with TDS flat = runoff (rain plate wet: stronger)”;
+**P0-3. “Rain” and “8 sensors” contradict the real build. STILL OPEN IN THE DECK AND PUBLIC REPO.**
+The real build has **7 sensor modules**: pH, TDS, turbidity, DS18B20, DHT11, LDR, MQ-3. There is **no rain sensor** in the Nano firmware, no rain input in `brain.py`, and the electronics manual Rev 2.0 explicitly says the rain sensor was dropped. Checked on 15 Nov 2026, the remaining contradictions are:
+- `AquaSentinel_Finale_7min.pptx` slides **6, 10, 11, 12, 18 and 22**: rain;
+- slide **15**: “Raspberry Pi, 8 sensors”;
+- slide **12**: says “Seven sensors” but lists Rain as an eighth;
+- the **7 Nov PDF export** also says ADS1115/RTC on page 12 and a RTC power line on page 21 (frozen submission record — do not edit it);
 - Public GitHub README: “One Raspberry Pi, eight sensors” and a rain-sensor diagram.
 
-This is a direct Art. 10 risk: two documents dated 14 Nov say different things, and the public repo says the wrong one. A judge who scans the QR code will see “eight sensors”.
-**Fix (recommended):** remove Rain from the deck and the public README; change “8 sensors” to “7 sensors / 8 readings” where the distinction is useful (pH, TDS, turbidity, water temp, air temp, humidity, light, vapour); remove the Rain column and the “rain plate wet” clause. Do **not** try to add a rain sensor in four days — the PCB v1.2 and firmware are not wired for it.
+**Local documents resolved 15 Nov 2026:** the cost Markdowns, customer cost PDF, cost README, 1:5 design notes and mechanical-manual addendum now all say seven sensors and no rain/ADS1115/RTC. The **deck** and the **public repo** are the two remaining places a judge can see the old wording.
+**Fix (recommended):** remove Rain from those deck slides; change “8 sensors” to “7 sensors / 8 readings” where useful (pH, TDS, turbidity, water temp, air temp, humidity, light, vapour); remove the “rain plate wet” clause; update or banner the public README. Do **not** try to add a rain sensor in four days — the PCB v1.2 and firmware are not wired for it.
 
 **P0-4. “Everything verified” is not supported yet.**
 Electronics manual p.17 says “Everything verified on the bench 12–13 Nov 2026”. The 13 Nov storytelling note says: every sensor and output was proven through the PCB, **but the SIM800L and the Raspberry Pi link were not tested yet**. The self-test I ran is the decision engine on simulated data, not the hardware chain.
@@ -161,9 +159,8 @@ Only 345 files are tracked, mostly the older `mechanical/`, `docs/`, `firmware/`
 
 ### P1 — fix before you print, hand over or present
 
-**P1-1. The mechanical assembly manual is stale.**
-`02_LIVE_MODEL_1to5/00_ASSEMBLY_MANUAL/AquaSentinel_LIVE_1to5_Assembly_Manual_SOLIDWORKS.pdf` is 30 pages, dated 7 Nov, and still instructs the builder to fit the rain plate + LM393 and says 37 parts. The 14 Nov electronics manual says rain was dropped. The `02_LIVE_MODEL_1to5/README.md` also references a 43-page manual that is not in the folder, a `03_PRINT_RECORDS/` folder that is missing, and a `pH_Electrode_Quick_Guide.pdf` that is missing. `00_START_HERE.md` says 37 STL; the folder has 38 (37 assembly print files + the printable sample bottle).
-**Fix:** add a one-page addendum to the mechanical manual (“rain plate is not instrumented; 38 STL files = 37 assembly print files + printable bottle”), fix the broken links, and do not hand the old manual to a judge without the addendum.
+**P1-1. The mechanical assembly manual is stale. — RESOLVED 15 Nov 2026 with an addendum.**
+`02_LIVE_MODEL_1to5/00_ASSEMBLY_MANUAL/AquaSentinel_LIVE_1to5_Assembly_Manual_SOLIDWORKS.pdf` is 30 pages, dated 7 Nov, and still instructs the builder to fit the rain plate + LM393 and says 37 parts. The 14 Nov electronics manual says rain was dropped. **Done:** a one-page addendum (`AquaSentinel_LIVE_1to5_Assembly_Manual_ADDENDUM_2026-11-15.pdf`) and the status note beside it now say leave the rain pocket/LM393 bay empty, give the final connector/pin map and the 5 V power map, and explain 37 parts / 38 STL. `02_LIVE_MODEL_1to5/README.md` no longer links a 43-page manual, a `03_PRINT_RECORDS/` folder or the missing pH guide, and `00_START_HERE.md` says 38 STL. Do not hand the 30-page manual to a judge without the addendum.
 
 **P1-2. Several deck technical claims are not matched by the code.**
 These are the ones a sharp Q&A judge could catch:
@@ -197,8 +194,8 @@ The PPTX was updated at 20:34 on 14 Nov; the PDF is 7 Nov. Export a fresh PDF af
 
 ### P2 — tidy, but do not let it consume the week
 
-- **Design notes are stale:** `02_LIVE_MODEL_1to5/04_DESIGN_NOTES/LIVE_model_design_notes.md` says “CAD concept, not yet printed or wet-tested”, references a `STL_print/` folder with 35 files, and still describes the ADS1115/rain design. It contradicts the README and the deck.
-- **Cost doc still carries the old design:** `07_COST_AND_BUSINESS/02_Pi_Based_Product_Cost_Estimate_2026-11-06.md` includes a “Rain plate + LM393 ₹100” line and “2 × ADS1115, DS3231, 3 buck converters … ₹3,000”. `03_Value_Engineered_Cost_48k_2026-11-07.md` includes “rain” in the electronics line and “2 × ADS1115, RTC, bucks …” in the bench additions. The ₹47,886 total is close enough for the pitch, but add a footnote: “rain sensor and ADS1115 removed in the final build; total unchanged within estimate tolerance.”
+- **Design notes — RESOLVED 15 Nov 2026.** `02_LIVE_MODEL_1to5/04_DESIGN_NOTES/LIVE_model_design_notes.md` now opens with a historical note (31 Oct rationale, printed Nov 2026, not assembled/floated), marks the rain pocket and LM393 bay as empty, and replaces the 31 Oct wiring map with the final Nano/Sensor Hub connector map. It no longer contradicts the README.
+- **Cost doc — RESOLVED 15 Nov 2026.** `07_COST_AND_BUSINESS/02_Pi_Based_Product_Cost_Estimate_2026-11-06.md` now has the Sensor Hub PCB v1.2 and the Nano/converter bench set in place of the rain plate, ADS1115 and RTC; `03_Value_Engineered_Cost_48k_2026-11-07.md` and the customer PDF match, with a dated note that the total is unchanged within estimate tolerance. The 23 Oct workbook keeps its research rows and carries clarifying cell notes; the mechanical lines are still current.
 - **Credentials in OneDrive:** `Claude_Conversation_Recovery/00_CONFIG_BACKUP` contains `.credentials.json` (19.4 KB), `.claude.json`, `buddy-tokens.json` and a `README_SENSITIVE.md`. This is a security risk, not a project risk. After re-login, delete the backup and empty the Recycle Bin; do not sync it to a shared folder.
 - **Booth display:** the organisers provide one display driven by their laptop. Plan how the Pi dashboard is shown: a small HDMI monitor/tablet on the team’s own table if allowed, or a phone on the Pi’s Wi-Fi hotspot, or printed dashboard stills. The beacon + pump demo works without a dashboard; the dashboard is the “wow”, not the proof.
 - **“250 mL” sample:** the pump runs 5 s; the deck says “pump fills 250 mL”. Measure it once. If it is not 250 mL, say “a sample” instead of a number.
@@ -226,7 +223,7 @@ Today is 14 November. That leaves four working days (15–18) plus travel and th
 
 ### Sunday 16 November — deck truth pass
 
-- Remove Rain and “8 sensors” from slides 18, 31, 34, 37, 46 and A4; use “7 sensors / 8 readings”.
+- Remove Rain from slides 6, 10, 11, 12, 18 and 22, and “8 sensors” from slide 15; use “7 sensors / 8 readings”. Slide 12 must not say “Seven sensors” while listing eight.
 - Fix “37 printed parts” to “37 printed parts + printable sample bottle” or “38 print files”.
 - Add “simulated” to the 4-of-4 30-day claim.
 - Fix the six code-vs-claim rows in P1-2.

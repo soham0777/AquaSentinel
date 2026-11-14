@@ -15,13 +15,13 @@ AquaSentinel is a float on a guide pole clamped to a bridge pier. Every 15 minut
 | What | The current file | Notes |
 |---|---|---|
 | **Pitch deck** | `01_FINALE_PRESENTATION/AquaSentinel_Finale_7min.pptx` | Last edited 14 Nov. This is the only deck to present or edit. |
-| **1:5 model assembly manual** | `02_LIVE_MODEL_1to5/00_ASSEMBLY_MANUAL/AquaSentinel_LIVE_1to5_Assembly_Manual_SOLIDWORKS.pdf` | 30 pages, 24 steps. Read `00_MANUAL_STATUS_READ_FIRST.md` beside it first. |
+| **1:5 model assembly manual** | `02_LIVE_MODEL_1to5/00_ASSEMBLY_MANUAL/AquaSentinel_LIVE_1to5_Assembly_Manual_SOLIDWORKS.pdf` | 30 pages, 24 steps. Read `00_MANUAL_STATUS_READ_FIRST.md` and the one-page 15 Nov addendum beside it first. |
 | **1:5 model electronics manual** | `12_ELECTRONICS_MANUAL_1to5/AquaSentinel_LIVE_1to5_Electronics_Assembly_Manual.pdf` | **Revision 2.0, 14 Nov, 17 pages** — Sensor Hub PCB v1.2 + Nano |
 | **Sensor Hub PCB + Nano firmware** | `12_ELECTRONICS_MANUAL_1to5/PCB_SENSOR_HUB_v1` | KiCad design, DRC, CNC G-code, placement/soldering/power-up guides, firmware |
 | **Raspberry Pi software** | `14_RASPBERRY_PI_SOFTWARE` | Decision engine, dashboard :8080, SIM800L, logging, install script, pH calibration tool |
 | **Full-size R3 assembly manual** | `05_R3_FULL_SIZE_CAD/00_ASSEMBLY_MANUAL/AquaSentinel_R3_Assembly_Manual_SOLIDWORKS.pdf` | 27 pages, 66 part numbers, 12 steps |
 | **R3 CAD as submitted (FDC)** | `05_R3_FULL_SIZE_CAD/02_SOLIDWORKS_PackAndGo_FDC` | Pack-and-Go folder + zip |
-| **Cost to quote** | `07_COST_AND_BUSINESS/04_AquaSentinel_Cost_48k_Value_Engineered.pdf` | ₹47,886 ex-GST at 100 units (≈ ₹56,505 with GST); prototype ₹64,616 |
+| **Cost to quote** | `07_COST_AND_BUSINESS/04_AquaSentinel_Cost_48k_Value_Engineered.pdf` | ₹47,886 ex-GST at 100 units (≈ ₹56,505 with GST); prototype ₹64,616. Electronics corrected to the 7-sensor build on 15 Nov |
 | **Pitch video (final)** | `08_VIDEOS/AquaSentinel_Pitch_Video_Clean_Water_Now_FINAL_v3.mp4` | 8 Nov voice-over, on the FDC. Earlier takes were deleted on 14 Nov. |
 | **Working audit + critical path** | `PROJECT_IDENTIFICATION_AND_CRITICAL_PATH_2026-11-14.md` | The 7 P0/P1/P2 problems, verified-vs-unverified table, Q&A traps |
 
@@ -63,7 +63,7 @@ The full explanation, with what is safe to say, is in the control report above (
 | Earlier stages / team change | `09_SUBMISSIONS_AND_CERTIFICATES/01_Earlier_stages`, `04_Team_change_Oct2026` |
 | Creative Experience storytelling | `13_CREATIVE_EXPERIENCE_STORYTELLING/00_README_START_HERE.md` |
 | What was deleted, and what was rescued | `00_PROJECT_CONTROL/PURGE_REPORT_2026-11-14.md` |
-| What remains, file by file (704 project files), every PNG verdict and every CAD verdict | `00_PROJECT_CONTROL/FILE_AUDIT_2026-11-14.md` + `FILE_AUDIT_2026-11-14.csv` + `PNG_AUDIT_2026-11-15.csv` + `CAD_AUDIT_2026-11-15.csv` |
+| What remains, file by file (705 project files: 704 in the 14 Nov CSV + the 15 Nov addendum), every PNG verdict and every CAD verdict | `00_PROJECT_CONTROL/FILE_AUDIT_2026-11-14.md` + `FILE_AUDIT_2026-11-14.csv` + `PNG_AUDIT_2026-11-15.csv` + `CAD_AUDIT_2026-11-15.csv` |
 
 **Not present:** the old `AquaSentinel_pH_Electrode_Quick_Guide.pdf` link was broken and has been removed from this map. For pH work use `14_RASPBERRY_PI_SOFTWARE/aquasentinel/tools/calibrate_ph.py` and the electronics manual.
 
@@ -92,7 +92,7 @@ Number gaps (03, 04, 10, 11) are deliberate: those folders were archived and the
 
 ## 4. How this workspace is kept safe
 
-- **Old versions were deleted on 14 Nov 2026** with the project lead's approval. Current work only. A later file audit packed derived files into verified zips: **704 project files / 826.6 MB (788 MiB)**, plus six audit records (see `00_PROJECT_CONTROL/FILE_AUDIT_2026-11-14.md`).
+- **Old versions were deleted on 14 Nov 2026** with the project lead's approval. Current work only. A later file audit packed derived files into verified zips: **705 project files / 826.7 MB (788.4 MiB)** after the 15 Nov addendum, plus six audit records (see `00_PROJECT_CONTROL/FILE_AUDIT_2026-11-14.md`; its file-by-file CSV records the 14 Nov set of 704, and the addendum PDF is the one file added since).
 - **Every move is logged** in `00_PROJECT_CONTROL/WORKSPACE_REORG_LOG_2026-11-14.csv` (source, destination, size, SHA-256, reason).
 - **A pre-purge fingerprint exists:** `99_ARCHIVE/file_manifest_before_purge_2026-11-14.csv` records SHA-256, size and timestamp of all 4,266 files that existed before the purge.
 - **Git holds the tracked text and code**, on every branch, plus tags `backup/pre-reorg-2026-11-14` and `workspace/reorg-2026-11-14`.

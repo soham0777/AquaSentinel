@@ -37,14 +37,15 @@ restored. The verified spare is `assembly_parts_copy_2026-11-07.zip`; see
 
 ## Known differences between the manual and the final build
 
-The 30-page manual was generated on 7 Nov, before the last hardware change. In the PDF:
+The 30-page manual was generated on 7 Nov, before the last hardware change. Read it with the one-page
+`00_ASSEMBLY_MANUAL/AquaSentinel_LIVE_1to5_Assembly_Manual_ADDENDUM_2026-11-15.pdf`, which corrects:
 
-- the meteorological plate (`LD-S10b`) still shows the **rain plate + LM393** that were later removed — the final build has **7 sensors and no rain sensor**;
+- the meteorological plate (`LD-S10b`) still shows the **rain plate + LM393** that were later removed — the final build has **7 sensors and no rain sensor**; leave the pocket and bay empty;
 - the wiring pin map is from the **ADS1115 era**. The current pin map is in the Sensor Hub PCB folder and the Nano firmware:
   `12_ELECTRONICS_MANUAL_1to5/PCB_SENSOR_HUB_v1` and `12_ELECTRONICS_MANUAL_1to5/PCB_SENSOR_HUB_v1/firmware`;
 - the cover says “37 printed parts”; the print folder contains **38 STL files** because the sample bottle has two variants.
 
-The **electronics manual Rev 2.0 (14 Nov)** is the authoritative document for anything electrical.
+The **electronics manual Rev 2.0 (14 Nov)** and the addendum are the authoritative documents for anything electrical/mechanical that changed after 7 Nov.
 
 ## Not stored here
 

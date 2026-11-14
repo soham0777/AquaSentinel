@@ -27,6 +27,10 @@ against 316L yield 170 MPa.
 
 ## Notes
 
+- **This folder is the R3 design as submitted.** Its controller line (`AS3-515`, ESP32/LTE with RTC) and the
+  `01_BOM_R3.csv` description belong to the full-size R3 concept, not the final 1:5 booth build. Do not use them for the
+  booth electronics; the final 7-sensor build is the Nano + Sensor Hub PCB v1.2 + Pi 3B+ set in
+  `12_ELECTRONICS_MANUAL_1to5/` and the costs in `07_COST_AND_BUSINESS/`.
 - The R3 is an **imported** SOLIDWORKS assembly, not native history-based design. The honest wording for the pitch is
   “assembled and simulated in SOLIDWORKS”, not “designed in SOLIDWORKS”.
 - The R3 has **not been built**. All results are design-stage.

@@ -1,18 +1,19 @@
 # AquaSentinel R3 – 1:5 LIVE sensor model
 
-> **HISTORICAL NOTE (14 Nov 2026).** This document describes the **31 October** design and is kept as design rationale.
-> It is now partly outdated: the **rain sensor was removed** (final build has 7 sensors), the **ADS1115 was replaced** by the
-> Sensor Hub PCB v1.2 + Arduino Nano, the model **has been printed** (not yet assembled/floated), and its CAD images were
-> deleted in the 14 Nov 2026 purge. For the current build read `../README.md` and the electronics manual Rev 2.0.
-> Links below that point to `previews/`, `STL_print/` or `_build/` no longer resolve; that content is deleted or superseded.
+> **HISTORICAL NOTE (15 Nov 2026).** This document describes the **31 October** design and is kept as design rationale.
+> The model **was printed in November 2026** (37 parts) but has **not been assembled or floated**. The final build has
+> **7 sensors** and uses the **Arduino Nano on Sensor Hub PCB v1.2 + Raspberry Pi 3B+**; the 31 October meteorological
+> plate, ADC and real-time-clock modules are **not fitted**. For the current build read `../README.md`, the electronics
+> manual Rev 2.0 and the 15 Nov addendum beside the mechanical assembly manual. Links below to `previews/`,
+> `STL_print/` or `_build/` no longer resolve; that content was deleted or superseded in the 14 Nov 2026 purge.
 
-**Status:** CAD concept, geometry-checked in CAD. **Not yet printed or wet-tested.** All fits and clearances below are
-nominal CAD values (no print shrinkage or tolerance stack). Sensor sizes other than the SEN0189 are assumptions – see
-"Measure before printing".
+**Status:** design frozen 31 October 2026; **printed November 2026; not yet assembled or wet-tested.** All fits and
+clearances below are **nominal 31 October CAD values** (no print shrinkage or tolerance stack). Sensor sizes other than
+the SEN0189 are assumptions – see "Measure before printing".
 
 The semi-final 1:5 float-on-pier display, turned into a working demo: the **real full-size sensors** hang under the float in
 a 1:1 cage and dip into a **Ø115 × 65 mm glass dish** of water; the Raspberry Pi electronics live in a new **plinth**; the
-rain / DHT11 / LDR sensors sit on a **met head** on the pier column; the **MQ-3** sniffs the headspace of a sample bottle
+DHT11 and LDR sensors sit on a **met head** on the pier column (the 30° rain pocket is not populated in the final build); the **MQ-3** sniffs the headspace of a sample bottle
 filled by the pump; the mast carries a **bicolour LED beacon**. To change the water sample, lift the float 60 mm, clip the
 park sleeve on the rod and slide the dish out to the front.
 
@@ -49,7 +50,7 @@ unchanged original and is copied into `STL_print` with an `ORIG-` prefix.
 
 All parts fit the H2D (even the 300 mm dual-nozzle area). 0.4 mm nozzle, 0.2 mm layers, 3 walls, 15–20 % gyroid.
 **PETG for everything that gets wet or sits outside** (well, cage, cap, collar, seat, MQ-3 cone, met plate); PLA elsewhere.
-No supports are needed in the given orientations; the longest bridges are ~33 mm (LM393 pocket ceiling in the met plate)
+No supports are needed in the given orientations; the longest bridges are ~33 mm (the unused LM393 pocket ceiling in the met plate)
 and ~21 mm (DHT11 screen roof). The plinth is the big one (~540 cm³, roughly 650 g PLA) – use a brim.
 
 | File (STL_print) | Qty | Material | Orientation / note |
@@ -75,6 +76,9 @@ and ~21 mm (DHT11 screen roof). The plinth is the big one (~540 cm³, roughly 65
 | ORIG-S02, S03, S04, S05a, S05b, S06 | 1 each | as the original guide | unchanged (S02 is 304 mm tall – fits the H2D) |
 | ORIG-OPT_rod_half_print_2 | 2 | PLA | only if you print the 12 mm rod |
 
+**31 October geometry note:** `LD-S10b` still contains the 30° rain-plate pocket and the LM393 board bay. They are
+**not populated** in the final 7-sensor build; fit only the DHT11 and LDR. The printed part is otherwise unchanged.
+
 ## Extra parts to buy
 
 - 2–4 glass crystallizing dishes **Ø115 × 65 mm** (≈ 0.5 L). Any straight-walled dish with OD ≤ 116 mm, ID ≥ 100 mm and
@@ -95,9 +99,9 @@ and ~21 mm (DHT11 screen roof). The plinth is the big one (~540 cm³, roughly 65
    into its socket, then brackets/collars exactly as in the original guide – everything simply sits 64 mm higher.
 2. Dish seat: three 6 mm filament pins into the plinth holes, press the seat on.
 3. Met head: cap on the column top (the U-skirt is open towards the bracket face), two filament pins, met plate on top.
-   Rain plate into the 30° pocket facing the jury, its pins down through the slot into the LM393 board pocket (board slides
-   in from the back). DHT11 inside the louvred screen, LDR module in the roof pocket. Wires drop behind the column to the
-   12 mm grommet behind-left of the column.
+   **Leave the 30° rain pocket and its LM393 bay empty** — the final 7-sensor build has no rain sensor. Fit the DHT11
+   inside the louvred screen and the LDR module in the roof pocket. Wires drop behind the column to the 12 mm grommet
+   behind-left of the column.
 4. Tray: Pi 3B+ on the standoffs with USB/Ethernet towards the end panel; other boards on the M3 grid; slide in from the
    left end; two M3 screws into the end bosses.
 
@@ -132,13 +136,27 @@ and ~21 mm (DHT11 screen roof). The plinth is the big one (~540 cm³, roughly 65
 17. Umbilical (sensor cables + LED wires): from the cap window along the deck to the bow, down beside the rod with a
     ≥ 70 mm service loop (the float must still lift 60 mm), into the Ø18 grommet behind the rod.
 
-## Wiring
+## Wiring (final build, 15 November 2026)
 
-Exactly the pin map of `13_RPI_PROTOTYPE_DESIGN/AquaSentinel_RPi_Prototype_Design.md` (ADS1115 0x48: pH, TDS, turbidity,
-MQ-3; 0x49: LDR, rain, battery; DS18B20 GPIO4; DHT11 GPIO17; rain DO GPIO27 / power GPIO22; LDR DO GPIO5; pump MX1508
-IN1 GPIO23; pH/TDS board switches GPIO6/GPIO13 – never both on; MQ-3 heater GPIO19; SIM800L UART + RST GPIO18).
-Beacon LED: **green → 150 Ω → GPIO26** (pin 37, the status-LED pin in that map), **red → 220 Ω → GPIO12** (pin 32, free),
-common cathode → GND (≈ 4–8 mA per colour; the prototype's transistor stage on GPIO26 also works).
+Do **not** wire from the 31 October map. The final electronics is the **Arduino Nano on Sensor Hub PCB v1.2**. The Nano
+reads every sensor and sends one JSON line per second to the Raspberry Pi 3B+ over USB. Connectors, power and the full
+pin map are in `12_ELECTRONICS_MANUAL_1to5/` (Rev 2.0) and `PCB_SENSOR_HUB_v1/README.md`.
+
+| Function | Board connector and Nano pin |
+|---|---|
+| pH signal | J11 → A6 (4.7 k on board) |
+| TDS | J9: power ← A0, signal → A1 |
+| Turbidity | J2: DO → D5, analog → A2 |
+| DS18B20 | J5: data → D2 (4.7 k pull-up) |
+| DHT11 | J4: data → D3 |
+| LDR | J3: DO → D4 |
+| MQ-3 | J1: DO → D6, analog → A3 |
+| RGB beacon | J6: G → D7, R → D8, B → D9 (220 Ω each) |
+| Pump (Mini L298N) | J7: IN1 → D10 |
+| pH limit output (optional) | J8 spare → D11 (firmware reads `ph_do`) |
+
+Power: **5 V in** on J12; **9 V step-up** for the pH board (J15); **4.0 V step-down** for the SIM800L (J16/J17); the
+Nano is powered from the Pi's USB. The Pi talks to the SIM800L on `/dev/serial0` at 9600 (J18).
 
 ## Demo: swap the water sample
 
@@ -160,7 +178,7 @@ common cathode → GND (≈ 4–8 mA per colour; the prototype's transistor stag
 | Dish | Ø115 × 65 mm, wall ≈ 3 mm | `DISH_OD`, `DISH_H` |
 | Bottle | Ø62 mm, mouth 18–50 mm | `BOTTLE_OD` |
 | MQ-3 module | board ≤ 33 × 23 mm, can ≤ Ø20.6 | `build_mq3_cap` |
-| Rain plate / LDR / LM393 | 54 × 40 / ≤ 33 × 16 / ≤ 33 × 12 × 19 mm | `RAIN_*`, `LDR_*` |
+| Met plate: rain pocket (unused) / LDR / DHT11 | 54 × 40 / ≤ 33 × 16 / ≤ 33 × 12 × 19 mm | `RAIN_*`, `LDR_*` — print geometry only; rain plate and LM393 are not fitted |
 | Pi 3B+ ports | USB at 29/47 mm, Ethernet at 10.25 mm from the power edge | `build_tray` panel openings |
 
 ## Checks done (in CAD)
@@ -175,7 +193,7 @@ common cathode → GND (≈ 4–8 mA per colour; the prototype's transistor stag
 
 ## Known limits
 
-- Not printed, not wet-tested; bayonet lock, post push-fits and LED seat are untested fits.
+- Printed November 2026 (37 parts), but not yet assembled or wet-tested; bayonet lock, post push-fits and LED seat are untested fits.
 - The float can still turn about the rod (as in the original); the cage reaches the dish wall at about ±7° – keep the float
   square when lowering it.
 - The pump hose route is free-form (not modelled); sensor positions assume the dimensions above.
