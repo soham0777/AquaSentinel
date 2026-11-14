@@ -11,3 +11,10 @@ Thumbs.db
 mechanical/cad/assembly/*_LowWater.*
 mechanical/cad/assembly/*_HighWater.*
 mechanical/cad/assembly/*_MidWater.stl
+
+# local safety snapshots (git bundles, file manifests) — kept on disk, not in git
+99_ARCHIVE/_SAFETY_SNAPSHOTS/
+
+# Claude Code working data (older checkouts); not project content
+.claude/
+
