@@ -30,17 +30,16 @@ Git is a history of the text and code, **not** a backup of the 2.2 GB of media, 
 This is why the numbered folder tree does not appear in the public repository. It is a deliberate local-only layout,
 inherited from before this cleanup. **Do not “fix” it by running `git add .`** — that would try to add gigabytes.
 
-## Why `git status` shows ~336 deleted files
+## Why `git status` used to show ~336 deleted files — now fixed
 
 On 14 Nov the project was reorganised into numbered folders, moving or removing the old `mechanical/`, `docs/`,
-`analytics/`, `firmware/`, `hardware/` and `project-management/` trees. Those files are still in git history and in the
-14 Nov bundle; they were never committed as deletions. The result is a working tree that does not match HEAD.
-
-**Do not click “Discard changes” in a git client.** That would restore the old folder tree on top of the clean layout.
+`analytics/`, `firmware/`, `hardware/` and `project-management/` trees. Those moves were uncommitted, so git reported
+336 files as deleted. **That state was recorded on 14 Nov 2026 in local commit `654764d`**
+(tag `workspace/reorg-2026-11-14`) and `git status` is clean of deletions. Nothing was pushed.
 
 The pre-cleanup state is preserved by:
 
-- tag and branch `backup/pre-reorg-2026-11-14` (commit `fd3c3a3`);
+- tag and branch `backup/pre-reorg-2026-11-14` (commit `fd3c3a3`) and tag `workspace/reorg-2026-11-14` (commit `654764d`);
 - bundle `99_ARCHIVE/_SAFETY_SNAPSHOTS/2026-11-14_pre_workspace_reorg/AquaSentinel_git_all_branches_2026-11-14.bundle`;
 - older bundle `99_ARCHIVE/_SAFETY_SNAPSHOTS/2026-11-08_GitHub_bundle/`.
 

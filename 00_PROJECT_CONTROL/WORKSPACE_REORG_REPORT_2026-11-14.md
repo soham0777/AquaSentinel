@@ -52,8 +52,9 @@
   (`PROJECT_IDENTIFICATION_AND_CRITICAL_PATH_2026-11-14.md`). Only paths and navigation were edited.
 - **SOLIDWORKS part/assembly names and locations** — moving individual parts breaks external references.
 - **`.claude/worktrees`** — 421 MB of hidden Claude Code checkouts; still useful as old-version reference until after the finale.
-- **Git history** — no commit, reset or push was made. `git status` still shows the pre-existing 336 deletions from the
-  earlier folder reorganisation; read `BACKUP_AND_VERSION_CONTROL.md` before using a git client.
+- **Git content** — no file content or history was rewritten. The reorganisation itself was recorded in a new local
+  commit `654764d` (tag `workspace/reorg-2026-11-14`), which resolves the 336 pre-existing deletions; **nothing was pushed**.
+  Read `BACKUP_AND_VERSION_CONTROL.md` before pushing or merging.
 
 ## Known remaining documentation warnings (not errors)
 
