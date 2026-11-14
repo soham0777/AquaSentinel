@@ -77,7 +77,7 @@ The full explanation, with what is safe to say, is in the control report above (
 | `01_FINALE_PRESENTATION/` | the 7-minute deck; the 7 Nov submission is in `01_FINALE_PRESENTATION/_SUBMISSION_RECORD_7Nov2026/` | **current** |
 | `02_LIVE_MODEL_1to5/` | the 1:5 LIVE model: manual, 38 STLs, SOLIDWORKS parts/assembly, labels, printed dish | **current** |
 | `05_R3_FULL_SIZE_CAD/` | full-size R3: manual, BOM, CAD, drawings, checks, renders, STEP/STL. Controller row `AS3-515` and the BOM descriptions belong to the R3 concept, not the booth build | **current** |
-| `06_SIMULATION/` | SOLIDWORKS static studies for the guide pole and pier bracket. Pole safety factor 2.66, peak stress 38.3 MPa; pinned 54.8 MPa, pinned + couple 64.0 MPa against 316L yield 170 MPa | **current** |
+| `06_SIMULATION/` | SOLIDWORKS static studies for the guide pole and pier bracket. Pole safety factor 2.66; peak von Mises stress 38.3 MPa against 316L yield 170 MPa | **current** |
 | `07_COST_AND_BUSINESS/` | costed BOM, 6 Nov estimate, value-engineered cost + PDF. Quote `04_…pdf`; `01_…xlsx` is the 23 Oct research base | **current** |
 | `08_VIDEOS/` | final pitch v3, R3 animation, journey and 60 s marketing cuts, raw teammate recordings in `00_source_recordings/`. No music in anything submitted; carry v3 on a USB stick | **current** |
 | `09_SUBMISSIONS_AND_CERTIFICATES/` | one sub-folder per stage: earlier, FDC Oct, FDC update 7 Nov, team change, certificates, portal, Maker Fest 2027 | **record** |
