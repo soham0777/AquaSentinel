@@ -21,11 +21,11 @@
 #include <DallasTemperature.h>
 #include <DHT.h>
 
-// 0 = breadboard wiring (tested 12 Nov 2026).  1 = AquaSentinel Sensor Hub PCB v1.1 (84 x 84 mm single-sided board;
+// 0 = breadboard wiring (tested 12 Nov 2026).  1 = AquaSentinel Sensor Hub PCB v1.2 (104 x 72 mm single-sided board;
 // the sensors' 5 V comes from the AUX charger on J12, the Nano itself from the Pi's USB, grounds shared).
 #define BOARD_PCB 1
 #if BOARD_PCB
-// PCB v1.1: J5 TEMP D2 · J4 AIR D3 · J3 LIGHT D4 · J2 TURB D5 · J1 ALC D6 · J6 BEACON G D7 / R D8 / B D9 (220R on board)
+// PCB v1.2: J5 TEMP D2 · J4 AIR D3 · J3 LIGHT D4 · J2 TURB D5 · J1 ALC D6 · J6 BEACON G D7 / R D8 / B D9 (220R on board)
 //           J7 PUMP D10 (10k pull-down on board) · J8 spare D11 D12 · J9 TDS power A0 + signal A1 · J11 pH A6 (4.7k on board)
 const byte PIN_DS = 2, PIN_DHT = 3, PIN_LDR_DO = 4, PIN_TURB_DO = 5, PIN_MQ3_DO = 6, PIN_LED_G = 7, PIN_LED_R = 8,
            PIN_LED_B = 9, PIN_PUMP = 10, PIN_PH_DO = 11, PIN_TDS_PWR = A0;

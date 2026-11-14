@@ -25,14 +25,16 @@ project folder).
 
 ## What git actually tracks
 
-**Tracked (99 files at 15 Nov 2026):**
+**Tracked (88 files at 15 Nov 2026):**
 
 - `README.md`, `LICENSE`, `.gitignore`, `.gitattributes`, `00_START_HERE.md`;
 - `00_PROJECT_CONTROL/` — audit, critical path, reorg report, purge report,
   backup policy, move log, the two 5 Nov deep audits and the 15 Nov PNG/CAD
   audits;
-- one `README.md` per working folder, the archive purge note and the pre-purge
-  manifest;
+- the folder notes that remain: `13_CREATIVE_EXPERIENCE_STORYTELLING/00_START_HERE.md`,
+  `12_ELECTRONICS_MANUAL_1to5/PCB_SENSOR_HUB_v1/PCB_v1.2_BUILD_AND_PINOUT.md`,
+  `14_RASPBERRY_PI_SOFTWARE/aquasentinel/PI_SETUP_AND_OPERATION.md`,
+  `99_ARCHIVE/PURGE_RECORD.md` and the pre-purge manifest;
 - the **complete Raspberry Pi application** in `14_RASPBERRY_PI_SOFTWARE/aquasentinel/`
   (code, web UI, tools, scripts) and the three wiring diagrams;
 - the **current Sensor Hub PCB v1.2** sources: KiCad board, DRC, design

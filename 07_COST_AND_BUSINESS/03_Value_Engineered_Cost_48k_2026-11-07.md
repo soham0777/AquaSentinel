@@ -36,7 +36,7 @@ Target set by the team: a sentinel at about ₹50,000. Starting point: the Raspb
 - First prototype (1 unit): ≈ ₹64,616 ex-GST.
 - One real-time station (₹35–40 lakh, CSE) = about **73–84 sentinels**.
 
-**Final-build note (15 Nov 2026).** The electronics lines now describe the build actually made: the 7 sensors, an
+**Build note, 15 Nov 2026.** The electronics lines describe the build actually made: the 7 sensors, an
 Arduino Nano on the Sensor Hub PCB v1.2, the Pi 3B+, and the 9 V / 4.0 V converters. The meteorological plate, ADC
 and real-time-clock modules of the earlier design are not fitted. The two line values are unchanged because the
 replacement parts sit inside the same estimate-level allowances; the total is unchanged within estimate tolerance.

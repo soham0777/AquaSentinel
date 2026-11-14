@@ -30,7 +30,7 @@ marked *est.* where no listing was found. Re-check prices before quoting to a cu
 | Wake-up timer board (Pi wakes every 15 min) | ₹3,000 | *est.*, same document |
 | **Subtotal incl. GST** | **₹14,483** | **= ₹12,274 ex-GST** |
 
-**Final-build note (15 Nov 2026).** The sensor set is the 7 modules in the table above. The earlier meteorological
+**Build note, 15 Nov 2026.** The sensor set is the 7 modules in the table above. The earlier meteorological
 plate, ADC and real-time-clock modules are not fitted; their ₹100 and ₹3,000 allowances are reused by the Sensor Hub
 PCB and the Nano/converter bench set. The totals are unchanged because both replacements sit inside the same
 estimate-level allowances.

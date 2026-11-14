@@ -52,6 +52,11 @@ python3 ~/aquasentinel/tools/check_hardware.py
 sudo systemctl start aquasentinel
 ```
 
+**MQ-3 warm-up.** Keep the model powered for at least 3 minutes before relying on SOLVENT detection. `mq3_warmup_s` in
+`config.json` is 90 s; some documents say about 3 minutes.
+
+**Self-test.** `tools/self_test.py` prints ALL PASS on simulated data. It proves the decision logic, not the wiring.
+
 ## At the booth: the six waters
 
 The first 20 seconds after start the dashboard says **LEARNING**: it learns what normal is for the water in the dish.

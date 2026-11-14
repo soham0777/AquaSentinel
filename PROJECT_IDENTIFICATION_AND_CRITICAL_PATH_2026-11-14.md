@@ -52,7 +52,7 @@ These are different objects and should never be mixed in a sentence.
 | Aspect | 1:5 LIVE model | Full-size R3 |
 |---|---|---|
 | Purpose | Booth proof of the measurement-and-decision chain | Product design, FEA, drawings, cost |
-| Status | Printed (team report); bench electronics tested 12–13 Nov; full model not floated or trial-assembled per the 5 Nov README | CAD and simulation only; no physical build |
+| Status | Printed (team report); bench electronics tested 12–13 Nov; full model not floated or trial-assembled per the 5 Nov design review | CAD and simulation only; no physical build |
 | Structure | 37 assembly print files + 1 printable sample bottle = 38 STL files; 17 LD parts designed new in SOLIDWORKS | 66-part SOLIDWORKS assembly; 14 design checks; 6-sheet drawing set; Pack and Go + STEP |
 | Sensors | 7 real modules: PH-4502C + E-201-C, DFRobot SEN0244 TDS, DFRobot SEN0189 turbidity, DS18B20, DHT11, LDR, MQ-3 | Same sensor set in the product design; dissolved oxygen, wiper and ultrasonic stage sensor were dropped |
 | Controllers | Arduino Nano (ATmega328P) on the custom Sensor Hub PCB v1.2 (104 × 72 mm, single-sided, milled 12 Nov) + Raspberry Pi 3B+ | Raspberry Pi 3B+ as the product brain |
@@ -96,8 +96,8 @@ This is the table to use when a judge asks “Have you built it?”
 | Pi ↔ Nano USB link | **Unverified** | Manual v2.0 implies it; the 13 Nov storytelling note says the Pi link was not tested yet. Prove it and record a video |
 | SIM800L SMS | **Unverified / disabled** | Wiring and 4.0 V supply are documented; `sms_numbers` is `[]`, so `send_all()` returns “no numbers set”. The headline demo will not send an SMS |
 | pH absolute reading | **Uncalibrated** | `ph_calibration.calibrated=false`; only a sudden pH change from baseline is used. The “pH < 6 or > 9” hard limit is inactive |
-| 1:5 model printed | **Team report** | README says all parts printed (team report); design notes still say “not yet printed”; the printed set has not been trial-assembled or wet-tested per the 5 Nov README |
-| 1:5 model wet test | **Full model not floated; sensor probes bench-tested** | The README says the model has not been wet-tested; the 12–13 Nov bench test used the probes in water. Confirm the dish demo; the model does not need to float at the booth |
+| 1:5 model printed | **Team report** | The 5 Nov design review says all parts were printed (team report); design notes still said “not yet printed”; the printed set has not been trial-assembled or wet-tested |
+| 1:5 model wet test | **Full model not floated; sensor probes bench-tested** | The 5 Nov design review says the model has not been wet-tested; the 12–13 Nov bench test used the probes in water. Confirm the dish demo; the model does not need to float at the booth |
 | R3 physical build | **Not built** | CAD, checks and FEA only; the tank test is after the finale |
 | Cost | **Estimate** | ₹47,886 ex-GST at 100 units, not a supplier quote |
 | Dashboard | **Runs** | Stdlib HTTP server, SSE stream, CSV download, command buttons; tested on the dev machine, not on the Pi |
@@ -138,7 +138,7 @@ The real build has **7 sensor modules**: pH, TDS, turbidity, DS18B20, DHT11, LDR
 - the **7 Nov PDF export** also says ADS1115/RTC on page 12 and a RTC power line on page 21 (frozen submission record — do not edit it);
 - Public GitHub README: “One Raspberry Pi, eight sensors” and a rain-sensor diagram.
 
-**Local documents resolved 15 Nov 2026:** the cost Markdowns, customer cost PDF, cost README, 1:5 design notes and mechanical-manual addendum now all say seven sensors and no rain/ADS1115/RTC. The **deck** and the **public repo** are the two remaining places a judge can see the old wording.
+**Local documents resolved 15 Nov 2026:** the cost Markdowns, customer cost PDF, 1:5 design notes and mechanical-manual addendum now all say seven sensors and no rain/ADS1115/RTC. The **deck** and the **public repo** are the two remaining places a judge can see the old wording.
 **Fix (recommended):** remove Rain from those deck slides; change “8 sensors” to “7 sensors / 8 readings” where useful (pH, TDS, turbidity, water temp, air temp, humidity, light, vapour); remove the “rain plate wet” clause; update or banner the public README. Do **not** try to add a rain sensor in four days — the PCB v1.2 and firmware are not wired for it.
 
 **P0-4. “Everything verified” is not supported yet.**
@@ -154,13 +154,13 @@ Electronics manual p.17 says “Everything verified on the bench 12–13 Nov 202
 - the cost pack (`07_*`),
 - the submission zip (`*.zip`).
 
-Only **99 files** are tracked (READMEs, audits, the Pi application and the Sensor Hub PCB sources); the deck, CAD, STLs, videos and cost pack are excluded. The list is in `00_PROJECT_CONTROL/BACKUP_AND_VERSION_CONTROL.md`. The 14 Nov deck update is outside git, on this laptop and OneDrive. The PDF backup next to it is dated **7 Nov**, so if the venue laptop cannot open the PPTX, the PDF shows the older deck. The 137 MB R3 animation is over GitHub’s 100 MB file limit; a `git add .` would try to add it and fail on push.
+Only **88 files** are tracked (the folder notes, audits, the Pi application and the Sensor Hub PCB sources); the deck, CAD, STLs, videos and cost pack are excluded. The list is in `00_PROJECT_CONTROL/BACKUP_AND_VERSION_CONTROL.md`. The 14 Nov deck update is outside git, on this laptop and OneDrive. The PDF backup next to it is dated **7 Nov**, so if the venue laptop cannot open the PPTX, the PDF shows the older deck. The 137 MB R3 animation is over GitHub’s 100 MB file limit; a `git add .` would try to add it and fail on push.
 **Fix:** copy the 14 Nov PPTX and a freshly exported PDF to a USB stick; make a full folder backup; commit the small code/docs selectively; create a git bundle; do not force-push the diverged `main`.
 
 ### P1 — fix before you print, hand over or present
 
-**P1-1. The mechanical assembly manual is stale. — RESOLVED 15 Nov 2026 with an addendum.**
-`02_LIVE_MODEL_1to5/00_ASSEMBLY_MANUAL/AquaSentinel_LIVE_1to5_Assembly_Manual_SOLIDWORKS.pdf` is 30 pages, dated 7 Nov, and still instructs the builder to fit the rain plate + LM393 and says 37 parts. The 14 Nov electronics manual says rain was dropped. **Done:** a one-page addendum (`AquaSentinel_LIVE_1to5_Assembly_Manual_ADDENDUM_2026-11-15.pdf`) and the status note beside it now say leave the rain pocket/LM393 bay empty, give the final connector/pin map and the 5 V power map, and explain 37 parts / 38 STL. `02_LIVE_MODEL_1to5/README.md` no longer links a 43-page manual, a `03_PRINT_RECORDS/` folder or the missing pH guide, and `00_START_HERE.md` says 38 STL. Do not hand the 30-page manual to a judge without the addendum.
+**P1-1. The mechanical assembly manual is stale. — Fixed with an addendum, 15 Nov 2026.**
+`02_LIVE_MODEL_1to5/00_ASSEMBLY_MANUAL/AquaSentinel_LIVE_1to5_Assembly_Manual_SOLIDWORKS.pdf` is 30 pages, dated 7 Nov, and still instructs the builder to fit the rain plate + LM393 and says 37 parts. The 14 Nov electronics manual says rain was dropped. The one-page addendum (`AquaSentinel_LIVE_1to5_Assembly_Manual_ADDENDUM_2026-11-15.pdf`) and `00_MANUAL_STATUS_READ_FIRST.md` beside it say leave the rain pocket/LM393 bay empty, give the final connector/pin map and the 5 V power map, and explain 37 parts / 38 STL. `00_START_HERE.md` says 38 STL. Do not hand the 30-page manual to a judge without the addendum.
 
 **P1-2. Several deck technical claims are not matched by the code.**
 These are the ones a sharp Q&A judge could catch:
@@ -194,8 +194,8 @@ The PPTX was updated at 20:34 on 14 Nov; the PDF is 7 Nov. Export a fresh PDF af
 
 ### P2 — tidy, but do not let it consume the week
 
-- **Design notes — RESOLVED 15 Nov 2026.** `02_LIVE_MODEL_1to5/04_DESIGN_NOTES/LIVE_model_design_notes.md` now opens with a historical note (31 Oct rationale, printed Nov 2026, not assembled/floated), marks the rain pocket and LM393 bay as empty, and replaces the 31 Oct wiring map with the final Nano/Sensor Hub connector map. It no longer contradicts the README.
-- **Cost doc — RESOLVED 15 Nov 2026.** `07_COST_AND_BUSINESS/02_Pi_Based_Product_Cost_Estimate_2026-11-06.md` now has the Sensor Hub PCB v1.2 and the Nano/converter bench set in place of the rain plate, ADS1115 and RTC; `03_Value_Engineered_Cost_48k_2026-11-07.md` and the customer PDF match, with a dated note that the total is unchanged within estimate tolerance. The 23 Oct workbook keeps its research rows and carries clarifying cell notes; the mechanical lines are still current.
+- **Design notes — fixed 15 Nov 2026.** `02_LIVE_MODEL_1to5/04_DESIGN_NOTES/LIVE_model_design_notes.md` now opens with a status note (31 Oct rationale, printed Nov 2026, not assembled/floated), marks the rain pocket and LM393 bay as empty, and gives the final Nano/Sensor Hub connector map in place of the 31 Oct wiring.
+- **Cost doc — fixed 15 Nov 2026.** `07_COST_AND_BUSINESS/02_Pi_Based_Product_Cost_Estimate_2026-11-06.md` now has the Sensor Hub PCB v1.2 and the Nano/converter bench set in place of the rain plate, ADS1115 and RTC; `03_Value_Engineered_Cost_48k_2026-11-07.md` and the customer PDF match, with a note that the total is unchanged within estimate tolerance. The 23 Oct workbook keeps its research rows and carries clarifying cell notes; the mechanical lines are still current.
 - **Credentials in OneDrive:** `Claude_Conversation_Recovery/00_CONFIG_BACKUP` contains `.credentials.json` (19.4 KB), `.claude.json`, `buddy-tokens.json` and a `README_SENSITIVE.md`. This is a security risk, not a project risk. After re-login, delete the backup and empty the Recycle Bin; do not sync it to a shared folder.
 - **Booth display:** the organisers provide one display driven by their laptop. Plan how the Pi dashboard is shown: a small HDMI monitor/tablet on the team’s own table if allowed, or a phone on the Pi’s Wi-Fi hotspot, or printed dashboard stills. The beacon + pump demo works without a dashboard; the dashboard is the “wow”, not the proof.
 - **“250 mL” sample:** the pump runs 5 s; the deck says “pump fills 250 mL”. Measure it once. If it is not 250 mL, say “a sample” instead of a number.
@@ -328,7 +328,7 @@ I will not overwrite the submitted 7 Nov deck. I will create a copy, for example
 
 `01_FINALE_PRESENTATION/BOOTH_19Nov/AquaSentinel_Finale_7min_BOOTH.pptx`
 
-and a fresh PDF next to it. After that, the second pass is the documentation truth fix: the live-model README/addendum, the `.ino` header, the design notes, the cost footnote, and the backup bundle.
+and a fresh PDF next to it. After that, the second pass is the documentation truth fix: the live-model notes/addendum, the `.ino` header, the design notes, the cost footnote, and the backup bundle.
 
 If you want me to start, say **“do the booth deck”** and I will produce the copy and show you the changed slides before saving over anything. If you would rather start with the hardware checklist, say **“do the pre-flight”** and I will turn Section 8 into a printable checklist with tick boxes.
 

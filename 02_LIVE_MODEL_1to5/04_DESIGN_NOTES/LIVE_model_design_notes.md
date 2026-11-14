@@ -1,11 +1,10 @@
 # AquaSentinel R3 – 1:5 LIVE sensor model
 
-> **HISTORICAL NOTE (15 Nov 2026).** This document describes the **31 October** design and is kept as design rationale.
-> The model **was printed in November 2026** (37 parts) but has **not been assembled or floated**. The final build has
-> **7 sensors** and uses the **Arduino Nano on Sensor Hub PCB v1.2 + Raspberry Pi 3B+**; the 31 October meteorological
-> plate, ADC and real-time-clock modules are **not fitted**. For the current build read `../README.md`, the electronics
-> manual Rev 2.0 and the 15 Nov addendum beside the mechanical assembly manual. Links below to `previews/`,
-> `STL_print/` or `_build/` no longer resolve; that content was deleted or superseded in the 14 Nov 2026 purge.
+> **Status note, 15 Nov 2026.** This is the 31 October design rationale. The model was printed in November 2026 (37 parts)
+> and has not been assembled or floated. The final build has **7 sensors**, an Arduino Nano on Sensor Hub PCB v1.2 and a
+> Raspberry Pi 3B+; the meteorological plate's rain pocket and the ADC/RTC modules are empty. Wire from the electronics
+> manual Rev 2.0 and the addendum in `00_ASSEMBLY_MANUAL/`, not from this file. Links below to `previews/`, `STL_print/`
+> and `_build/` are dead; that content was deleted on 14 Nov 2026.
 
 **Status:** design frozen 31 October 2026; **printed November 2026; not yet assembled or wet-tested.** All fits and
 clearances below are **nominal 31 October CAD values** (no print shrinkage or tolerance stack). Sensor sizes other than
@@ -140,7 +139,7 @@ and ~21 mm (DHT11 screen roof). The plinth is the big one (~540 cm³, roughly 65
 
 Do **not** wire from the 31 October map. The final electronics is the **Arduino Nano on Sensor Hub PCB v1.2**. The Nano
 reads every sensor and sends one JSON line per second to the Raspberry Pi 3B+ over USB. Connectors, power and the full
-pin map are in `12_ELECTRONICS_MANUAL_1to5/` (Rev 2.0) and `PCB_SENSOR_HUB_v1/README.md`.
+pin map are in `12_ELECTRONICS_MANUAL_1to5/` (Rev 2.0) and `12_ELECTRONICS_MANUAL_1to5/PCB_SENSOR_HUB_v1/PCB_v1.2_BUILD_AND_PINOUT.md`.
 
 | Function | Board connector and Nano pin |
 |---|---|

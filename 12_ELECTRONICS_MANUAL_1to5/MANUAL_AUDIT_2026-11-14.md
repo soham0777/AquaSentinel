@@ -33,8 +33,8 @@ The manual has been rewritten as **Revision 2.0 (14 Nov 2026)** and installed at
   sensor wiring → sensor 3D → SIM800L/Pi link → model mount → Nano flash → Pi setup → calibration/checks →
   six demo waters + decision rules → troubleshooting + revision history.
 - New accurate diagrams: `system_block_v2.svg`, `power_chain_v2.svg`, `wiring_map_v2.svg`.
-- Sources of truth used: `PCB_SENSOR_HUB_v1/README.md` (v1.2), `firmware/aquasentinel_nano/aquasentinel_nano.ino`,
-  `14_RASPBERRY_PI_SOFTWARE/` (README, install.sh, config.json, sensors.py, brain.py), recovered 12–14 Nov conversations.
+- Sources of truth used: `PCB_SENSOR_HUB_v1/PCB_v1.2_BUILD_AND_PINOUT.md` (v1.2), `firmware/aquasentinel_nano/aquasentinel_nano.ino`,
+  `14_RASPBERRY_PI_SOFTWARE/aquasentinel/PI_SETUP_AND_OPERATION.md`, `install.sh`, `config.json`, `sensors.py`, `brain.py`, recovered 12–14 Nov conversations.
 - Verification: 17-page PDF, per-page content checks all pass; old-design terms appear only on the revision-history page.
 
 ## Backups
