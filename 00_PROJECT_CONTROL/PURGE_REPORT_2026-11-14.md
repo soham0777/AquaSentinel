@@ -64,6 +64,18 @@ All four copies were checked byte-for-byte against the pre-purge manifest:
 - `00_PROJECT_CONTROL/WORKSPACE_REORG_LOG_2026-11-14.csv` — every move made
   during the earlier reorganisation.
 
+## Verification
+
+- **1,008 remaining files matched their pre-purge SHA-256 exactly** — videos, deck,
+  CAD, manuals, images and code were not touched.
+- **11 text files differ on purpose**, because links to deleted content had to be
+  rewritten: `.gitignore`, `00_START_HERE.md`, `README.md`, `02_LIVE_MODEL_1to5/README.md`,
+  the 1:5 design notes, both FDC documents, the 13_ storytelling README and plan,
+  the older storyteller plan, and the 14_ Pi README.
+- **25 paths are new since the manifest**: files moved during the earlier
+  reorganisation plus the new navigation, audit, purge and manifest files.
+- **0 empty folders, 0 broken Markdown links** in the final folder.
+
 ## Recovery
 
 - **Git-tracked text/code:** intact in `.git`; branches, tags
