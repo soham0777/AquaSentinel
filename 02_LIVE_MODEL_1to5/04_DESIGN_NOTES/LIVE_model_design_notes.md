@@ -16,8 +16,7 @@ rain / DHT11 / LDR sensors sit on a **met head** on the pier column; the **MQ-3*
 filled by the pump; the mast carries a **bicolour LED beacon**. To change the water sample, lift the float 60 mm, clip the
 park sleeve on the rod and slide the dish out to the front.
 
-![assembled](previews/LIVE_model_assembled_front_left.png)
-![cage](previews/LIVE_sensor_cage_in_dish.png)
+*(The two 31 October assembly preview images were deleted in the 14 Nov 2026 purge. Current photos and renders are in the manual and in `05_R3_FULL_SIZE_CAD/06_Renders`.)*
 
 ## What changed versus the original 1:5 kit
 
