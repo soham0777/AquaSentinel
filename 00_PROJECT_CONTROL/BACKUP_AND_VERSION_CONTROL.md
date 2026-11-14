@@ -25,7 +25,7 @@ project folder).
 
 ## What git actually tracks
 
-**Tracked (89 files at 14 Nov 2026):**
+**Tracked (92 files at 14 Nov 2026):**
 
 - `README.md`, `LICENSE`, `.gitignore`, `.gitattributes`, `00_START_HERE.md`;
 - `00_PROJECT_CONTROL/` — audit, critical path, reorg report, purge report,
@@ -70,7 +70,7 @@ would try to add gigabytes of media and CAD.
 
 ## Remote
 
-- `main` is at `260aaf5`, **20 commits ahead / 14 behind** `origin/main`.
+- `main` is at `de73ec2`, **24 commits ahead / 14 behind** `origin/main`.
 - The public GitHub repository is an older, divergent version. It is not the
   source of truth.
 - Do not push before the finale unless the team has decided how to reconcile
