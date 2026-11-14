@@ -63,7 +63,7 @@ The full explanation, with what is safe to say, is in the control report above (
 | Earlier stages / team change | `09_SUBMISSIONS_AND_CERTIFICATES/01_Earlier_stages`, `04_Team_change_Oct2026` |
 | Creative Experience storytelling | `13_CREATIVE_EXPERIENCE_STORYTELLING/00_README_START_HERE.md` |
 | What was deleted, and what was rescued | `00_PROJECT_CONTROL/PURGE_REPORT_2026-11-14.md` |
-| What remains, file by file (709 project files) and every PNG verdict | `00_PROJECT_CONTROL/FILE_AUDIT_2026-11-14.md` + `FILE_AUDIT_2026-11-14.csv` + `PNG_AUDIT_2026-11-15.csv` |
+| What remains, file by file (704 project files), every PNG verdict and every CAD verdict | `00_PROJECT_CONTROL/FILE_AUDIT_2026-11-14.md` + `FILE_AUDIT_2026-11-14.csv` + `PNG_AUDIT_2026-11-15.csv` + `CAD_AUDIT_2026-11-15.csv` |
 
 **Not present:** the old `AquaSentinel_pH_Electrode_Quick_Guide.pdf` link was broken and has been removed from this map. For pH work use `14_RASPBERRY_PI_SOFTWARE/aquasentinel/tools/calibrate_ph.py` and the electronics manual.
 
@@ -92,7 +92,7 @@ Number gaps (03, 04, 10, 11) are deliberate: those folders were archived and the
 
 ## 4. How this workspace is kept safe
 
-- **Old versions were deleted on 14 Nov 2026** with the project lead's approval. Current work only. A later file audit packed derived files into four verified zips: **709 project files / 783 MB**, plus the four audit records (see `00_PROJECT_CONTROL/FILE_AUDIT_2026-11-14.md`).
+- **Old versions were deleted on 14 Nov 2026** with the project lead's approval. Current work only. A later file audit packed derived files into verified zips: **704 project files / 826.4 MB (788 MiB)**, plus six audit records (see `00_PROJECT_CONTROL/FILE_AUDIT_2026-11-14.md`).
 - **Every move is logged** in `00_PROJECT_CONTROL/WORKSPACE_REORG_LOG_2026-11-14.csv` (source, destination, size, SHA-256, reason).
 - **A pre-purge fingerprint exists:** `99_ARCHIVE/file_manifest_before_purge_2026-11-14.csv` records SHA-256, size and timestamp of all 4,266 files that existed before the purge.
 - **Git holds the tracked text and code**, on every branch, plus tags `backup/pre-reorg-2026-11-14` and `workspace/reorg-2026-11-14`.
@@ -107,7 +107,8 @@ Number gaps (03, 04, 10, 11) are deliberate: those folders were archived and the
 | 14 Nov, afternoon | old electronics, housing, storytelling, LinkedIn post, old video takes archived | described in the purge report |
 | 14 Nov, evening | workspace reorganised: current deck separated from the submission, navigation rebuilt | `00_PROJECT_CONTROL/WORKSPACE_REORG_REPORT_2026-11-14.md` |
 | 14 Nov, night | old versions, Claude worktrees and safety bundles permanently deleted; four unique documents rescued first | `00_PROJECT_CONTROL/PURGE_REPORT_2026-11-14.md` |
-| 14 Nov, late night | file-by-file audit: 259 derived files packed into four verified zips, 68 duplicates removed; 1,034 → 714 files (711 project + 3 records) | `00_PROJECT_CONTROL/FILE_AUDIT_2026-11-14.md` |
+| 14 Nov, late night | file-by-file audit: 259 derived files packed into four verified zips, 68 duplicates removed; 1,034 → 713 files (709 project + 4 records) | `00_PROJECT_CONTROL/FILE_AUDIT_2026-11-14.md` |
 | 15 Nov | every remaining PNG inspected: 232 kept, 2 with no content or unique value deleted; 3 missing SIM800L diagrams restored from git | `00_PROJECT_CONTROL/PNG_AUDIT_2026-11-15.csv` |
+| 15 Nov | all 212 native CAD reviewed against the assemblies: 205 kept, 7 obsolete v1/legacy files archived; the 40-part 1:5 set proven to be required by stored references; “Vector” parts confirmed as the 1:5 design source | `00_PROJECT_CONTROL/CAD_AUDIT_2026-11-15.md` |
 
 **If something looks missing,** read the purge report first (it lists every deleted folder), then the move log (it lists every move).

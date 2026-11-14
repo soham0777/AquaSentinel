@@ -20,9 +20,12 @@ electronics, storytelling, Pi software, and project control.
 > or superseded files into four SHA-256-verified zips and removed 68 duplicate
 > files, taking the tree from 1,034 to **713 files / 783 MB** (709 project
 > files plus four audit records). A follow-up PNG review on 15 Nov kept 232 of
-> 234 images and deleted 2 with no content or unique value. Neither pass
-> deleted current content. All counts below describe the state at the end of
-> the purge itself; see `FILE_AUDIT_2026-11-14.md` for the final state.
+> 234 images and deleted 2 with no content or unique value. A CAD review on
+> 15 Nov checked all 212 native CAD files against the assemblies: 205 kept,
+> 7 obsolete v1/legacy files archived, 0 broken references. The final state is
+> **710 files / 826.6 MB (704 project files + 6 audit records)**. None of these
+> passes deleted current content. All counts below describe the state at the
+> end of the purge itself; see `FILE_AUDIT_2026-11-14.md` for the final state.
 
 ## What was deleted
 

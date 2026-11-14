@@ -12,13 +12,20 @@ It is a 1:5 model of the R3 float on its pier column, built around the **real, f
 | `00_ASSEMBLY_MANUAL/AquaSentinel_LIVE_1to5_Assembly_Manual_SOLIDWORKS.pdf` | Step-by-step assembly, A4, **30 pages, 24 steps** (safety, parts, dry-fit, steps A1–D7, operation, troubleshooting, appendices) | Current, with the caveats in the status note |
 | `00_ASSEMBLY_MANUAL/images/` | The manual's 73 illustrations (PNG), rendered from the final STL files in their assembled positions | Current; used by the PDF |
 | `01_FINAL_STL/` | **38 STL files** + `PARTS_LIST.csv` (37 listed parts; the extra file is the `LD-S16_sample_bottle_printable.STL` variant) | Current print set |
-| `02_CAD_SOLIDWORKS/` | SOLIDWORKS parts of the 17 **LD** parts, with descriptive names; `02_CAD_SOLIDWORKS/reference/` = supplied SEN0189 turbidity sensor model | Current part models |
+| `02_CAD_SOLIDWORKS/` | SOLIDWORKS source parts of the **LD** parts, with descriptive names: 17 Vector-designed models (31 Oct 2026) + the current `LD-S16` bottle variant (13 Nov); `reference/` = supplied SEN0189 turbidity sensor model | Design source |
 | `04_DESIGN_NOTES/` | `LIVE_model_design_notes.md` (design rationale, 31 Oct), `verification_summary.json`, `print_list.csv` (36 files), `CLEANUP_LOG_2026-11-05.csv` | Historical reference — partly outdated |
-| `05_SOLIDWORKS_ASSEMBLY/` | The complete 1:5 assembly (`AquaSentinel_LIVE_1to5_Assembly.SLDASM`), all parts as used for the manual renders, and `views.zip` (72 derived renders, packed 14 Nov 2026) | Current assembly |
+| `05_SOLIDWORKS_ASSEMBLY/` | The complete 1:5 assembly (`AquaSentinel_LIVE_1to5_Assembly.SLDASM`), its **40 local part files** (the assembly's stored references point here), `views.zip` (72 derived renders) and `assembly_parts_copy_2026-11-07.zip` (spare verified copy) | Current assembly |
 | `06_PART_LABELS_A4/` | A4 sheet of part labels for the booth (PDF + PNG) | Current |
 | `07_PRINTED_DISH_LD-S17/` | The 3D-printed sensing dish: print settings, STL, STEP, F3D, preview | Current |
 
 **Part names:** `LD-` = new for the LIVE model · `ORIG-` = unchanged part of the original 1:5 kit · `P-` = bought/probe stand-in.
+
+**Do not delete the 40 `.SLDPRT` files in `05_SOLIDWORKS_ASSEMBLY/`.** They are
+byte-identical to the 40 in `12_ELECTRONICS_MANUAL_1to5/CAD/live_copy/`, but the
+1:5 assembly stores references to its own local copies. A deletion test in the
+15 Nov 2026 CAD audit produced 40 missing references and the parts had to be
+restored. The verified spare is `assembly_parts_copy_2026-11-07.zip`; see
+`00_PROJECT_CONTROL/CAD_AUDIT_2026-11-15.md`.
 
 ## Status (14 Nov 2026)
 

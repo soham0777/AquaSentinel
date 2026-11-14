@@ -25,9 +25,10 @@ These are SOLIDWORKS assemblies with external references. **Moving or renaming i
 
 | Sub-folder | What it is |
 |---|---|
-| `CAD/bay_v2/`, `CAD/live_v2/` | Current electronics-bay and LIVE assembly with electronics |
-| `CAD/bay_copy/`, `CAD/live_copy/` | Copies used to render the manual — older than `*_v2` |
-| `CAD/parts_new/` | Electronic modules modelled for the bay. **`E27_Rain_plate`, `E28_Rain_LM393`, `E02_ADS1115`, `E03_DS3231`, `E07_Buck_C`, `E12_Level_converter` are legacy parts** not used in the final build (no rain sensor; no ADS1115/RTC; one 9 V step-up + one 4.0 V step-down). Do not delete them from the CAD without checking which assemblies reference them. |
+| `CAD/bay_v2/`, `CAD/live_v2/` | `live_v2` is the current LIVE assembly with electronics; `bay_v2` is the intact bay-v2 layout (Hub-HAT era). The final electronics is the Sensor Hub PCB v1.2, not the Hub HAT. |
+| `CAD/bay_copy/`, `CAD/live_copy/` | The working part sets referenced by the v2 assemblies (40 live parts + 13 bay parts). The old v1 bay assembly/drawing and the old 1:5 render assembly were moved to `CAD/older_design_2026-11-09.zip` on 15 Nov 2026. |
+| `CAD/parts_new/` | Electronic modules modelled for the bay. **`E27_Rain_plate` and `E28_Rain_LM393` (rain, removed from the final 7-sensor build), `E07_Buck_C` and `E12_Level_converter` were archived** in `CAD/older_design_2026-11-09.zip`. **`E02_ADS1115` and `E03_DS3231` remain on disk because `live_v2` and `bay_v2` still insert them**, even though the final build does not use them. |
+| `CAD/older_design_2026-11-09.zip` | 7 obsolete v1/legacy CAD files, hash-verified. Extract over `CAD/` to restore; see `RESTORE.txt`. |
 
 ## Before the booth
 
