@@ -35,4 +35,5 @@ These are SOLIDWORKS assemblies with external references. **Moving or renaming i
 - The firmware still carries a stale comment saying “PCB v1.1 (84 × 84 mm)”; the build is **v1.2, 104 × 72 mm**. Comment only — the pin defines are correct.
 - `12_…/…` is not the software. The Pi-side software is in `14_RASPBERRY_PI_SOFTWARE`.
 
-Old Pi-direct ADS1115 electronics are archived in `99_ARCHIVE/09_Cleanup_2026-11-14/03_ELECTRONICS_RASPBERRY_PI_old_ADS1115_design/`.
+Old Pi-direct ADS1115 electronics were deleted in the 14 Nov 2026 purge. `MANUAL_AUDIT_2026-11-14.md` in this folder records
+what was wrong with that design and with the v1.0 manual.

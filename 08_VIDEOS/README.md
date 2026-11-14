@@ -8,8 +8,8 @@
 | `AquaSentinel_Marketing_60s.mp4` | 11.1 MB, 19 Oct | 60-second marketing cut — **has music** | **Not** for the competition deck (rules require no music in submitted videos) |
 | `00_source_recordings/` | 108.3 MB, 2 files | Raw teammate voice recordings used to cut v3 | Do not submit |
 
-Earlier pitch takes (`Pitch_Video_1080p`, `…_FINAL`, `…_FINAL_v2`) were archived on 14 Nov 2026 in
-`99_ARCHIVE/09_Cleanup_2026-11-14/08_videos_superseded_versions/`. **v3 is the only current pitch video.**
+Earlier pitch takes (`Pitch_Video_1080p`, `…_FINAL`, `…_FINAL_v2`) were deleted on 14 Nov 2026. **v3 is the only current
+pitch video.**
 
 ## Notes
 

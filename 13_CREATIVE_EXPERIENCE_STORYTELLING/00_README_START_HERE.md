@@ -1,8 +1,7 @@
 # Creative Experience and storytelling: everything in one place
 
-Collected 13 Nov 2026. The earlier `10_VIRTUAL_STORYTELLER` folder is now archived at
-`99_ARCHIVE/09_Cleanup_2026-11-14/10_VIRTUAL_STORYTELLER_superseded_by_13/` (nothing was deleted).
-Use this folder — it is the current one.
+Collected 13 Nov 2026. The earlier `10_VIRTUAL_STORYTELLER` folder was superseded by this one and deleted on 14 Nov 2026.
+Use this folder — it is the only current one.
 
 | Folder / file | What it is | Use it for |
 |---|---|---|

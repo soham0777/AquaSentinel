@@ -1,59 +1,87 @@
 # Backup and version control
 
-AquaSentinel is a **local-first** project: the folder on this laptop (synced by OneDrive) is the source of truth.
-Git is a history of the text and code, **not** a backup of the 2.2 GB of media, CAD and manuals.
+AquaSentinel is a **local-first** project: the folder on this laptop (synced by
+OneDrive) is the source of truth. Git is a history of the text and code, **not**
+a backup of the 807 MB of media, CAD, decks and manuals.
 
 ## The three layers
 
 | Layer | What it protects | Where |
 |---|---|---|
-| OneDrive | The whole folder, continuously; also keeps older versions of most files | `C:\Users\dell\OneDrive\Desktop\AquaSentinel` |
-| Archive + move log | Every superseded version, every moved file, reversibly | `99_ARCHIVE/` + `00_PROJECT_CONTROL/WORKSPACE_REORG_LOG_2026-11-14.csv` |
-| Git | History of tracked text/code; branches and tags | `.git` + snapshots in `99_ARCHIVE/_SAFETY_SNAPSHOTS/` |
+| OneDrive | The whole folder, continuously; recycle bin and previous versions for deleted or changed files (they expire) | `C:\Users\dell\OneDrive\Desktop\AquaSentinel` |
+| Git | History of tracked text/code; every branch and tag | `.git` |
+| Audit trail | Every move, every deleted folder, and a SHA-256 fingerprint of the pre-purge state | `00_PROJECT_CONTROL/WORKSPACE_REORG_LOG_2026-11-14.csv`, `00_PROJECT_CONTROL/PURGE_REPORT_2026-11-14.md`, `99_ARCHIVE/file_manifest_before_purge_2026-11-14.csv` |
+
+There is **no in-project bundle or second archive any more**. Those were
+deleted on 14 Nov 2026 to remove duplication; git itself holds all tracked
+history, and
+
+```bash
+git bundle create "C:/Users/dell/Desktop/AquaSentinel_backup_$(date +%F).bundle" --all
+```
+
+creates a fresh external copy whenever one is wanted (keep it **outside** the
+project folder).
 
 ## What git actually tracks
 
-**Tracked (79 files at 14 Nov 2026):**
+**Tracked (about 86 files at 14 Nov 2026):**
 
 - `README.md`, `LICENSE`, `.gitignore`, `.gitattributes`, `00_START_HERE.md`;
-- `00_PROJECT_CONTROL/` (audit, backup policy, reorg report, move log);
-- one `README.md` per working folder, plus `99_ARCHIVE/00_ARCHIVE_INDEX.md` and the archive manifest;
-- the **complete Raspberry Pi application** in `14_RASPBERRY_PI_SOFTWARE/aquasentinel/` (code, web UI, tools, scripts)
-  and the three wiring diagrams;
-- the **current Sensor Hub PCB v1.2** sources: KiCad board, DRC, design scripts, G-code, firmware, guides
-  (the superseded `older_versions/` layouts are not tracked).
+- `00_PROJECT_CONTROL/` — audit, critical path, reorg report, purge report,
+  backup policy, move log, and the two 5 Nov deep audits;
+- one `README.md` per working folder, the archive purge note and the pre-purge
+  manifest;
+- the **complete Raspberry Pi application** in `14_RASPBERRY_PI_SOFTWARE/aquasentinel/`
+  (code, web UI, tools, scripts) and the three wiring diagrams;
+- the **current Sensor Hub PCB v1.2** sources: KiCad board, DRC, design
+  scripts, G-code, firmware, guides (the superseded `older_versions/` layouts
+  are not tracked).
 
 **Not tracked:**
 
-- the old October tree (`mechanical/`, `docs/`, `analytics/`, `firmware/`, `hardware/`, `project-management/`):
-  it was removed from HEAD in commit `654764d` and remains in history and in the pre-reorg tag/bundle;
-- the deck and presentation assets in `01_`; STLs and SOLIDWORKS in `02_`; R3 CAD in `05_`; cost and simulation binaries in `06_`/`07_`;
-- videos in `08_`, submission packages in `09_`, manual PDF/images/CAD copies in `12_`, assets in `13_`;
-- `99_ARCHIVE` contents (except its index and manifest), `*.zip`, `_SAFETY_SNAPSHOTS/`, `.claude/`, `private/`.
+- the old October tree (`mechanical/`, `docs/`, `analytics/`, `firmware/`,
+  `hardware/`, `project-management/`): removed from HEAD in commit `654764d`,
+  still present in history and in tag `backup/pre-reorg-2026-11-14`;
+- the deck and presentation assets in `01_`; STLs and SOLIDWORKS in `02_`;
+  R3 CAD in `05_`; cost and simulation binaries in `06_`/`07_`;
+- videos in `08_`, submission packages in `09_`, manual PDF/images/CAD copies
+  in `12_`, assets in `13_`;
+- `*.zip`, `.claude/`, `private/`, and the deleted old archive contents.
 
-These exclusions come from blanket rules in `.git/info/exclude` (`00_*`–`07_*`) plus plain untracked status. They are the
-reason a fresh clone does not contain the heavy project files. **Do not “fix” it by running `git add .`** — that would try
-to add gigabytes of media and CAD.
+These exclusions come from blanket rules in `.git/info/exclude` (`00_*`–`07_*`)
+plus plain untracked status. They are the reason a fresh clone does not contain
+the heavy project files. **Do not “fix” it by running `git add .`** — that
+would try to add gigabytes of media and CAD.
 
-## Why `git status` used to show ~336 deleted files — now fixed
+## What happened on 14 Nov 2026
 
-On 14 Nov the project was reorganised into numbered folders, moving or removing the old `mechanical/`, `docs/`,
-`analytics/`, `firmware/`, `hardware/` and `project-management/` trees. Those moves were uncommitted, so git reported
-336 files as deleted. **That state was recorded on 14 Nov 2026 in local commit `654764d`**
-(tag `workspace/reorg-2026-11-14`) and `git status` is clean of deletions. Nothing was pushed.
+1. **Reorganisation:** the current deck was separated from the 7 Nov submission
+   record, October renders moved out of the live folder, navigation rebuilt.
+   Recorded in commit `654764d`, tag `workspace/reorg-2026-11-14`, and
+   `00_PROJECT_CONTROL/WORKSPACE_REORG_REPORT_2026-11-14.md`.
+2. **Purge (approved by the project lead):** old decks, old video takes, the
+   virtual-storyteller build, abandoned electronics, old reports, both git
+   bundles and Claude's two worktrees were permanently deleted. Four unique
+   documents were rescued first and hash-checked. Recorded in
+   `00_PROJECT_CONTROL/PURGE_REPORT_2026-11-14.md`.
+3. **Result:** 4,281 → 1,032 working files; 2.25 GB → 807 MB (1.1 GB including
+   `.git`). Nothing was pushed.
 
-The pre-cleanup state is preserved by:
+## Remote
 
-- tag and branch `backup/pre-reorg-2026-11-14` (commit `fd3c3a3`) and tag `workspace/reorg-2026-11-14` (commit `654764d`);
-- bundle `99_ARCHIVE/_SAFETY_SNAPSHOTS/2026-11-14_pre_workspace_reorg/AquaSentinel_git_all_branches_2026-11-14.bundle`;
-- older bundle `99_ARCHIVE/_SAFETY_SNAPSHOTS/2026-11-08_GitHub_bundle/`.
+- `main` is at `213ab19`, **19 commits ahead / 14 behind** `origin/main`.
+- The public GitHub repository is an older, divergent version. It is not the
+  source of truth.
+- Do not push before the finale unless the team has decided how to reconcile
+  the two histories. Never force-push.
 
 ## Safe routines
 
 **Before any big change**
 
 ```bash
-git bundle create "99_ARCHIVE/_SAFETY_SNAPSHOTS/$(date +%F)_before_change.bundle" --all
+git bundle create "C:/Users/dell/Desktop/AquaSentinel_backup_$(date +%F).bundle" --all
 ```
 
 **Check what would be committed**
@@ -66,18 +94,14 @@ git diff --stat
 **Never**
 
 - `git add .` or `git add -A` (would sweep local-only media);
-- `git push --force` (the remote is 14 commits behind and 14 ahead; it needs a considered merge, not a force);
-- delete `99_ARCHIVE` or `.claude` to “save space” before the finale.
+- `git push --force`;
+- delete `.git`, `00_START_HERE.md` or any current folder to “save space”.
 
-## `.claude/` — 421 MB of hidden copies
+## If a file is lost
 
-`.claude/worktrees/` holds two older full checkouts created by Claude Code (`aquasentinel-project-90da4a` at `e44b7fa`,
-`moisture-sensor-solidworks-29a086` at `3b9f501`). They are not project deliverables and are hidden in Explorer.
-They are useful as an extra old-version reference until the finale. After that they can be removed with
-`git worktree remove <path>` (the branches and commits stay in git).
-
-## Remote
-
-- `main` is at `2a92c7c`, **ahead 14 / behind 14** relative to `origin/main`.
-- The public GitHub repository is an older, divergent version. It is not the source of truth.
-- Do not push before the finale unless the team has decided how to reconcile the two histories.
+1. OneDrive recycle bin or version history (time-limited).
+2. `git log --all -- <path>` / `git show <tag>:<path>` for tracked files.
+3. `00_PROJECT_CONTROL/WORKSPACE_REORG_LOG_2026-11-14.csv` to see where a moved
+   file went.
+4. `00_PROJECT_CONTROL/PURGE_REPORT_2026-11-14.md` to confirm whether it was
+   deliberately deleted.

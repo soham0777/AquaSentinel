@@ -75,11 +75,11 @@ These are different objects and should never be mixed in a sentence.
 | `05_R3_FULL_SIZE_CAD` + `06_SIMULATION` | R3 CAD, drawings, FEA | Current for the design that was submitted |
 | `01_FINALE_PRESENTATION/AquaSentinel_Finale_7min.pptx` (44 MB, 14 Nov 20:34) | Finale deck | Current deck file, but some slides are stale on sensors/status |
 | `09_SUBMISSIONS_AND_CERTIFICATES` | FDC records, certificates, portal evidence | Historical record; do not rewrite |
-| `99_ARCHIVE` | Superseded material, including the old ADS1115/HAT electronics and old videos | Do not use for the booth |
+| `99_ARCHIVE` | Purge record only: old versions, Claude worktrees and safety bundles were deleted on 14 Nov 2026; the pre-purge manifest is kept | Nothing to use for the booth |
 | `https://github.com/soham0777/AquaSentinel` | Public repo and GitHub Pages site | **Older and divergent**; its README says “eight sensors” and includes rain |
 | 3DSwym / AAKRUTI dashboard | Submission platform | The submitted record; task status not fully readable in the in-app browser |
 
-**The local folder is the truth. The public GitHub is not.** The remote `main` is at `e44b7fa`; the local `main` is at `2a92c7c`, and the two histories have diverged 14 commits each way. Do not assume a push will be a fast-forward.
+**The local folder is the truth. The public GitHub is not.** The remote `main` is at `e44b7fa`; the local `main` is at `213ab19`, and the two histories have diverged (19 local commits ahead, 14 remote commits you do not have). Do not assume a push will be a fast-forward.
 
 ---
 
@@ -176,7 +176,7 @@ These are the ones a sharp Q&A judge could catch:
 | “turbidity 3× its baseline” (A4) | `classify()` uses the turbidity **digital DO**, not a 3× analog baseline | “turbidity turns cloudy” |
 | “Hard limits act at once” (A4) | hard limits still go through the 2-of-3 confirmation window | “hard limits need 2 of the last 3 readings” |
 | “pH and TDS boards are never powered together” (A4) | pH is **always** powered from 9 V; only TDS is switched by A0 | “the TDS board is powered only while it is read, because it disturbs pH” |
-| “4 of 4 spills flagged in a 30-day test” (slide 46) | The 30-day test is **synthetic data**; the archived analytics README says so | “4 of 4 simulated spills in a 30-day synthetic test” |
+| “4 of 4 spills flagged in a 30-day test” (slide 46) | The 30-day test is **synthetic data**; the analytics README in git history says so | “4 of 4 simulated spills in a 30-day synthetic test” |
 
 **P1-3. `.ino` header says the wrong board.**
 The firmware comment says “AquaSentinel Sensor Hub PCB v1.1 (84 × 84 mm …)”. The actual board is **v1.2, 104 × 72 mm**. The pin map below the comment is the v1.2 map, so the code is right and the comment is stale. Fix the comment; a judge reading the source will notice.

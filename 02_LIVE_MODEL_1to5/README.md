@@ -46,5 +46,5 @@ The **electronics manual Rev 2.0 (14 Nov)** is the authoritative document for an
 
 ## Archive
 
-The 31 Oct concept renders and the original kit's Scale Model Guide were moved to
-`99_ARCHIVE/11_LiveModel_superseded_31Oct2026/` on 14 Nov 2026. They are still available, but they are not the final design.
+The 31 Oct concept renders and the original kit's Scale Model Guide were moved out of this folder on 14 Nov 2026 and then
+deleted in the same evening's purge. They are no longer available. The current design is what this folder contains.

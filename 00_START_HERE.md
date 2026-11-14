@@ -6,7 +6,7 @@
 AquaSentinel is a float on a guide pole clamped to a bridge pier. Every 15 minutes it reads the river; when a spill passes, it turns its beacon red, sends an SMS and keeps a bottle of that water for the lab.
 
 > **This file is the map.** It is the only place that says which version of each thing is current.
-> Everything old is in `99_ARCHIVE` — nothing has been deleted.
+> Old versions were deleted on 14 Nov 2026 with the project lead's approval; what remains is the current build.
 
 ---
 
@@ -22,7 +22,7 @@ AquaSentinel is a float on a guide pole clamped to a bridge pier. Every 15 minut
 | **Full-size R3 assembly manual** | `05_R3_FULL_SIZE_CAD/00_ASSEMBLY_MANUAL/AquaSentinel_R3_Assembly_Manual_SOLIDWORKS.pdf` | 27 pages, 66 part numbers, 12 steps |
 | **R3 CAD as submitted (FDC)** | `05_R3_FULL_SIZE_CAD/02_SOLIDWORKS_PackAndGo_FDC` | Pack-and-Go folder + zip |
 | **Cost to quote** | `07_COST_AND_BUSINESS/04_AquaSentinel_Cost_48k_Value_Engineered.pdf` | ₹47,886 ex-GST at 100 units (≈ ₹56,505 with GST); prototype ₹64,616 |
-| **Pitch video (final)** | `08_VIDEOS/AquaSentinel_Pitch_Video_Clean_Water_Now_FINAL_v3.mp4` | 8 Nov voice-over, on the FDC. Earlier takes are archived. |
+| **Pitch video (final)** | `08_VIDEOS/AquaSentinel_Pitch_Video_Clean_Water_Now_FINAL_v3.mp4` | 8 Nov voice-over, on the FDC. Earlier takes were deleted on 14 Nov. |
 | **Working audit + critical path** | `00_PROJECT_CONTROL/PROJECT_IDENTIFICATION_AND_CRITICAL_PATH_2026-11-14.md` | The 7 P0/P1/P2 problems, verified-vs-unverified table, Q&A traps |
 
 ### Status at 14 Nov 2026 — do not overclaim at the booth
@@ -62,7 +62,7 @@ The full explanation, with what is safe to say, is in the control report above (
 | Certificates | `09_SUBMISSIONS_AND_CERTIFICATES/05_Participation_Certificates` |
 | Earlier stages / team change | `09_SUBMISSIONS_AND_CERTIFICATES/01_Earlier_stages`, `04_Team_change_Oct2026` |
 | Creative Experience storytelling | `13_CREATIVE_EXPERIENCE_STORYTELLING/00_README_START_HERE.md` |
-| Anything old or superseded | `99_ARCHIVE/00_ARCHIVE_INDEX.md` |
+| What was deleted, and what was rescued | `00_PROJECT_CONTROL/PURGE_REPORT_2026-11-14.md` |
 
 **Not present:** the old `AquaSentinel_pH_Electrode_Quick_Guide.pdf` link was broken and has been removed from this map. For pH work use `14_RASPBERRY_PI_SOFTWARE/aquasentinel/tools/calibrate_ph.py` and the electronics manual.
 
@@ -78,32 +78,33 @@ The full explanation, with what is safe to say, is in the control report above (
 | `05_R3_FULL_SIZE_CAD/` | full-size R3: manual, BOM, CAD, drawings, checks, renders, STEP/STL | **current** |
 | `06_SIMULATION/` | SOLIDWORKS Simulation: guide pole and pier bracket | **current** |
 | `07_COST_AND_BUSINESS/` | costed BOM, 6 Nov estimate, value-engineered cost + PDF | **current** (read its README for caveats) |
-| `08_VIDEOS/` | final pitch, assembly, journey, marketing; raw recordings in `08_VIDEOS/00_source_recordings/` | **current** |
+| `08_VIDEOS/` | final pitch, R3 assembly, journey and 60 s marketing videos, plus the raw teammate recordings in `08_VIDEOS/00_source_recordings/` | **current** |
 | `09_SUBMISSIONS_AND_CERTIFICATES/` | one sub-folder per stage: earlier, FDC Oct, FDC update 7 Nov, team change, certificates, portal, Maker Fest 2027 | **record** |
 | `12_ELECTRONICS_MANUAL_1to5/` | electronics manual Rev 2.0, Sensor Hub PCB v1.2, CAD working copies, manual build source | **current** |
 | `13_CREATIVE_EXPERIENCE_STORYTELLING/` | 3DEXCITE Creative Experience storyline, assets, story video, AR model, scripts | **current** |
 | `14_RASPBERRY_PI_SOFTWARE/` | Pi 3B+ software and install/calibration/self-test tools | **current** |
-| `99_ARCHIVE/` | every superseded version, plus safety snapshots | **do not use for work** |
+| `99_ARCHIVE/` | the pre-purge file manifest and purge note only; old versions were deleted on 14 Nov 2026 | historical record |
 
-Number gaps (03, 04, 10, 11) are deliberate: those folders were archived on 14 Nov 2026 and their numbers were not reused, so old links and conversations still make sense. `99_ARCHIVE/09_Cleanup_2026-11-14/MANIFEST.md` lists every one.
+Number gaps (03, 04, 10, 11) are deliberate: those folders were archived and then deleted on 14 Nov 2026, and their numbers were not reused, so old links and conversations still make sense. `00_PROJECT_CONTROL/PURGE_REPORT_2026-11-14.md` lists what each one was.
 
 ---
 
 ## 4. How this workspace is kept safe
 
-- **Nothing is deleted.** Superseded files are moved into `99_ARCHIVE`, with the original path recorded.
+- **Old versions were deleted on 14 Nov 2026** with the project lead's approval. Current work only.
 - **Every move is logged** in `00_PROJECT_CONTROL/WORKSPACE_REORG_LOG_2026-11-14.csv` (source, destination, size, SHA-256, reason).
-- **A full before-image exists:** `99_ARCHIVE/_SAFETY_SNAPSHOTS/2026-11-14_pre_workspace_reorg/` holds a git bundle of every branch and a SHA-256 manifest of all 4,266 files.
-- **Backups:** `99_ARCHIVE/_SAFETY_SNAPSHOTS/`; the git bundle from 8 Nov is in `99_ARCHIVE/_SAFETY_SNAPSHOTS/2026-11-08_GitHub_bundle/`.
-- **Git is not the backup for heavy files.** Read `00_PROJECT_CONTROL/BACKUP_AND_VERSION_CONTROL.md` before committing or pushing.
+- **A pre-purge fingerprint exists:** `99_ARCHIVE/file_manifest_before_purge_2026-11-14.csv` records SHA-256, size and timestamp of all 4,266 files that existed before the purge.
+- **Git holds the tracked text and code**, on every branch, plus tags `backup/pre-reorg-2026-11-14` and `workspace/reorg-2026-11-14`.
+- **Git is not a backup for videos, decks or CAD.** Those are local-only; OneDrive version history is the only recovery path. Read `00_PROJECT_CONTROL/BACKUP_AND_VERSION_CONTROL.md` before committing or pushing.
 
 ### History of cleanups
 
 | Date | What happened | Where the record is |
 |---|---|---|
-| 6 Nov | first cleanup (some files went to the Recycle Bin) | `99_ARCHIVE/REORGANISATION_LOG_2026-11-06.csv` |
-| 7 Nov | R3 folders numbered, submissions split by stage, coursework archived | `99_ARCHIVE/REORGANISATION_LOG_2026-11-07.csv` |
-| 14 Nov, afternoon | old electronics, housing, storytelling, LinkedIn post, old video takes archived | `99_ARCHIVE/09_Cleanup_2026-11-14/MANIFEST.md` |
-| 14 Nov, evening | this workspace reorganisation: current deck separated from the submission, October renders archived, navigation rebuilt | `00_PROJECT_CONTROL/WORKSPACE_REORG_REPORT_2026-11-14.md` |
+| 6 Nov | first cleanup (some files went to the Recycle Bin) | described in the purge report |
+| 7 Nov | R3 folders numbered, submissions split by stage, coursework archived | described in the purge report |
+| 14 Nov, afternoon | old electronics, housing, storytelling, LinkedIn post, old video takes archived | described in the purge report |
+| 14 Nov, evening | workspace reorganised: current deck separated from the submission, navigation rebuilt | `00_PROJECT_CONTROL/WORKSPACE_REORG_REPORT_2026-11-14.md` |
+| 14 Nov, night | old versions, Claude worktrees and safety bundles permanently deleted; four unique documents rescued first | `00_PROJECT_CONTROL/PURGE_REPORT_2026-11-14.md` |
 
-**If something looks missing,** search the archive index first, then the reorg log; both record where it went.
+**If something looks missing,** read the purge report first (it lists every deleted folder), then the move log (it lists every move).

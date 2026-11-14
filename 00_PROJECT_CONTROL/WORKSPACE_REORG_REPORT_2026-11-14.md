@@ -1,7 +1,12 @@
 # Workspace reorganisation — 14 November 2026, evening
 
-**Scope:** the whole `AquaSentinel` project folder. **Rule:** organise and archive; delete nothing.
-**Outcome:** every file that existed before still exists, with the same SHA-256, at a known path. Verified.
+> **Historical document.** This describes the 22:20 state on 14 Nov. Later that night, with the project lead's
+> approval, the archive, both safety bundles and Claude's worktrees were permanently deleted. The file counts and
+> archive paths below therefore no longer describe the current folder. For the current state read
+> `00_START_HERE.md`; for the deletion record read `00_PROJECT_CONTROL/PURGE_REPORT_2026-11-14.md`.
+
+**Scope:** the whole `AquaSentinel` project folder. **Rule at the time:** organise and archive; delete nothing.
+**Outcome:** every file that existed before the reorganisation still existed afterwards, with the same SHA-256, at a known path. Verified.
 
 ## Before → after
 

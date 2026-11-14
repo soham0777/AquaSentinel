@@ -43,15 +43,15 @@ See `00_PROJECT_CONTROL/PROJECT_IDENTIFICATION_AND_CRITICAL_PATH_2026-11-14.md` 
 | `05_R3_FULL_SIZE_CAD` | full-size R3: manual, BOM, CAD, drawings, design checks, renders, STEP/STL |
 | `06_SIMULATION` | SOLIDWORKS Simulation studies and reports (guide pole, pier bracket) |
 | `07_COST_AND_BUSINESS` | costed BOM, earlier estimate, value-engineered ≈ ₹48,000 cost + PDF |
-| `08_VIDEOS` | pitch (FINAL v3), assembly, journey, marketing 60 s, raw recordings |
+| `08_VIDEOS` | pitch (FINAL v3), assembly, journey, marketing 60 s, raw teammate recordings |
 | `09_SUBMISSIONS_AND_CERTIFICATES` | per-stage records: earlier stages, FDC Oct, FDC update 7 Nov, team change, certificates, portal, Maker Fest 2027 |
 | `12_ELECTRONICS_MANUAL_1to5` | electronics manual Rev 2.0, Sensor Hub PCB v1.2 (design + firmware) |
 | `13_CREATIVE_EXPERIENCE_STORYTELLING` | 3DEXCITE Creative Experience storyline, assets, story video, AR model, scripts |
 | `14_RASPBERRY_PI_SOFTWARE` | Raspberry Pi 3B+ software: nano link, decisions, SMS, dashboard, logging, install |
-| `99_ARCHIVE` | every superseded version + safety snapshots — index at `99_ARCHIVE/00_ARCHIVE_INDEX.md` |
+| `99_ARCHIVE` | purge record and the SHA-256 manifest of the pre-purge state |
 
-Number gaps (03, 04, 10, 11) are intentional: those folders were archived on 14 Nov 2026 and their numbers were not
-reused. Nothing was deleted. See `99_ARCHIVE/09_Cleanup_2026-11-14/MANIFEST.md`.
+Number gaps (03, 04, 10, 11) are intentional: those folders were archived and then deleted on 14 Nov 2026, and their
+numbers were not reused. See `00_PROJECT_CONTROL/PURGE_REPORT_2026-11-14.md`.
 
 ## Repository note
 
