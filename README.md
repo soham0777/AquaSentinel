@@ -31,7 +31,7 @@ value-engineered product cost ≈ ₹48,000 (`07_COST_AND_BUSINESS`).
 
 Sensors, beacon and pump are bench-proven; the model has **not yet been floated**. The Pi ↔ Nano link and the SIM800L
 SMS path were **not yet verified end to end** at 14 Nov, pH is **not calibrated**, and no SMS numbers are configured.
-See `00_PROJECT_CONTROL/PROJECT_IDENTIFICATION_AND_CRITICAL_PATH_2026-11-14.md` in the local folder.
+See `PROJECT_IDENTIFICATION_AND_CRITICAL_PATH_2026-11-14.md` in the local folder.
 
 ## Folder map (local project)
 

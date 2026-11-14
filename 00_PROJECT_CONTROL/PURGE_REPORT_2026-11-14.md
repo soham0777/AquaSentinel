@@ -16,6 +16,13 @@ Every remaining folder is current work: the deck and its 7 Nov submission
 record, the 1:5 model, R3 CAD, simulation, cost, videos, submissions,
 electronics, storytelling, Pi software, and project control.
 
+> **Later the same night:** a second, file-level lean pass packed 259 derived
+> or superseded files into four SHA-256-verified zips and removed 68 duplicate
+> files, taking the tree from 1,034 to **714 files / 784 MB** (711 project
+> files plus the three audit records). It deleted no current content. All
+> counts below describe the state at the end of the purge itself; see
+> `FILE_AUDIT_2026-11-14.md` for the final state.
+
 ## What was deleted
 
 | Item | Size | Files | Why |

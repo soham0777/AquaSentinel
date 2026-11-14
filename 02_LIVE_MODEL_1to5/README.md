@@ -14,7 +14,7 @@ It is a 1:5 model of the R3 float on its pier column, built around the **real, f
 | `01_FINAL_STL/` | **38 STL files** + `PARTS_LIST.csv` (37 listed parts; the extra file is the `LD-S16_sample_bottle_printable.STL` variant) | Current print set |
 | `02_CAD_SOLIDWORKS/` | SOLIDWORKS parts of the 17 **LD** parts, with descriptive names; `02_CAD_SOLIDWORKS/reference/` = supplied SEN0189 turbidity sensor model | Current part models |
 | `04_DESIGN_NOTES/` | `LIVE_model_design_notes.md` (design rationale, 31 Oct), `verification_summary.json`, `print_list.csv` (36 files), `CLEANUP_LOG_2026-11-05.csv` | Historical reference — partly outdated |
-| `05_SOLIDWORKS_ASSEMBLY/` | The complete 1:5 assembly (`AquaSentinel_LIVE_1to5_Assembly.SLDASM`), all parts as used for the manual renders, and `05_SOLIDWORKS_ASSEMBLY/views/` | Current assembly |
+| `05_SOLIDWORKS_ASSEMBLY/` | The complete 1:5 assembly (`AquaSentinel_LIVE_1to5_Assembly.SLDASM`), all parts as used for the manual renders, and `views.zip` (72 derived renders, packed 14 Nov 2026) | Current assembly |
 | `06_PART_LABELS_A4/` | A4 sheet of part labels for the booth (PDF + PNG) | Current |
 | `07_PRINTED_DISH_LD-S17/` | The 3D-printed sensing dish: print settings, STL, STEP, F3D, preview | Current |
 
@@ -26,7 +26,7 @@ It is a 1:5 model of the R3 float on its pier column, built around the **real, f
 - CAD geometry has been checked; the printed set has **not yet been trial-assembled and the model has not been floated**.
   Do the dry-fit list in section 0 of the manual before gluing.
 - The sensors, beacon and pump have been **bench-tested** (12–13 Nov) through the Sensor Hub PCB.
-- Open build points are in manual Appendix D and in `00_PROJECT_CONTROL/PROJECT_IDENTIFICATION_AND_CRITICAL_PATH_2026-11-14.md`.
+- Open build points are in manual Appendix D and in `PROJECT_IDENTIFICATION_AND_CRITICAL_PATH_2026-11-14.md`.
 
 ## Known differences between the manual and the final build
 

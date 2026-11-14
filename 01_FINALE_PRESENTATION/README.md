@@ -18,7 +18,7 @@ There is **no current PDF** of the 14 Nov deck. Export one before travelling if 
 ## Before presenting — known content issues
 
 The deck was written before the last hardware changes. The three issues to fix are in
-`00_PROJECT_CONTROL/PROJECT_IDENTIFICATION_AND_CRITICAL_PATH_2026-11-14.md` (§7):
+`PROJECT_IDENTIFICATION_AND_CRITICAL_PATH_2026-11-14.md` (§7):
 
 - it says **rain**/“8 sensors”; the final build has **7 sensors and no rain sensor**;
 - it describes some things as **verified** that were not tested end to end (Pi ↔ Nano, SIM800L SMS);

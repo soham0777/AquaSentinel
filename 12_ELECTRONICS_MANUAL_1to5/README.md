@@ -14,7 +14,7 @@ streaming one JSON line per second over USB to the **Raspberry Pi 3B+**, which d
 | `PCB_SENSOR_HUB_v1/` | Sensor Hub PCB v1.2: KiCad file, DRC report, CNC G-code, placement/soldering/continuity/power-up guides, Nano firmware | **Current** |
 | `PCB_SENSOR_HUB_v1/firmware/aquasentinel_nano/aquasentinel_nano.ino` | The firmware that actually runs on the Nano | **Current** |
 | `PCB_SENSOR_HUB_v1/firmware/wiring_test.py` | Bench wiring test helper | Current |
-| `PCB_SENSOR_HUB_v1/older_versions/` | Earlier board layouts (`v1_145x90`, `v1_1_84x84`) | Superseded — do not mill |
+| `PCB_SENSOR_HUB_v1/older_versions.zip` | Earlier board layouts (`v1_145x90`, `v1_1_84x84`), packed 14 Nov 2026 | Superseded — do not mill |
 | `images/` | 63 figures for the manual (`images/bay/`, `images/diagrams/`, `images/live/`, `images/parts/`) | Current |
 | `_build_v2/` | The build source of the current PDF (`manual_v2.html`, SVGs, `verify_pdf.py`); `manual_v2.pdf` is byte-identical to the manual above | Source, keep |
 | `CAD/` | SOLIDWORKS working copies and electronics models | Working set — see warning below |

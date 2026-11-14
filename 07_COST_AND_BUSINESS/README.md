@@ -21,6 +21,6 @@ The two documents were written before the final hardware change and still contai
 - an electronics count based on the Pi reading sensors directly.
 
 The total is dominated by mechanics, so these lines are small, but the wording must match the build (Art. 10). They are
-tracked as P2 in `00_PROJECT_CONTROL/PROJECT_IDENTIFICATION_AND_CRITICAL_PATH_2026-11-14.md`.
+tracked as P2 in `PROJECT_IDENTIFICATION_AND_CRITICAL_PATH_2026-11-14.md`.
 
 Do not present `02_…` as the current cost. Use `04_…pdf`, and say “estimate at 100 units, ex-GST”.

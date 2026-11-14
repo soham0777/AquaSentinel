@@ -35,7 +35,7 @@ project folder).
 - the **complete Raspberry Pi application** in `14_RASPBERRY_PI_SOFTWARE/aquasentinel/`
   (code, web UI, tools, scripts) and the three wiring diagrams;
 - the **current Sensor Hub PCB v1.2** sources: KiCad board, DRC, design
-  scripts, G-code, firmware, guides (the superseded `older_versions/` layouts
+  scripts, G-code, firmware, guides (the superseded `older_versions.zip` layouts
   are not tracked).
 
 **Not tracked:**

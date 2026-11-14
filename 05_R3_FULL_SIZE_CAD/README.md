@@ -11,12 +11,12 @@ with its sensor cartridge in a well between the hulls. **66 part numbers, 144 pa
 |---|---|---|
 | `00_ASSEMBLY_MANUAL/…_SOLIDWORKS.pdf` | 27-page assembly manual: 66 part numbers, 144 parts, 12 steps | Current |
 | `01_BOM_R3.csv` | Bill of materials for the R3 | Current |
-| `02_SOLIDWORKS_PackAndGo_FDC/` | Pack-and-Go folder **as submitted at the FDC** (68 files) + `AquaSentinel_R3_SOLIDWORKS_PackAndGo.zip` | Frozen submission record |
-| `03_SOLIDWORKS_2026_assembly_for_manual/` | Working SOLIDWORKS 2026 assembly used to render the manual (167 files) | Current working set |
-| `04_Drawings/` | Six A3 sheets (AS3-DWG-01…06) + the combined drawing set PDF | Current |
+| `02_SOLIDWORKS_PackAndGo_FDC/` | Pack-and-Go **as submitted at the FDC**, kept as `AquaSentinel_R3_SOLIDWORKS_PackAndGo.zip`; the unzipped copy was removed on 14 Nov 2026 after 67/67 entries were verified identical | Frozen submission record |
+| `03_SOLIDWORKS_2026_assembly_for_manual/` | Working SOLIDWORKS 2026 assembly used to render the manual (66 parts + assembly) + `views.zip` (100 derived renders) | Current working set |
+| `04_Drawings/` | Six A3 sheets (AS3-DWG-01…06) + the combined drawing set PDF (the duplicate A3 PDF was removed 14 Nov) | Current |
 | `05_Design_Checks/` | 14 design checks (`design_checks.json`), STEP validation, check sheet PNG | Current |
 | `06_Renders/` | 15 renders used in the deck, manual and FDC | Current |
-| `07_Parts_STEP_STL/` | Neutral STEP/STL of all R3 parts (132 files) | Current |
+| `07_Parts_STEP_STL/` | Neutral **STEP** of all 66 R3 parts + `R3_parts_STL_exports.zip` (66 STL; the R3 has never been printed) | Current |
 | `08_Assembly_STEP_GLB/` | Whole-assembly STEP + GLB (`AquaSentinel_R3_Assembly_MidWater.step`, `AquaSentinel_R3.glb`) | Current |
 
 ## Simulation

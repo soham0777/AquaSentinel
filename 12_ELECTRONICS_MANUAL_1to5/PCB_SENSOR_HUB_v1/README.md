@@ -52,7 +52,7 @@ Single-sided carrier board for the 1:5 LIVE model electronics. The Arduino Nano 
   - it has a height map, pause/resume/stop and check mode;
   - run it with `python pcb_sender.py --port COM18 --run FILE.nc`.
 - `firmware/` holds the Nano firmware and `wiring_test.py` for the Pi.
-- `older_versions/` holds the earlier 145 x 90 and 84 x 84 layouts, which were not milled.
+- `older_versions.zip` holds the earlier 145 x 90 and 84 x 84 layouts, which were not milled (packed 14 Nov 2026).
 
 ## Machine notes (TTC-450 Pro, GRBL 1.1h)
 
