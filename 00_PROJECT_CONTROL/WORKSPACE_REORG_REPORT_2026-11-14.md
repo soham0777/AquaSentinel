@@ -5,7 +5,7 @@
 
 ## Before → after
 
-| | Before (21:25) | After (22:05) |
+| | Before (21:25) | After (22:20) |
 |---|---|---|
 | Files (excluding `.git`) | 4,265 | 4,281 (16 new README/index/control files) |
 | Size | 2.2 GB | 2.63 GB (includes the new 244 MB safety bundle) |
@@ -39,12 +39,12 @@
 
 ## Verification
 
-- 4,266 manifest entries re-checked by SHA-256 after the moves.
-- **4,261 identical, 0 missing.**
-- 5 files intentionally re-written: `00_START_HERE.md`, `README.md`, `02_LIVE_MODEL_1to5/README.md`,
-  `13_…/00_README_START_HERE.md`, `14_RASPBERRY_PI_SOFTWARE/README.md` (all corrections, no data removed).
-- Empty-folder scan after: **0**.
-- Link scan of the current docs: remaining warnings are historical notes and contextual command paths, listed below.
+- 4,266 manifest entries re-checked by SHA-256 after all work.
+- **4,255 identical, 0 missing.**
+- 11 existing files were intentionally re-written, all text: `.gitignore`, `00_START_HERE.md`, `README.md`, the control report,
+  `02_LIVE_MODEL_1to5/README.md`, the design-notes banner, `13_…/00_README_START_HERE.md`, `13_…/00_Virtual_Storyteller_Plan.md`,
+  `14_RASPBERRY_PI_SOFTWARE/README.md`, and two path fixes in `01_…/00_TODAY_7Nov…` and `09_…/FDC_post_contents_7Nov2026.md`.
+  No data, deck, CAD, video or manual content was altered. The new README/index/control files are additions, not changes.
 
 ## What was deliberately not touched
 
