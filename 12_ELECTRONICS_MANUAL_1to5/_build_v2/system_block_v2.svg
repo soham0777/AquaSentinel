@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="450" viewBox="0 0 860 450" font-family="Segoe UI, Arial, sans-serif">
+<defs>
+<marker id="arr" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 z" fill="#0b3d62"/></marker>
+</defs>
+<rect x="0" y="0" width="860" height="450" fill="#ffffff"/>
+<text x="430" y="26" text-anchor="middle" font-size="17" font-weight="700" fill="#0b3d62">The 1:5 LIVE model — who does what</text>
+
+<!-- sensors column -->
+<text x="30" y="52" font-size="12" font-weight="700" fill="#1b7a32">7 sensors (real, full-size)</text>
+<g font-size="10.5">
+<rect x="30" y="62" width="190" height="38" rx="6" fill="#eef7f0" stroke="#1b7a32"/>
+<text x="125" y="86" text-anchor="middle">pH  PH-4502C + E-201-C</text>
+<rect x="30" y="108" width="190" height="38" rx="6" fill="#eef7f0" stroke="#1b7a32"/>
+<text x="125" y="132" text-anchor="middle">TDS  SEN0244 (0–1000 ppm)</text>
+<rect x="30" y="154" width="190" height="38" rx="6" fill="#eef7f0" stroke="#1b7a32"/>
+<text x="125" y="178" text-anchor="middle">Turbidity  SEN0189</text>
+<rect x="30" y="200" width="190" height="38" rx="6" fill="#eef7f0" stroke="#1b7a32"/>
+<text x="125" y="224" text-anchor="middle">Water temp  DS18B20</text>
+<rect x="30" y="246" width="190" height="38" rx="6" fill="#eef7f0" stroke="#1b7a32"/>
+<text x="125" y="270" text-anchor="middle">Air temp/humidity  DHT11</text>
+<rect x="30" y="292" width="190" height="38" rx="6" fill="#eef7f0" stroke="#1b7a32"/>
+<text x="125" y="316" text-anchor="middle">Light  LDR module</text>
+<rect x="30" y="338" width="190" height="38" rx="6" fill="#eef7f0" stroke="#1b7a32"/>
+<text x="125" y="362" text-anchor="middle">Vapour  MQ-3</text>
+</g>
+
+<!-- hub -->
+<rect x="310" y="130" width="240" height="150" rx="8" fill="#0b3d62"/>
+<text x="430" y="158" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">Sensor Hub PCB v1.2</text>
+<text x="430" y="180" text-anchor="middle" font-size="11" fill="#cfe3f2">Arduino Nano (ATmega328P)</text>
+<text x="430" y="202" text-anchor="middle" font-size="10" fill="#cfe3f2">reads every sensor</text>
+<text x="430" y="222" text-anchor="middle" font-size="10" fill="#cfe3f2">drives beacon + pump</text>
+<text x="430" y="242" text-anchor="middle" font-size="10" fill="#cfe3f2">sends 1 JSON line / second</text>
+<text x="430" y="262" text-anchor="middle" font-size="9" fill="#9fc3dd">(our own board, milled 12 Nov 2026)</text>
+
+<line x1="220" y1="205" x2="310" y2="205" stroke="#1b7a32" stroke-width="2.5" marker-end="url(#arr)"/>
+<text x="265" y="198" text-anchor="middle" font-size="9" fill="#1b7a32">5 V · GND · signals</text>
+
+<!-- beacon + pump -->
+<rect x="310" y="316" width="115" height="58" rx="6" fill="#fff4e6" stroke="#c07f00"/>
+<text x="367" y="340" text-anchor="middle" font-size="10.5" font-weight="700" fill="#8a5a00">RGB beacon</text>
+<text x="367" y="358" text-anchor="middle" font-size="9" fill="#8a5a00">green / red / blue</text>
+<rect x="440" y="316" width="110" height="58" rx="6" fill="#fff4e6" stroke="#c07f00"/>
+<text x="495" y="340" text-anchor="middle" font-size="10.5" font-weight="700" fill="#8a5a00">Mini L298N</text>
+<text x="495" y="358" text-anchor="middle" font-size="9" fill="#8a5a00">+ sample pump</text>
+<line x1="430" y1="280" x2="380" y2="316" stroke="#c07f00" stroke-width="2" marker-end="url(#arr)"/>
+<line x1="430" y1="280" x2="495" y2="316" stroke="#c07f00" stroke-width="2" marker-end="url(#arr)"/>
+
+<!-- pi -->
+<rect x="640" y="130" width="200" height="150" rx="8" fill="#e8f0f7" stroke="#0b3d62" stroke-width="1.5"/>
+<text x="740" y="156" text-anchor="middle" font-size="14" font-weight="700" fill="#0b3d62">Raspberry Pi 3B+</text>
+<text x="740" y="178" text-anchor="middle" font-size="10.5" fill="#123">decides: NORMAL / ACIDIC /</text>
+<text x="740" y="196" text-anchor="middle" font-size="10.5" fill="#123">INDUSTRIAL / RUNOFF / SOLVENT</text>
+<text x="740" y="218" text-anchor="middle" font-size="10.5" fill="#123">runs the dashboard, logs CSV</text>
+<text x="740" y="240" text-anchor="middle" font-size="10.5" fill="#123">sends SMS via SIM800L</text>
+
+<line x1="550" y1="205" x2="640" y2="205" stroke="#0b3d62" stroke-width="2.5" marker-end="url(#arr)"/>
+<text x="595" y="196" text-anchor="middle" font-size="9.5" fill="#0b3d62">USB</text>
+<text x="595" y="212" text-anchor="middle" font-size="9" fill="#0b3d62">power + data</text>
+
+<!-- sim + dashboard -->
+<rect x="640" y="316" width="200" height="52" rx="6" fill="#eef7f0" stroke="#1b7a32"/>
+<text x="740" y="338" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1b7a32">SIM800L — SMS alert</text>
+<text x="740" y="356" text-anchor="middle" font-size="9" fill="#1b7a32">UART GPIO14/15 via board J18</text>
+<line x1="740" y1="280" x2="740" y2="316" stroke="#1b7a32" stroke-width="2" marker-end="url(#arr)"/>
+<rect x="640" y="386" width="200" height="40" rx="6" fill="#f2f5f8" stroke="#667"/>
+<text x="740" y="410" text-anchor="middle" font-size="10" fill="#333">Dashboard  http://pi-address:8080</text>
+<line x1="740" y1="280" x2="740" y2="386" stroke="#667" stroke-width="1.5" marker-end="url(#arr)"/>
+</svg>

@@ -1,0 +1,48 @@
+{
+  "site_name": "Godavari river, Kopargaon (1:5 live model)",
+  "team": "Team Sanjivani Hero's Journey",
+  "nano_port": "auto",
+  "nano_baud": 115200,
+  "sim_enabled": true,
+  "sim_port": "/dev/serial0",
+  "sim_baud": 9600,
+  "sms_numbers": [],
+  "sms_cooldown_minutes": 10,
+  "web_port": 8080,
+  "auto_sample": true,
+  "sample_pump_seconds": 5,
+  "learn_seconds": 20,
+  "confirm_window": 3,
+  "confirm_needed": 2,
+  "clear_after_normal": 4,
+  "limits": {
+    "ph_low": 6.0,
+    "ph_high": 9.0,
+    "ph_drop_from_baseline": 1.0,
+    "ph_rise_from_baseline": 1.0,
+    "tds_high_ppm": 1400,
+    "tds_jump_ratio": 1.5,
+    "tds_jump_min_ppm": 150,
+    "water_temp_high_c": 40.0
+  },
+  "digital_outputs": {
+    "turbidity_dirty_value": 0,
+    "mq3_vapour_value": 0,
+    "ldr_dark_value": 1
+  },
+  "ph_calibration": {
+    "calibrated": false,
+    "points": [
+      [
+        2.082,
+        4.0
+      ],
+      [
+        2.279,
+        9.2
+      ]
+    ]
+  },
+  "log_dir": "logs",
+  "mq3_warmup_s": 90
+}

@@ -263,8 +263,8 @@ footer{padding:50px 0 70px;color:var(--sub);font-size:14px;text-align:center;bor
   <div class="wrap">
     <div class="reveal"><div class="eyebrow">Our innovation</div><h2>A sentinel that lives in the river<br>and decides on the spot.</h2></div>
     <div class="grid g3 sda reveal" style="margin-top:36px">
-      <div class="card"><div class="num">01</div><div style="font-size:34px">📡</div><h3>Sense</h3><p>Every 15 minutes: pH, dissolved solids, turbidity and water temperature; rain, light and humidity; and vapour from the sample bottle. 2,880 readings a month instead of one.</p></div>
-      <div class="card"><div class="num">02</div><div style="font-size:34px">🧠</div><h3>Decide</h3><p>On board, no cloud. A Raspberry Pi compares each reading with hard limits and with what is normal for that hour of the day, and names the pattern: industrial, acidic, runoff or solvent.</p></div>
+      <div class="card"><div class="num">01</div><div style="font-size:34px">📡</div><h3>Sense</h3><p>Every 15 minutes: pH, dissolved solids, turbidity and water temperature; light, air temperature and humidity; and vapour from the sample bottle. 2,880 readings a month instead of one.</p></div>
+      <div class="card"><div class="num">02</div><div style="font-size:34px">🧠</div><h3>Decide</h3><p>On board, no cloud. A Raspberry Pi compares each reading with hard limits and with a baseline it learns from the water, and names the pattern: industrial, acidic, runoff or solvent.</p></div>
       <div class="card"><div class="num">03</div><div style="font-size:34px">🚨</div><h3>Act</h3><p>In seconds. A red beacon for anyone on the bank, an SMS to the water-works and the board, and one bottle of the spill for the lab, so the right water gets tested.</p></div>
     </div>
   </div>
@@ -285,7 +285,7 @@ footer{padding:50px 0 70px;color:var(--sub);font-size:14px;text-align:center;bor
           <button data-p="clean" class="on"><span>💧</span>Clean water</button>
           <button data-p="salty"><span>🧂</span>Salty water</button>
           <button data-p="vinegar"><span>🍋</span>Vinegar</button>
-          <button data-p="muddy"><span>🌧️</span>Muddy, after rain</button>
+          <button data-p="muddy"><span>🌧️</span>Muddy water</button>
           <button data-p="solvent"><span>🧴</span>Sanitiser in the bottle</button>
           <button data-p="unplug"><span>🔌</span>Unplug a probe</button>
         </div>
@@ -294,7 +294,7 @@ footer{padding:50px 0 70px;color:var(--sub);font-size:14px;text-align:center;bor
         <div class="ctl"><label>Dissolved solids <output id="o_tds"></output></label><input type="range" id="tds" min="50" max="3000" step="10"></div>
         <div class="ctl"><label>Turbidity vs normal <output id="o_tu"></output></label><input type="range" id="tu" min="0.5" max="6" step="0.1"></div>
         <div class="ctl"><label>Vapour in the bottle <output id="o_va"></output></label><input type="range" id="va" min="0" max="100" step="1"></div>
-        <div class="toggles"><label><input type="checkbox" id="rain"> 🌧️ raining</label><label><input type="checkbox" id="probe" checked> 🔌 probes connected</label></div>
+        <div class="toggles"><label style="display:none"><input type="checkbox" id="rain"> raining</label><label><input type="checkbox" id="probe" checked> 🔌 probes connected</label></div>
       </div>
 
       <div class="card stage">
@@ -375,8 +375,8 @@ footer{padding:50px 0 70px;color:var(--sub);font-size:14px;text-align:center;bor
 <section id="live">
   <div class="wrap">
     <div class="reveal"><div class="eyebrow">Proof · our 1:5 LIVE model</div><h2>We printed it at 1:5,<br>around the real sensors.</h2>
-      <p class="lead">Real pH, dissolved-solids, turbidity and temperature probes at full size dip into a dish of water under the float. A Raspberry Pi in the base. Rain, light and humidity on the column, an MQ-3 over the sample bottle, the beacon on the mast. To show a different river, we swap the dish.</p></div>
-    <div class="svgcard reveal"><img src="assets/booth-demo.svg" alt="Booth demo cycle"></div>
+      <p class="lead">Real pH, dissolved-solids, turbidity and temperature probes at full size dip into a dish of water under the float. A Raspberry Pi and our own circuit board in the base. Light, air temperature and humidity above the water, an MQ-3 over the sample bottle, the beacon on the mast. To show a different river, we swap the dish.</p></div>
+    <div class="grid g2 reveal" style="margin-top:28px"><div class="media" style="background:#fff"><img src="assets/img/photo-1to5-float.jpg" alt="The printed 1:5 float on its stand, photographed" loading="lazy"></div><div class="svgcard" style="margin:0"><img src="assets/booth-demo.svg" alt="Booth demo cycle"></div></div>
     <div class="grid g2 reveal" style="margin-top:22px">
       <div class="media" style="background:#fff"><img src="assets/live-1to5-assembly-steps.gif" alt="The 24 assembly steps from our SOLIDWORKS assembly" loading="lazy"></div>
       <div class="media" style="background:#fff"><img src="assets/img/live-labelled.jpg" alt="Every part of the 1:5 LIVE model, labelled" loading="lazy"></div>
@@ -388,16 +388,22 @@ footer{padding:50px 0 70px;color:var(--sub);font-size:14px;text-align:center;bor
 <!-- ELECTRONICS -->
 <section id="electronics" style="background:var(--bg2)">
   <div class="wrap">
-    <div class="reveal"><div class="eyebrow">The electronics</div><h2>One Raspberry Pi. Eight sensors.<br>Three actions.</h2>
-      <p class="lead">Thirteen boards modelled as native SOLIDWORKS parts, assembled on the printed tray, checked for clashes (two found, two fixed, now zero) and documented in drawing AS-LIVE-ELEC-01. Hover a pin on the header to see what it does.</p></div>
+    <div class="reveal"><div class="eyebrow">The electronics</div><h2>Seven sensors. One board we milled ourselves.<br>One Raspberry Pi that decides.</h2>
+    <p class="lead">In October the Pi read every sensor itself, through a tray of ten small boards. SOLIDWORKS found two clashes in that tray before anything was printed, so we drew one board instead: the Sensor Hub, 104 × 72 mm, single-sided, drawn in KiCad and cut on a desktop CNC on 12 November. An Arduino Nano in the middle reads all seven sensors and drives the light and the pump; it sends one line of readings a second to the Raspberry Pi, which decides, logs and sends the SMS. On 13 November all seven sensors answered through it on the bench.</p></div>
     <div class="grid g2 reveal" style="margin-top:36px;align-items:start">
+      <div class="media" style="background:#fff"><img src="assets/img/photo-electronics.jpg" alt="The electronics wired in the tray: Raspberry Pi, our Sensor Hub board with the Arduino Nano, and the sensor and power boards" loading="lazy"></div>
       <div>
-        <div class="header40" id="hdr" aria-label="Raspberry Pi 40-pin header"></div>
-        <div class="legend"><span><i style="background:#35d0ba"></i>used by AquaSentinel</span><span><i style="background:#ff6b6b"></i>power</span><span><i style="background:#3a4650"></i>ground</span><span><i style="background:#c8a24a"></i>free</span></div>
-        <div class="card pininfo" id="pininfo"><b>Pin 3 · GPIO2 (SDA)</b><br><span style="color:var(--sub)">I²C data to both ADS1115 converters (0x48, 0x49) and the DS3231 clock (0x68)</span></div>
+        <div class="media" style="background:#fff"><img src="assets/img/sensor-hub-top.jpg" alt="Sensor Hub v1.2, parts side, KiCad render" loading="lazy"></div>
+        <div class="card" style="margin-top:16px"><b>In the water</b> pH · dissolved solids · turbidity · water temperature<br><b>Above it</b> light · air temperature and humidity<br><b>At the bottle</b> MQ-3 vapour<br><span style="color:var(--sub)">Every sensor has its own labelled header on the board, J1 to J11. Pin map, build steps and G-code are in <code>12_ELECTRONICS_MANUAL_1to5</code>.</span></div>
+        <div id="hdr" hidden></div><div id="pininfo" hidden></div>
       </div>
-      <div class="media" style="background:#fff"><img src="assets/electronics-bay.gif" alt="The electronics bay in SOLIDWORKS" loading="lazy"></div>
     </div>
+    <div class="grid g3 reveal" style="margin-top:22px">
+      <div class="media" style="background:#091f2e"><img src="assets/img/dashboard-normal.jpg" alt="Dashboard: NORMAL" loading="lazy"></div>
+      <div class="media" style="background:#091f2e"><img src="assets/img/dashboard-industrial.jpg" alt="Dashboard: INDUSTRIAL after a spoon of salt" loading="lazy"></div>
+      <div class="media" style="background:#091f2e"><img src="assets/img/dashboard-sensor-fault.jpg" alt="Dashboard: SENSOR FAULT after a probe is pulled" loading="lazy"></div>
+    </div>
+    <p class="src">The Raspberry Pi's dashboard: clean water, a spoon of salt, a pulled-out probe. Captured from the simulator built into our software, which plays the same waters with no hardware attached.</p>
   </div>
 </section>
 
@@ -457,19 +463,19 @@ footer{padding:50px 0 70px;color:var(--sub);font-size:14px;text-align:center;bor
         <div class="it"><div class="d">2026</div><h3>Problem researched</h3><p>CPCB data, 296 sites, the Godavari at Kopargaon.</p></div>
         <div class="it"><div class="d">5 Oct</div><h3>Final Design Challenge</h3><p>Three design generations, a 66-part R3, 14 checks, 2 simulations.</p></div>
         <div class="it"><div class="d">24–25 Oct</div><h3>India semi-final: top 10</h3><p>Into the India Geo Finale.</p></div>
-        <div class="it"><div class="d">Nov</div><h3>Raspberry Pi + 1:5 LIVE model</h3><p>Real sensors, printed model, cost down to ≈ ₹48k.</p></div>
+        <div class="it"><div class="d">Nov</div><h3>Raspberry Pi + 1:5 LIVE model</h3><p>Real sensors, printed model, our own milled board, cost down to ≈ ₹48k.</p></div>
         <div class="it now"><div class="d">19–20 Nov</div><h3>India Geo Finale, Pune</h3><p>Live booth demo and the 7-minute pitch.</p></div>
         <div class="it next"><div class="d">Next</div><h3>Tank test, then the Godavari pilot</h3><p>2 m travel and roller friction at full size; 30 days at Kopargaon once permits are in place.</p></div>
       </div>
     </div>
     <div class="reveal">
-      <div class="eyebrow">Where we really are</div><h2>Honest status.</h2>
+      <div class="eyebrow">Where we are</div><h2>Built, step by step.</h2>
       <div class="levels" style="grid-template-columns:1fr">
         <div class="lv done"><div class="s">● Done</div><h3>0 · Digital design</h3><p>CAD, calculations and FEA; the logic flags 4 of 4 simulated spills.</p></div>
-        <div class="lv doing"><div class="s">● Printed · assembly now</div><h3>1 · 1:5 LIVE model</h3><p>37 printed parts; real sensors at 1:1 in a dish.</p></div>
-        <div class="lv doing"><div class="s">● Before 19 Nov</div><h3>2 · Electronics on the model</h3><p>The Pi reads, decides, acts: beacon, pump, SMS; wet test with 4 samples.</p></div>
-        <div class="lv plan"><div class="s">○ Planned</div><h3>3 · Tank test</h3><p>Full-size float on a 2-inch pole.</p></div>
-        <div class="lv plan"><div class="s">○ After permits</div><h3>4 · Godavari pilot</h3><p>30 days; alerts checked against lab samples.</p></div>
+        <div class="lv done"><div class="s">● Printed</div><h3>1 · 1:5 LIVE model</h3><p>37 printed parts, 17 designed new; real sensors at 1:1 in a dish.</p></div>
+        <div class="lv done"><div class="s">● Milled · bench-run 13 Nov</div><h3>2 · Electronics</h3><p>Our own Sensor Hub board reads all seven sensors and drives the light and the pump; the Raspberry Pi decides.</p></div><div class="lv doing"><div class="s">● 19–20 Nov</div><h3>3 · Live at the finale</h3><p>The six waters on the booth table, in Pune.</p></div>
+        <div class="lv plan"><div class="s">○ Planned</div><h3>4 · Tank test</h3><p>Full-size float on a 2-inch pole.</p></div>
+        <div class="lv plan"><div class="s">○ After permits</div><h3>5 · Godavari pilot</h3><p>30 days; alerts checked against lab samples.</p></div>
       </div>
       <p class="src">Every figure on this page is a design estimate unless it says otherwise.</p>
     </div>
@@ -582,7 +588,7 @@ function set(p){const v=PRE[p];S.ph.value=v[0];S.tds.value=v[1];S.tu.value=v[2];
 function decide(r){if(!r.probe)return['SENSOR FAULT','#9aa7b2','The pH probe stopped answering. AquaSentinel reports a fault and asks for a visit; it never shows "normal" on a missing reading.',false];
  const c=[];if(r.tds>1400)c.push(['INDUSTRIAL',`Dissolved solids ${r.tds.toLocaleString('en-IN')} ppm, above the 1,400 ppm limit (about the CPCB Class E conductivity): a saline or industrial discharge.`,`dissolved solids ${r.tds.toLocaleString('en-IN')} ppm (limit 1,400)`]);
  if(r.ph<6)c.push(['ACIDIC',`pH ${r.ph.toFixed(1)}, below 6: an acid spill.`,`pH ${r.ph.toFixed(1)} (limit 6)`]);if(r.ph>9)c.push(['ALKALINE',`pH ${r.ph.toFixed(1)}, above 9: an alkaline discharge.`,`pH ${r.ph.toFixed(1)} (limit 9)`]);
- if(r.tu>=3&&r.tds<=1400)c.push(['RUNOFF',`Turbidity ${r.tu.toFixed(1)}× its normal for this hour while salts stay flat${r.rain?', and the rain plate is wet':''}: runoff.`,`turbidity ${r.tu.toFixed(1)}× normal${r.rain?', raining':''}`]);
+ if(r.tu>=3&&r.tds<=1400)c.push(['RUNOFF',`Turbidity ${r.tu.toFixed(1)}× its normal while salts stay flat${r.rain?', and the rain plate is wet':''}: runoff.`,`turbidity ${r.tu.toFixed(1)}× normal${r.rain?', raining':''}`]);
  if(r.va>=50)c.push(['SOLVENT',`Vapour in the sample bottle at ${r.va} %: solvent or fuel.`,`vapour ${r.va} % in the bottle`]);
  if(!c.length)return['NORMAL','#33d17a','All readings inside their limits and close to the normal for this hour. Logged; the Pi goes back to sleep for 15 minutes.',false];
  return[c.map(x=>x[0]).join(' + '),c[0][0]==='RUNOFF'?'#ffb020':'#ff4d4d',c.map(x=>x[1]).join(' ')+' Beacon red, SMS out, one bottle filled for the lab.',true,c.map(x=>x[2]).join(', ')]}
@@ -594,7 +600,7 @@ function tick(advance){if(advance)minute+=15;const r={ph:+S.ph.value,tds:+S.tds.
  $('rings').setAttribute('opacity',ev?1:0);$('rainG').setAttribute('opacity',r.rain?.8:0);
  const tint=r.tds>1400?'#5a6e4a':r.ph<6?'#7a8a2a':r.tu>=3?'#6b4a2a':'#1b6b84';$('wt0').setAttribute('stop-color',tint);
  $('plume').setAttribute('opacity',ev?.8:0);$('plumeE').setAttribute('fill',r.ph<6?'#a8b83a':r.va>=50?'#b48cff':'#7b4a28');
- $('fill').setAttribute('height',ev?40:0);$('fill').setAttribute('y',ev?18:58);$('filltxt').textContent=ev?'250 mL kept':'empty';
+ $('fill').setAttribute('height',ev?40:0);$('fill').setAttribute('y',ev?18:58);$('filltxt').textContent=ev?'sample kept':'empty';
  if(ev&&v!==lastState){const n=document.createElement('div');n.className='notif';n.innerHTML=`<b>SMS · AQUASENTINEL #01 · ${t}</b>Spill at the Kopargaon bridge: ${v}, ${sms}. Sample bottled. Beacon red.`;const ib=$('inbox');if(ib.querySelector('.quiet'))ib.innerHTML='';ib.prepend(n);while(ib.children.length>3)ib.lastChild.remove()}
  if(!ev&&!fault&&lastState!=='NORMAL'&&lastState!=='SENSOR FAULT'){}
  lastState=v;log.unshift([t,v,col]);log=log.slice(0,4);$('log').innerHTML=log.map(([a,b,c])=>`<div><span>${a}</span><i style="color:${c}">${b}</i></div>`).join('')}

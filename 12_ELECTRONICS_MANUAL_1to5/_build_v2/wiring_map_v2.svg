@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="620" viewBox="0 0 860 620" font-family="Segoe UI, Arial, sans-serif">
+<defs>
+<marker id="arr3" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L7,4 L0,8 z" fill="#0b3d62"/></marker>
+</defs>
+<rect x="0" y="0" width="860" height="620" fill="#ffffff"/>
+<text x="430" y="24" text-anchor="middle" font-size="15" font-weight="700" fill="#0b3d62">Sensor Hub PCB v1.2 — every connector and where it goes</text>
+
+<!-- board -->
+<rect x="230" y="130" width="400" height="360" rx="10" fill="#f4ede0" stroke="#8a6a3a" stroke-width="2"/>
+<text x="430" y="160" text-anchor="middle" font-size="12" font-weight="700" fill="#6a4a1a">Sensor Hub PCB v1.2 · 104 × 72 mm · single-sided</text>
+<rect x="262" y="180" width="130" height="86" rx="6" fill="#0b3d62"/>
+<text x="327" y="208" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">Arduino Nano</text>
+<text x="327" y="226" text-anchor="middle" font-size="9" fill="#cfe3f2">ATmega328P · USB to the Pi</text>
+<text x="327" y="242" text-anchor="middle" font-size="9" fill="#cfe3f2">firmware: aquasentinel_nano.ino</text>
+<text x="327" y="256" text-anchor="middle" font-size="9" fill="#cfe3f2">BOARD_PCB = 1 · 115200</text>
+
+<!-- left connectors -->
+<g font-size="9.5">
+<rect x="36" y="146" width="168" height="30" rx="4" fill="#eef7f0" stroke="#1b7a32"/><text x="46" y="165">J1 · MQ-3 → D6 (DO) + A3</text>
+<rect x="36" y="188" width="168" height="30" rx="4" fill="#eef7f0" stroke="#1b7a32"/><text x="46" y="207">J2 · Turbidity → D5 (DO) + A2</text>
+<rect x="36" y="230" width="168" height="30" rx="4" fill="#eef7f0" stroke="#1b7a32"/><text x="46" y="249">J3 · LDR → D4 (DO)</text>
+<rect x="36" y="272" width="168" height="30" rx="4" fill="#eef7f0" stroke="#1b7a32"/><text x="46" y="291">J4 · DHT11 → D3 (DATA)</text>
+<rect x="36" y="314" width="168" height="30" rx="4" fill="#eef7f0" stroke="#1b7a32"/><text x="46" y="333">J5 · DS18B20 → D2 (4.7k R1)</text>
+</g>
+<line x1="204" y1="161" x2="230" y2="161" stroke="#0b3d62" stroke-width="1.5" marker-end="url(#arr3)"/>
+<line x1="204" y1="203" x2="230" y2="203" stroke="#0b3d62" stroke-width="1.5" marker-end="url(#arr3)"/>
+<line x1="204" y1="245" x2="230" y2="245" stroke="#0b3d62" stroke-width="1.5" marker-end="url(#arr3)"/>
+<line x1="204" y1="287" x2="230" y2="287" stroke="#0b3d62" stroke-width="1.5" marker-end="url(#arr3)"/>
+<line x1="204" y1="329" x2="230" y2="329" stroke="#0b3d62" stroke-width="1.5" marker-end="url(#arr3)"/>
+
+<!-- right connectors -->
+<g font-size="9.5">
+<rect x="656" y="150" width="176" height="30" rx="4" fill="#eef7f0" stroke="#1b7a32"/><text x="666" y="169">J9 · TDS: power ← A0, signal → A1</text>
+<rect x="656" y="192" width="176" height="30" rx="4" fill="#eef7f0" stroke="#1b7a32"/><text x="666" y="211">J11 · pH: "O" → 4.7k R8 → A6</text>
+<rect x="656" y="234" width="176" height="30" rx="4" fill="#eef7f0" stroke="#1b7a32"/><text x="666" y="253">J10 · spare analog A2–A5</text>
+<rect x="656" y="276" width="176" height="30" rx="4" fill="#fff4e6" stroke="#c07f00"/><text x="666" y="295">J6 · RGB: G→D7 · R→D8 · B→D9</text>
+<rect x="656" y="318" width="176" height="30" rx="4" fill="#fff4e6" stroke="#c07f00"/><text x="666" y="337">J7 · pump: IN1→D10 (10k R7)</text>
+<rect x="656" y="360" width="176" height="30" rx="4" fill="#f2f5f8" stroke="#667"/><text x="666" y="379">J8 · spare D11 / D12</text>
+</g>
+<line x1="630" y1="165" x2="656" y2="165" stroke="#0b3d62" stroke-width="1.5" marker-end="url(#arr3)"/>
+<line x1="630" y1="207" x2="656" y2="207" stroke="#0b3d62" stroke-width="1.5" marker-end="url(#arr3)"/>
+<line x1="630" y1="249" x2="656" y2="249" stroke="#0b3d62" stroke-width="1.5" marker-end="url(#arr3)"/>
+<line x1="630" y1="291" x2="656" y2="291" stroke="#0b3d62" stroke-width="1.5" marker-end="url(#c07f00)"/>
+<line x1="630" y1="333" x2="656" y2="333" stroke="#0b3d62" stroke-width="1.5" marker-end="url(#c07f00)"/>
+<line x1="630" y1="375" x2="656" y2="375" stroke="#0b3d62" stroke-width="1.5" marker-end="url(#arr3)"/>
+
+<!-- top connectors -->
+<g font-size="9.5">
+<rect x="90" y="44" width="170" height="30" rx="4" fill="#fff4e6" stroke="#c07f00"/><text x="100" y="63">J12 · AUX 5 V in (screw +/−)</text>
+<rect x="278" y="44" width="170" height="30" rx="4" fill="#fff4e6" stroke="#c07f00"/><text x="288" y="63">J14 · step-up → OUT 9 V</text>
+<rect x="466" y="44" width="170" height="30" rx="4" fill="#fff4e6" stroke="#c07f00"/><text x="476" y="63">J15 · pH board 9 V + GND</text>
+<rect x="654" y="44" width="178" height="30" rx="4" fill="#fff4e6" stroke="#c07f00"/><text x="664" y="63">J16 · step-down → OUT 4.0 V</text>
+</g>
+<line x1="200" y1="74" x2="268" y2="130" stroke="#c0001a" stroke-width="1.5"/>
+<line x1="363" y1="74" x2="376" y2="130" stroke="#c0001a" stroke-width="1.5"/>
+<line x1="551" y1="74" x2="520" y2="130" stroke="#c0001a" stroke-width="1.5"/>
+<line x1="743" y1="74" x2="620" y2="130" stroke="#c0001a" stroke-width="1.5"/>
+
+<!-- bottom connectors -->
+<g font-size="9.5">
+<rect x="36" y="520" width="180" height="30" rx="4" fill="#fff4e6" stroke="#c07f00"/><text x="46" y="539">J13 · pump power out → Mini L298N</text>
+<rect x="236" y="520" width="188" height="30" rx="4" fill="#eef7f0" stroke="#1b7a32"/><text x="246" y="539">J17 · SIM800L: VCC 4.0 V · RXD · TXD</text>
+<rect x="444" y="520" width="200" height="30" rx="4" fill="#eef7f0" stroke="#1b7a32"/><text x="454" y="539">J18 · Pi UART: GND pin 6 · TX pin 8 →</text>
+<text x="454" y="547" font-size="8" fill="#1b7a32">SIM RXD (4.7k/10k divider) · SIM TXD → RX pin 10</text>
+<rect x="664" y="520" width="168" height="30" rx="4" fill="#f2f5f8" stroke="#667"/><text x="674" y="539">Nano power: Pi USB cable</text>
+</g>
+<line x1="240" y1="490" x2="200" y2="520" stroke="#c0001a" stroke-width="1.5"/>
+<line x1="360" y1="490" x2="346" y2="520" stroke="#1b7a32" stroke-width="1.5"/>
+<line x1="480" y1="490" x2="520" y2="520" stroke="#1b7a32" stroke-width="1.5"/>
+<line x1="610" y1="490" x2="712" y2="520" stroke="#667" stroke-width="1.5"/>
+
+<text x="430" y="585" text-anchor="middle" font-size="10" fill="#c0001a">All grounds are shared · The sensors' 5 V comes from J12, never from the Nano · connect everything with the power OFF</text>
+<text x="430" y="605" text-anchor="middle" font-size="9" fill="#667">220R beacon resistors R2–R4 and TDS/pH signal resistors are already on the board</text>
+</svg>

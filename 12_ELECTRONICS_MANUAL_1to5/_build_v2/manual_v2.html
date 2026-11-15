@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AquaSentinel 1:5 LIVE model — Electronics assembly manual v2.0</title>
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif; color: #0f1720; }
+.page { width: 210mm; height: 297mm; padding: 12mm 14mm 16mm; page-break-after: always; position: relative; overflow: hidden; }
+.page:last-child { page-break-after: auto; }
+h1 { font-size: 16pt; margin: 0 0 3mm; color: #0b3d62; }
+h2 { font-size: 12.5pt; margin: 2.5mm 0 1.5mm; color: #0b3d62; }
+h3 { font-size: 10.5pt; margin: 2mm 0 1mm; color: #123a5c; }
+p { font-size: 9.3pt; line-height: 1.42; margin: 0 0 1.8mm; }
+ul, ol { font-size: 9.3pt; margin: 0 0 2mm; padding-left: 5mm; line-height: 1.42; }
+table { width: 100%; border-collapse: collapse; font-size: 8.8pt; margin-bottom: 2mm; }
+th, td { border: 0.5pt solid #9fb3c4; padding: 1.1mm 1.5mm; text-align: left; vertical-align: top; }
+th { background: #e8f0f7; }
+code { font-family: Consolas, monospace; font-size: 8.3pt; background: #f2f5f8; padding: 0 1px; }
+pre { font-family: Consolas, monospace; font-size: 8.3pt; background: #f2f5f8; border: 0.5pt solid #d5dee6; padding: 2mm; white-space: pre-wrap; margin: 0 0 2mm; }
+img { max-width: 100%; }
+.fig { text-align: center; margin: 1.5mm 0; }
+.cap { font-size: 8pt; color: #4a5a68; margin-top: 0.5mm; text-align: center; }
+.kicker { font-size: 10pt; letter-spacing: 2px; color: #1b7a32; text-transform: uppercase; font-weight: 600; }
+.cover-title { font-size: 24pt; font-weight: 700; color: #0b3d62; margin: 2mm 0; }
+.cover-sub { font-size: 13.5pt; color: #333; margin-bottom: 3mm; }
+.chip { display: inline-block; background: #0b3d62; color: #fff; font-size: 8.5pt; padding: 1mm 2.5mm; border-radius: 2mm; margin: 0.8mm 1mm 0 0; }
+.warn { background: #fdeeee; border-left: 1.2mm solid #c0001a; padding: 2mm 3mm; margin: 2mm 0; font-size: 9pt; }
+.note { background: #eef7f0; border-left: 1.2mm solid #1b7a32; padding: 2mm 3mm; margin: 2mm 0; font-size: 9pt; }
+.footer { position: absolute; bottom: 7mm; left: 14mm; right: 14mm; font-size: 7.8pt; color: #667; display: flex; justify-content: space-between; border-top: 0.4pt solid #d5dee6; padding-top: 1.2mm; }
+.badge { display: inline-block; background: #0b3d62; color: #fff; font-weight: 700; font-size: 11pt; padding: 0.8mm 3mm; border-radius: 1.5mm; margin-right: 2mm; vertical-align: middle; }
+.stitle { font-size: 13pt; font-weight: 700; color: #0b3d62; vertical-align: middle; }
+.smeta { font-size: 8.3pt; color: #667; margin-top: 1mm; }
+.grid2 { display: flex; gap: 3mm; }
+.grid2 > div { flex: 1; }
+.grid3 { display: flex; gap: 2.5mm; }
+.grid3 > div { flex: 1; }
+.card { border: 0.5pt solid #9fb3c4; border-radius: 2mm; padding: 2mm; font-size: 8.6pt; }
+.ok { color: #1b7a32; font-weight: 700; }
+.bad { color: #c0001a; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<!-- ================= PAGE 1 · COVER ================= -->
+<section class="page">
+<div class="kicker">AAKRUTI 2026 · India Geo Finale · Robotics</div>
+<div class="cover-title">AquaSentinel 1:5 LIVE model</div>
+<div class="cover-sub">Electronics assembly manual · <b>Revision 2.0 · 14 November 2026</b></div>
+<div class="fig"><img src="../PCB_SENSOR_HUB_v1/design/render_top.png" style="width:132mm"></div>
+<div class="cap">Our own Sensor Hub PCB v1.2 (104 × 72 mm, single-sided, designed in KiCad and milled in-house on a desktop CNC, 12 Nov 2026). The Arduino Nano plugs into the socket and reads every sensor.</div>
+<p style="margin-top:3mm">An <b>Arduino Nano on the Sensor Hub PCB v1.2</b> reads the seven real water-quality sensors of the full-size AquaSentinel R3 and drives the beacon and the pump. It sends one line of readings every second over USB to a <b>Raspberry Pi 3B+</b>, which decides, shows the dashboard, logs the readings and sends SMS alerts through the SIM800L.</p>
+<div style="margin:3mm 0">
+<span class="chip">1 custom PCB — Sensor Hub v1.2</span><span class="chip">7 sensors</span><span class="chip">2 controllers: Arduino Nano + Pi 3B+</span><span class="chip">5 V AUX in · step-up 9 V · step-down 4.0 V</span><span class="chip">Nano ↔ Pi over USB · 1 line/s</span><span class="chip">SIM800L SMS</span>
+</div>
+<div class="warn"><b>IMPORTANT — this revision replaces the old design.</b> Revision 1.0 (10 Nov 2026) described the "bay v2" build: a Hub HAT, ADS1115, DS3231, a 12 V adapter with two buck converters, a rain sensor and the Pi reading sensors directly over GPIO. That design was <b>replaced on 12–13 Nov 2026</b> by the Sensor Hub PCB + Nano build described here. <b>Do not build from old printouts.</b> See page 2 for the full list of changes.</div>
+<p class="smeta">Team Sanjivani Hero's Journey (AG26-1500$41), Sanjivani University, Kopargaon · matches the hardware bench-tested on 12–13 Nov 2026 · sources: <code>PCB_SENSOR_HUB_v1</code> (board + Nano firmware) and <code>14_RASPBERRY_PI_SOFTWARE</code> (Pi software)</p>
+<div class="footer"><span>AquaSentinel R3 · 1:5 LIVE model · Electronics assembly manual 2.0 (14 Nov 2026)</span><span>1 / 17</span></div>
+</section>
+
+<!-- ================= PAGE 2 · WHAT CHANGED ================= -->
+<section class="page">
+<h1>What changed from the 10 Nov manual (v1.0 → v2.0)</h1>
+<p>On 12–13 Nov 2026 we bench-tested the new build: our own milled <b>Sensor Hub PCB v1.2</b> with an <b>Arduino Nano</b> reading every sensor, feeding a <b>Raspberry Pi 3B+</b>. Everything the old manual said about the Pi reading sensors through a HAT is now wrong.</p>
+<table>
+<tr><th style="width:44%">Old manual (10 Nov, bay v2) — <span class="bad">no longer true</span></th><th>Current build (this manual) — <span class="ok">verified 12–13 Nov</span></th></tr>
+<tr><td>"1 Hub HAT, 12 plug-in headers", ADS1115 ADC (0x48), DS3231 RTC (0x68), level converter</td><td><b>Sensor Hub PCB v1.2</b> (104 × 72 mm) + <b>Arduino Nano</b>. No HAT, no ADS1115, no DS3231, no level converter.</td></tr>
+<tr><td>Pi reads the sensors over GPIO (DHT11 on GPIO17, DS18B20 on GPIO4, TDS switch GPIO13, rain GPIO22, beacon GPIO12/26, pump GPIO23, ACK button GPIO16)</td><td>The <b>Nano reads every sensor</b> (D2–D6, D8–D12, A0–A3, A6). The Pi only talks to the Nano over <b>USB</b> and to the SIM800L over <b>UART (GPIO14/15)</b>.</td></tr>
+<tr><td>"12 V 2 A in, 2 buck converters", DC jack panel, inline fuse</td><td><b>AUX 5 V charger → J12</b>; on-board <b>step-up → 9 V</b> (pH board) and <b>step-down → 4.0 V</b> (SIM800L).</td></tr>
+<tr><td>MX1508 pump driver</td><td><b>Mini L298N</b> driver (control J7, power J13).</td></tr>
+<tr><td>"8 sensors" (included a rain sensor)</td><td><b>7 sensors</b> — pH, TDS, turbidity, DS18B20, DHT11, LDR, MQ-3. The rain sensor was dropped from the live model.</td></tr>
+<tr><td>Software: <code>config.txt</code> overlays for ADS1115/DS3231/DHT11, <code>i2cdetect</code> expecting 0x48/0x57/0x68, DHT11 read through <code>/sys/bus/iio</code></td><td>Software: <code>14_RASPBERRY_PI_SOFTWARE</code>. The only serial setup is <code>enable_uart=1</code> + <code>dtoverlay=disable-bt</code> for the SIM800L. Sensors arrive as one JSON line per second from the Nano.</td></tr>
+<tr><td>"10 boards on one slide-out tray" (electronics bay v2, LD-S08 tray)</td><td>One carrier PCB holds everything; it sits in the model base. Photos: pages 7 and 12.</td></tr>
+</table>
+<div class="note"><b>Why:</b> the board version the team milled on 12 Nov is the Sensor Hub PCB v1.2 — every sensor, the beacon and the pump were proven through it on 12–13 Nov, and the public project text was updated on 13 Nov to say exactly this. The old bay/HAT design was never built.</div>
+<p>Throughout this manual, values in <span class="bad">red</span> boxes are things people get wrong; <span class="ok">green</span> boxes are the tested settings.</p>
+<div class="footer"><span>AquaSentinel R3 · 1:5 LIVE model · Electronics assembly manual 2.0 (14 Nov 2026)</span><span>2 / 17</span></div>
+</section>
+
+<!-- ================= PAGE 3 · SYSTEM OVERVIEW ================= -->
+<section class="page">
+<h1>The system in one picture</h1>
+<div class="fig"><img src="system_block_v2.svg" style="width:178mm"></div>
+<div class="grid3">
+<div class="card"><b>Sensor hub.</b> The Nano on our PCB reads the 7 sensors once a second, sequences the TDS power (so it never disturbs the pH electrode), drives the RGB beacon and the pump, and prints one JSON line per second on its USB serial port at 115200.</div>
+<div class="card"><b>The Pi.</b> <code>14_RASPBERRY_PI_SOFTWARE</code> reads the Nano over USB, converts volts to units, decides (NORMAL / ACIDIC / INDUSTRIAL / RUNOFF / SOLVENT / SENSOR FAULT), shows a full-screen dashboard on port 8080, writes daily CSV logs and sends one SMS per 10 minutes through the SIM800L.</div>
+<div class="card"><b>Power.</b> One AUX 5 V charger feeds J12. The step-up makes 9 V for the pH board; the step-down makes 4.0 V for the SIM800L. The Nano is powered by the Pi's USB cable.</div>
+</div>
+<h2>How to use this manual</h2>
+<ol>
+<li><b>Pages 4–7</b> — parts and the board itself (J1–J18).</li>
+<li><b>Pages 5–7</b> — bench build: power first, then the board population, then measure the voltages.</li>
+<li><b>Pages 8–11</b> — wire the sensors, beacon, pump and SIM800L; mount everything on the model.</li>
+<li><b>Pages 13–15</b> — flash the Nano, set up the Pi, calibrate and run the bench checks.</li>
+<li><b>Pages 16–17</b> — the six demo waters, the decision rules and troubleshooting.</li>
+</ol>
+<div class="warn"><b>Safety rules:</b> connect or change any wire with the power OFF · set and measure the 9 V and 4.0 V outputs <b>before</b> connecting the pH board or SIM800L · never feed more than 5 V into J12 · the sensors' 5 V comes from J12, never from the Nano.</div>
+<div class="footer"><span>AquaSentinel R3 · 1:5 LIVE model · Electronics assembly manual 2.0 (14 Nov 2026)</span><span>3 / 17</span></div>
+</section>
+
+<!-- ================= PAGE 4 · PARTS ================= -->
+<section class="page">
+<h1>Parts you need</h1>
+<table>
+<tr><th style="width:26%">Part</th><th style="width:44%">Connects to</th><th>Notes</th></tr>
+<tr><td><b>Sensor Hub PCB v1.2</b></td><td>—</td><td>Our own board, 104 × 72 mm, milled 12 Nov. J1–J18 + Nano socket.</td></tr>
+<tr><td><b>Arduino Nano</b> (ATmega328P)</td><td>socket on the PCB</td><td>Most clones: Processor "ATmega328P (Old Bootloader)".</td></tr>
+<tr><td><b>Raspberry Pi 3B+</b></td><td>USB cable to the Nano; J18 (3 wires) to the SIM800L</td><td>Raspberry Pi OS (Desktop), monitor, keyboard, mouse.</td></tr>
+<tr><td><b>pH board PH-4502C</b> + E-201-C electrode</td><td>signal pin "O" → J11; power 9 V from J15</td><td>Keep the electrode wet when stored.</td></tr>
+<tr><td><b>TDS board</b> (DFRobot SEN0244 "TDS Meter V1.0")</td><td>J9: power ← A0, signal → A1</td><td>0–1000 ppm; powered only while being read.</td></tr>
+<tr><td><b>Turbidity sensor</b> (DFRobot SEN0189)</td><td>DO → J2 (D5); AO → J10 (A2); 5 V/GND from header</td><td>The head is not waterproof on top.</td></tr>
+<tr><td><b>DS18B20</b> waterproof probe</td><td>J5 → D2 (4.7 kΩ pull-up R1 on board)</td><td>Sits in the water dish.</td></tr>
+<tr><td><b>DHT11</b></td><td>J4 → D3</td><td>Air temperature + humidity.</td></tr>
+<tr><td><b>LDR module</b></td><td>J3 → D4 (digital DO)</td><td>Threshold set with the module's blue trimmer.</td></tr>
+<tr><td><b>MQ-3 module</b></td><td>DO → J1 (D6); AO → J10 (A3)</td><td>Warm up ≈ 3 min before the vapour demo.</td></tr>
+<tr><td><b>RGB LED module</b> (common "−")</td><td>J6: G→D7, R→D8, B→D9, "−" → GND</td><td>220 Ω resistors R2–R4 are on the board.</td></tr>
+<tr><td><b>Mini pump + Mini L298N driver</b></td><td>J7 (IN1→D10, IN2=GND) + J13 (driver power)</td><td>Runs 5 s to bottle a sample.</td></tr>
+<tr><td><b>Step-up module</b></td><td>J14 (IN from 5 V; OUT set to <b>9.0 V</b>)</td><td>Feeds J15 (pH) and the step-down.</td></tr>
+<tr><td><b>Step-down module</b></td><td>J16 (IN = 9 V; OUT set to <b>4.0 V</b>)</td><td>Feeds the SIM800L on J17 (1000 µF C2 on board).</td></tr>
+<tr><td><b>SIM800L</b> + antenna + SIM</td><td>J17 (VCC 4.0 V, RXD, TXD, GND); UART via J18 to the Pi</td><td>SIM with SMS balance.</td></tr>
+<tr><td><b>AUX 5 V charger</b> (USB-style 5 V supply)</td><td>J12 screw terminal + / −</td><td>Single power input for the whole board.</td></tr>
+<tr><td>USB cable (Nano → Pi), jumper wires, M3 standoffs, multimeter, phone</td><td>—</td><td>The USB cable also powers the Nano.</td></tr>
+</table>
+<div class="footer"><span>AquaSentinel R3 · 1:5 LIVE model · Electronics assembly manual 2.0 (14 Nov 2026)</span><span>4 / 17</span></div>
+</section>
+
+<!-- ================= PAGE 5 · BOARD TOUR ================= -->
+<section class="page">
+<h1>Board tour — Sensor Hub PCB v1.2</h1>
+<div class="grid2">
+<div class="fig"><img src="../PCB_SENSOR_HUB_v1/design/render_top.png"><div class="cap">Top (copper) side — Nano socket and all headers labelled</div></div>
+<div class="fig"><img src="../PCB_SENSOR_HUB_v1/design/render_bottom.png"><div class="cap">Plain side</div></div>
+</div>
+<table>
+<tr><th>Ref</th><th>What</th><th>Pins / Nano</th></tr>
+<tr><td>J1</td><td>MQ-3</td><td>5 V, GND, DO → D6</td></tr>
+<tr><td>J2</td><td>Turbidity</td><td>5 V, GND, DO → D5</td></tr>
+<tr><td>J3</td><td>LDR</td><td>5 V, GND, DO → D4</td></tr>
+<tr><td>J4</td><td>DHT11</td><td>5 V, GND, DATA → D3</td></tr>
+<tr><td>J5</td><td>DS18B20</td><td>5 V, GND, DATA → D2 (4.7 kΩ pull-up R1 on board)</td></tr>
+<tr><td>J6</td><td>RGB beacon</td><td>B → D9, R → D8, G → D7 (220 Ω each, R2–R4), and "−" (common → GND)</td></tr>
+<tr><td>J7</td><td>Pump driver control</td><td>GND, IN2 (= GND), IN1 → D10 (10 kΩ pull-down R7)</td></tr>
+<tr><td>J8</td><td>Spare</td><td>D11, D12, GND</td></tr>
+<tr><td>J9</td><td>TDS</td><td>GND, power ← A0, signal → A1</td></tr>
+<tr><td>J10</td><td>Analog spare</td><td>A2–A5 (A2 = turbidity AO, A3 = MQ-3 AO)</td></tr>
+<tr><td>J11</td><td>pH signal</td><td>ADIY pin "O" → 4.7 kΩ (R8) → A6, and GND</td></tr>
+<tr><td>J12</td><td>AUX 5 V in</td><td>Screw terminal: + and − (feeds the sensors' 5 V, the pump and the step-up)</td></tr>
+<tr><td>J13</td><td>Pump power out</td><td>+ and −, to the Mini L298N</td></tr>
+<tr><td>J14</td><td>Step-up module</td><td>IN+, IN−, OUT+ (9 V), OUT−</td></tr>
+<tr><td>J15</td><td>pH board power</td><td>9 V and GND</td></tr>
+<tr><td>J16</td><td>Step-down module</td><td>IN+ (9 V), IN−, OUT+ (set to 4.0 V), OUT−</td></tr>
+<tr><td>J17</td><td>SIM800L</td><td>RXD, TXD, GND, VCC (4.0 V; 1000 µF C2 on board)</td></tr>
+<tr><td>J18</td><td>Raspberry Pi UART</td><td>GND (pin 6), TX (pin 8, through the 4.7 k/10 k divider), RX (pin 10)</td></tr>
+</table>
+<div class="note"><b>Power:</b> the sensors' 5 V comes from the AUX charger on J12, not from the Nano. The Nano is powered by the Pi's USB. All grounds are shared.</div>
+<div class="footer"><span>AquaSentinel R3 · 1:5 LIVE model · Electronics assembly manual 2.0 (14 Nov 2026)</span><span>5 / 17</span></div>
+</section>
+
+<!-- ================= PAGE 6 · POWER ================= -->
+<section class="page">
+<h1>Bench build 1 — power first</h1>
+<div class="fig"><img src="power_chain_v2.svg" style="width:174mm"></div>
+<ol>
+<li><b>Nothing connected yet.</b> Plug the AUX 5 V charger into the wall; connect its + and − to the <b>J12</b> screw terminal.</li>
+<li><b>Step-up (J14):</b> connect IN+/IN− to the 5 V rail and, with a multimeter, set its output to <b>9.0 V</b>.</li>
+<li><b>Step-down (J16):</b> feed its input from the 9 V rail and set its output to <b>4.0 V</b>.</li>
+<li><b>Measure first:</b> 5 V on the sensor headers (J1–J5), 9 V on J15, 4.0 V on J17. Only then connect the pH board, the SIM800L and the sensors.</li>
+<li>Pump driver: J13 (+/−) powers the Mini L298N.</li>
+</ol>
+<div class="fig"><img src="../PCB_SENSOR_HUB_v1/guide/4_power_up_voltages.png" style="width:120mm"></div>
+<div class="cap">Power-up voltages to check on the board</div>
+<div class="warn"><b>Common mistakes:</b> using the old 12 V adapter (the board wants <b>5 V</b> on J12) · powering the SIM800L from 5 V (it takes <b>4.0 V</b>) · powering the pH board from 5 V (it takes <b>9 V</b>).</div>
+<div class="footer"><span>AquaSentinel R3 · 1:5 LIVE model · Electronics assembly manual 2.0 (14 Nov 2026)</span><span>6 / 17</span></div>
+</section>
+
+<!-- ================= PAGE 7 · BOARD ASSEMBLY ================= -->
+<section class="page">
+<h1>Bench build 2 — the board itself</h1>
+<p>The board was designed in KiCad and milled in-house on a desktop CNC (TwoTrees TTC-450 Pro, 12 Nov 2026): isolation, spot drill, outline score, then 103 × 1.0 mm holes + 6 pilots. KiCad DRC: 0 unconnected nets, 0 clearance errors.</p>
+<div class="grid2">
+<div class="fig"><img src="../PCB_SENSOR_HUB_v1/guide/1_part_placement.png"><div class="cap">1 · part placement</div></div>
+<div class="fig"><img src="../PCB_SENSOR_HUB_v1/guide/2_soldering_order.png"><div class="cap">2 · soldering order</div></div>
+</div>
+<div class="grid2">
+<div class="fig"><img src="../PCB_SENSOR_HUB_v1/guide/3_copper_continuity_colours.png"><div class="cap">3 · continuity check colours</div></div>
+<div class="card" style="align-self:center">
+<b>Build steps</b>
+<ol>
+<li>Socket the Nano (USB port to the left).</li>
+<li>Solder the headers J1–J18 and the few on-board parts: R1 4.7 kΩ (DS18B20 pull-up), R2–R4 220 Ω (beacon), R7 10 kΩ (pump pull-down), R8 4.7 kΩ (pH signal), C2 1000 µF (SIM800L), the 4.7 k/10 k divider on J18.</li>
+<li>Beep-test every track against the copper-colour map before powering anything.</li>
+</ol>
+</div>
+</div>
+<div class="note"><b>Re-milling:</b> full repeatable procedure and every command file in <code>PCB_SENSOR_HUB_v1/PCB_MILL_AGAIN_step_by_step.pdf</code> and <code>design/gcode/</code>. The Nano is <b>not</b> soldered — it sits in the socket.</div>
+<div class="footer"><span>AquaSentinel R3 · 1:5 LIVE model · Electronics assembly manual 2.0 (14 Nov 2026)</span><span>7 / 17</span></div>
+</section>
+
+<!-- ================= PAGE 8 · SENSOR WIRING ================= -->
+<section class="page">
+<h1>Wire the seven sensors</h1>
+<div class="fig"><img src="wiring_map_v2.svg" style="width:168mm"></div>
+<table>
+<tr><th>Sensor</th><th>Board header → Nano pin</th><th>Details</th></tr>
+<tr><td>pH (PH-4502C, ADIY board)</td><td>pin "O" → <b>J11</b> → A6 (via 4.7 kΩ R8); power: <b>9 V</b> from J15</td><td>Trim the offset pot so the board reads ≈ 2.5 V at pH 7. Store the electrode in KCl solution.</td></tr>
+<tr><td>TDS (SEN0244)</td><td><b>J9</b>: power ← A0, signal → A1</td><td>The Nano switches the TDS board ON only while reading it (600 ms), because it disturbs the pH electrode — never power it permanently.</td></tr>
+<tr><td>Turbidity (SEN0189)</td><td>DO → <b>J2</b> (D5); AO → <b>J10</b> (A2)</td><td>Voltage falls as the water gets cloudy. DO threshold set by its trimmer.</td></tr>
+<tr><td>Water temperature (DS18B20)</td><td><b>J5</b> → D2</td><td>4.7 kΩ pull-up R1 is already on the board. Probe goes in the dish.</td></tr>
+<tr><td>DHT11</td><td><b>J4</b> → D3</td><td>Keep it out of the spray zone; humidity near water is often &gt; 90 % (its upper limit).</td></tr>
+<tr><td>LDR module</td><td><b>J3</b> → D4 (digital DO)</td><td>Set the light threshold with the module's blue trimmer.</td></tr>
+<tr><td>MQ-3</td><td>DO → <b>J1</b> (D6); AO → <b>J10</b> (A3)</td><td>Warm up ≈ 3 min. Hold sanitiser on a tissue at the bottle cone for the SOLVENT demo.</td></tr>
+</table>
+<div class="note">The Nano sends both the analog voltages (<code>ph_v</code>, <code>tds_v</code>, <code>turb_v</code>, <code>mq3_v</code>) and the digital limits (<code>turb_do</code>, <code>mq3_do</code>, <code>ldr_do</code>) every second. The pH board's digital Do output can optionally be jumped to J8 spare (D11) — the firmware reads it as <code>ph_do</code>.</div>
+<div class="footer"><span>AquaSentinel R3 · 1:5 LIVE model · Electronics assembly manual 2.0 (14 Nov 2026)</span><span>8 / 17</span></div>
+</section>
+
+<!-- ================= PAGE 9 · SENSOR PHOTOS ================= -->
+<section class="page">
+<h1>The sensors in 3D</h1>
+<div class="grid3">
+<div class="fig"><img src="../images/parts/E21.png"><div class="cap">E21 · pH electrode (E-201-C)</div></div>
+<div class="fig"><img src="../images/parts/E22.png"><div class="cap">E22 · TDS probe (SEN0244)</div></div>
+<div class="fig"><img src="../images/parts/E23.png"><div class="cap">E23 · DS18B20 probe</div></div>
+</div>
+<div class="grid3">
+<div class="fig"><img src="../images/parts/E24.png"><div class="cap">E24 · MQ-3 module</div></div>
+<div class="fig"><img src="../images/parts/E25.png"><div class="cap">E25 · DHT11 module</div></div>
+<div class="fig"><img src="../images/parts/E26.png"><div class="cap">E26 · LDR module</div></div>
+</div>
+<div class="grid3">
+<div class="fig"><img src="../images/parts/E30.png"><div class="cap">E30 · RGB LED (beacon)</div></div>
+<div class="fig"><img src="../images/parts/E29.png"><div class="cap">E29 · mini pump</div></div>
+<div class="card" style="align-self:center">
+<b>Beacon + pump wiring</b>
+<p>RGB module common pin "−" → GND; G → J6 D7, R → J6 D8, B → J6 D9 (220 Ω on board).</p>
+<p>Pump: L298N IN1 → J7 D10, IN2 → GND; L298N power from J13.</p>
+<p>Test: <code>LED G</code>, <code>LED R</code>, <code>PUMP 3</code> in the Serial Monitor.</p>
+</div>
+</div>
+<div class="footer"><span>AquaSentinel R3 · 1:5 LIVE model · Electronics assembly manual 2.0 (14 Nov 2026)</span><span>9 / 17</span></div>
+</section>
+
+<!-- ================= PAGE 10 · SIM800L ================= -->
+<section class="page">
+<h1>SIM800L and the link to the Pi</h1>
+<div class="grid2">
+<div>
+<h3>Power (J17)</h3>
+<ul>
+<li>VCC = <b>4.0 V</b> from the step-down (1000 µF C2 on the board — the module needs it for TX bursts).</li>
+<li>RXD, TXD, GND on J17; screw the SMA antenna on.</li>
+<li>Insert the SIM (no PIN), with SMS balance.</li>
+</ul>
+<h3>UART to the Pi (J18)</h3>
+<ul>
+<li>GND → Pi <b>pin 6</b>.</li>
+<li>Pi TX <b>pin 8</b> → on-board 4.7 k/10 k divider → SIM <b>RXD</b> (5 V → 3.3 V logic).</li>
+<li>SIM <b>TXD</b> → Pi RX <b>pin 10</b>.</li>
+<li>The Pi talks at 9600 baud on <code>/dev/serial0</code> (GPIO14/15).</li>
+</ul>
+</div>
+<div>
+<h3>Test the modem by hand</h3>
+<table class="compact">
+<tr><th>Send (9600 8N1)</th><th>Expect</th><th>Means</th></tr>
+<tr><td><code>AT</code></td><td>OK</td><td>module alive</td></tr>
+<tr><td><code>AT+CPIN?</code></td><td>+CPIN: READY</td><td>SIM found, no PIN</td></tr>
+<tr><td><code>AT+CSQ</code></td><td>+CSQ: 10 or more</td><td>usable signal</td></tr>
+<tr><td><code>AT+CREG?</code></td><td>+CREG: 0,1 (or 0,5)</td><td>registered</td></tr>
+<tr><td><code>AT+CMGF=1</code></td><td>OK</td><td>SMS text mode</td></tr>
+<tr><td><code>AT+CMGS="+91…"</code> + text + Ctrl-Z</td><td>+CMGS: n</td><td>SMS sent</td></tr>
+</table>
+<p class="smeta">Or press <b>Send test SMS</b> on the dashboard once the Pi is set up.</p>
+</div>
+</div>
+<div class="warn"><b>Common mistakes:</b> powering the SIM800L from 5 V (it must be 4.0 V) · skipping the 1000 µF capacitor (TX bursts brown out) · connecting Pi TX straight to SIM RXD without the divider.</div>
+<div class="footer"><span>AquaSentinel R3 · 1:5 LIVE model · Electronics assembly manual 2.0 (14 Nov 2026)</span><span>10 / 17</span></div>
+</section>
+
+<!-- ================= PAGE 11 · MOUNT ON MODEL ================= -->
+<section class="page">
+<h1>Mount everything on the model</h1>
+<div class="grid2">
+<div class="fig"><img src="../images/live/live_overview_front.png"><div class="cap">The 1:5 model with the electronics</div></div>
+<div class="fig"><img src="../images/live/live_overview_xray.png"><div class="cap">X-ray view: board and Pi in the base</div></div>
+</div>
+<div class="grid2">
+<div class="fig"><img src="../images/live/live_cage_sensors.png"><div class="cap">Sensor cage: pH, TDS, turbidity and DS18B20 probes in the dish</div></div>
+<div class="fig"><img src="../images/live/live_mq3_station.png"><div class="cap">MQ-3 sniffing station at the bottle cone</div></div>
+</div>
+<ul>
+<li>The Sensor Hub PCB and the Pi sit in the base; the USB cable links the two.</li>
+<li>The four water probes (pH, TDS, turbidity, DS18B20) hang in the dish; the DHT11 and LDR stay above the water.</li>
+<li>Route the pump hose into the sample bottle; the MQ-3 watches the bottle cone (sanitiser vapour demo).</li>
+</ul>
+<div class="footer"><span>AquaSentinel R3 · 1:5 LIVE model · Electronics assembly manual 2.0 (14 Nov 2026)</span><span>11 / 17</span></div>
+</section>
+
+<!-- ================= PAGE 12 · FLASH NANO ================= -->
+<section class="page">
+<h1>Flash the Arduino Nano</h1>
+<ol>
+<li>Arduino IDE → Tools → Manage Libraries → install <b>OneWire</b>, <b>DallasTemperature</b> and <b>DHT sensor library (Adafruit)</b>.</li>
+<li>Board: <b>Arduino Nano</b>; Processor: <b>ATmega328P (Old Bootloader)</b> for most clones (try ATmega328P if the upload fails); Port: the Nano's COM port.</li>
+<li>Open <code>PCB_SENSOR_HUB_v1/firmware/aquasentinel_nano/aquasentinel_nano.ino</code>.</li>
+<li>Confirm <code>#define BOARD_PCB 1</code> (this manual's wiring). Upload.</li>
+<li>Serial Monitor at <b>115200</b>: you should see one JSON line per second.</li>
+</ol>
+<h3>The JSON line (one per second)</h3>
+<pre>{"vcc":4.75,"ph_v":2.15,"ph":5.8,"tds_v":0.64,"turb_v":1.79,"mq3_v":1.64,
+ "ldr_do":0,"ph_do":0,"turb_do":1,"mq3_do":1,"t_water":27.1,"t_air":28.4,"rh":17,"pump":0,"up":18}</pre>
+<table>
+<tr><th>Field</th><th>Meaning</th><th>Field</th><th>Meaning</th></tr>
+<tr><td><code>vcc</code></td><td>Nano supply voltage (auto-corrects analog reads)</td><td><code>ldr_do / ph_do / turb_do / mq3_do</code></td><td>digital limit outputs</td></tr>
+<tr><td><code>ph_v / ph</code></td><td>pH volts / pH (provisional Nano calibration)</td><td><code>t_water / t_air / rh</code></td><td>DS18B20 °C · DHT11 °C · DHT11 %</td></tr>
+<tr><td><code>tds_v</code></td><td>TDS board volts (Pi converts to ppm)</td><td><code>pump / up</code></td><td>pump state · Nano uptime s</td></tr>
+<tr><td><code>turb_v / mq3_v</code></td><td>turbidity / vapour analog volts</td><td>—</td><td>—</td></tr>
+</table>
+<h3>Handy commands (type in the monitor)</h3>
+<p><code>PING</code> → <code>{"pong":1}</code> · <code>LED G</code> / <code>LED R</code> / <code>LED B</code> / <code>LED Y</code> / <code>LED W</code> / <code>LED F</code> (fault blink) / <code>LED O</code> (off) · <code>PUMP 5</code> (run pump 5 s, max 30).</p>
+<div class="note"><b>pH on the Nano is provisional</b> (2-point: 4.0 → 2.082 V, 9.2 → 2.279 V, ≈ 38 mV/pH, from the 12 Nov bench test). Re-calibrate with 4.0 / 7.0 / 9.2 buffers before the finale — the Pi also re-computes pH from <code>ph_v</code> using <code>config.json → ph_calibration</code>, and computes TDS ppm from <code>tds_v</code> with the SEN0244 temperature-compensated formula.</div>
+<div class="footer"><span>AquaSentinel R3 · 1:5 LIVE model · Electronics assembly manual 2.0 (14 Nov 2026)</span><span>12 / 17</span></div>
+</section>
+
+<!-- ================= PAGE 13 · PI SETUP ================= -->
+<section class="page">
+<h1>Set up the Raspberry Pi</h1>
+<p>The software lives in <code>14_RASPBERRY_PI_SOFTWARE/aquasentinel</code>. Internet is needed only for the setup.</p>
+<ol>
+<li>Copy the folder to the Pi: <code>~/aquasentinel</code>.</li>
+<li>Run <code>bash install.sh</code>. It does everything: installs <code>python3-serial</code>, Chromium and unclutter · enables the serial port for the SIM800L (<code>raspi-config</code> + <code>enable_uart=1</code> + <code>dtoverlay=disable-bt</code>, no login shell) · installs the <code>aquasentinel</code> systemd service (auto-start, auto-restart) · sets the dashboard to open full-screen at boot.</li>
+<li>Put the phone numbers in <code>config.json</code>: <code>"sms_numbers": ["+91XXXXXXXXXX"]</code>.</li>
+<li><code>sudo reboot</code> — the dashboard opens by itself.</li>
+</ol>
+<h3>Key settings in <code>config.json</code></h3>
+<table>
+<tr><th>Setting</th><th>Value</th><th>Setting</th><th>Value</th></tr>
+<tr><td>Nano link</td><td><code>nano_port: "auto"</code>, <code>115200</code> (USB)</td><td>SIM800L</td><td><code>/dev/serial0</code>, <code>9600</code></td></tr>
+<tr><td>Dashboard</td><td>port <b>8080</b> → <code>http://&lt;pi-address&gt;:8080</code></td><td>SMS</td><td>1 per 10 min max</td></tr>
+<tr><td>Learning</td><td>first <b>20 s</b> = LEARNING (learns the water)</td><td>Confirm</td><td>2 unusual of last 3 readings</td></tr>
+<tr><td>Limits</td><td>pH 6.0–9.0 · TDS 1400 ppm · water 40 °C</td><td>Sampling</td><td>pump <b>5 s</b> on event</td></tr>
+<tr><td>pH calibration</td><td><code>ph_calibration.points</code> (2.082 V→4.0, 2.279 V→9.2 provisional)</td><td>Logs</td><td><code>logs/readings_YYYY-MM-DD.csv</code></td></tr>
+</table>
+<h3>Dashboard buttons</h3>
+<p><b>Beacon test</b> · <b>Take a sample</b> (pump 5 s) · <b>Send test SMS</b> · <b>Learn new water</b>.</p>
+<p class="smeta">Status: <code>systemctl status aquasentinel</code> · live log: <code>journalctl -u aquasentinel -f</code> · leave full-screen: Alt+F4.</p>
+<div class="footer"><span>AquaSentinel R3 · 1:5 LIVE model · Electronics assembly manual 2.0 (14 Nov 2026)</span><span>13 / 17</span></div>
+</section>
+
+<!-- ================= PAGE 14 · CALIBRATION ================= -->
+<section class="page">
+<h1>Calibration and bench checks</h1>
+<h2>Before the booth (once)</h2>
+<ol>
+<li><b>Check every wire in 30 seconds</b> — <code>python3 ~/aquasentinel/tools/check_hardware.py</code> prints OK / FAIL for every sensor, the beacon, the pump and the SIM800L.</li>
+<li><b>Calibrate pH</b> with buffer solutions (until then the pH tile says <i>calibrate</i> and only a sudden pH change counts as an event):
+<pre>sudo systemctl stop aquasentinel
+python3 ~/aquasentinel/tools/calibrate_ph.py
+sudo systemctl start aquasentinel</pre></li>
+<li><b>One-sensor tests</b> — <code>python3 PCB_SENSOR_HUB_v1/firmware/wiring_test.py &lt;test&gt;</code> with <code>nano temp dht ldr led pump ph tds turb mq3 sim</code>. Remember: MQ-3 needs ≈ 3 min warm-up; block the turbidity slot with paper to see its output fall; add salt to see TDS rise.</li>
+<li><b>Decision engine self-test</b> — <code>python3 ~/aquasentinel/tools/self_test.py</code> (install.sh already ran it; it ends ALL PASS).</li>
+<li><b>TDS factor (optional)</b> — against a trusted TDS pen; the Pi applies the SEN0244 formula with the water temperature.</li>
+</ol>
+<h2>Every day at the booth</h2>
+<ul>
+<li>Power up: AUX charger → J12 first, then the Pi (the Nano comes up over USB).</li>
+<li>Wait for the dashboard: first 20 s LEARNING, then NORMAL (green beacon).</li>
+<li>Keep the probes wet between demos; dry the MQ-3 station between solvent runs.</li>
+</ul>
+<div class="warn"><b>pH electrode care:</b> never let it dry out — store in KCl storage solution; rinse with distilled water between waters; recalibrate if the reading drifts.</div>
+<div class="footer"><span>AquaSentinel R3 · 1:5 LIVE model · Electronics assembly manual 2.0 (14 Nov 2026)</span><span>14 / 17</span></div>
+</section>
+
+<!-- ================= PAGE 15 · DEMO WATERS ================= -->
+<section class="page">
+<h1>The six demo waters</h1>
+<p>After the first 20 s (LEARNING), try each water and wait ≈ 5 s:</p>
+<table>
+<tr><th>Put in the dish / do</th><th>Dashboard shows</th><th>Beacon</th><th>Action</th></tr>
+<tr><td>Clean tap water</td><td>NORMAL</td><td>green</td><td>—</td></tr>
+<tr><td>A spoon of salt, stirred</td><td>INDUSTRIAL (dissolved solids jump)</td><td>red</td><td>sample + SMS</td></tr>
+<tr><td>A little vinegar</td><td>ACIDIC (pH falls)</td><td>red</td><td>sample + SMS</td></tr>
+<tr><td>A spoon of soil</td><td>RUNOFF (cloudy, salts flat)</td><td>red</td><td>sample + SMS</td></tr>
+<tr><td>Sanitiser on a tissue at the bottle cone</td><td>SOLVENT (vapour)</td><td>red</td><td>sample + SMS</td></tr>
+<tr><td>Unplug the temperature probe</td><td>SENSOR FAULT</td><td>blinking red</td><td>— (never "normal")</td></tr>
+</table>
+<div class="note">Back in clean water it returns to NORMAL after a few seconds. To start fresh with new water press <b>Learn new water</b>. Only one SMS is sent per 10 minutes.</div>
+<h2>How the Pi decides</h2>
+<ul>
+<li><b>Hard limits:</b> pH &lt; 6 or &gt; 9 · dissolved solids &gt; 1400 ppm.</li>
+<li><b>Learned baseline:</b> a sudden jump counts even below the limit (pH drop/rise of 1.0, TDS ×1.5 and +150 ppm).</li>
+<li><b>Confirmation:</b> 2 unusual readings out of the last 3 — no false alarm from one bad reading.</li>
+<li><b>Classes:</b> NORMAL · ACIDIC · INDUSTRIAL · RUNOFF · SOLVENT · SENSOR FAULT (a broken or missing sensor is reported as SENSOR FAULT, never as normal).</li>
+<li>The model reads once a second for the demo (the river design reads every 15 minutes).</li>
+</ul>
+<div class="footer"><span>AquaSentinel R3 · 1:5 LIVE model · Electronics assembly manual 2.0 (14 Nov 2026)</span><span>15 / 17</span></div>
+</section>
+
+<!-- ================= PAGE 16 · TROUBLESHOOTING ================= -->
+<section class="page">
+<h1>If something is wrong</h1>
+<table>
+<tr><th>You see</th><th>Do this</th></tr>
+<tr><td><i>Sensor hub offline</i></td><td>USB cable Nano → Pi; then <code>sudo systemctl restart aquasentinel</code></td></tr>
+<tr><td><i>SIM800L · no answer</i></td><td>4.0 V on J17; TX/RX wires on J18; antenna on; run <code>tools/check_hardware.py</code></td></tr>
+<tr><td><i>searching network</i></td><td>wait 30 s; check the SIM has SMS balance</td></tr>
+<tr><td>Black screen, no dashboard</td><td>open the browser at <code>http://localhost:8080</code></td></tr>
+<tr><td>pH tile says <i>calibrate</i></td><td>run <code>tools/calibrate_ph.py</code></td></tr>
+<tr><td>Temperature probe unplugged</td><td>SENSOR FAULT + blinking red (this is correct behaviour)</td></tr>
+<tr><td>DHT11 fails now and then</td><td>normal — retry after 2 s; constant failures = wiring</td></tr>
+<tr><td>MQ-3 demo does nothing</td><td>wait 3 min warm-up; check the blue trimmer threshold</td></tr>
+<tr><td>pH reads ~0</td><td>electrode dry or unplugged; check 9 V on J15 and the "O" wire on J11</td></tr>
+<tr><td>TDS always 0 ppm</td><td>check the A0 power switch on J9 (the board is powered only while reading)</td></tr>
+</table>
+<h2>Revision history</h2>
+<table>
+<tr><th>Rev</th><th>Date</th><th>Design</th></tr>
+<tr><td>1.0</td><td>10 Nov 2026</td><td>"Bay v2": Hub HAT + ADS1115 + DS3231, 12 V + 2 bucks, Pi reads sensors on GPIO. <b>Superseded — do not build from it.</b> (Old PDF kept in <code>99_ARCHIVE/09_Cleanup_2026-11-14/</code>.)</td></tr>
+<tr><td>2.0</td><td>14 Nov 2026</td><td>Sensor Hub PCB v1.2 + Arduino Nano reads every sensor; Pi 3B+ decides; AUX 5 V in; step-up 9 V; step-down 4.0 V. Bench-tested 12–13 Nov 2026. <b>This manual.</b></td></tr>
+</table>
+<div class="note"><b>Sources of truth:</b> <code>12_ELECTRONICS_MANUAL_1to5/PCB_SENSOR_HUB_v1/</code> (board v1.2 + <code>firmware/aquasentinel_nano/</code>) · <code>14_RASPBERRY_PI_SOFTWARE/</code> (Pi software) · team's public FDC text updated 13 Nov 2026.</div>
+<div class="footer"><span>AquaSentinel R3 · 1:5 LIVE model · Electronics assembly manual 2.0 (14 Nov 2026)</span><span>16 / 17</span></div>
+</section>
+
+<!-- ================= PAGE 17 · BACK ================= -->
+<section class="page">
+<h1>Team &amp; project</h1>
+<p><b>Team Sanjivani Hero's Journey</b> (AG26-1500$41), Sanjivani University, Kopargaon · AAKRUTI 2026 · Robotics · <b>India Geo Finale: booth 19 Nov, pitch 20 Nov 2026 (Pune)</b>.</p>
+<p>AquaSentinel is a solar-powered float on a stainless guide pole clamped to a bridge pier. Every 15 minutes it reads the river; when a spill passes it turns its light red, sends an SMS and keeps a bottle of that water for the lab. The 1:5 LIVE model runs the same sensors and the same decision rules on the booth table, once a second.</p>
+<h2>This build in five lines</h2>
+<ol>
+<li><b>7 sensors:</b> PH-4502C (pH) · SEN0244 (TDS) · SEN0189 (turbidity) · DS18B20 · DHT11 · LDR · MQ-3.</li>
+<li><b>Arduino Nano</b> on the <b>Sensor Hub PCB v1.2</b> reads them all and drives the beacon + pump.</li>
+<li><b>Raspberry Pi 3B+</b> decides, dashboards (<code>:8080</code>), logs CSV, sends SMS (SIM800L).</li>
+<li><b>Power:</b> AUX 5 V → J12 → step-up 9 V (pH) → step-down 4.0 V (SIM800L).</li>
+<li><b>Everything verified on the bench 12–13 Nov 2026.</b></li>
+</ol>
+<div class="fig"><img src="../images/live/live_overview_front.png" style="width:120mm"></div>
+<div class="cap">The 1:5 LIVE model — good luck at the finale! 🚀</div>
+<div class="footer"><span>AquaSentinel R3 · 1:5 LIVE model · Electronics assembly manual 2.0 (14 Nov 2026)</span><span>17 / 17</span></div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AquaSentinel · Live</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-state="LEARNING">
+<div class="bg"></div>
+
+<header class="top">
+  <div class="brand">
+    <svg class="logo" viewBox="0 0 64 64" aria-hidden="true">
+      <defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5ee7df"/><stop offset="1" stop-color="#1b7fd6"/></linearGradient></defs>
+      <path d="M32 4C32 4 12 28 12 40a20 20 0 0 0 40 0C52 28 32 4 32 4z" fill="url(#lg)"/>
+      <path d="M17 42c5-4 10 4 15 0s10 4 15 0" stroke="#fff" stroke-width="3.2" fill="none" stroke-linecap="round" opacity=".9"/>
+      <circle cx="32" cy="24" r="4" class="logo-beacon"/>
+    </svg>
+    <div>
+      <h1>Aqua<span>Sentinel</span></h1>
+      <p>A river that raises its own alarm</p>
+    </div>
+  </div>
+  <div class="site"><span class="dot live"></span><span id="site">-</span></div>
+  <div class="pills">
+    <div class="pill" id="pill-nano"><i></i><span>Sensor hub</span></div>
+    <div class="pill" id="pill-sim"><i></i><span>SIM800L</span><b class="bars" id="bars"><s></s><s></s><s></s><s></s></b></div>
+    <div class="clock" id="clock">--:--:--</div>
+  </div>
+</header>
+
+<main class="grid">
+  <!-- STATUS HERO -->
+  <section class="card hero" id="hero">
+    <div class="hero-ring"><div class="hero-core"><span id="hero-icon">◌</span></div></div>
+    <div class="hero-text">
+      <div class="eyebrow">Water status</div>
+      <div class="state" id="state">LEARNING</div>
+      <div class="title" id="title">Learning the water</div>
+      <p class="explain" id="explain">Reading the water to learn what is normal here.</p>
+      <ul class="reasons" id="reasons"></ul>
+      <div class="meta"><span id="since">since --:--</span><span class="sep">·</span><span id="beacon-label">beacon -</span><span class="sep">·</span><span id="samples">0 samples</span></div>
+    </div>
+  </section>
+
+  <!-- RIVER SCENE -->
+  <section class="card scene">
+    <svg id="river" viewBox="0 0 800 360" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b2236"/><stop offset="1" stop-color="#173b57"/></linearGradient>
+        <linearGradient id="water" x1="0" y1="0" x2="0" y2="1"><stop offset="0" id="w1" stop-color="#1c8aa0"/><stop offset="1" id="w2" stop-color="#0a3c52"/></linearGradient>
+        <radialGradient id="glow"><stop offset="0" id="g1" stop-color="#3dff8f" stop-opacity=".95"/><stop offset="1" id="g2" stop-color="#3dff8f" stop-opacity="0"/></radialGradient>
+        <linearGradient id="hull" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4c542"/><stop offset="1" stop-color="#b8860b"/></linearGradient>
+      </defs>
+      <rect width="800" height="360" fill="url(#sky)"/>
+      <g id="stars"></g>
+      <rect x="60" y="40" width="70" height="320" fill="#4a5662"/><rect x="40" y="30" width="760" height="22" fill="#5d6a77"/>
+      <rect x="40" y="18" width="760" height="4" fill="#8794a1"/>
+      <g id="pole"><rect x="300" y="52" width="8" height="300" fill="#9aa7b4"/><rect x="292" y="70" width="24" height="10" fill="#6b7885"/></g>
+      <rect x="130" y="100" width="170" height="8" fill="#6b7885"/>
+      <g id="float">
+        <ellipse id="beacon-glow" cx="352" cy="148" rx="70" ry="70" fill="url(#glow)"/>
+        <rect x="346" y="150" width="4" height="40" fill="#c9d3dc"/>
+        <circle id="beacon" cx="348" cy="148" r="8" fill="#3dff8f"/>
+        <rect x="318" y="182" width="78" height="10" rx="2" fill="#d7dee5"/>
+        <rect x="330" y="166" width="26" height="18" rx="2" fill="#eef2f5"/>
+        <rect x="362" y="160" width="30" height="5" fill="#1d3557"/>
+        <path d="M296 192h126l-10 26H306z" fill="url(#hull)"/>
+        <rect x="296" y="188" width="28" height="14" rx="3" fill="#7b8794"/>
+      </g>
+      <path id="wave2" fill="url(#water)" opacity=".55"/>
+      <path id="wave1" fill="url(#water)"/>
+      <g id="particles"></g>
+      <text x="780" y="342" text-anchor="end" class="scene-cap" id="scene-cap">Live from the sensors · demo cadence 1 reading/s</text>
+    </svg>
+  </section>
+
+  <!-- SENSOR TILES -->
+  <section class="tiles" id="tiles"></section>
+
+  <!-- CHART -->
+  <section class="card chart">
+    <div class="card-h"><h2>Last 10 minutes</h2><div class="legend"><span class="lg ph">pH</span><span class="lg tds">Dissolved solids (ppm)</span><span class="lg ev">events</span></div></div>
+    <canvas id="chart"></canvas>
+  </section>
+
+  <!-- EVENTS -->
+  <section class="card events">
+    <div class="card-h"><h2>Events</h2><span class="muted" id="ev-count">none yet</span></div>
+    <ol id="events"></ol>
+  </section>
+
+  <!-- CONTROLS -->
+  <section class="card controls">
+    <div class="card-h"><h2>Booth controls</h2><span class="muted" id="cmd-result"></span></div>
+    <div class="btns">
+      <button data-cmd="beacon_test"><b>◉</b>Beacon test</button>
+      <button data-cmd="sample"><b>⇣</b>Take a sample</button>
+      <button data-cmd="sms_test"><b>✉</b>Send test SMS</button>
+      <button data-cmd="relearn"><b>↺</b>Learn new water</button>
+    </div>
+    <div class="how">
+      <h3>How it decides</h3>
+      <p>Hard limits (pH below 6 or above 9, dissolved solids above 1,400 ppm) <em>and</em> a baseline it learns from the water.
+         Two unusual readings out of three make an event. A silent sensor is a <b>fault</b>, never “normal”.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <span id="foot-team">Team Sanjivani Hero's Journey · AAKRUTI 2026</span>
+  <span class="ticker" id="ticker"></span>
+  <span id="foot-up">up 0 s</span>
+</footer>
+
+<div class="toast" id="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>
