@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -7,7 +7,7 @@
 <meta name="description" content="AquaSentinel: a floating river sentinel that reads the water every 15 minutes, decides on board and, when a spill passes, turns its beacon red, sends an SMS and bottles a sample. AAKRUTI 2026 India Geo Finalist.">
 <meta property="og:title" content="AquaSentinel · A river that raises its own alarm">
 <meta property="og:description" content="Reads the water every 15 minutes · decides on board · warns the bank · bottles the spill. Team Sanjivani Hero's Journey, AAKRUTI 2026.">
-<meta property="og:image" content="https://soham0777.github.io/AquaSentinel/media/pitch-video-poster.jpg">
+<meta property="og:image" content="https://soham0777.github.io/AquaSentinel/media/pitch-film-poster.jpg">
 <meta name="theme-color" content="#06141f">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2306141f'/%3E%3Cpath d='M8 40c8-6 16 6 24 0s16 6 24 0v16H8z' fill='%2335d0ba'/%3E%3Ccircle cx='32' cy='20' r='9' fill='%23ff4d4d'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -376,7 +376,7 @@ footer{padding:50px 0 70px;color:var(--sub);font-size:14px;text-align:center;bor
   <div class="wrap">
     <div class="reveal"><div class="eyebrow">Proof · our 1:5 LIVE model</div><h2>We printed it at 1:5,<br>around the real sensors.</h2>
       <p class="lead">Real pH, dissolved-solids, turbidity and temperature probes at full size dip into a dish of water under the float. A Raspberry Pi and our own circuit board in the base. Light, air temperature and humidity above the water, an MQ-3 over the sample bottle, the beacon on the mast. To show a different river, we swap the dish.</p></div>
-    <div class="grid g2 reveal" style="margin-top:28px"><div class="media" style="background:#fff"><img src="assets/img/photo-1to5-float.jpg" alt="The printed 1:5 float on its stand, photographed" loading="lazy"></div><div class="svgcard" style="margin:0"><img src="assets/booth-demo.svg" alt="Booth demo cycle"></div></div>
+    <div class="grid g2 reveal" style="margin-top:28px"><div class="media" style="background:#fff"><img src="assets/img/live-1to5-render.jpg" alt="The 1:5 LIVE model, rendered from our SOLIDWORKS assembly" loading="lazy"></div><div class="svgcard" style="margin:0"><img src="assets/booth-demo.svg" alt="Booth demo cycle"></div></div>
     <div class="grid g2 reveal" style="margin-top:22px">
       <div class="media" style="background:#fff"><img src="assets/live-1to5-assembly-steps.gif" alt="The 24 assembly steps from our SOLIDWORKS assembly" loading="lazy"></div>
       <div class="media" style="background:#fff"><img src="assets/img/live-labelled.jpg" alt="Every part of the 1:5 LIVE model, labelled" loading="lazy"></div>
@@ -389,9 +389,9 @@ footer{padding:50px 0 70px;color:var(--sub);font-size:14px;text-align:center;bor
 <section id="electronics" style="background:var(--bg2)">
   <div class="wrap">
     <div class="reveal"><div class="eyebrow">The electronics</div><h2>Seven sensors. One board we milled ourselves.<br>One Raspberry Pi that decides.</h2>
-    <p class="lead">In October the Pi read every sensor itself, through a tray of ten small boards. SOLIDWORKS found two clashes in that tray before anything was printed, so we drew one board instead: the Sensor Hub, 104 × 72 mm, single-sided, drawn in KiCad and cut on a desktop CNC on 12 November. An Arduino Nano in the middle reads all seven sensors and drives the light and the pump; it sends one line of readings a second to the Raspberry Pi, which decides, logs and sends the SMS. On 13 November all seven sensors answered through it on the bench.</p></div>
+    <p class="lead">In October the Pi read every sensor itself, through a tray of ten small boards. SOLIDWORKS found two clashes in that tray before anything was printed, so we drew one board instead: the Sensor Hub, 104 × 72 mm, single-sided, drawn in KiCad and cut on a desktop CNC on 12 November. An Arduino Nano in the middle reads all seven sensors and drives the light and the pump; it sends one line of readings a second to the Raspberry Pi, which decides, logs every reading and drives the SIM800L modem for the SMS alert. On 13 November all seven sensors answered through it on the bench.</p></div>
     <div class="grid g2 reveal" style="margin-top:36px;align-items:start">
-      <div class="media" style="background:#fff"><img src="assets/img/photo-electronics.jpg" alt="The electronics wired in the tray: Raspberry Pi, our Sensor Hub board with the Arduino Nano, and the sensor and power boards" loading="lazy"></div>
+      <div class="media" style="background:#fff"><img src="assets/img/copper-toolpath.jpg" alt="The copper side of the Sensor Hub: our isolation toolpath from our own G-code, drawn to scale" loading="lazy"></div>
       <div>
         <div class="media" style="background:#fff"><img src="assets/img/sensor-hub-top.jpg" alt="Sensor Hub v1.2, parts side, KiCad render" loading="lazy"></div>
         <div class="card" style="margin-top:16px"><b>In the water</b> pH · dissolved solids · turbidity · water temperature<br><b>Above it</b> light · air temperature and humidity<br><b>At the bottle</b> MQ-3 vapour<br><span style="color:var(--sub)">Every sensor has its own labelled header on the board, J1 to J11. Pin map, build steps and G-code are in <code>12_ELECTRONICS_MANUAL_1to5</code>.</span></div>
@@ -422,8 +422,11 @@ footer{padding:50px 0 70px;color:var(--sub);font-size:14px;text-align:center;bor
       <figure><img src="assets/img/r3-underwater.jpg" alt="Under water" loading="lazy"><figcaption>The sensor cage under water</figcaption></figure>
       <figure><img src="assets/img/sim-pole-stress.jpg" alt="Pole stress" loading="lazy"><figcaption>SOLIDWORKS Simulation: pole</figcaption></figure>
       <figure><img src="assets/img/sim-bracket-stress.jpg" alt="Bracket stress" loading="lazy"><figcaption>SOLIDWORKS Simulation: bracket</figcaption></figure>
-      <figure><img src="assets/img/r3-drawing-ga.jpg" alt="General arrangement" loading="lazy"><figcaption>Drawing set: general arrangement</figcaption></figure>
-      <figure><img src="assets/img/r3-design-checks.jpg" alt="Design checks" loading="lazy"><figcaption>The 14 design checks</figcaption></figure>
+      <figure><img src="assets/img/r3-3dexcite-dusk.jpg" alt="The R3 at dusk" loading="lazy"><figcaption>3DEXCITE Creative Experience render</figcaption></figure>
+      <figure><img src="assets/img/r3-drawing-install.jpg" alt="AS3-DWG-01 installation" loading="lazy"><figcaption>SOLIDWORKS drawing: installation</figcaption></figure>
+      <figure><img src="assets/img/r3-drawing-ga.jpg" alt="AS3-DWG-02 float general arrangement" loading="lazy"><figcaption>SOLIDWORKS drawing: the float</figcaption></figure>
+      <figure><img src="assets/img/r3-drawing-bracket.jpg" alt="AS3-DWG-06 pier bracket" loading="lazy"><figcaption>SOLIDWORKS drawing: pier bracket</figcaption></figure>
+      <figure><img src="assets/img/r3-design-checks.jpg" alt="Design checks" loading="lazy"><figcaption>Design checks: 14 of 14 pass</figcaption></figure>
       <figure><img src="assets/img/r3-section.jpg" alt="Section" loading="lazy"><figcaption>Centre-line section</figcaption></figure>
       <figure><img src="assets/img/r3-weathervane.jpg" alt="Weathervane" loading="lazy"><figcaption>It weathervanes with the current</figcaption></figure>
     </div>
@@ -485,8 +488,11 @@ footer{padding:50px 0 70px;color:var(--sub);font-size:14px;text-align:center;bor
 <!-- WATCH -->
 <section id="watch" style="background:var(--bg2)">
   <div class="wrap">
-    <div class="reveal"><div class="eyebrow">Watch</div><h2>The pitch, in 100 seconds.</h2><p class="lead">Narrated by our team.</p></div>
-    <div class="media reveal" style="margin-top:30px"><video controls playsinline preload="none" poster="media/pitch-video-poster.jpg"><source src="media/pitch-video.mp4" type="video/mp4"></video></div>
+    <div class="reveal"><div class="eyebrow">Watch</div><h2>Two films, 92 seconds each.</h2><p class="lead">Made only from our own CAD, renders, drawings, dashboard and sourced figures. The milling shot is drawn from our real G-code.</p></div>
+    <div class="grid g2 reveal" style="margin-top:30px">
+      <div><div class="media"><video controls playsinline preload="none" poster="media/pitch-film-poster.jpg"><source src="media/aquasentinel-pitch-film.mp4" type="video/mp4"></video></div><p class="src"><b>The pitch.</b> The problem, the float, how it works and what it costs.</p></div>
+      <div><div class="media"><video controls playsinline preload="none" poster="media/journey-film-poster.jpg"><source src="media/aquasentinel-journey-film.mp4" type="video/mp4"></video></div><p class="src"><b>Our journey.</b> From our first handwritten page to the board we milled, and what we learned.</p></div>
+    </div>
   </div>
 </section>
 
@@ -546,15 +552,17 @@ const m=L[0][1],b=document.getElementById('bars');b.innerHTML=L.map(([n,v])=>`<d
 // downloads
 (()=>{const G='https://github.com/soham0777/AquaSentinel/blob/main/',T='https://github.com/soham0777/AquaSentinel/tree/main/';
 const D=[['🎤','Finale deck (PDF)','16 pitch slides + 12 Q&A backups',G+'01_FINALE_PRESENTATION/AquaSentinel_Finale_7min.pdf'],
-['🧩','1:5 assembly manual','30 pages, pictures from SOLIDWORKS 2026',G+'02_LIVE_MODEL_1to5/00_ASSEMBLY_MANUAL/AquaSentinel_LIVE_1to5_Assembly_Manual_SOLIDWORKS.pdf'],
-['🖨️','37 print files','STL + parts list for the 1:5 model',T+'02_LIVE_MODEL_1to5/01_FINAL_STL'],
-['⚡','Electronics in SOLIDWORKS','13 parts, bay assembly, drawing AS-LIVE-ELEC-01',G+'03_ELECTRONICS_RASPBERRY_PI/AquaSentinel_Electronics_in_SOLIDWORKS.pdf'],
-['🍓','Raspberry Pi design','pin map, power, decision logic',G+'03_ELECTRONICS_RASPBERRY_PI/AquaSentinel_RPi_Prototype_Design.pdf'],
+['🎬','Two films','pitch and journey, 92 s each',G+'docs/media/aquasentinel-pitch-film.mp4'],
+['🧩','1:5 assembly manual','31 pages, pictures from SOLIDWORKS 2026',G+'02_LIVE_MODEL_1to5/00_ASSEMBLY_MANUAL/AquaSentinel_LIVE_1to5_Assembly_Manual_SOLIDWORKS.pdf'],
+['🖨️','38 STL print files','STL + parts list for the 1:5 model',T+'02_LIVE_MODEL_1to5/01_FINAL_STL'],
+['⚡','Electronics manual','17 pages: the board, every sensor, the six waters',G+'12_ELECTRONICS_MANUAL_1to5/AquaSentinel_LIVE_1to5_Electronics_Assembly_Manual.pdf'],
+['🍓','Raspberry Pi software','decision rules, dashboard, SMS, self-test',T+'14_RASPBERRY_PI_SOFTWARE'],
 ['📐','R3 assembly manual','27 pages, full-size float',G+'05_R3_FULL_SIZE_CAD/00_ASSEMBLY_MANUAL/AquaSentinel_R3_Assembly_Manual_SOLIDWORKS.pdf'],
-['📦','R3 SOLIDWORKS Pack and Go','66 parts + assembly',T+'05_R3_FULL_SIZE_CAD/02_SOLIDWORKS_PackAndGo'],
+['📦','R3 SOLIDWORKS Pack and Go','66 part numbers + assembly',T+'05_R3_FULL_SIZE_CAD/02_SOLIDWORKS_PackAndGo_FDC'],
 ['🧊','STEP and STL of every part','open in any CAD tool',T+'05_R3_FULL_SIZE_CAD/07_Parts_STEP_STL'],
-['📏','R3 drawing set','6 sheets, from the CAD',G+'05_R3_FULL_SIZE_CAD/04_Drawings/AquaSentinel_R3_Drawing_Set.pdf'],
+['📏','R3 drawings','6 SOLIDWORKS drawings, PDF + SLDDRW',G+'05_R3_FULL_SIZE_CAD/04_Drawings/AquaSentinel_R3_Drawing_Set.pdf'],
 ['🧮','SOLIDWORKS Simulation','pole and pier bracket studies',T+'06_SIMULATION'],
+['✅','Design checks','14 of 14 pass, one page',G+'05_R3_FULL_SIZE_CAD/05_Design_Checks/AquaSentinel_R3_Design_Checks.pdf'],
 ['💰','Cost: ≈ ₹48,000','value-engineered, line by line',G+'07_COST_AND_BUSINESS/04_AquaSentinel_Cost_48k_Value_Engineered.pdf'],
 ['🗂️','The whole repository','everything above, in one place','https://github.com/soham0777/AquaSentinel']];
 document.getElementById('dls').innerHTML=D.map(([i,t,s,u])=>`<a class="card dl" href="${u}"><span class="ic">${i}</span><span><b>${t}</b><span>${s}</span></span></a>`).join('')})();

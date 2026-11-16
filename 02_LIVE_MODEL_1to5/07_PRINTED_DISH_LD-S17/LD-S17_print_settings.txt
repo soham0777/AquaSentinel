@@ -1,0 +1,47 @@
+LD-S17 PRINTED DISH 115 x 65  -  replaces the bought glass dish (P-DISH) in LIVE manual step D6
+Team Sanjivani Hero's Journey - designed 13 Nov 2026 (Fusion, parametric)
+
+FILES (this folder)
+  LD-S17_printed_dish_115x65.step   -> for Bambu Studio / OrcaSlicer / PrusaSlicer
+  LD-S17_printed_dish_115x65.stl    -> for Cura (no STEP import)
+  LD-S17_printed_dish_115x65.f3d    -> Fusion archive; parameters dish_od, dish_height, wall_t, floor_t, base_chamfer
+
+FIT IN THE MODEL (same outside size as the glass dish)
+  OD 115 mm  -> seat LD-S09 stop bore is 116.5 mm: 0.75 mm play per side, slides in from the front
+  Height 65  -> rim stays 5 mm under the float hulls; parked cage still 6 mm above the rim
+  Wall 0.5   -> inside 114 mm: cage (dia 92) is now 11 mm from the wall (glass: 8.5 mm)
+  Floor 1.0  -> 5 layers of 0.2 mm; 0.6 mm chamfer on the outer bottom edge (elephant-foot relief)
+
+WHY TWO FILAMENTS (the 20 g limit)
+  Whole dish in one material  : about 27 g (wall 14.3 g + floor 12.9 g)
+  Thinnest possible, one material (0.45 wall, 0.6 floor): about 20.7 g  -> over 20 g, and the floor would leak
+  SOLUTION: floor in ANY other PLA (~13 g, hidden in the seat), wall in TRANSPARENT PLA
+  Transparent used: ~13-14 g wall + ~1 g purge at the swap = ~15 g  (about 5 g margin)
+
+SLICER SETTINGS (0.4 mm nozzle)
+  Layer height ............ 0.2 mm (first layer 0.2 mm)
+  Spiral / vase mode ...... ON   (Cura: "Spiralize Outer Contour"; Prusa/Orca/Bambu: "Spiral vase")
+  Bottom layers ........... 5    (= 1.0 mm floor); top layers 0; infill 0 %
+  Wall / outer line width . 0.50 mm
+  Filament change ......... at the start of layer 6 (Z = 1.2 mm): swap to TRANSPARENT PLA
+      Bambu / Orca / Prusa: right-click the layer slider at 1.2 mm -> Add pause (or Add color change)
+      Cura: Extensions > Post Processing > Modify G-Code > Filament Change (or Pause at height) > layer 6
+  Nozzle temp ............. 220 C (clearer, better layer bonding = fewer leaks); bed 60 C
+  Wall speed .............. 25-30 mm/s
+  Part fan ................ 50 %
+  Flow .................... 100-105 %
+  Skirt 1 loop (prints in the floor filament), no brim, no supports
+  CHECK the slicer's filament estimate before printing: the transparent part (layer 6 up) must be under ~16 g
+
+AFTER PRINTING
+  1. Leak test FIRST: fill with water and leave it on paper towel for 1 hour. The electronics bay is
+     directly under the dish - never put an untested dish on the model.
+  2. If it weeps: coat the inside floor joint and the wall thinly with clear epoxy or clear nail varnish, dry, test again.
+  3. Slide it onto the seat EMPTY, then fill. Do not lift it full of water by the rim (thin wall).
+  4. Water: about 450 mL now (was 380 mL with glass). The check is unchanged:
+     water 1-2 mm over the cage plate, about 10 mm below the rim.
+  5. No hot water: PLA softens at about 55-60 C.
+
+GLASS OPTION (if you still want glass)
+  115 x 65 mm is a standard 500 mL laboratory CRYSTALLISING DISH (e.g. DURAN 213134901).
+  Ask a lab-glassware / scientific supplies shop, not a kitchen shop.

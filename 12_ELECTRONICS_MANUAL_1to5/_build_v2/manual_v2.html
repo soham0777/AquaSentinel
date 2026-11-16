@@ -46,35 +46,51 @@ img { max-width: 100%; }
 <!-- ================= PAGE 1 · COVER ================= -->
 <section class="page">
 <div class="kicker">AAKRUTI 2026 · India Geo Finale · Robotics</div>
-<div class="cover-title">AquaSentinel 1:5 LIVE model</div>
-<div class="cover-sub">Electronics assembly manual · <b>Revision 2.0 · 14 November 2026</b></div>
-<div class="fig"><img src="../PCB_SENSOR_HUB_v1/design/render_top.png" style="width:132mm"></div>
-<div class="cap">Our own Sensor Hub PCB v1.2 (104 × 72 mm, single-sided, designed in KiCad and milled in-house on a desktop CNC, 12 Nov 2026). The Arduino Nano plugs into the socket and reads every sensor.</div>
-<p style="margin-top:3mm">An <b>Arduino Nano on the Sensor Hub PCB v1.2</b> reads the seven real water-quality sensors of the full-size AquaSentinel R3 and drives the beacon and the pump. It sends one line of readings every second over USB to a <b>Raspberry Pi 3B+</b>, which decides, shows the dashboard, logs the readings and sends SMS alerts through the SIM800L.</p>
-<div style="margin:3mm 0">
-<span class="chip">1 custom PCB — Sensor Hub v1.2</span><span class="chip">7 sensors</span><span class="chip">2 controllers: Arduino Nano + Pi 3B+</span><span class="chip">5 V AUX in · step-up 9 V · step-down 4.0 V</span><span class="chip">Nano ↔ Pi over USB · 1 line/s</span><span class="chip">SIM800L SMS</span>
-</div>
-<div class="warn"><b>IMPORTANT — this revision replaces the old design.</b> Revision 1.0 (10 Nov 2026) described the "bay v2" build: a Hub HAT, ADS1115, DS3231, a 12 V adapter with two buck converters, a rain sensor and the Pi reading sensors directly over GPIO. That design was <b>replaced on 12–13 Nov 2026</b> by the Sensor Hub PCB + Nano build described here. <b>Do not build from old printouts.</b> See page 2 for the full list of changes.</div>
-<p class="smeta">Team Sanjivani Hero's Journey (AG26-1500$41), Sanjivani University, Kopargaon · matches the hardware bench-tested on 12–13 Nov 2026 · sources: <code>PCB_SENSOR_HUB_v1</code> (board + Nano firmware) and <code>14_RASPBERRY_PI_SOFTWARE</code> (Pi software)</p>
+<div class="cover-title" style="font-size:28pt;margin-top:4mm">AquaSentinel 1:5 LIVE model</div>
+<div class="cover-sub" style="font-size:15pt">Electronics assembly manual</div>
+<div class="fig" style="margin-top:6mm"><img src="cover_copper_toolpath.png" style="width:170mm;border:0.5pt solid #9fb3c4"></div>
+<div class="cap">The copper side of the Sensor Hub v1.2 as we milled it: the isolation toolpath from our G-code, 104 × 72 mm.</div>
+<p style="margin-top:6mm;font-size:10.5pt;line-height:1.5">This manual builds the electronics of the 1:5 LIVE model: our own milled Sensor Hub board with an Arduino Nano that reads seven water-quality sensors and drives the beacon and the sample pump, and a Raspberry Pi 3B+ that decides, shows the dashboard, logs every reading and sends SMS alerts through a SIM800L.</p>
+<table style="margin-top:6mm;width:120mm;font-size:9pt">
+<tr><th style="width:40mm">Document</th><td>Electronics assembly manual, 17 pages</td></tr>
+<tr><th>Revision</th><td>2.0, 14 November 2026</td></tr>
+<tr><th>Applies to</th><td>Sensor Hub PCB v1.2 · Nano firmware v1 · Pi software 1.0.0</td></tr>
+<tr><th>Prepared by</th><td>Team Sanjivani Hero's Journey (AG26-1500$41), Sanjivani University, Kopargaon</td></tr>
+<tr><th>Sources</th><td><code>12_ELECTRONICS_MANUAL_1to5/PCB_SENSOR_HUB_v1</code> · <code>14_RASPBERRY_PI_SOFTWARE</code></td></tr>
+</table>
 <div class="footer"><span>AquaSentinel R3 · 1:5 LIVE model · Electronics assembly manual 2.0 (14 Nov 2026)</span><span>1 / 17</span></div>
 </section>
 
-<!-- ================= PAGE 2 · WHAT CHANGED ================= -->
+<!-- ================= PAGE 2 · CONTENTS ================= -->
 <section class="page">
-<h1>What changed from the 10 Nov manual (v1.0 → v2.0)</h1>
-<p>On 12–13 Nov 2026 we bench-tested the new build: our own milled <b>Sensor Hub PCB v1.2</b> with an <b>Arduino Nano</b> reading every sensor, feeding a <b>Raspberry Pi 3B+</b>. Everything the old manual said about the Pi reading sensors through a HAT is now wrong.</p>
-<table>
-<tr><th style="width:44%">Old manual (10 Nov, bay v2) — <span class="bad">no longer true</span></th><th>Current build (this manual) — <span class="ok">verified 12–13 Nov</span></th></tr>
-<tr><td>"1 Hub HAT, 12 plug-in headers", ADS1115 ADC (0x48), DS3231 RTC (0x68), level converter</td><td><b>Sensor Hub PCB v1.2</b> (104 × 72 mm) + <b>Arduino Nano</b>. No HAT, no ADS1115, no DS3231, no level converter.</td></tr>
-<tr><td>Pi reads the sensors over GPIO (DHT11 on GPIO17, DS18B20 on GPIO4, TDS switch GPIO13, rain GPIO22, beacon GPIO12/26, pump GPIO23, ACK button GPIO16)</td><td>The <b>Nano reads every sensor</b> (D2–D6, D8–D12, A0–A3, A6). The Pi only talks to the Nano over <b>USB</b> and to the SIM800L over <b>UART (GPIO14/15)</b>.</td></tr>
-<tr><td>"12 V 2 A in, 2 buck converters", DC jack panel, inline fuse</td><td><b>AUX 5 V charger → J12</b>; on-board <b>step-up → 9 V</b> (pH board) and <b>step-down → 4.0 V</b> (SIM800L).</td></tr>
-<tr><td>MX1508 pump driver</td><td><b>Mini L298N</b> driver (control J7, power J13).</td></tr>
-<tr><td>"8 sensors" (included a rain sensor)</td><td><b>7 sensors</b> — pH, TDS, turbidity, DS18B20, DHT11, LDR, MQ-3. The rain sensor was dropped from the live model.</td></tr>
-<tr><td>Software: <code>config.txt</code> overlays for ADS1115/DS3231/DHT11, <code>i2cdetect</code> expecting 0x48/0x57/0x68, DHT11 read through <code>/sys/bus/iio</code></td><td>Software: <code>14_RASPBERRY_PI_SOFTWARE</code>. The only serial setup is <code>enable_uart=1</code> + <code>dtoverlay=disable-bt</code> for the SIM800L. Sensors arrive as one JSON line per second from the Nano.</td></tr>
-<tr><td>"10 boards on one slide-out tray" (electronics bay v2, LD-S08 tray)</td><td>One carrier PCB holds everything; it sits in the model base. Photos: pages 7 and 12.</td></tr>
+<h1>Contents</h1>
+<table style="width:150mm;font-size:10pt">
+<tr><td style="width:12mm">3</td><td>The system in one picture · how to use this manual</td></tr>
+<tr><td>4</td><td>Parts you need</td></tr>
+<tr><td>5</td><td>Board tour: Sensor Hub PCB v1.2, connectors J1–J18</td></tr>
+<tr><td>6</td><td>Bench build 1: power first</td></tr>
+<tr><td>7</td><td>Bench build 2: the board itself</td></tr>
+<tr><td>8</td><td>Wire the seven sensors</td></tr>
+<tr><td>9</td><td>The sensors in 3D</td></tr>
+<tr><td>10</td><td>SIM800L and the link to the Pi</td></tr>
+<tr><td>11</td><td>Mount everything on the model</td></tr>
+<tr><td>12</td><td>Flash the Arduino Nano</td></tr>
+<tr><td>13</td><td>Set up the Raspberry Pi</td></tr>
+<tr><td>14</td><td>Calibration and bench checks</td></tr>
+<tr><td>15</td><td>The six demo waters · how the Pi decides</td></tr>
+<tr><td>16</td><td>If something is wrong · revision history</td></tr>
+<tr><td>17</td><td>Team and project</td></tr>
 </table>
-<div class="note"><b>Why:</b> the board version the team milled on 12 Nov is the Sensor Hub PCB v1.2 — every sensor, the beacon and the pump were proven through it on 12–13 Nov, and the public project text was updated on 13 Nov to say exactly this. The old bay/HAT design was never built.</div>
-<p>Throughout this manual, values in <span class="bad">red</span> boxes are things people get wrong; <span class="ok">green</span> boxes are the tested settings.</p>
+<h1 style="margin-top:9mm">The build at a glance</h1>
+<table style="font-size:9.5pt">
+<tr><th style="width:38mm">Sensors (7)</th><td>pH: PH-4502C board + E-201-C electrode · dissolved solids: DFRobot SEN0244 · turbidity: DFRobot SEN0189 · water temperature: DS18B20 · air temperature and humidity: DHT11 · light: LDR module · vapour: MQ-3</td></tr>
+<tr><th>Controllers (2)</th><td>Arduino Nano on the Sensor Hub PCB v1.2 reads every sensor · Raspberry Pi 3B+ decides, logs and alerts</td></tr>
+<tr><th>Outputs</th><td>RGB beacon (green normal, red event, blinking red fault) · sample pump through a Mini L298N driver · SMS through a SIM800L</td></tr>
+<tr><th>Power</th><td>AUX 5 V into J12 → step-up to 9.0 V for the pH board → step-down to 4.0 V for the SIM800L · Nano powered from the Pi's USB</td></tr>
+<tr><th>Link</th><td>Nano → Pi over USB, one JSON line per second at 115200 baud · Pi → SIM800L over UART (GPIO14/15)</td></tr>
+<tr><th>Board</th><td>104 × 72 mm, single-sided copper, KiCad, milled on a TwoTrees TTC-450 Pro on 12 November 2026</td></tr>
+</table>
+<div class="note" style="margin-top:4mm"><b>Safety:</b> connect or change any wire with the power off · set and measure the 9 V and 4.0 V outputs before connecting the pH board or the SIM800L · never feed more than 5 V into J12.</div>
 <div class="footer"><span>AquaSentinel R3 · 1:5 LIVE model · Electronics assembly manual 2.0 (14 Nov 2026)</span><span>2 / 17</span></div>
 </section>
 
@@ -416,7 +432,7 @@ sudo systemctl start aquasentinel</pre></li>
 <h2>Revision history</h2>
 <table>
 <tr><th>Rev</th><th>Date</th><th>Design</th></tr>
-<tr><td>1.0</td><td>10 Nov 2026</td><td>"Bay v2": Hub HAT + ADS1115 + DS3231, 12 V + 2 bucks, Pi reads sensors on GPIO. <b>Superseded — do not build from it.</b> (Old PDF kept in <code>99_ARCHIVE/09_Cleanup_2026-11-14/</code>.)</td></tr>
+<tr><td>1.0</td><td>10 Nov 2026</td><td>"Bay v2": Hub HAT + ADS1115 + DS3231, 12 V + 2 bucks, Pi reads sensors on GPIO. Superseded by revision 2.0.</td></tr>
 <tr><td>2.0</td><td>14 Nov 2026</td><td>Sensor Hub PCB v1.2 + Arduino Nano reads every sensor; Pi 3B+ decides; AUX 5 V in; step-up 9 V; step-down 4.0 V. Bench-tested 12–13 Nov 2026. <b>This manual.</b></td></tr>
 </table>
 <div class="note"><b>Sources of truth:</b> <code>12_ELECTRONICS_MANUAL_1to5/PCB_SENSOR_HUB_v1/</code> (board v1.2 + <code>firmware/aquasentinel_nano/</code>) · <code>14_RASPBERRY_PI_SOFTWARE/</code> (Pi software) · team's public FDC text updated 13 Nov 2026.</div>
@@ -434,10 +450,10 @@ sudo systemctl start aquasentinel</pre></li>
 <li><b>Arduino Nano</b> on the <b>Sensor Hub PCB v1.2</b> reads them all and drives the beacon + pump.</li>
 <li><b>Raspberry Pi 3B+</b> decides, dashboards (<code>:8080</code>), logs CSV, sends SMS (SIM800L).</li>
 <li><b>Power:</b> AUX 5 V → J12 → step-up 9 V (pH) → step-down 4.0 V (SIM800L).</li>
-<li><b>Everything verified on the bench 12–13 Nov 2026.</b></li>
+<li><b>Bench-tested 12–13 Nov 2026:</b> all seven sensors, the beacon and the pump answered through the board.</li>
 </ol>
-<div class="fig"><img src="../images/live/live_overview_front.png" style="width:120mm"></div>
-<div class="cap">The 1:5 LIVE model — good luck at the finale! 🚀</div>
+<div class="fig"><img src="../../02_LIVE_MODEL_1to5/00_ASSEMBLY_MANUAL/images/cover_hero.png" style="width:125mm"></div>
+<div class="cap">The 1:5 LIVE model, rendered from our SOLIDWORKS assembly.</div>
 <div class="footer"><span>AquaSentinel R3 · 1:5 LIVE model · Electronics assembly manual 2.0 (14 Nov 2026)</span><span>17 / 17</span></div>
 </section>
 
