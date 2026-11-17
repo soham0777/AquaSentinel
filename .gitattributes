@@ -13,3 +13,5 @@
 *.pdf binary
 # the viewer embeds the model; keep it out of the language statistics
 docs/viewer.html linguist-generated
+# shell scripts run on the Raspberry Pi: always Unix line endings
+*.sh text eol=lf

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AquaSentinel Live</title>
+<style>
+  :root { --navy:#0B2545; --teal:#0E7C86; --text:#1E2B36; --muted:#6B7C8A; --card:#F2F6F9; --line:#D5E0E8;
+          --red:#D7263D; --green:#2A9D5C; --amber:#E09F3E; --bg:#ffffff; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: "Segoe UI", Roboto, Arial, sans-serif; color:var(--text); background:var(--bg); }
+  header { background:var(--navy); color:#fff; padding:14px 20px; display:flex; gap:16px; align-items:center; flex-wrap:wrap; }
+  header h1 { font-size:20px; margin:0; letter-spacing:.5px; }
+  header select { font-size:15px; padding:6px 10px; border-radius:6px; border:0; }
+  header .upd { margin-left:auto; font-size:13px; opacity:.8; }
+  main { max-width:1200px; margin:0 auto; padding:16px; display:grid; gap:16px; }
+  .state { border-radius:14px; padding:18px 22px; color:#fff; background:var(--green); display:flex; gap:20px; align-items:center; flex-wrap:wrap; }
+  .state.bad { background:var(--red); } .state.warn { background:var(--amber); color:var(--navy); } .state.off { background:#5B6B78; }
+  .state .big { font-size:30px; font-weight:700; } .state .why { font-size:15px; opacity:.95; }
+  .state .meta { margin-left:auto; font-size:13px; text-align:right; opacity:.9; }
+  .tiles { display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:12px; }
+  .tile { background:var(--card); border-radius:12px; padding:12px 14px; }
+  .tile .k { font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; }
+  .tile .v { font-size:26px; font-weight:700; color:var(--navy); margin-top:4px; }
+  .tile .v small { font-size:13px; color:var(--muted); font-weight:400; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:12px; padding:14px; }
+  .card h2 { font-size:14px; margin:0 0 8px; color:var(--teal); letter-spacing:1px; text-transform:uppercase; }
+  svg { width:100%; height:240px; display:block; }
+  .legend { font-size:12px; color:var(--muted); } .legend b { display:inline-block; width:14px; height:3px; vertical-align:middle; margin:0 4px 0 10px; }
+  ul.ev { list-style:none; margin:0; padding:0; } ul.ev li { border-top:1px solid var(--line); padding:8px 2px; font-size:14px; }
+  ul.ev .t { font-weight:700; color:var(--navy); } ul.ev .chip { font-size:11px; padding:2px 8px; border-radius:10px; background:var(--card); margin-left:6px; }
+  ul.ev .open { background:var(--red); color:#fff; }
+  .note { font-size:12px; color:var(--muted); }
+  .empty { color:var(--muted); font-size:14px; padding:8px 0; }
+  @media (max-width:600px) { .state .meta { margin-left:0; text-align:left; } header .upd { margin-left:0; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>AquaSentinel · Live</h1>
+  <select id="station" aria-label="Station"></select>
+  <span class="upd" id="upd">connecting…</span>
+</header>
+<main>
+  <section class="state off" id="state"><div><div class="big" id="title">Waiting for data</div><div class="why" id="why"></div></div>
+    <div class="meta" id="meta"></div></section>
+  <section class="tiles" id="tiles"></section>
+  <section class="card"><h2>Last 24 hours</h2>
+    <div class="legend"><b style="background:#0E7C86"></b>pH (0–14) <b style="background:#E09F3E"></b>dissolved solids (ppm) <b style="background:#D7263D33;height:10px"></b>event</div>
+    <svg id="chart" viewBox="0 0 1000 240" preserveAspectRatio="none"></svg></section>
+  <section class="card"><h2>Events</h2><ul class="ev" id="events"></ul></section>
+  <p class="note">Data from the AquaSentinel float, sent by its Raspberry Pi. A station that loses internet keeps its readings and sends them when it is back.</p>
+</main>
+<script src="firebase-config.js"></script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getDatabase, ref, onValue, query, orderByKey, startAt, limitToLast, off }
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+const db = getDatabase(initializeApp(window.FIREBASE_CONFIG));
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+let subs = [], live = null;
+
+onValue(ref(db, "index"), (snap) => {                    // small list of stations (not their data)
+  const ids = Object.keys(snap.val() || {}); const sel = $("station"); const cur = sel.value || location.hash.slice(1);
+  sel.innerHTML = ids.map(id => `<option ${id === cur ? "selected" : ""}>${esc(id)}</option>`).join("");
+  if (ids.length && !subs.length) watch(sel.value);
+});
+$("station").addEventListener("change", e => watch(e.target.value));
+
+function watch(id) {
+  subs.forEach(r => off(r)); subs = []; location.hash = id;
+  const base = `stations/${id}`;
+  const L = ref(db, base + "/live"); subs.push(L); onValue(L, s => { live = s.val(); renderLive(); });
+  const R = query(ref(db, base + "/readings"), orderByKey(), startAt(String(Date.now() - 864e5)), limitToLast(1500));
+  subs.push(R); onValue(R, s => chart(Object.values(s.val() || {})));
+  const E = query(ref(db, base + "/events"), orderByKey(), limitToLast(30)); subs.push(E);
+  onValue(E, s => events(Object.values(s.val() || {}).reverse()));
+}
+setInterval(renderLive, 5000);
+
+function renderLive() {
+  if (!live) return;
+  const age = (Date.now() - (live.updated || 0)) / 1000; const stale = age > 60;
+  const bad = !["NORMAL", "LEARNING"].includes(live.state);
+  $("state").className = "state " + (stale ? "off" : live.state === "SENSOR FAULT" ? "warn" : bad ? "bad" : "");
+  $("title").textContent = stale ? `Station offline · last state: ${live.title}` : `${live.state} · ${live.title}`;
+  $("why").textContent = (live.reasons || []).join(" · ");
+  $("meta").innerHTML = `${esc(live.site)}<br>beacon ${esc(live.beacon)} · ${live.samples || 0} samples bottled<br>`
+    + `SMS ${esc(live.sim)} · power ${live.power_ok === false ? "LOW" : "ok"}`;
+  $("upd").textContent = live.updated ? `updated ${Math.round(age)} s ago` : "";
+  const r = live.reading || {}; const f = (v, d = 1) => v == null ? "–" : Number(v).toFixed(d);
+  const T = [["pH", f(r.ph, 2), ""], ["Dissolved solids", f(r.tds, 0), "ppm"],
+    ["Turbidity", r.turbid == null ? "–" : r.turbid ? "Cloudy" : "Clear", r.turb_pct != null ? `${r.turb_pct}%` : ""],
+    ["Vapour", r.vapour == null ? "–" : r.vapour ? "Detected" : "None", ""], ["Water temp", f(r.t_water), "°C"],
+    ["Air temp", f(r.t_air), "°C"], ["Humidity", f(r.rh, 0), "%"], ["Light", r.dark == null ? "–" : r.dark ? "Night" : "Day", ""]];
+  $("tiles").innerHTML = T.map(([k, v, u]) => `<div class="tile"><div class="k">${k}</div><div class="v">${v} <small>${u}</small></div></div>`).join("");
+}
+
+function chart(rows) {
+  const svg = $("chart"); const W = 1000, H = 240, P = 8;
+  if (!rows.length) { svg.innerHTML = `<text x="20" y="40" fill="#6B7C8A" font-size="16">No readings in the last 24 hours</text>`; return; }
+  const t1 = Date.now() / 1000, t0 = t1 - 86400; const X = t => P + (t - t0) / 86400 * (W - 2 * P);
+  const tmax = Math.max(500, ...rows.map(p => p.tds || 0)) * 1.15;
+  let out = "";
+  for (let i = 0; i <= 4; i++) out += `<line x1="0" x2="${W}" y1="${P + i * (H - 2 * P) / 4}" y2="${P + i * (H - 2 * P) / 4}" stroke="#D5E0E8"/>`;
+  rows.forEach((p, i) => { if (!["NORMAL", "LEARNING", null, undefined].includes(p.s)) {
+    const nx = rows[i + 1] ? X(rows[i + 1].t) : X(p.t) + 4; out += `<rect x="${X(p.t)}" y="0" width="${Math.max(2, nx - X(p.t))}" height="${H}" fill="#D7263D22"/>`; } });
+  const path = (key, scale) => { let d = "", on = false;
+    rows.forEach(p => { if (p[key] == null) { on = false; return; } const y = H - P - scale(p[key]) * (H - 2 * P);
+      d += (on ? "L" : "M") + X(p.t).toFixed(1) + " " + y.toFixed(1) + " "; on = true; }); return d; };
+  out += `<path d="${path("ph", v => v / 14)}" fill="none" stroke="#0E7C86" stroke-width="2.5" vector-effect="non-scaling-stroke"/>`;
+  out += `<path d="${path("tds", v => v / tmax)}" fill="none" stroke="#E09F3E" stroke-width="2.5" vector-effect="non-scaling-stroke"/>`;
+  svg.innerHTML = out;
+}
+
+function events(list) {
+  $("events").innerHTML = list.length ? list.map(e => `<li><span class="t">${esc(e.title)}</span> · ${esc(e.date)} ${esc(e.time)}
+    ${e.open ? '<span class="chip open">active</span>' : `<span class="chip">cleared ${esc(e.cleared || "")}</span>`}
+    ${e.sample ? '<span class="chip">sample bottled</span>' : ""}<br><span class="note">${esc((e.reasons || []).join(" · "))}</span></li>`).join("")
+    : `<div class="empty">No events yet.</div>`;
+}
+</script>
+</body>
+</html>

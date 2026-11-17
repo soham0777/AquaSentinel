@@ -1,10 +1,12 @@
+> **SUPERSEDED on 7 Nov 2026. Do not quote these figures.** The final cost is ₹47,886 a float (≈ ₹48,000) and the fee is ₹8,000 a month: see `../00_COST_SUMMARY_READ_FIRST.md`. Kept only as the working that led there.
+
 # AquaSentinel: cost of the Raspberry Pi product (estimate, 6 Nov 2026)
 
 **Team decision, 6 Nov 2026:** the components used in the 1:5 LIVE model are the components of the final product. The R3
 mechanics (float, guide pole, bridge kit, solar, sampler) stay as costed on 23 Oct. The industrial RS485 probes, ESP32 and
 LTE modem are replaced by the team's Raspberry Pi electronics.
 
-All figures are **estimates**. The mechanics come from `01_AquaSentinel_Costed_BOM_Researched.xlsx` (23 Oct, ex-GST). The
+All figures are **estimates**. The mechanics come from `2026-10-23_Costed_BOM_ESP32_industrial_design.xlsx` (23 Oct, ex-GST). The
 electronics are indicative Indian retail prices (incl. 18 % GST, converted to ex-GST by ÷ 1.18) found on 6 Nov 2026, or
 marked *est.* where no listing was found. Re-check prices before quoting to a customer.
 

@@ -60,7 +60,7 @@ These are different objects and should never be mixed in a sentence.
 | Simulation | No FEA; CAD fit checks + bench test | Pole SF min 2.66; FEA 38.3 MPa; pinned 54.8; pinned + couple 64.0 vs 316L yield 170 MPa |
 | Cost | Prototype ≈ ₹64,616 | ≈ ₹47,886 ex-GST at 100 units; ≈ ₹56,505 with GST; service ≈ ₹8,000/month; hardware payback ≈ 11.9 months |
 
-**Important distinction for the pitch:** the R3 was imported into SOLIDWORKS, not natively designed there. The 17 LIVE-model parts were designed natively. The deck already says “assembled and simulated in SOLIDWORKS”, which is the honest wording. Keep it.
+**Important distinction for the pitch (updated 16 Nov):** the R3 geometry started in our own Python design code; on 16 Nov all 66 parts were rebuilt as native, editable SOLIDWORKS features (712 features), then assembled, checked and simulated in SOLIDWORKS. The 17 LIVE-model parts were designed in SOLIDWORKS from the start. Never say the R3 was "designed natively in SOLIDWORKS".
 
 ---
 
@@ -195,7 +195,7 @@ The PPTX was updated at 20:34 on 14 Nov; the PDF is 7 Nov. Export a fresh PDF af
 ### P2 — tidy, but do not let it consume the week
 
 - **Design notes — fixed 15 Nov 2026.** `02_LIVE_MODEL_1to5/04_DESIGN_NOTES/LIVE_model_design_notes.md` now opens with a status note (31 Oct rationale, printed Nov 2026, not assembled/floated), marks the rain pocket and LM393 bay as empty, and gives the final Nano/Sensor Hub connector map in place of the 31 Oct wiring.
-- **Cost doc — fixed 15 Nov 2026.** `07_COST_AND_BUSINESS/02_Pi_Based_Product_Cost_Estimate_2026-11-06.md` now has the Sensor Hub PCB v1.2 and the Nano/converter bench set in place of the rain plate, ADS1115 and RTC; `03_Value_Engineered_Cost_48k_2026-11-07.md` and the customer PDF match, with a note that the total is unchanged within estimate tolerance. The 23 Oct workbook keeps its research rows and carries clarifying cell notes; the mechanical lines are still current.
+- **Cost doc — fixed 15 Nov 2026.** `07_COST_AND_BUSINESS/_superseded_DO_NOT_QUOTE/2026-11-06_Pi_Cost_Estimate_first_pass.md` now has the Sensor Hub PCB v1.2 and the Nano/converter bench set in place of the rain plate, ADS1115 and RTC; `03_Value_Engineered_Cost_48k_2026-11-07.md` and the customer PDF match, with a note that the total is unchanged within estimate tolerance. The 23 Oct workbook keeps its research rows and carries clarifying cell notes; the mechanical lines are still current.
 - **Credentials in OneDrive:** `Claude_Conversation_Recovery/00_CONFIG_BACKUP` contains `.credentials.json` (19.4 KB), `.claude.json`, `buddy-tokens.json` and a `README_SENSITIVE.md`. This is a security risk, not a project risk. After re-login, delete the backup and empty the Recycle Bin; do not sync it to a shared folder.
 - **Booth display:** the organisers provide one display driven by their laptop. Plan how the Pi dashboard is shown: a small HDMI monitor/tablet on the team’s own table if allowed, or a phone on the Pi’s Wi-Fi hotspot, or printed dashboard stills. The beacon + pump demo works without a dashboard; the dashboard is the “wow”, not the proof.
 - **“250 mL” sample:** the pump runs 5 s; the deck says “pump fills 250 mL”. Measure it once. If it is not 250 mL, say “a sample” instead of a number.

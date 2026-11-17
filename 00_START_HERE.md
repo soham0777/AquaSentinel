@@ -1,114 +1,107 @@
-# AquaSentinel — start here
+# AquaSentinel: start here
 
 **Team Sanjivani Hero's Journey** · AG26-1500$41 · AAKRUTI 2026 · Robotics
-**India Geo Finale:** booth **19 Nov**, pitch **20 Nov 2026**, DS Campus, Pune (7 min pitch + Q&A; top 2 go to Nashville).
 
-AquaSentinel is a float on a guide pole clamped to a bridge pier. Every 15 minutes it reads the river; when a spill passes, it turns its beacon red, sends an SMS and keeps a bottle of that water for the lab.
+**India Geo Finale:** booth on **19 Nov** and pitch on **20 Nov 2026**, at DS Campus, Pune. The pitch is 7 minutes plus Q&A; the top 2 teams go to Nashville.
 
-> **This file is the map.** It is the only place that says which version of each thing is current.
-> Old versions were deleted on 14 Nov 2026 with the project lead's approval; what remains is the current build.
+AquaSentinel is a float on a guide pole clamped to a bridge pier. Every 15 minutes it reads the river. When a spill passes, it turns its beacon red, sends an SMS and keeps a bottle of that water for the lab.
+
+> **This file is the map.** It is the only place that says which version of each thing is current. Last checked **17 Nov 2026**.
 
 ---
 
-## 1. Read this first: what is current on 15 Nov 2026
+## 1. What is current (17 Nov 2026)
 
 | What | The current file | Notes |
 |---|---|---|
-| **Pitch deck** | `01_FINALE_PRESENTATION/AquaSentinel_Finale_7min.pptx` | Last edited 14 Nov. This is the only deck to present or edit. |
-| **1:5 model assembly manual** | `02_LIVE_MODEL_1to5/00_ASSEMBLY_MANUAL/AquaSentinel_LIVE_1to5_Assembly_Manual_SOLIDWORKS.pdf` | 30 pages, 24 steps. Read `00_MANUAL_STATUS_READ_FIRST.md` and the one-page 15 Nov addendum beside it first. |
-| **1:5 model electronics manual** | `12_ELECTRONICS_MANUAL_1to5/AquaSentinel_LIVE_1to5_Electronics_Assembly_Manual.pdf` | **Revision 2.0, 14 Nov, 17 pages** — Sensor Hub PCB v1.2 + Nano |
-| **Sensor Hub PCB + Nano firmware** | `12_ELECTRONICS_MANUAL_1to5/PCB_SENSOR_HUB_v1` | KiCad design, DRC, CNC G-code, placement/soldering/power-up guides, firmware |
-| **Raspberry Pi software** | `14_RASPBERRY_PI_SOFTWARE` | Decision engine, dashboard :8080, SIM800L, logging, install script, pH calibration tool |
-| **Full-size R3 assembly manual** | `05_R3_FULL_SIZE_CAD/00_ASSEMBLY_MANUAL/AquaSentinel_R3_Assembly_Manual_SOLIDWORKS.pdf` | 27 pages, 66 part numbers, 12 steps |
-| **R3 CAD as submitted (FDC)** | `05_R3_FULL_SIZE_CAD/02_SOLIDWORKS_PackAndGo_FDC` | Pack-and-Go folder + zip |
-| **Cost to quote** | `07_COST_AND_BUSINESS/04_AquaSentinel_Cost_48k_Value_Engineered.pdf` | ₹47,886 ex-GST at 100 units (≈ ₹56,505 with GST); prototype ₹64,616. Quote this PDF, not the 23 Oct workbook. |
-| **Pitch video (final)** | `08_VIDEOS/AquaSentinel_Pitch_Video_Clean_Water_Now_FINAL_v3.mp4` | 8 Nov voice-over, on the FDC. Earlier takes were deleted on 14 Nov. |
-| **Working audit + critical path** | `PROJECT_IDENTIFICATION_AND_CRITICAL_PATH_2026-11-14.md` | The 7 P0/P1/P2 problems, verified-vs-unverified table, Q&A traps |
+| **Pitch deck** | `01_FINALE_PRESENTATION/AquaSentinel_Finale_7min.pptx` (+ `.pdf`) | The same file is on the FDC; the organisers downloaded it on 17 Nov, so no more changes. Every number is checked in `AquaSentinel_Deck_Fact_Check.md`. |
+| **Pitch script (one speaker)** | `01_FINALE_PRESENTATION/AquaSentinel_Live_Pitch_Script_v3.pdf` (+ `.docx`) | Slide by slide from the greeting; about 6 min 40 s. |
+| **Cost and business numbers** | `07_COST_AND_BUSINESS/00_COST_SUMMARY_READ_FIRST.md` | ₹47,886 a float (≈ ₹48,000), ₹64,616 prototype, ₹8,000 a month. **The only figures to quote.** |
+| **Printable cost sheet** | `07_COST_AND_BUSINESS/04_AquaSentinel_Cost_48k_Value_Engineered.pdf` | On the FDC and in the print pack. |
+| **Booth print files** | `00_PROJECT_CONTROL/PRINT_READY/` | Corrected 17 Nov: figures match the deck, and the photos are restored. The order is in `00_PRINT_LIST.txt`. |
+| **1:5 model assembly manual** | `02_LIVE_MODEL_1to5/00_ASSEMBLY_MANUAL/AquaSentinel_LIVE_1to5_Assembly_Manual_SOLIDWORKS.pdf` | Read `00_MANUAL_STATUS_READ_FIRST.md` and the 15 Nov addendum first. |
+| **1:5 model electronics manual** | `12_ELECTRONICS_MANUAL_1to5/AquaSentinel_LIVE_1to5_Electronics_Assembly_Manual.pdf` | Revision 2.0, 17 pages. |
+| **Sensor Hub PCB + Nano firmware v2** | `12_ELECTRONICS_MANUAL_1to5/PCB_SENSOR_HUB_v1/` | KiCad design, G-code, build guides, picture guides, firmware v2 (17 Nov). |
+| **Raspberry Pi software** | `14_RASPBERRY_PI_SOFTWARE/aquasentinel/` | Start with `RASPBERRY_PI_STEP_BY_STEP.md`. Includes the installer, calibration, health doctor, SMS and Firebase cloud. |
+| **Full-size R3 assembly manual** | `05_R3_FULL_SIZE_CAD/00_ASSEMBLY_MANUAL/AquaSentinel_R3_Assembly_Manual_SOLIDWORKS.pdf` | 27 pages, 66 part numbers, 12 steps. |
+| **R3 CAD on the FDC** | `05_R3_FULL_SIZE_CAD/02_SOLIDWORKS_PackAndGo_FDC/AquaSentinel_R3_SOLIDWORKS_NATIVE_PackAndGo.zip` | Native parts, assembly and 6 drawings. |
+| **Films on the FDC** | `08_VIDEOS/AquaSentinel_Pitch_Film_2026-11-16.mp4`, `AquaSentinel_Journey_Film_2026-11-16.mp4` | Both have a music bed: show them muted, or talk over them. The deck's own videos are silent. |
 
-### Status at 14 Nov 2026 — do not overclaim at the booth
+### Status on 17 Nov 2026: what is proven, and what is not yet
 
-- Sensors, beacon and pump are **bench-proven** (12–13 Nov).
-- The 1:5 model has **not yet been trial-assembled or floated**.
-- The **Pi ↔ Nano USB link** and **SIM800L SMS** are **not yet verified end to end**.
-- **pH is not calibrated**, so the absolute pH limits (6–9) are inactive; only sudden pH changes act.
-- **`sms_numbers` is empty**, so the station currently cannot send an SMS.
-- The self-test printing **ALL PASS** exercises the decision engine on simulated data — it is not a hardware test.
+**Proven:**
+- Sensors, beacon and pump on the bench (12–13 Nov).
+- The Pi reads the Nano live.
+- pH, turbidity and MQ-3 calibrated on the Pi (17 Nov).
+- 4 SMS numbers set.
+- The Firebase project and the station login created.
 
-The full explanation, with what is safe to say, is in the control report above (§5 and §7).
+**Not yet proven:**
+- An SMS received end to end.
+- The cloud test on the Pi.
+- The 1:5 model floated.
+- The full-size R3 built: it is a design, not a build.
 
----
+The self-test (ALL PASS) proves the software logic on simulated data. It is not a hardware test.
 
 ## 2. I need…
 
 | I need… | Open this |
 |---|---|
-| The pitch deck | `01_FINALE_PRESENTATION/AquaSentinel_Finale_7min.pptx` |
-| The speaker split for the 7 minutes | `01_FINALE_PRESENTATION/_SUBMISSION_RECORD_7Nov2026/00_TODAY_7Nov_Submission_and_Messages.md` |
-| Exactly what was submitted on 7 Nov | `01_FINALE_PRESENTATION/_SUBMISSION_RECORD_7Nov2026/` (PDF + zip) |
-| The 38 print files for the 1:5 model | `02_LIVE_MODEL_1to5/01_FINAL_STL` (38 STL + `PARTS_LIST.csv` lists 37; the extra is the LD-S16 bottle variant) |
+| The deck, its fact check, the script | `01_FINALE_PRESENTATION/` |
+| Exactly what was submitted on 7 Nov | `01_FINALE_PRESENTATION/_SUBMISSION_RECORD_7Nov2026/` (frozen record) |
+| The deck as it was before the 16 Nov update | `01_FINALE_PRESENTATION/_backup_before_16Nov_update/` |
+| The 38 print files for the 1:5 model | `02_LIVE_MODEL_1to5/01_FINAL_STL` (`PARTS_LIST.csv` lists 37; the extra file is a bottle variant) |
 | The 1:5 model in SOLIDWORKS | `02_LIVE_MODEL_1to5/05_SOLIDWORKS_ASSEMBLY/AquaSentinel_LIVE_1to5_Assembly.SLDASM` |
-| The 17 LD parts, named | `02_LIVE_MODEL_1to5/02_CAD_SOLIDWORKS` |
-| The printed dish (LD-S17) | `02_LIVE_MODEL_1to5/07_PRINTED_DISH_LD-S17` |
-| A4 part labels for the booth | `02_LIVE_MODEL_1to5/06_PART_LABELS_A4` |
-| Design notes and print list | `02_LIVE_MODEL_1to5/04_DESIGN_NOTES` |
-| The R3 in SOLIDWORKS | `05_R3_FULL_SIZE_CAD/03_SOLIDWORKS_2026_assembly_for_manual` |
-| R3 drawings / checks / renders | `05_R3_FULL_SIZE_CAD/04_Drawings`, `05_Design_Checks`, `06_Renders` |
-| R3 STEP/STL and GLB | `05_R3_FULL_SIZE_CAD/07_Parts_STEP_STL`, `08_Assembly_STEP_GLB` |
-| R3 bill of materials | `05_R3_FULL_SIZE_CAD/01_BOM_R3.csv` |
+| The R3 native SOLIDWORKS parts | `05_R3_FULL_SIZE_CAD/03b_SOLIDWORKS_2026_NATIVE` |
+| R3 drawings, checks, renders, STEP/STL, BOM | `05_R3_FULL_SIZE_CAD/04_Drawings`, `05_Design_Checks`, `06_Renders`, `07_Parts_STEP_STL`, `01_BOM_R3.csv` |
 | Pole and bracket FEA | `06_SIMULATION` |
-| Costed BOM (researched base data) | `07_COST_AND_BUSINESS/01_AquaSentinel_Costed_BOM_Researched.xlsx` |
-| Videos | `08_VIDEOS` — v3 is the submitted pitch; the 60 s marketing cut has music and must not go in the finale deck |
-| FDC portal contents | `09_SUBMISSIONS_AND_CERTIFICATES/03_FDC_Update_7Nov2026/FDC_post_contents_7Nov2026.md` |
-| Certificates | `09_SUBMISSIONS_AND_CERTIFICATES/05_Participation_Certificates` |
-| Earlier stages / team change | `09_SUBMISSIONS_AND_CERTIFICATES/01_Earlier_stages`, `04_Team_change_Oct2026` |
+| Every cost line and rate | `07_COST_AND_BUSINESS/03_Value_Engineered_Cost_48k_2026-11-07.md` |
+| PCB soldering and power-up picture cards | `12_ELECTRONICS_MANUAL_1to5/PCB_SENSOR_HUB_v1/guide/picture_guides/` |
+| Set up a Raspberry Pi from scratch | `14_RASPBERRY_PI_SOFTWARE/aquasentinel/RASPBERRY_PI_STEP_BY_STEP.md` |
+| Firebase cloud set-up | `14_RASPBERRY_PI_SOFTWARE/aquasentinel/cloud/FIREBASE_SETUP.md` (project `aquasentinel-live`) |
 | Creative Experience storytelling | `13_CREATIVE_EXPERIENCE_STORYTELLING/00_START_HERE.md` |
-| What was deleted, and what was rescued | `00_PROJECT_CONTROL/PURGE_REPORT_2026-11-14.md` |
-| What remains, file by file (the 14 Nov CSV plus the addendum PDF), every PNG verdict and every CAD verdict | `00_PROJECT_CONTROL/FILE_AUDIT_2026-11-14.md` + `FILE_AUDIT_2026-11-14.csv` + `PNG_AUDIT_2026-11-15.csv` + `CAD_AUDIT_2026-11-15.csv` |
-
-**Not present:** the old `AquaSentinel_pH_Electrode_Quick_Guide.pdf` link was broken and has been removed from this map. For pH work use `14_RASPBERRY_PI_SOFTWARE/aquasentinel/tools/calibrate_ph.py` and the electronics manual.
-
----
+| Certificates, FDC records, team change | `09_SUBMISSIONS_AND_CERTIFICATES/` (frozen records) |
 
 ## 3. Folder map
 
-| Folder | What lives there | Current? |
+| Folder | What lives there | State |
 |---|---|---|
-| `00_PROJECT_CONTROL/` | audit, critical path, reorg log, backup policy | working documents |
-| `01_FINALE_PRESENTATION/` | the 7-minute deck; the 7 Nov submission is in `01_FINALE_PRESENTATION/_SUBMISSION_RECORD_7Nov2026/` | **current** |
-| `02_LIVE_MODEL_1to5/` | the 1:5 LIVE model: manual, 38 STLs, SOLIDWORKS parts/assembly, labels, printed dish | **current** |
-| `05_R3_FULL_SIZE_CAD/` | full-size R3: manual, BOM, CAD, drawings, checks, renders, STEP/STL. Controller row `AS3-515` and the BOM descriptions belong to the R3 concept, not the booth build | **current** |
-| `06_SIMULATION/` | SOLIDWORKS static studies for the guide pole and pier bracket. Pole safety factor 2.66; peak von Mises stress 38.3 MPa against 316L yield 170 MPa | **current** |
-| `07_COST_AND_BUSINESS/` | costed BOM, 6 Nov estimate, value-engineered cost + PDF. Quote `04_…pdf`; `01_…xlsx` is the 23 Oct research base | **current** |
-| `08_VIDEOS/` | final pitch v3, R3 animation, journey and 60 s marketing cuts, raw teammate recordings in `00_source_recordings/`. No music in anything submitted; carry v3 on a USB stick | **current** |
-| `09_SUBMISSIONS_AND_CERTIFICATES/` | one sub-folder per stage: earlier, FDC Oct, FDC update 7 Nov, team change, certificates, portal, Maker Fest 2027 | **record** |
-| `12_ELECTRONICS_MANUAL_1to5/` | electronics manual Rev 2.0, Sensor Hub PCB v1.2, CAD working copies, manual build source. Do not move or rename the CAD parts: the assemblies reference them | **current** |
-| `13_CREATIVE_EXPERIENCE_STORYTELLING/` | 3DEXCITE Creative Experience storyline, assets, story video, AR model, scripts | **current** |
-| `14_RASPBERRY_PI_SOFTWARE/` | Pi 3B+ software and install/calibration/self-test tools | **current** |
-| `99_ARCHIVE/` | the pre-purge file manifest and purge note only; old versions were deleted on 14 Nov 2026 | historical record |
+| `00_PROJECT_CONTROL/` | booth print files (`PRINT_READY`), audits, reorg logs, backup policy; AI prompt notes in `_ai_working_notes/` | working + records |
+| `01_FINALE_PRESENTATION/` | the 7-minute deck, fact check, solo pitch script; the 7 Nov submission and a pre-16 Nov backup | **current** |
+| `02_LIVE_MODEL_1to5/` | the 1:5 LIVE model: manual, 38 STLs, SOLIDWORKS parts and assembly, labels, printed dish | **current** |
+| `05_R3_FULL_SIZE_CAD/` | full-size R3: manual, BOM, native CAD, drawings, checks, renders, STEP/STL | **current** |
+| `06_SIMULATION/` | SOLIDWORKS static studies of the guide pole and pier bracket (lowest pole safety factor 2.66) | **current** |
+| `07_COST_AND_BUSINESS/` | **`00_COST_SUMMARY_READ_FIRST.md`**, the full working (03), the cost sheet PDF (04); old estimates in `_superseded_DO_NOT_QUOTE/` | **current** |
+| `08_VIDEOS/` | the two 16 Nov films, the R3 assembly animation, teammates' raw recordings; older cuts in `_earlier_cuts/` | **current** |
+| `09_SUBMISSIONS_AND_CERTIFICATES/` | one sub-folder per stage | frozen record |
+| `12_ELECTRONICS_MANUAL_1to5/` | electronics manual Rev 2.0, Sensor Hub PCB v1.2, CAD working copies. Do not move or rename CAD parts: the assemblies point to them | **current** |
+| `13_CREATIVE_EXPERIENCE_STORYTELLING/` | 3DEXCITE storyline, assets, story video, AR model | **current** |
+| `14_RASPBERRY_PI_SOFTWARE/` | Pi software, firmware copy, installer, cloud | **current** |
+| `99_ARCHIVE/` | the pre-purge manifest and purge note | frozen record |
 
-Number gaps (03, 04, 10, 11) are deliberate: those folders were archived and then deleted on 14 Nov 2026, and their numbers were not reused, so old links and conversations still make sense. `00_PROJECT_CONTROL/PURGE_REPORT_2026-11-14.md` lists what each one was.
+The missing folder numbers (03, 04, 10, 11) are deliberate. Those folders were archived and deleted on 14 Nov 2026, and their numbers were not reused.
+
+`PROJECT_IDENTIFICATION_AND_CRITICAL_PATH_2026-11-14.md` at the root is the 14 Nov working audit. Some of its status lines are older than this page.
 
 ---
 
 ## 4. How this workspace is kept safe
 
-- **Old versions were deleted on 14 Nov 2026** with the project lead's approval. Current work only. A later file audit packed derived files into verified zips: **700 files / 826.7 MB (788.4 MiB)** — 694 project files and six audit records. The file-by-file CSV records the 14 Nov set; the folder READMEs were removed on 15 Nov and the addendum PDF added.
-- **Every move is logged** in `00_PROJECT_CONTROL/WORKSPACE_REORG_LOG_2026-11-14.csv` (source, destination, size, SHA-256, reason).
-- **A pre-purge fingerprint exists:** `99_ARCHIVE/file_manifest_before_purge_2026-11-14.csv` records SHA-256, size and timestamp of all 4,266 files that existed before the purge.
-- **Git holds the tracked text and code**, on every branch, plus tags `backup/pre-reorg-2026-11-14` and `workspace/reorg-2026-11-14`.
-- **Git is not a backup for videos, decks or CAD.** Those are local-only; OneDrive version history is the only recovery path. Read `00_PROJECT_CONTROL/BACKUP_AND_VERSION_CONTROL.md` before committing or pushing.
+- **Git** tracks the text and code. **Videos, decks and CAD are local only**, so OneDrive version history is their only backup. Read `00_PROJECT_CONTROL/BACKUP_AND_VERSION_CONTROL.md` before committing or pushing.
+- **Never commit `14_RASPBERRY_PI_SOFTWARE/aquasentinel/secrets.json`.** It holds the SMS numbers and the Firebase key. `.gitignore` already excludes it.
+- **Frozen records are never edited:**
+  - the 7 Nov export;
+  - `09_SUBMISSIONS_AND_CERTIFICATES`;
+  - the audit CSVs and reports in `00_PROJECT_CONTROL`;
+  - `99_ARCHIVE`;
+  - `_SUBMISSION_RECORD_7Nov2026`.
 
 ### History of cleanups
 
 | Date | What happened | Where the record is |
 |---|---|---|
-| 6 Nov | first cleanup (some files went to the Recycle Bin) | described in the purge report |
-| 7 Nov | R3 folders numbered, submissions split by stage, coursework archived | described in the purge report |
-| 14 Nov, afternoon | old electronics, housing, storytelling, LinkedIn post, old video takes archived | described in the purge report |
-| 14 Nov, evening | workspace reorganised: current deck separated from the submission, navigation rebuilt | `00_PROJECT_CONTROL/WORKSPACE_REORG_REPORT_2026-11-14.md` |
-| 14 Nov, night | old versions, Claude worktrees and safety bundles permanently deleted; four unique documents rescued first | `00_PROJECT_CONTROL/PURGE_REPORT_2026-11-14.md` |
-| 14 Nov, late night | file-by-file audit: 259 derived files packed into four verified zips, 68 duplicates removed; 1,034 → 713 files (709 project + 4 records) | `00_PROJECT_CONTROL/FILE_AUDIT_2026-11-14.md` |
-| 15 Nov | every remaining PNG inspected: 232 kept, 2 with no content or unique value deleted; 3 missing SIM800L diagrams restored from git | `00_PROJECT_CONTROL/PNG_AUDIT_2026-11-15.csv` |
-| 15 Nov | all 212 native CAD reviewed against the assemblies: 205 kept, 7 obsolete v1/legacy files archived; the 40-part 1:5 set proven to be required by stored references; “Vector” parts confirmed as the 1:5 design source | `00_PROJECT_CONTROL/CAD_AUDIT_2026-11-15.md` |
-
-**If something looks missing,** read the purge report first (it lists every deleted folder), then the move log (it lists every move).
+| 6–7 Nov | first cleanup; R3 folders numbered; submissions split by stage | `00_PROJECT_CONTROL/PURGE_REPORT_2026-11-14.md` |
+| 14 Nov | workspace reorganised; old versions deleted with the project lead's approval | `WORKSPACE_REORG_REPORT_2026-11-14.md`, `PURGE_REPORT_2026-11-14.md` |
+| 14–15 Nov | file, PNG and CAD audits | `FILE_AUDIT_2026-11-14.md`, `PNG_AUDIT_2026-11-15.csv`, `CAD_AUDIT_2026-11-15.md` |
+| 17 Nov | Project-wide cost audit. Booth prints corrected from ₹47,900 / ₹64,600 to ₹47,886 / ₹64,616, and 19 → 18 Wh. 4 broken photo links repaired. Cost folder cut to one summary, with old estimates moved to `_superseded_DO_NOT_QUOTE/`. PCB picture guides moved next to the PCB. AI prompts moved to `_ai_working_notes/`. Older video cuts moved to `_earlier_cuts/`. Python caches and simulator test logs removed. The first script draft sent to the Recycle Bin. | this table |

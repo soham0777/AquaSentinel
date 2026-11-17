@@ -98,7 +98,13 @@ function wavePath(t, amp, base, k, phase) { let d = `M0 ${base}`;
   for (let x = 0; x <= 800; x += 20) d += ` L${x} ${base + Math.sin(x * k + t + phase) * amp + Math.sin(x * k * 2.3 + t * 1.7) * amp * .35}`;
   return d + " L800 360 L0 360 Z"; }
 let riverLevel = 0;
+// Frame cap: the river scene does not need 60 frames a second. On the Pi (4 cores or fewer, ARM) or with ?lite in the
+// address it runs at 10 fps, elsewhere at 24 fps. This keeps the Pi's browser light.
+const LITE = /lite/.test(location.search) || (/arm|aarch64/i.test(navigator.userAgent + navigator.platform) && (navigator.hardwareConcurrency || 4) <= 4);
+const FRAME_MS = LITE ? 100 : 42;
 function animate(ts) {
+  if (document.hidden || ts - (animate.last || 0) < FRAME_MS) { requestAnimationFrame(animate); return; }
+  animate.last = ts;
   const t = ts / 900, st = S ? S.state : "LEARNING", bad = !["NORMAL", "LEARNING"].includes(st);
   const lvl = 214 - riverLevel; $("wave1").setAttribute("d", wavePath(t, 5, lvl, .018, 0)); $("wave2").setAttribute("d", wavePath(t * .8, 7, lvl - 8, .013, 2));
   const bob = Math.sin(t) * 3 - riverLevel; $("float").setAttribute("transform", `translate(0 ${bob}) rotate(${Math.sin(t * .9) * 1.2} 352 200)`);
@@ -147,14 +153,17 @@ function render() {
 
   const ev = S.events || [];
   $("ev-count").textContent = ev.length ? `${ev.length} today` : "none yet";
-  $("events").innerHTML = ev.length ? ev.map(e => `
+  const evKey = JSON.stringify(ev);
+  if (evKey !== render.evKey) { render.evKey = evKey; $("events").innerHTML = ev.length ? ev.map(e => `
     <li class="${e.open ? "open" : ""}"><div class="e1"><span>${e.title}</span><span>${e.time}</span></div>
     <div class="e2">${(e.reasons || []).join(" · ")}</div>
     <div class="tags">${e.open ? '<span class="chip bad">active</span>' : `<span class="chip ok">cleared ${e.cleared || ""}</span>`}
       ${e.sample ? '<span class="chip">sample bottled</span>' : ""}<span class="chip">SMS: ${e.sms || "-"}</span></div></li>`).join("")
-    : `<div class="empty">No events. The river is calm.</div>`;
+    : `<div class="empty">No events. The river is calm.</div>`; }
   $("ticker").textContent = (S.logs || [])[0] || "";
-  const u = S.uptime; $("foot-up").textContent = `up ${u > 3600 ? Math.floor(u / 3600) + " h " : ""}${Math.floor(u % 3600 / 60)} min · ${S.link.age != null ? "last reading " + S.link.age + " s ago" : ""}`;
+  const u = S.uptime; $("foot-up").textContent = `up ${u > 3600 ? Math.floor(u / 3600) + " h " : ""}${Math.floor(u % 3600 / 60)} min · ${S.link.age != null ? "last reading " + S.link.age + " s ago" : ""}`
+    + (S.system && S.system.power_ok === false ? " · ⚠ POWER SUPPLY TOO WEAK" : "")
+    + (S.cloud && S.cloud.enabled ? ` · cloud: ${S.cloud.status}${S.cloud.queued ? " (" + S.cloud.queued + " waiting)" : ""}` : "");
   $("foot-team").textContent = `${S.team} · AAKRUTI 2026`;
   bigChart();
 }

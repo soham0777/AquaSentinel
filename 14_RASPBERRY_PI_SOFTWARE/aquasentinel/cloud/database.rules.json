@@ -1,0 +1,20 @@
+{
+  "rules": {
+    "owners": {
+      ".read": false,
+      ".write": false
+    },
+    "index": {
+      ".read": true,
+      "$station": {
+        ".write": "auth != null && root.child('owners').child($station).val() === auth.uid"
+      }
+    },
+    "stations": {
+      ".read": true,
+      "$station": {
+        ".write": "auth != null && root.child('owners').child($station).val() === auth.uid"
+      }
+    }
+  }
+}

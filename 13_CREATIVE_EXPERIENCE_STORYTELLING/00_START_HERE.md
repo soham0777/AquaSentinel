@@ -13,6 +13,6 @@ Use this folder — it is the only current one.
 | `01_Creative_Experience_Storyline_and_Build_Plan.md` | The 8-act story "A night on the Godavari" and the build steps | Next steps in Creative Experience |
 | `00_Virtual_Storyteller_Plan.md` | First plan (7 Nov) | Background |
 | `06_source_scripts/` | Scripts that made the graphics, the story video and the AR page | Rebuilding them |
-| `07_PCB_picture_guides/` | Picture cards for soldering, beep tests, power-up, plugging in each sensor, and the tray layout | Assembling the Sensor Hub PCB in the 1:5 model |
+| `../12_ELECTRONICS_MANUAL_1to5/PCB_SENSOR_HUB_v1/guide/picture_guides/` (moved 17 Nov to sit with the PCB) | Picture cards for soldering, beep tests, power-up, plugging in each sensor, and the tray layout | Assembling the Sensor Hub PCB in the 1:5 model |
 
 How to open Creative Experience: platform compass -> Virtual Storyteller for Education -> Creative Experience (never start 3DEXPERIENCE.exe directly: that gives the "tenant OnPremise" error).

@@ -1,6 +1,6 @@
 # AquaSentinel: value-engineered production cost ≈ ₹48,000 (7 Nov 2026)
 
-Target set by the team: a sentinel at about ₹50,000. Starting point: the Raspberry Pi version of R3 at ₹1,18,580 (prototype) / ₹90,800 (100 units), from `02_Pi_Based_Product_Cost_Estimate_2026-11-06.md` and the researched costed BOM (23 Oct).
+Target set by the team: a sentinel at about ₹50,000. Starting point: the Raspberry Pi version of R3 at ₹1,18,580 (prototype) / ₹90,800 (100 units), from `_superseded_DO_NOT_QUOTE/2026-11-06_Pi_Cost_Estimate_first_pass.md` and the researched costed BOM (23 Oct).
 
 **How the cost falls:** the parts bolted to the bridge move from 316L stainless to galvanised steel; welded and anodised aluminium parts become bolted or HDPE parts; the wiper and the cool-box sampler are dropped (the Pi sensor set does not use them); fasteners, assembly and freight are scaled for 100 units. **Float mass is unchanged** (steel replaces stainless of the same density; HDPE parts are lighter), so the buoyancy and stability checks still hold. The guide pole keeps its 2-inch section; galvanised pipe steel yields at ≥ 210 MPa against 170 MPa for 316L, so the quoted pole safety factor (2.66) stays conservative.
 

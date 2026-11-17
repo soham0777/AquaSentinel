@@ -22,6 +22,9 @@ class FakeNano:
         self.colour = "G"
         self.stop = threading.Event()
         self.scene = "clean"
+        self.glitch = cfg.get("sim_glitch", 0.04)    # share of readings with a dropout, to show the bridging works
+        self.stats = {"lines": 0, "bad": 0, "lost": 0, "reconnects": 0, "resent": 0, "fw": 2, "e_dht": 0, "e_ds": 0,
+                      "last_problem": ""}
 
     def run(self):
         up, i, t_end = 0, 0, time.time() + SCENES[0][1]
@@ -44,6 +47,14 @@ class FakeNano:
                    "t_water": None if self.scene == "unplugged" else round(26.0 + random.uniform(-.1, .1), 2),
                    "t_air": round(28.4 + random.uniform(-.2, .2), 1), "rh": 42,
                    "pump": 1 if time.time() < self.pump_until else 0, "up": up}
+            if random.random() < self.glitch:            # a DHT11 or DS18B20 read that failed, like on the real board
+                k = random.choice(["t_air", "t_water"])
+                if msg[k] is not None:
+                    msg[k] = None; self.stats["e_dht" if k == "t_air" else "e_ds"] += 1
+                    if k == "t_air":
+                        msg["rh"] = None
+            msg.update({"seq": up, "led": self.colour, "fw": 2})
+            self.stats["lines"] += 1
             self.last_rx = time.time()
             self.on_reading(msg)
             time.sleep(1)

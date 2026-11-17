@@ -16,6 +16,7 @@ CASES = [("clean tap water", {}, "NORMAL"),
          ("vinegar", {"ph_v": 1.98}, "ACIDIC"),
          ("muddy water", {"turb_do": 0, "turb_v": 1.2}, "RUNOFF"),
          ("sanitiser at the bottle", {"mq3_do": 0, "mq3_v": 2.6, "up": 200}, "SOLVENT"),
+         ("MQ-3 still warming up (5 s)", {"mq3_do": 0, "mq3_v": 2.6, "up": 5}, "NORMAL"),
          ("temperature probe unplugged", {"t_water": None}, "SENSOR FAULT")]
 
 
@@ -43,4 +44,9 @@ def run():
 
 
 if __name__ == "__main__":
-    sys.exit(0 if run() else 1)
+    good = run()
+    print()
+    print("--- reliability (drop-outs, damaged lines, calibration, cloud) ---")
+    import test_reliability
+    good = test_reliability.run() and good
+    sys.exit(0 if good else 1)

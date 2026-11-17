@@ -7,7 +7,9 @@ import time
 from collections import deque
 
 from .brain import Brain, CLASS_INFO
-from .sensors import derive
+from .sensors import Conditioner, derive
+from .sysmon import SysMon
+from . import settings
 
 BEACON = {"LEARNING": "B", "NORMAL": "G", "SENSOR FAULT": "F"}   # any spill class -> "R"
 
@@ -16,6 +18,8 @@ class Station:
     def __init__(self, cfg, simulate=False):
         self.cfg = cfg
         self.brain = Brain(cfg)
+        self.cond = Conditioner(cfg)
+        self.sysmon = SysMon(self.log)
         self.lock = threading.Lock()
         self.history = deque(maxlen=3600)          # one hour of 1-second readings
         self.events = deque(maxlen=50)
@@ -37,6 +41,10 @@ class Station:
         self.modem = Modem(cfg, self.log) if not simulate else Modem({**cfg, "sim_enabled": False}, self.log)
         self._csv_day = None
         self._csv = None
+        self.cloud = None
+        if cfg.get("cloud", {}).get("enabled"):
+            from .cloud import Cloud
+            self.cloud = Cloud(cfg, settings.load_secrets(), self.log)
 
     # ---------- logging ----------
     def log(self, text):
@@ -61,7 +69,7 @@ class Station:
 
     # ---------- the heart ----------
     def on_reading(self, raw):
-        r = derive(raw, self.cfg)
+        r = derive(self.cond.clean(raw), self.cfg)
         state, changed, reasons = self.brain.step(r)
         now = time.time()
         if changed:
@@ -79,6 +87,18 @@ class Station:
         except Exception as e:
             self.log(f"log write failed: {e}")
         self.publish()
+        if self.cloud:
+            self.cloud.reading(point, force=changed)
+            self.cloud.set_live(self.cloud_live(point))
+
+    def cloud_live(self, p):
+        b = self.brain
+        return {"site": self.cfg["site_name"], "team": self.cfg.get("team", ""), "state": b.state,
+                "title": CLASS_INFO[b.state][0], "reasons": b.last_reasons, "since": round(b.state_since),
+                "reading": {k: p.get(k) for k in ("ph", "tds", "turbid", "turb_pct", "vapour", "t_water", "t_air", "rh", "dark")},
+                "beacon": self.beacon_colour, "samples": self.samples_taken, "nano": self.nano.connected,
+                "sim": self.modem.status, "power_ok": self.sysmon.info.get("power_ok"),
+                "cpu_temp": self.sysmon.info.get("cpu_temp"), "uptime": int(time.time() - self.started)}
 
     def _on_change(self, state, reasons, r):
         title, text = CLASS_INFO[state]
@@ -87,8 +107,15 @@ class Station:
             if self.events and self.events[0].get("open"):
                 self.events[0]["open"] = False
                 self.events[0]["cleared"] = time.strftime("%H:%M:%S")
+                if self.cloud:
+                    self.cloud.event(self.events[0])
             return
-        ev = {"time": time.strftime("%H:%M:%S"), "date": time.strftime("%d %b"), "cls": state, "title": title,
+        if self.events and self.events[0].get("open"):          # one event turns into another: close the first
+            self.events[0]["open"] = False
+            self.events[0]["cleared"] = time.strftime("%H:%M:%S")
+            if self.cloud:
+                self.cloud.event(self.events[0])
+        ev = {"id": int(time.time() * 1000), "time": time.strftime("%H:%M:%S"), "date": time.strftime("%d %b"), "cls": state, "title": title,
               "reasons": reasons or [text], "open": True, "sample": False, "sms": ""}
         if state != "SENSOR FAULT" and self.cfg.get("auto_sample", True):
             secs = self.cfg.get("sample_pump_seconds", 5)
@@ -101,6 +128,8 @@ class Station:
                + ("Sample bottled." if ev["sample"] else "Check the sensors."))
         ev["sms"] = self.modem.send_all(sms)
         self.events.appendleft(ev)
+        if self.cloud:
+            self.cloud.event(ev)
 
     # ---------- dashboard data ----------
     def snapshot(self, history_seconds=600):
@@ -123,7 +152,9 @@ class Station:
                      "age": round(time.time() - self.nano.last_rx, 1) if self.nano.last_rx else None,
                      "sim": self.modem.status, "signal": self.modem.signal, "operator": self.modem.operator,
                      "numbers": len([n for n in self.cfg.get("sms_numbers", []) if n.strip()]),
-                     "simulate": self.simulate},
+                     "simulate": self.simulate, "stats": getattr(self.nano, "stats", {})},
+            "system": self.sysmon.info,
+            "cloud": self.cloud.info() if self.cloud else {"enabled": False},
             "sms": self.modem.sent[:5],
             "uptime": int(time.time() - self.started),
         }
@@ -158,6 +189,13 @@ class Station:
         if action == "sms_test":
             return self.modem.send_all(f"AquaSentinel test message from {self.cfg['site_name']}. "
                                        f"System working, {time.strftime('%d %b %H:%M')}.", force=True)
+        if action == "reload_config":
+            new = settings.load()
+            for k in ("ph_calibration", "calibration", "limits", "sms_numbers", "hold_seconds", "digital_outputs"):
+                self.cfg[k] = new[k]
+            self.cond.reset()
+            self.log("Settings and calibration reloaded")
+            return "reloaded"
         if action == "relearn":
             self.brain.relearn(); self.log("Baseline reset: learning the water again")
             return "learning again"
@@ -166,6 +204,9 @@ class Station:
     def start(self):
         threading.Thread(target=self.nano.run, daemon=True).start()
         threading.Thread(target=self.modem.run, daemon=True).start()
+        self.sysmon.start()
+        if self.cloud:
+            self.cloud.start()
         def watchdog():
             while True:
                 time.sleep(2)

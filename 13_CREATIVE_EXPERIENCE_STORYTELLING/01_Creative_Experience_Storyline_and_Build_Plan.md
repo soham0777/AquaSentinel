@@ -42,7 +42,7 @@ The acts follow the finale deck, so the booth, the video and the pitch tell the 
 | 0 | **AquaSentinel** · "Click Start" | Logo image over a dusk river | `Each time Act0 is active, CamTitle becomes current.` `Each time Start is clicked, Act1 becomes active.` | wide, slow orbit | - |
 | 1 | **Dusk at the bridge** | R3 float on its pole at a pier; beacon **green**; calm water | `Rotate` off; the beacon lens uses the green emissive material | CamWide | "Reads the water every 15 minutes" |
 | 2 | **The river rises** | The float slides up the pole (2 m) and back down | `Motion` / path on the float group, along +Z, about 4 s each way | CamSide (sees the pole) | "No anchors, no motor: the river lifts it" (deck slide 8) |
-| 3 | **02:00, a spill** | Water material swaps to brown; beacon lens swaps to **red**; an SMS card (2D image) appears | `Each time Spill is clicked, Water becomes WaterBrown, Lens becomes LensRed, SMS becomes visible.` | CamBeacon (close on the beacon) | "Red in one cycle, SMS goes out"; the water colour is labelled **illustration** |
+| 3 | **02:00, a spill** | Water material swaps to brown; beacon lens swaps to **red**; an SMS card (2D image) appears | `Each time Spill is clicked, Water becomes WaterBrown, Lens becomes LensRed, SMS becomes visible.` | CamBeacon (close on the beacon) | "Red within two readings (about 30 min), SMS goes out"; the water colour is labelled **illustration** |
 | 4 | **It keeps the evidence** | Spotlight on the autosampler; the lid opens; one bottle highlighted | `Open/Close` behaviour on the sampler lid | CamSampler | "Bottles the water at the moment of the spill" |
 | 5 | **Service from the bridge** | A technician (Human) on the bridge deck; the carriage gate opens; the sensor cartridge lifts out | `Open/Close` on the gate; `Motion` (+Z) on the cartridge group | CamService | "Installed and serviced from the bridge" |
 | 6 | **Inside the sentinel** | Exploded view; buttons **Explode / Assemble**; 6 callouts (2D images) | `Explode` behaviour: distance factor 2, 3 s, one direction | CamExplode | "66-part R3, assembled and simulated in SOLIDWORKS" |
@@ -172,7 +172,7 @@ This PC qualifies: NVIDIA Quadro T2000 and 32 GB RAM. The webinar minimum is 32 
   - `AS3-515` controller board: don't label it; it is inside the pod.
 - **Wording:**
   - say "3D animation of our CAD" and "assembled and simulated in SOLIDWORKS";
-  - never say "designed in SOLIDWORKS" for the R3, because the R3 was imported;
+  - never say "designed in SOLIDWORKS" for the R3: its geometry started in our Python generator and was rebuilt as native SOLIDWORKS features;
   - the 17 LIVE-model parts *were* designed natively in SOLIDWORKS, so that phrase is fine for them.
 - **Spill colour:** the brown water is an **illustration**. Put that word on screen in act 3.
 - **The 1:5 model, act 7:** claim only what is true on 19 Nov.
@@ -188,7 +188,7 @@ This PC qualifies: NVIDIA Quadro T2000 and 32 GB RAM. The webinar minimum is 32 
 | Need | File |
 |---|---|
 | R3 model (66 parts) | `05_R3_FULL_SIZE_CAD/08_Assembly_STEP_GLB/AquaSentinel_R3_Assembly_MidWater.step` (+ `.glb`, 1.4 MB, handy as the AR fallback) |
-| R3 in SOLIDWORKS 2026 | `05_R3_FULL_SIZE_CAD/03_SOLIDWORKS_2026_assembly_for_manual/AquaSentinel_R3_Assembly.SLDASM` (also CXP-importable) |
+| R3 in SOLIDWORKS 2026 | `05_R3_FULL_SIZE_CAD/03b_SOLIDWORKS_2026_NATIVE/AquaSentinel_R3_Assembly_NATIVE.SLDASM` (native features; also CXP-importable) |
 | 1:5 LIVE model | `02_LIVE_MODEL_1to5/05_SOLIDWORKS_ASSEMBLY/AquaSentinel_LIVE_1to5_Assembly.SLDASM` |
 | Electronics bay in SOLIDWORKS | `03_ELECTRONICS_RASPBERRY_PI/SOLIDWORKS_Electronics_Bay/AquaSentinel_Electronics_Bay_1to5.SLDASM` |
 | Reference renders (for the look) | `05_R3_FULL_SIZE_CAD/06_Renders/` (hero river, exploded, gate open, cartridge pulled up) |

@@ -10,7 +10,7 @@ SIM800L, and keeps a bottle of that water for the lab. No motor, no anchor — i
 > **Local project map:** `00_START_HERE.md`. This repository is an older public snapshot; the full folder on the team
 > laptop (CAD, decks, videos, manuals) is the source of truth.
 
-## Current build (15 Nov 2026)
+## Current build (17 Nov 2026)
 
 **1:5 LIVE model** — a scale model built around the real, full-size sensors:
 
@@ -30,9 +30,11 @@ value-engineered product cost ≈ ₹48,000 (`07_COST_AND_BUSINESS`).
 
 ### Status, honestly
 
-Sensors, beacon and pump are bench-proven; the model has **not yet been floated**. The Pi ↔ Nano link and the SIM800L
-SMS path were **not yet verified end to end** at 14 Nov, pH is **not calibrated**, and no SMS numbers are configured.
-See `PROJECT_IDENTIFICATION_AND_CRITICAL_PATH_2026-11-14.md` in the local folder.
+On 17 Nov 2026:
+- **Proven:** sensors, beacon and pump on the bench; the Pi reads the Nano live; pH, turbidity and MQ-3 are calibrated; SMS numbers are set.
+- **Not yet proven:** an SMS received end to end, the cloud link, and the model floated.
+
+The local status is in `00_START_HERE.md`.
 
 ## Folder map (local project)
 
@@ -43,8 +45,8 @@ See `PROJECT_IDENTIFICATION_AND_CRITICAL_PATH_2026-11-14.md` in the local folder
 | `02_LIVE_MODEL_1to5` | 1:5 live model: assembly manual, 38 STLs, SOLIDWORKS parts/assembly, labels, printed dish |
 | `05_R3_FULL_SIZE_CAD` | full-size R3: manual, BOM, CAD, drawings, design checks, renders, STEP/STL |
 | `06_SIMULATION` | SOLIDWORKS Simulation studies and reports (guide pole, pier bracket) |
-| `07_COST_AND_BUSINESS` | costed BOM, earlier estimate, value-engineered ≈ ₹48,000 cost + PDF |
-| `08_VIDEOS` | pitch (FINAL v3), assembly, journey, marketing 60 s, raw teammate recordings |
+| `07_COST_AND_BUSINESS` | `00_COST_SUMMARY_READ_FIRST.md`: ₹47,886 a float (≈ ₹48,000), ₹8,000 a month; full working + cost sheet PDF; old estimates marked superseded |
+| `08_VIDEOS` | the 16 Nov pitch and journey films, R3 assembly animation, raw teammate recordings; older cuts in `_earlier_cuts/` |
 | `09_SUBMISSIONS_AND_CERTIFICATES` | per-stage records: earlier stages, FDC Oct, FDC update 7 Nov, team change, certificates, portal, Maker Fest 2027 |
 | `12_ELECTRONICS_MANUAL_1to5` | electronics manual Rev 2.0, Sensor Hub PCB v1.2 (design + firmware) |
 | `13_CREATIVE_EXPERIENCE_STORYTELLING` | 3DEXCITE Creative Experience storyline, assets, story video, AR model, scripts |

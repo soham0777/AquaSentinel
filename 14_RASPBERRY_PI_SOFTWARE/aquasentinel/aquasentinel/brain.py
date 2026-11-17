@@ -66,7 +66,7 @@ class Brain:
         f = self.faults(r)
         if f:
             return "SENSOR FAULT", f
-        lim, base = self.lim, self.baseline
+        lim, base = self.cfg["limits"], self.baseline           # read each time: calibration can be reloaded live
         ph, tds = r["ph"], r["tds"]
         acid = industrial = False
         # Absolute pH limits only count once the probe is calibrated; before that only a sudden change counts.
@@ -94,7 +94,8 @@ class Brain:
         if r["turbid"]:
             return "RUNOFF", ["water turned cloudy, salts flat"]
         warmup_s = self.cfg.get("mq3_warmup_s", 0)
-        warmed = r.get("up") is None or r["up"] >= warmup_s
+        up = r.get("nano_uptime")                     # seconds since the Nano (and the MQ-3 heater) powered up
+        warmed = up is None or up >= warmup_s
         if r["vapour"] and warmed:
             return "SOLVENT", ["vapour detected above the sample"]
         return "NORMAL", []

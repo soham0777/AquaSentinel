@@ -15,3 +15,7 @@ mechanical/cad/assembly/*_MidWater.stl
 # the pre-purge file manifest is tracked; bundles and worktrees are not kept
 .claude/
 
+
+# AquaSentinel Pi: private and generated files
+14_RASPBERRY_PI_SOFTWARE/aquasentinel/secrets.json
+14_RASPBERRY_PI_SOFTWARE/aquasentinel/logs/
