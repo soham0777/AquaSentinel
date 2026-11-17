@@ -45,7 +45,7 @@ project folder).
 
 - the old October tree (`mechanical/`, `docs/`, `analytics/`, `firmware/`,
   `hardware/`, `project-management/`): removed from HEAD in commit `654764d`,
-  still present in history and in tag `backup/pre-reorg-2026-11-14`;
+  still present in history and in commit `fd3c3a3` (the old tag `backup/pre-reorg-2026-11-14` was removed on 17 Nov; the commit is in `main`);
 - the deck and presentation assets in `01_`; STLs and SOLIDWORKS in `02_`;
   R3 CAD in `05_`; cost and simulation binaries in `06_`/`07_`;
 - videos in `08_`, submission packages in `09_`, manual PDF/images/CAD copies
@@ -61,7 +61,7 @@ would try to add gigabytes of media and CAD.
 
 1. **Reorganisation:** the current deck was separated from the 7 Nov submission
    record, October renders moved out of the live folder, navigation rebuilt.
-   Recorded in commit `654764d`, tag `workspace/reorg-2026-11-14`, and
+   Recorded in commit `654764d` (in `main`; its tag `workspace/reorg-2026-11-14` was removed on 17 Nov), and
    `00_PROJECT_CONTROL/WORKSPACE_REORG_REPORT_2026-11-14.md`.
 2. **Purge (approved by the project lead):** old decks, old video takes, the
    virtual-storyteller build, abandoned electronics, old reports, both git
