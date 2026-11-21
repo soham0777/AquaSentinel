@@ -1,0 +1,72 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'><title>AquaSentinel_FEA_Results_A4</title><style>@page { size: 210mm 297mm; margin: 0; }
+* { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+html, body { margin: 0; padding: 0; }
+body { font-family: Cambria, Georgia, serif; color: #111; }
+.sheet { position: relative; overflow: hidden; page-break-after: always; break-after: page; }
+.sheet:last-child { page-break-after: auto; break-after: auto; }
+h1, h2, h3, .dis, th, .tb, .lab, .tag { font-family: Bahnschrift, "Arial Narrow", Arial, sans-serif; }
+h1 { font-weight: 600; margin: 0; line-height: 1.05; letter-spacing: -0.01em; }
+h2 { font-weight: 600; margin: 0 0 1.5mm; text-transform: uppercase; letter-spacing: 0.06em; color: #0e7c86; }
+p { margin: 0 0 2mm; }
+code, .mono { font-family: Consolas, "Courier New", monospace; }
+table { border-collapse: collapse; width: 100%; }
+th, td { border: 0.25mm solid #111; padding: 1.1mm 1.6mm; text-align: left; vertical-align: top; }
+th { font-weight: 600; background: #e6eeef; text-transform: uppercase; letter-spacing: 0.04em; }
+.box { display: inline-block; width: 3.4mm; height: 3.4mm; border: 0.3mm solid #111; vertical-align: -0.5mm; margin-right: 1.6mm; }
+.fill { display: inline-block; border-bottom: 0.3mm solid #111; min-width: 18mm; height: 4mm; vertical-align: bottom; }
+.red { color: #b3261e; } .teal { color: #0e7c86; }
+.rule { border-top: 0.5mm solid #111; margin: 2.5mm 0; }
+.note { border-left: 1mm solid #0e7c86; padding: 0.5mm 0 0.5mm 2.5mm; }
+.warn { border: 0.4mm solid #b3261e; padding: 1.6mm 2.2mm; }
+.tb { position: absolute; left: var(--m); right: var(--m); bottom: var(--m); display: grid;
+      grid-template-columns: 2.2fr 3fr 3.2fr 1.6fr 1.1fr; border: 0.35mm solid #111; font-size: var(--tbf); line-height: 1.2; }
+.tb div { padding: 1mm 1.6mm; border-right: 0.25mm solid #111; }
+.tb div:last-child { border-right: 0; }
+.tb small { display: block; font-size: 0.72em; letter-spacing: 0.08em; text-transform: uppercase; color: #444; }
+.tb b { font-weight: 600; }
+ul { margin: 0; padding: 0; list-style: none; }
+li { margin: 0 0 1.3mm; padding-left: 5.4mm; text-indent: -5.4mm; }
+
+    .f { font-size: 9.6pt; line-height: 1.3; } .f h1 { font-size: 23pt; } .f h2 { font-size: 9.6pt; margin-top: 3.2mm; }
+    .f td, .f th { font-size: 9pt; padding: 0.8mm 1.4mm; } .f th { font-size: 7.6pt; }
+    .pl { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; margin: 2mm 0; }
+    .pl img { width: 100%; border: 0.25mm solid #111; display: block; } .pl div { font-size: 8pt; }
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+    td.n { font-family: Consolas, monospace; text-align: right; white-space: nowrap; }
+    </style></head><body><div class="sheet" style="width:210mm;height:297mm;padding:12mm;--m:12mm;--tbf:7.5pt;"><div class="f">
+    <h1>Will the pole bend? Will the bracket hold?</h1>
+    <p style="margin-top:2mm">Two static studies in SOLIDWORKS Simulation, run on the full-size CAD on 5 October 2026. Both parts are 316L stainless, yield 170 MPa. These are design-stage estimates. Nothing here has been load-tested.</p>
+    <div class="pl">
+    <div><img src="file:///C:/Users/dell/OneDrive/Desktop/AquaSentinel/04_R3_FULL_SIZE_DESIGN/09_Simulation_FEA_pole_and_bracket/Pole_vonMises_Stress.png">Guide pole, stress. The bend in this picture is drawn about 240 times larger than it is.</div>
+    <div><img src="file:///C:/Users/dell/OneDrive/Desktop/AquaSentinel/04_R3_FULL_SIZE_DESIGN/09_Simulation_FEA_pole_and_bracket/Pole_Displacement.png">Guide pole, movement. The real maximum is 1.255 mm.</div>
+    <div><img src="file:///C:/Users/dell/OneDrive/Desktop/AquaSentinel/04_R3_FULL_SIZE_DESIGN/09_Simulation_FEA_pole_and_bracket/Bracket_vonMises_Stress.png">Pier bracket, stress. Almost all blue: it is barely loaded.</div>
+    <div><img src="file:///C:/Users/dell/OneDrive/Desktop/AquaSentinel/04_R3_FULL_SIZE_DESIGN/09_Simulation_FEA_pole_and_bracket/Bracket_Displacement.png">Pier bracket, movement. The real maximum is 0.004 mm.</div>
+    </div>
+    <div class="two"><div>
+    <h2>Guide pole · "Pole flood and debris"</h2>
+    <table>
+    <tr><td>Load, five forces, total</td><td class="n">871.3 N</td></tr>
+    <tr><td>Held at</td><td class="n">both ends fixed</td></tr>
+    <tr><td>Highest stress (von Mises)</td><td class="n">38.32 MPa</td></tr>
+    <tr><td>Yield ÷ highest stress</td><td class="n">about 4.4</td></tr>
+    <tr><td>Largest movement</td><td class="n">1.255 mm</td></tr>
+    <tr><td>Mesh</td><td class="n">6 mm · 179,650 nodes</td></tr>
+    <tr><td>Mass of the pole</td><td class="n">16.56 kg</td></tr>
+    </table>
+    </div><div>
+    <h2>Pier bracket · "Bracket pole reaction"</h2>
+    <table>
+    <tr><td>Load</td><td class="n">2 × 215 N and 2 × 80.5 N</td></tr>
+    <tr><td>Reaction at the pier face</td><td class="n">459.2 N</td></tr>
+    <tr><td>Highest stress (von Mises)</td><td class="n">3.651 MPa</td></tr>
+    <tr><td>Yield ÷ highest stress</td><td class="n">about 46</td></tr>
+    <tr><td>Largest movement</td><td class="n">0.0041 mm</td></tr>
+    <tr><td>Mesh</td><td class="n">4 mm · 268,389 nodes</td></tr>
+    <tr><td>Mass of the bracket</td><td class="n">12.68 kg</td></tr>
+    </table>
+    </div></div>
+    <h2>Why our slides say 2.66 and this sheet says 4.4</h2>
+    <p>The study fixes the pole rigidly at both ends, and real bolted clamps are not rigid. So we also did the sum by hand with the ends pinned and the load from the carriage added: 64.0 MPa, which is 170 ÷ 64.0 = 2.66. We quote 2.66 because it is the worse of the two.</p>
+    <h2>Next studies</h2>
+    <p>Debris impact on the pole, fatigue over years, and the welds, anchors, rollers and hulls as separate bodies.</p>
+    </div><div class="tb"><div><small>Project</small><b>AquaSentinel</b></div><div><small>Sheet</small><b>Simulation results · pole and bracket</b></div><div><small>Team</small>Sanjivani Hero's Journey · AG26-1500$41</div><div><small>Date</small>15 Nov 2026</div><div><small>Page</small>1 of 1</div></div></div></body></html>

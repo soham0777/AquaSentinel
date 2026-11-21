@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AquaSentinel pre-flight checklist, 15 Nov 2026</title>
+<style>
+  @page { size: A4; margin: 10mm 13mm; }
+  * { box-sizing: border-box; }
+  body { font: 9.3pt/1.28 "Segoe UI", Arial, sans-serif; color: #111; margin: 0; }
+  h1 { font-size: 15pt; margin: 0 0 1mm; }
+  .sub { font-size: 9pt; color: #444; margin: 0 0 3mm; }
+  h2 { font-size: 10.3pt; margin: 2.6mm 0 1.1mm; padding: 0.8mm 1.5mm; background: #e9eef0; border-left: 3px solid #0e7c86; break-after: avoid; }
+  ul { list-style: none; margin: 0; padding: 0; }
+  li { position: relative; padding: 0.55mm 0 0.55mm 6.2mm; break-inside: avoid; }
+  li::before { content: ""; position: absolute; left: 0.6mm; top: 1.15mm; width: 3.1mm; height: 3.1mm; border: 0.35mm solid #111; }
+  code { font: 8.6pt Consolas, "Courier New", monospace; background: #f1f1f1; padding: 0 0.8mm; white-space: nowrap; }
+  .fill { display: inline-block; min-width: 20mm; border-bottom: 0.3mm solid #111; height: 3.6mm; vertical-align: bottom; }
+  .fill.w { min-width: 34mm; }
+  .note { font-size: 8.6pt; color: #333; margin: 0.8mm 0 0 6.2mm; }
+  .warn { border: 0.4mm solid #b3261e; padding: 1.2mm 2mm; margin: 2mm 0; font-size: 9pt; break-inside: avoid; }
+  table { width: 100%; border-collapse: collapse; margin-top: 1mm; break-inside: avoid; }
+  th, td { border: 0.3mm solid #555; padding: 0.6mm 1.4mm; text-align: left; vertical-align: top; font-size: 9pt; }
+  th { background: #e9eef0; }
+  td.box { width: 22mm; }
+  .cols { display: flex; gap: 6mm; }
+  .cols > div { flex: 1; }
+  .page { break-before: page; }
+  .sign { margin-top: 4mm; display: flex; gap: 8mm; font-size: 9pt; }
+  .sign div { flex: 1; border-top: 0.3mm solid #111; padding-top: 1mm; }
+</style>
+</head>
+<body>
+
+<h1>AquaSentinel 1:5 LIVE model: pre-flight checklist</h1>
+<p class="sub">Hardware truth day, Sunday 15 November 2026 · Team Sanjivani Hero's Journey · AG26-1500$41 · Do the sections in order. Write every number down: the deck is corrected from this sheet.</p>
+
+<div class="warn"><b>Exit criterion for today:</b> one real run on real hardware: water changes → class on the dashboard → red beacon → pump → SMS on a phone. Not the simulator.</div>
+
+<h2>A. Put today's code on the Pi (5 min)</h2>
+<ul>
+  <li>Copy the folder <code>14_RASPBERRY_PI_SOFTWARE/aquasentinel</code> from the laptop to the Pi at <code>~/aquasentinel</code>, replacing the old copy. The laptop copy was fixed on 15 Nov (MQ-3 warm-up guard).</li>
+  <li>On the Pi: <code>cd ~/aquasentinel</code> then <code>python3 tools/self_test.py</code>. It must print 7 lines and <b>ALL PASS</b>. If it prints 6 lines, the Pi still has the old copy.</li>
+  <li>Nano firmware: <code>#define BOARD_PCB 1</code> in <code>aquasentinel_nano.ino</code>, then upload (Arduino Nano, ATmega328P Old Bootloader).</li>
+</ul>
+
+<h2>B. Power, with nothing plugged into J15 and J17 (10 min)</h2>
+<ul>
+  <li>All power OFF while wiring. Never more than 5 V into J12.</li>
+  <li>AUX 5 V charger on J12. Measured at J12: <span class="fill"></span> V (expect 4.9 to 5.2).</li>
+  <li>Step-up on J14. Measured output: <span class="fill"></span> V (set to 9.0).</li>
+  <li>Step-down on J16. Measured output: <span class="fill"></span> V (set to 4.0, never above 4.2).</li>
+  <li>Power OFF. Now plug the pH board power into J15 and the SIM800L into J17. Antenna on, SIM in.</li>
+</ul>
+
+<h2>C. Wiring (10 min)</h2>
+<div class="cols">
+<div><ul>
+  <li>J1 MQ-3 (DO → D6); its AO to J10 pin A3</li>
+  <li>J2 turbidity (DO → D5); its AO to J10 pin A2</li>
+  <li>J3 LDR (DO → D4)</li>
+  <li>J4 DHT11 (D3)</li>
+  <li>J5 DS18B20 (D2)</li>
+</ul></div>
+<div><ul>
+  <li>J6 RGB beacon (G D7, R D8, B D9)</li>
+  <li>J7 pump control, J13 pump power to the Mini L298N</li>
+  <li>J9 TDS (power A0, signal A1)</li>
+  <li>J11 pH signal pin "O" (A6)</li>
+  <li>J18 → Pi: GND pin 6, TX pin 8, RX pin 10</li>
+</ul></div>
+</div>
+<ul><li>Nano USB cable into the Pi. All probes in clean tap water. pH electrode cap off, bulb wet.</li></ul>
+
+<h2>D. Hardware check (5 min)</h2>
+<ul>
+  <li><code>sudo systemctl stop aquasentinel</code> then <code>python3 ~/aquasentinel/tools/check_hardware.py</code></li>
+  <li>"readings in 10 s" count: <span class="fill"></span> (expect about 10). Every sensor line says OK.</li>
+  <li>Beacon goes red, green, blue, green. Pump runs 2 s when you answer <code>y</code> (its end in water).</li>
+  <li>SIM800L answers · SIM card OK · signal <span class="fill"></span> /31 (10+ is good) · network registered.</li>
+</ul>
+<p class="note">Any FAIL or CHECK: fix it and run the check again before going on. Write here what failed: <span class="fill w"></span> <span class="fill w"></span></p>
+
+<h2>E. pH calibration (15 min)</h2>
+<ul>
+  <li>Service still stopped. <code>python3 ~/aquasentinel/tools/calibrate_ph.py</code></li>
+  <li>Rinse in clean water between buffers. The tool asks in this order:</li>
+</ul>
+<table>
+  <tr><th>Buffer</th><th>Volts shown</th><th>Noise (mV)</th><th>Check value the tool prints</th></tr>
+  <tr><td>pH 7.0</td><td class="box"></td><td class="box"></td><td></td></tr>
+  <tr><td>pH 4.0</td><td class="box"></td><td class="box"></td><td></td></tr>
+  <tr><td>pH 9.2 (optional)</td><td class="box"></td><td class="box"></td><td></td></tr>
+</table>
+<ul>
+  <li>Result line: <span class="fill"></span> mV per pH unit. The 12 Nov bench value was about 38. Under 30 the tool prints a warning: check the probe and the board's gain trimmer before saving.</li>
+  <li>Answer <code>y</code> to save. Open <code>config.json</code> and confirm <code>"calibrated": true</code>.</li>
+  <li><code>sudo systemctl start aquasentinel</code>. The pH tile no longer says "calibrate". Tap water reads pH <span class="fill"></span>.</li>
+</ul>
+
+<h2>F. One real SMS (10 min)</h2>
+<ul>
+  <li>In <code>config.json</code>: <code>"sms_numbers": ["+91…", "+91…"]</code> (two team phones, with +91).</li>
+  <li><code>sudo systemctl restart aquasentinel</code>. The SIM pill at the top of the dashboard turns green and shows the operator name (not "SIM800L · searching network").</li>
+  <li>Press <b>Send test SMS</b> on the dashboard. Received at <span class="fill"></span> on phone(s): <span class="fill w"></span></li>
+  <li>Take a screenshot of the message. Keep it on the phone for the booth.</li>
+</ul>
+<p class="note">If nothing arrives in 1 minute: <code>journalctl -u aquasentinel -n 30</code> and look for "SMS to … sent / FAILED". Check SMS balance on the SIM.</p>
+
+<h2>G. Pi ↔ Nano link, 10 minutes untouched</h2>
+<ul>
+  <li>Start time <span class="fill"></span>. Leave it running 10 minutes. Do not touch the cable.</li>
+  <li>After 10 min: <code>wc -l ~/aquasentinel/logs/readings_$(date +%F).csv</code> → rows added in the 10 minutes: <span class="fill"></span> (expect roughly 550 to 600).</li>
+  <li>Dashboard never showed "Sensor hub offline" during the 10 minutes.</li>
+  <li>Pull the Nano USB cable for 15 s, plug it back. State goes SENSOR FAULT, then recovers by itself in <span class="fill"></span> s.</li>
+</ul>
+
+<h2>H. The six waters on real hardware</h2>
+<p class="note" style="margin-left:0">Wait for LEARNING to finish (20 s). After <b>any</b> restart or re-plug of the Nano, SOLVENT is blocked for 90 s while the MQ-3 warms up; the manual says give it 3 minutes. Back to clean water and wait for NORMAL between tests.</p>
+<table>
+  <tr><th>Do this</th><th>Expected</th><th>Class shown</th><th>Seconds</th><th>Beacon</th><th>Pump ran</th></tr>
+  <tr><td>Clean tap water</td><td>NORMAL, green</td><td class="box"></td><td class="box"></td><td class="box"></td><td>n/a</td></tr>
+  <tr><td>Spoon of salt, stirred</td><td>INDUSTRIAL, red</td><td></td><td></td><td></td><td class="box"></td></tr>
+  <tr><td>A little vinegar</td><td>ACIDIC, red</td><td></td><td></td><td></td><td></td></tr>
+  <tr><td>Spoon of soil</td><td>RUNOFF, red</td><td></td><td></td><td></td><td></td></tr>
+  <tr><td>Sanitiser on a tissue at the bottle cone</td><td>SOLVENT, red</td><td></td><td></td><td></td><td></td></tr>
+  <tr><td>Unplug the temperature probe</td><td>SENSOR FAULT, blinking red</td><td></td><td></td><td></td><td>no</td></tr>
+</table>
+<ul>
+  <li>The first event after section F sent an alert SMS by itself (not the test button). Received at <span class="fill"></span>.</li>
+  <li>A second event inside 10 minutes showed "cooldown" in the event log and sent no SMS.</li>
+</ul>
+
+<h2>I. Three numbers the deck needs</h2>
+<ul>
+  <li><b>Pump volume.</b> Press <b>Take a sample</b> (5 s) into a measuring cup: <span class="fill"></span> mL. The deck and the FDC post say 250 mL.</li>
+  <li><b>Time from spill to red beacon</b> (average of section H): <span class="fill"></span> s.</li>
+  <li><b>MQ-3 real warm-up.</b> From power-on, seconds until sanitiser is first detected: <span class="fill"></span> s. (Decides whether <code>mq3_warmup_s</code> stays 90 or becomes 180.)</li>
+</ul>
+
+<h2>J. Evidence and model</h2>
+<ul>
+  <li>One phone video, about 60 s, one take: salt goes in → dashboard class → red beacon → pump → SMS arriving on the phone.</li>
+  <li>Photo of the dashboard in NORMAL and in one event state. Photo of the wired board.</li>
+  <li>Dry-fit the printed 1:5 model. Parts that do not fit: <span class="fill w"></span> <span class="fill w"></span></li>
+  <li>Dish with water, cage lowered: all four probes reach the water. Nothing leaks towards the plinth.</li>
+  <li>Copy <code>config.json</code> and today's <code>logs/readings_….csv</code> from the Pi back to the laptop folder.</li>
+</ul>
+
+<h2>Result</h2>
+<table>
+  <tr><th>Claim</th><th style="width:30mm">Proven? yes / no</th><th>If no, what happened</th></tr>
+  <tr><td>Pi ↔ Nano link runs 10 minutes</td><td class="box"></td><td></td></tr>
+  <tr><td>A real SMS was received</td><td></td><td></td></tr>
+  <tr><td>pH is calibrated (<code>calibrated: true</code>)</td><td></td><td></td></tr>
+  <tr><td>All six waters give the expected class</td><td></td><td></td></tr>
+  <tr><td>Full chain recorded on video</td><td></td><td></td></tr>
+</table>
+<p class="note" style="margin-left:0">Anything marked "no" must be said as "not yet proven" in the deck, the manual and at the booth.</p>
+
+<div class="sign"><div>Tested by</div><div>Date and time</div><div>Checked by</div></div>
+
+</body>
+</html>

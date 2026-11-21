@@ -1,0 +1,123 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>FDC post audit, 15 Nov 2026</title>
+<style>
+@page { size: A4; margin: 15mm 16mm 16mm; }
+* { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { font: 10.2pt/1.42 Cambria, Georgia, serif; color: #141414; margin: 0; }
+h1, h2, h3, th, .k { font-family: Bahnschrift, "Arial Narrow", Arial, sans-serif; }
+h1 { font-size: 22pt; font-weight: 600; margin: 0 0 1mm; }
+.sub { font-size: 9.5pt; color: #444; margin: 0 0 5mm; }
+h2 { font-size: 12pt; font-weight: 600; margin: 6mm 0 2mm; padding-bottom: 1mm; border-bottom: 0.5mm solid #141414; break-after: avoid; }
+h3 { font-size: 10.5pt; font-weight: 600; margin: 4mm 0 1mm; color: #0e7c86; break-after: avoid; }
+p { margin: 0 0 2.2mm; }
+ul, ol { margin: 0 0 2.5mm 5mm; padding: 0; } li { margin: 0 0 1.2mm; }
+table { border-collapse: collapse; width: 100%; margin: 1mm 0 3mm; font-size: 9.2pt; }
+th, td { border: 0.25mm solid #777; padding: 1.2mm 1.6mm; vertical-align: top; text-align: left; }
+th { background: #e9eff0; font-weight: 600; font-size: 8.4pt; letter-spacing: 0.03em; text-transform: uppercase; }
+tr { break-inside: avoid; }
+.sev { font-family: Bahnschrift, Arial, sans-serif; font-weight: 600; font-size: 8.4pt; white-space: nowrap; }
+.s1 { color: #b3261e; } .s2 { color: #a15c00; } .s3 { color: #5a5a5a; }
+.verdict { border: 0.5mm solid #141414; padding: 3mm 4mm; margin: 0 0 4mm; }
+.quote { border-left: 1mm solid #0e7c86; padding: 0.5mm 0 0.5mm 3mm; margin: 2mm 0; font-style: italic; }
+.done { color: #1b7a43; font-family: Bahnschrift, Arial, sans-serif; font-weight: 600; font-size: 8.4pt; }
+.wait { color: #a15c00; font-family: Bahnschrift, Arial, sans-serif; font-weight: 600; font-size: 8.4pt; }
+.you { color: #b3261e; font-family: Bahnschrift, Arial, sans-serif; font-weight: 600; font-size: 8.4pt; }
+.small { font-size: 8.6pt; color: #444; }
+</style>
+</head>
+<body>
+
+<h1>The FDC post, read the way a judge will read it</h1>
+<p class="sub">AquaSentinel · Team Sanjivani Hero's Journey · AG26-1500$41 · audit of the live 3DEXPERIENCE post, 15 November 2026 · checked against the project folder, the 14 November backup on E:, the 5 October FDC deck and the competition emails</p>
+
+<div class="verdict">
+<p><b>Verdict.</b> The post is now honest, specific and readable, which most of the other nine will not be. Its weakness is not the writing any more. It is three things a design jury looks for and cannot find on the page: proof that a real user was asked anything, proof that the hardware chain works end to end, and an explanation of why the November build quietly reverses a decision the October submission was graded on. The first two need your team, not me. The third I have fixed in the text, along with six smaller gaps. Those fixes are now live on the post, together with the corrected finale deck and the current electronics manual (published and checked after a reload on 15 November).</p>
+</div>
+
+<h2>1. The sixty-second test</h2>
+<p>A juror at a booth on 19 November, or scrolling posts before the pitch, gives a page about a minute. On this post that minute now buys: the river at two in the morning, the scale of the problem in one sourced sentence, what the float does, a photograph of the printed model, and the six-water demo table. That is a good first minute.</p>
+<p>What the minute does not yet buy is a reason to believe the electronics work, because every proof on the page is a design document, a render, a simulator screenshot or a team report. The one photograph of the electronics shows garbled printing on the boards (section 3, finding C4). One honest bench video would change the page more than anything else on this list.</p>
+
+<h2>2. Findings by lens</h2>
+
+<h3>Empathy: who is this for, and do we know them?</h3>
+<table>
+<tr><th style="width:5%">#</th><th style="width:34%">What I found</th><th style="width:15%">Evidence</th><th style="width:7%">Weight</th><th>What to do</th><th style="width:11%">Status</th></tr>
+<tr><td>E1</td><td>No interview, site visit or conversation with a water-works operator, an MPCB officer or anyone at a ghat exists anywhere in either folder. The user insights on FDC slide 3 are written, not heard.</td><td>search of both folders, 15 Nov</td><td class="sev s1">high</td><td>One 15-minute phone call before the 19th: Kopargaon water-works, the MPCB regional office, or a faculty member who has sampled the Godavari. Write down three sentences they said. Put one on the post and the poster. If no call happens, be ready to say so plainly in Q&amp;A.</td><td class="you">needs you</td></tr>
+<tr><td>E2</td><td>Part 1 never said who the float serves. The October deck did (operator, officer, people at the ghat), and the finale deck does, but the post had lost it.</td><td>FDC slides 3, 5; finale slide 14</td><td class="sev s2">medium</td><td>Added a "Who it is for" section naming the three people and the moment each one cares about.</td><td class="done">live</td></tr>
+<tr><td>E3</td><td>The red/green light assumes everyone sees colour. The 5 November audit flagged colour-blind users and suggested a flash pattern.</td><td>5 Nov audit §3.4</td><td class="sev s3">low</td><td>The firmware already blinks red for a fault. Say in Q&amp;A that a flash pattern for "stay out" is the next change. Do not claim it exists.</td><td class="you">talking point</td></tr>
+</table>
+
+<h3>Design thinking: is the loop visible?</h3>
+<p>Empathise is the gap (E1). Define is strong: "a spill passes between two monthly samples" is clear and sourced. Ideate is visible in the three generations and the two CAD mistakes. Prototype is now visible: printed model, milled board. Test is the weak end: only simulated data, a bench report and static studies.</p>
+<table>
+<tr><th style="width:5%">#</th><th style="width:34%">What I found</th><th style="width:15%">Evidence</th><th style="width:7%">Weight</th><th>What to do</th><th style="width:11%">Status</th></tr>
+<tr><td>D1</td><td>The October FDC lists "hobby turbidity boards leak → industrial RS485 probes" as a lesson learned. The November build went back to hobby boards, and the post did not say why. A juror who opens Part 2 will see the contradiction.</td><td>FDC slides 3, 10, 12; finale slide 12</td><td class="sev s1">high</td><td>Added a short paragraph that owns the reversal: why (electronics from about ₹80,000 to ₹11,000 a float), what it costs (drift, no dissolved oxygen), and that industrial probes stay an option.</td><td class="done">live</td></tr>
+<tr><td>D2</td><td>Part 2 is the graded submission and must stay as it was. But it still says ESP32, LTE, dissolved oxygen, a wiper, ₹1.34 lakh and "66 parts, native SOLIDWORKS", with no note that any of it has moved.</td><td>FDC slides 5–8, 11–12; Art. 10 correction of 7 Nov</td><td class="sev s1">high</td><td>Added one status paragraph under the Part 2 heading listing what moved since evaluation, including the native-SOLIDWORKS correction. The evaluated content itself is untouched (checked byte for byte).</td><td class="done">live</td></tr>
+<tr><td>D3</td><td>"Test" on the page is simulation and a team report. There is no measured number anywhere: no pH slope, no reaction time, no pump volume.</td><td>config.json; pre-flight checklist</td><td class="sev s1">high</td><td>Run sections D to I of the pre-flight checklist. Three measured numbers (pH mV per unit, seconds from salt to red light, pump millilitres) belong on the post the same day.</td><td class="you">needs you</td></tr>
+</table>
+
+<h3>Critical thinking: would each claim survive a hard question?</h3>
+<table>
+<tr><th style="width:5%">#</th><th style="width:34%">What I found</th><th style="width:15%">Evidence</th><th style="width:7%">Weight</th><th>What to do</th><th style="width:11%">Status</th></tr>
+<tr><td>C1</td><td>The post quoted ₹47,900 next to "AISI 316L frame". The ₹47,900 assumes galvanised steel for the bridge parts. Two numbers about two different machines.</td><td>cost doc 03; finale slide 23</td><td class="sev s2">medium</td><td>Cost paragraph now says the price assumes galvanised steel and the CAD still shows 316L.</td><td class="done">live</td></tr>
+<tr><td>C2</td><td>"What still does not work" left out the three risks the October design had answers for and November does not: fouling (the wiper was removed), power (Pi needs to sleep; about 3 days without sun on paper), floods above 2 m.</td><td>5 Nov audit A3–A5; cost doc 03; finale slides 21, 25</td><td class="sev s2">medium</td><td>Added all three to the list, in plain words.</td><td class="done">live</td></tr>
+<tr><td>C3</td><td>The problem had no number on the page. The 296 / 54 figures with their CPCB source were only in the deck.</td><td>finale slide 4</td><td class="sev s2">medium</td><td>Added one sourced sentence right after the opening.</td><td class="done">live</td></tr>
+<tr><td>C4</td><td>The electronics photograph has unreadable or misspelled printing on the boards ("TDS Moter", "HOMI", jumbled Nano pins), and the board is amber rather than milled copper. You confirmed it is unedited; a juror who zooms in may not believe that.</td><td>photo, zoomed 15 Nov</td><td class="sev s1">high</td><td>Retake it on the bench with the phone's AI enhance or "remaster" switched off, copper side visible, and swap it in. Two minutes of work, and it removes the only image on the page a sceptic can attack.</td><td class="you">needs you</td></tr>
+<tr><td>C5</td><td>The finale deck attached to the post is very likely the 7 November file. The local deck was corrected on 15 Nov (no rain, 7 sensors), and no re-upload is recorded. The deck also still says "baseline for every hour", "saved to disk" and "being coded in Python", which the code does not do.</td><td>deck slides 6, 10, 15, 22; FDC update notes</td><td class="sev s1">high</td><td>Done: 20 corrections on slides 6, 10, 11, 12, 13, 15, 22 and 25 and two speaker notes; fresh PDF exported; the 7 Nov deck on the post replaced with the corrected one.</td><td class="done">live</td></tr>
+</table>
+
+<h3>Product development and design analysis</h3>
+<table>
+<tr><th style="width:5%">#</th><th style="width:34%">What I found</th><th style="width:15%">Evidence</th><th style="width:7%">Weight</th><th>What to do</th><th style="width:11%">Status</th></tr>
+<tr><td>P1</td><td>The strongest design ideas are mechanical and passive: the pole-guided float, free yaw so the pole takes no twist, the tool-free gate, the 8.6× anti-jam margin. The post spends one sentence on them.</td><td>FDC slides 6, 8, 9; design_checks.json</td><td class="sev s3">low</td><td>Keep the clips and drawings where they are. At the booth, lead with the float rising on the pole before the electronics; it is the part no other team will have.</td><td class="you">talking point</td></tr>
+<tr><td>P2</td><td>The full-size float and the model now have different electronics philosophies. The 5 November audit suggested keeping a low-power controller in the field and the Pi as a gateway. The deck answers this with a wake-up timer; nothing is measured.</td><td>5 Nov audit A5; finale slide 21</td><td class="sev s2">medium</td><td>Have one sentence ready: "the Pi sleeps and a timer wakes it every 15 minutes; on paper that is 19 Wh a day; we have not measured it."</td><td class="you">talking point</td></tr>
+<tr><td>P3</td><td>No next step on the page. The deck has a clear one (tank test, then a permitted 30-day pilot).</td><td>finale slides 15, 26, 27</td><td class="sev s3">low</td><td>Added a two-sentence "after the finale" paragraph before the closing lines.</td><td class="done">live</td></tr>
+</table>
+
+<h3>Market making: who pays, and why them?</h3>
+<table>
+<tr><th style="width:5%">#</th><th style="width:34%">What I found</th><th style="width:15%">Evidence</th><th style="width:7%">Weight</th><th>What to do</th><th style="width:11%">Status</th></tr>
+<tr><td>M1</td><td>The post gave a price but no buyer, no business model and no alternatives. A judge asks "why not buy a sonde?" within a minute.</td><td>finale slides 5, 14, 24</td><td class="sev s2">medium</td><td>"Who it is for" now covers the four alternatives honestly ("ours is cruder than all three"), the ₹8,000-a-month service with what it includes, that the fee is unproven, and the three-float Kopargaon start.</td><td class="done">live</td></tr>
+<tr><td>M2</td><td>The ₹8,000 fee has never been put to a buyer. The market size (₹1.56 crore a year for Maharashtra) rests on two assumptions: three floats per stretch and that fee.</td><td>finale slide 24 notes</td><td class="sev s2">medium</td><td>The same phone call as E1 can test it: "would you pay for alerts like this, and from which budget?" One answer, even a no, is worth more than the model.</td><td class="you">needs you</td></tr>
+<tr><td>M3</td><td>Industrial estates appear in the October "who buys" list and on finale slide 14 ("independent proof of a clean discharge"), but nowhere on the post. They may be the buyer with a budget.</td><td>FDC slide 12; finale slide 14</td><td class="sev s3">low</td><td>Keep it for Q&amp;A rather than adding more text: "an industrial estate could buy one to prove its own discharge is clean."</td><td class="you">talking point</td></tr>
+</table>
+
+<h2>3. Does it read like people wrote it?</h2>
+<p>Mostly, yes. The page now opens on a place and a time, uses objects before numbers, admits two mistakes and a reversal, and ends on what the team does not know. None of the words in your voice guide's banned list appear (checked by search).</p>
+<p>Three things still give away a machine hand, and only your team can fix them:</p>
+<ol>
+<li><b>No names inside the story.</b> Nobody on the page did anything. One clause each would do it: who milled the board, who wrote the rules, who printed the 37 parts. I have not added any, because I do not know who did what.</li>
+<li><b>No moment.</b> The 13 November bench day is reported, not remembered. One sentence in your own words, such as what happened the first time the light turned red, is the most human line the page could carry.</li>
+<li><b>Even polish.</b> Every caption is careful. Real teams have one slightly rough photo caption. Let the photos you take on the bench carry that.</li>
+</ol>
+
+<h2>4. Everything changed on the post today</h2>
+<table>
+<tr><th style="width:24%">Where</th><th>Change</th><th style="width:22%">Source</th></tr>
+<tr><td>After the opening paragraph</td><td>New: "Kopargaon is not unusual. India counts 296 polluted river stretches and locations, and Maharashtra has 54 of them, more than any other state (CPCB, published 2025). Most monitoring points are still sampled by hand, once a month at best."</td><td>finale slide 4</td></tr>
+<tr><td>What is on our table</td><td>New paragraph owning the October-to-November sensor reversal (₹81,000 for four industrial probes; electronics about ₹80,000 → ₹11,000; drift; no dissolved oxygen; industrial probes still an option).</td><td>FDC slides 3, 10, 12; finale slides 12, 25; cost doc 02</td></tr>
+<tr><td>New section "Who it is for"</td><td>The three people and their moment; the CPCB station, YSI EXO2 sonde and ISCO 6712 sampler compared plainly; the ₹8,000-a-month service, marked as an unproven proposal; three floats at Kopargaon to start.</td><td>FDC slides 3, 5; finale slides 5, 14</td></tr>
+<tr><td>What it costs</td><td>Added: the price assumes galvanised steel for the bridge parts; the CAD still shows 316L.</td><td>cost doc 03; finale slide 23</td></tr>
+<tr><td>What still does not work</td><td>Three new items: fouling with the wiper removed; about three days without sun, unmeasured; floods above 2 m and the missing gauge data.</td><td>5 Nov audit; cost doc 03; finale slides 21, 25</td></tr>
+<tr><td>19 and 20 November</td><td>New "after the finale" paragraph: tank test, then a permitted 30-day pilot with every alert checked against a lab sample.</td><td>finale slides 15, 25, 26</td></tr>
+<tr><td>Part 2, under its heading</td><td>One status paragraph: what moved since 5 October, including the correction that the 66 R3 parts are imported bodies. Nothing evaluated was changed.</td><td>FDC slides 5–8, 12; cost docs; Art. 10 note of 7 Nov</td></tr>
+</table>
+<p class="small">Also added: the corrected finale deck (replacing the 7 Nov file) and the electronics manual Rev 2.0, uploaded through the editor's own upload button. After publishing and a reload: 37 media items, all loading. Checked in the editor before publishing: Part 2 is byte-identical apart from the one new paragraph; the October electronics section is byte-identical; all 36 media items are present; the list has 9 items.</p>
+
+<h2>5. What is waiting for you</h2>
+<ol>
+
+<li><b>Bench test, today.</b> Pre-flight checklist sections D to I. Send me the result table and the three numbers.</li>
+<li><b>Retake the electronics photo</b> with AI enhance off, and send the bench video (60 seconds, one take).</li>
+<li><b>One phone call to a real user</b> (E1, M2). Write down what they said.</li>
+<li><b>Rehearse with the corrected deck</b> (01_FINALE_PRESENTATION, PPTX and PDF, both dated 15 Nov). Slides 11 and 15 now give the 15 November status; update them again after the bench test.</li>
+<li><b>One sentence each</b>: who did what, and one remembered moment from 13 November.</li>
+</ol>
+
+</body>
+</html>
+

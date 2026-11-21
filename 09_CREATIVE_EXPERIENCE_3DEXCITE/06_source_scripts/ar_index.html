@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AquaSentinel in 3D</title>
+<script type="module" src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
+<style>
+  :root { --teal:#0e7c86; --navy:#091f2e; --red:#e5383b; --green:#2bb673; --amber:#f4b400; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:"Segoe UI", system-ui, sans-serif; background:var(--navy); color:#fff; }
+  header { padding:14px 16px 4px; }
+  h1 { margin:0; font-family:Bahnschrift, "Segoe UI", sans-serif; font-weight:600; font-size:clamp(26px,5vw,44px); }
+  .sub { color:#9fdde3; margin:2px 0 0; font-size:clamp(14px,2.6vw,20px); }
+  model-viewer { width:100%; height:68vh; background:radial-gradient(circle at 50% 35%, #1c4a63 0%, #091f2e 75%); }
+  .bar { display:flex; flex-wrap:wrap; gap:8px; padding:10px 16px; }
+  button { font:600 16px "Segoe UI", sans-serif; color:#fff; border:2px solid #fff3; border-radius:999px; padding:10px 18px; background:var(--teal); cursor:pointer; }
+  button.red { background:var(--red); } button.green { background:var(--green); } button.amber { background:var(--amber); color:#1b1b1b; }
+  #status { position:absolute; top:12px; left:12px; padding:8px 16px; border-radius:999px; font-weight:700; background:var(--green); }
+  #status.alert { background:var(--red); }
+  .hs { display:none; background:#091f2ee0; color:#fff; border:1px solid #f4b400; border-radius:10px; padding:4px 10px; font-size:13px; white-space:nowrap; }
+  .hs.on { display:block; }
+  .hs b { color:#f4b400; }
+  #ar-button { position:absolute; bottom:16px; right:16px; background:var(--amber); color:#1b1b1b; }
+  footer { padding:6px 16px 18px; color:#9fb3c2; font-size:13px; line-height:1.5; }
+</style>
+</head>
+<body>
+<header>
+  <h1>AquaSentinel</h1>
+  <p class="sub">A river that raises its own alarm. Rotate it, explore it, or tap <b>View in your space</b> to place it life-size.</p>
+</header>
+
+<model-viewer id="mv" src="AquaSentinel_R3_AR.glb" alt="AquaSentinel R3 river-monitoring float on its guide pole"
+  camera-controls touch-action="pan-y" auto-rotate auto-rotate-delay="4000" rotation-per-second="12deg"
+  shadow-intensity="1" exposure="1.05" environment-image="neutral"
+  ar ar-modes="webxr scene-viewer quick-look" ar-scale="fixed"
+  camera-orbit="35deg 78deg auto" camera-target="0.25m 1.25m 0m" min-camera-orbit="auto 20deg auto" max-camera-orbit="auto 100deg auto" field-of-view="32deg">
+  <div id="status">NORMAL · water OK</div>
+  <div class="hs" slot="hotspot-beacon"   data-position="0.86m 1.80m -0.22m" data-normal="0m 1m 0m"><b>Beacon</b> green normal · red spill</div>
+  <div class="hs" slot="hotspot-pv"       data-position="0.59m 1.56m 0m"     data-normal="0m 1m 0m"><b>Solar canopy</b></div>
+  <div class="hs" slot="hotspot-pod"      data-position="0.50m 1.36m 0.14m"  data-normal="0m 0m 1m"><b>Pod</b> Raspberry Pi decides on board</div>
+  <div class="hs" slot="hotspot-sampler"  data-position="0.76m 1.43m 0.10m"  data-normal="0m 0m 1m"><b>Sampler</b> keeps the evidence</div>
+  <div class="hs" slot="hotspot-well"     data-position="0.24m 1.31m 0.05m"  data-normal="0m 0m 1m"><b>Sensor cartridge</b> pH · TDS · turbidity · temp.</div>
+  <div class="hs" slot="hotspot-carriage" data-position="0.02m 1.48m 0.12m"  data-normal="0m 0m 1m"><b>Carriage</b> 8 rollers ride the pole</div>
+  <div class="hs" slot="hotspot-hull"     data-position="0.40m 1.05m -0.40m" data-normal="0m 0m -1m"><b>Hulls</b> foam-filled</div>
+  <button slot="ar-button" id="ar-button">View in your space</button>
+</model-viewer>
+
+<div class="bar">
+  <button class="green" onclick="normal()">Normal water</button>
+  <button class="red" onclick="spill()">Spill at 02:00</button>
+  <button onclick="view('35deg 78deg auto','0.25m 1.25m 0m')">Whole sentinel</button>
+  <button onclick="view('20deg 60deg 1.6m','0.80m 1.65m -0.1m',['beacon','pv'])">Beacon</button>
+  <button onclick="view('80deg 55deg 1.5m','0.30m 1.25m 0m',['well','pod'])">Sensors + pod</button>
+  <button class="amber" onclick="view('110deg 65deg 1.4m','0.75m 1.35m 0m',['sampler'])">Sampler</button>
+  <button onclick="view('-40deg 70deg 1.8m','0.05m 1.35m 0m',['carriage','hull'])">Carriage on the pole</button>
+</div>
+
+<footer>
+  3D model of our R3 CAD (66-part assembly, assembled and simulated in SOLIDWORKS), shown without the features our
+  Raspberry Pi product no longer includes. The red beacon is an illustration of the alert state.
+  Team Sanjivani Hero's Journey · AAKRUTI 2026 · India Geo Finale.
+</footer>
+
+<script>
+  const mv = document.getElementById('mv');
+  const statusEl = document.getElementById('status');
+  function lens() { return mv.model && mv.model.materials.find(m => m.name === 'BEACON_LENS'); }
+  function setLens(rgb) {
+    const m = lens(); if (!m) return;
+    m.pbrMetallicRoughness.setBaseColorFactor([...rgb, 1]);
+    m.setEmissiveFactor(rgb);
+  }
+  function normal() { setLens([0.17, 0.85, 0.45]); statusEl.textContent = 'NORMAL · water OK'; statusEl.className = ''; }
+  function spill()  { setLens([1.0, 0.12, 0.12]); statusEl.textContent = 'ALERT · spill detected (illustration)'; statusEl.className = 'alert';
+                      view('20deg 60deg 1.6m', '0.80m 1.65m -0.1m', ['beacon']); }
+  function view(orbit, target, show = []) { mv.autoRotate = false; mv.cameraTarget = target; mv.cameraOrbit = orbit;
+    document.querySelectorAll('.hs').forEach(h => h.classList.toggle('on', show.includes(h.slot.replace('hotspot-', '')))); }
+  mv.addEventListener('load', normal);
+</script>
+</body>
+</html>

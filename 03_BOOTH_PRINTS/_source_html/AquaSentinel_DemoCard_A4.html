@@ -1,0 +1,61 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'><title>AquaSentinel_DemoCard_A4</title><style>@page { size: 210mm 297mm; margin: 0; }
+* { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+html, body { margin: 0; padding: 0; }
+body { font-family: Cambria, Georgia, serif; color: #111; }
+.sheet { position: relative; overflow: hidden; page-break-after: always; break-after: page; }
+.sheet:last-child { page-break-after: auto; break-after: auto; }
+h1, h2, h3, .dis, th, .tb, .lab, .tag { font-family: Bahnschrift, "Arial Narrow", Arial, sans-serif; }
+h1 { font-weight: 600; margin: 0; line-height: 1.05; letter-spacing: -0.01em; }
+h2 { font-weight: 600; margin: 0 0 1.5mm; text-transform: uppercase; letter-spacing: 0.06em; color: #0e7c86; }
+p { margin: 0 0 2mm; }
+code, .mono { font-family: Consolas, "Courier New", monospace; }
+table { border-collapse: collapse; width: 100%; }
+th, td { border: 0.25mm solid #111; padding: 1.1mm 1.6mm; text-align: left; vertical-align: top; }
+th { font-weight: 600; background: #e6eeef; text-transform: uppercase; letter-spacing: 0.04em; }
+.box { display: inline-block; width: 3.4mm; height: 3.4mm; border: 0.3mm solid #111; vertical-align: -0.5mm; margin-right: 1.6mm; }
+.fill { display: inline-block; border-bottom: 0.3mm solid #111; min-width: 18mm; height: 4mm; vertical-align: bottom; }
+.red { color: #b3261e; } .teal { color: #0e7c86; }
+.rule { border-top: 0.5mm solid #111; margin: 2.5mm 0; }
+.note { border-left: 1mm solid #0e7c86; padding: 0.5mm 0 0.5mm 2.5mm; }
+.warn { border: 0.4mm solid #b3261e; padding: 1.6mm 2.2mm; }
+.tb { position: absolute; left: var(--m); right: var(--m); bottom: var(--m); display: grid;
+      grid-template-columns: 2.2fr 3fr 3.2fr 1.6fr 1.1fr; border: 0.35mm solid #111; font-size: var(--tbf); line-height: 1.2; }
+.tb div { padding: 1mm 1.6mm; border-right: 0.25mm solid #111; }
+.tb div:last-child { border-right: 0; }
+.tb small { display: block; font-size: 0.72em; letter-spacing: 0.08em; text-transform: uppercase; color: #444; }
+.tb b { font-weight: 600; }
+ul { margin: 0; padding: 0; list-style: none; }
+li { margin: 0 0 1.3mm; padding-left: 5.4mm; text-indent: -5.4mm; }
+
+    .d { font-size: 10.2pt; line-height: 1.32; } .d h1 { font-size: 25pt; } .d h2 { font-size: 10pt; margin-top: 4mm; }
+    .d td, .d th { font-size: 9.6pt; } .d th { font-size: 8pt; }
+    .state { font-family: Bahnschrift, Arial, sans-serif; font-weight: 600; letter-spacing: 0.03em; white-space: nowrap; }
+    .say { font-style: italic; }
+    .q { margin: 0 0 2.6mm; break-inside: avoid; } .q b { font-family: Bahnschrift, Arial, sans-serif; font-weight: 600; font-size: 10.6pt; display: block; margin-bottom: 0.4mm; }
+    .cols { column-count: 2; column-gap: 7mm; }
+    </style></head><body><div class="sheet" style="width:210mm;height:297mm;padding:12mm;--m:12mm;--tbf:7.5pt;"><div class="d">
+    <h1>Pour something in</h1>
+    <p style="margin-top:2mm">The demo, in the order we run it. Clean water goes back in the dish between every step, and we wait for <span class="state teal">NORMAL</span> before the next one.</p>
+    <table><tr><th style="width:6mm">#</th><th style="width:44mm">Do this</th><th style="width:47mm">Wait for</th><th>Then say</th></tr><tr><td>1</td><td>Clean tap water in the dish.</td><td><span class="state teal">NORMAL</span> · green</td><td class='say'>This is the river on an ordinary day.</td></tr><tr><td>2</td><td>One spoon of salt. Stir.</td><td><span class="state red">INDUSTRIAL</span> · red · pump runs</td><td class='say'>Dissolved solids jumped. That is what a salty or industrial discharge looks like.</td></tr><tr><td>3</td><td>A little vinegar.</td><td><span class="state red">ACIDIC</span> · red · pump runs</td><td class='say'>The pH fell. Something acid is in the water.</td></tr><tr><td>4</td><td>One spoon of soil.</td><td><span class="state red">RUNOFF</span> · red · pump runs</td><td class='say'>Cloudy water, but the salts did not move. That is soil washing in.</td></tr><tr><td>5</td><td>Sanitiser on a tissue, held at the bottle cone.</td><td><span class="state red">SOLVENT</span> · red · pump runs</td><td class='say'>Vapour above the sample. A solvent or a fuel.</td></tr><tr><td>6</td><td>Pull out the temperature probe.</td><td><span class="state red">SENSOR FAULT</span> · blinking red</td><td class='say'>A broken sensor is a fault. It never says the water is fine.</td></tr></table>
+    <h2>Before the first visitor</h2>
+    <ul>
+    <li><span class="box"></span>Power on. The light is blue for 20 seconds while it learns the water in the dish. Do not demo during blue.</li>
+    <li><span class="box"></span>The MQ-3 needs to warm up. The software blocks SOLVENT for the first 90 seconds; give it 3 minutes to be safe. Same again after any restart.</li>
+    <li><span class="box"></span>pH electrode cap off, bulb wet. It must never dry out.</li>
+    <li><span class="box"></span>Turbidity slot clean. Bottle station dry before each sanitiser run.</li>
+    <li><span class="box"></span>Measuring spoons, salt, vinegar, soil, sanitiser, tissues and a jug of clean water within reach.</li>
+    </ul>
+    <h2>Things to say, because they are true</h2>
+    <p class="note">It tells you what kind of change it saw. It does not tell you which chemical. That is what the bottle is for.</p>
+    <p class="note">The model proves the chain from a sensor to an alarm. It does not prove the river. A dish is not a river.</p>
+    <p class="note">One SMS in ten minutes, on purpose, so a phone is not flooded. Do not promise an SMS on every step.</p>
+    <h2>When something goes wrong</h2>
+    <table>
+    <tr><td style="width:44mm">The SMS does not arrive</td><td>Show the event on the screen. Say it did not send. Do not pretend.</td></tr>
+    <tr><td>A sensor dies</td><td>That is step 6. Show the fault. It is the behaviour we designed.</td></tr>
+    <tr><td>The Nano or the board dies</td><td>Run the simulator on the Pi, and say out loud that it is the simulator. Show the phone video of the real run.</td></tr>
+    <tr><td>No screen for the dashboard</td><td>The light and the pump still show the whole chain. Use the printed dashboard stills.</td></tr>
+    </table></div><div class="tb"><div><small>Project</small><b>AquaSentinel</b></div><div><small>Sheet</small><b>Demo card · the six waters</b></div><div><small>Team</small>Sanjivani Hero's Journey · AG26-1500$41</div><div><small>Date</small>15 Nov 2026</div><div><small>Page</small>1 of 2</div></div></div><div class="sheet" style="width:210mm;height:297mm;padding:12mm;--m:12mm;--tbf:7.5pt;"><div class="d">
+    <h1>Hard questions</h1>
+    <p style="margin-top:2mm">Answer the question that was asked. If we have not measured it, say so, and say how we would. Tick the two boxes after the bench test, in pen.</p>
+    <div class="rule"></div><div class="cols"><div class="q"><b>Have you built it?</b>The 1:5 model, yes: printed from our CAD, with the real sensors, our own board and a Raspberry Pi. The full-size float, no. That one is CAD, drawings and calculations.</div><div class="q"><b>Is the SMS real?</b><span class="box"></span>Yes. Sent on <span class="fill"></span>, here is the message.<br><span class="box"></span>Not yet. The modem is wired; no message has left the board.</div><div class="q"><b>Does the Pi really read the board?</b><span class="box"></span>Yes. It ran for <span class="fill"></span> minutes on <span class="fill"></span>.<br><span class="box"></span>Not proven end to end yet. Each half works on its own.</div><div class="q"><b>How do you know it is not just salt?</b>We do not. It says dissolved solids jumped, which is what salt or effluent does. The bottle goes to a lab to name it.</div><div class="q"><b>What about false alarms?</b>It wants two unusual readings out of three, and it learns the water first. Real false-alarm rates need weeks in a river. We have none.</div><div class="q"><b>Why not buy a sonde?</b>A sonde is a better instrument. It also needs a mount, a logger and a modem, and it keeps no sample. Ours is an early warning that keeps the evidence, for about ₹48,000. That figure is an estimate.</div><div class="q"><b>What is simulated?</b>The 30-day test, 4 spills out of 4: synthetic data. The software self-test: simulated readings. The two stress studies: static, on CAD. The full-size float: never built.</div><div class="q"><b>2.66 or 4.4 for the pole?</b>Both. 4.4 is the SOLIDWORKS study with both ends fixed: 38.3 MPa against 170 MPa yield. 2.66 is our hand calculation with pinned ends and the carriage load: 64.0 MPa. We quote the lower one.</div><div class="q"><b>Is the R3 native SOLIDWORKS?</b>The 66 parts of the R3 are imported bodies. We assembled, mated and simulated them in SOLIDWORKS. The 17 new parts of the 1:5 model are native SOLIDWORKS parts.</div><div class="q"><b>Does it learn a baseline for every hour?</b>Our October firmware did. The code on this table keeps one baseline for pH and one for dissolved solids, learned in the first 20 seconds.</div><div class="q"><b>What does the ₹48,000 stand on?</b>₹47,886 before GST, at 100 units, from Indian supplier listings in November 2026. Not quotes. The first one costs ₹64,616.</div><div class="q"><b>Is it really solar?</b>The design is: about 18 Wh a day against a 20 W panel, on paper. Nothing measured. The model on this table runs from a wall socket.</div><div class="q"><b>Is the bottle legal evidence?</b>No. The Water Act has its own sampling procedure. Ours is a triage sample: it tells the Board when and where to take theirs.</div><div class="q"><b>What if the river rises more than 2 m?</b>The float is held under at the top stop. That is an open risk. It needs gauge data for the site before any pilot.</div></div></div><div class="tb"><div><small>Project</small><b>AquaSentinel</b></div><div><small>Sheet</small><b>Demo card · hard questions</b></div><div><small>Team</small>Sanjivani Hero's Journey · AG26-1500$41</div><div><small>Date</small>15 Nov 2026</div><div><small>Page</small>2 of 2</div></div></div></body></html>

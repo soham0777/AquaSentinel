@@ -1,0 +1,61 @@
+LD-S17 rev B  PRINTED DISH 115 x 65  -  durable, watertight version
+Team Sanjivani Hero's Journey - rev B designed 17 Nov 2026 (Fusion, parametric)
+Replaces rev A (0.5 mm vase-mode wall), which leaked and flexed. Rev A files are kept, do not print them again.
+
+FILES (this folder)
+  LD-S17_revB_printed_dish_115x65.step   -> import this into Bambu Studio
+  LD-S17_revB_printed_dish_115x65.stl    -> only for slicers without STEP import
+  LD-S17_revB_printed_dish_115x65.f3d    -> Fusion archive (parameters below)
+
+WHAT CHANGED (rev A -> rev B)
+  Wall ............ 0.5 mm  -> 2.4 mm   (6 solid perimeters instead of 1 vase line)
+  Floor ........... 1.0 mm  -> 2.4 mm   (12 solid layers instead of 5)
+  Inside corner ... sharp   -> 4 mm fillet (thick, sealed floor-to-wall joint; easy to wipe)
+  Rim ............. sharp   -> 0.8 mm rounded edges (hose and fingers)
+  Mass ............ ~27 g   -> ~98 g PLA (79.1 cm3 x 1.24 g/cm3), about 33 m of 1.75 mm filament
+  Wall bending stiffness: about 110x rev A (thickness ratio 4.8, cubed) - calculated, not measured
+
+UNCHANGED, SO IT STILL FITS THE MODEL
+  OD 115 mm ....... seat LD-S09 stop bore 116.5 mm: 0.75 mm play per side, slides in from the front
+  Height 65 mm .... rim 5 mm under the float hulls; parked cage 6 mm above the rim
+  Inside 110.2 mm . cage (dia 92) is 9.1 mm from the wall (glass dish: 8.5 mm, rev A: 11 mm)
+  Outer bottom chamfer 0.6 mm (elephant-foot relief)
+
+FUSION PARAMETERS
+  dish_od 115 | dish_height 65 | wall_t 2.4 | floor_t 2.4 | base_chamfer 0.6 | inner_fillet_r 4 | rim_round_r 0.8  (mm)
+  Tested: wall_t and floor_t changed to 3.0 and back, model rebuilt without errors.
+
+BAMBU STUDIO SETTINGS (0.4 mm nozzle, PLA) - start from "0.20mm Standard", change ONLY these
+  Quality  > Layer height ................ 0.2 mm
+  Quality  > Seam position ............... Aligned
+  Quality  > Wall generator .............. Arachne
+  Strength > Wall loops .................. 6      (whole wall becomes perimeters, no infill gaps)
+  Strength > Top shell layers ............ 5
+  Strength > Bottom shell layers ......... 7
+  Strength > Sparse infill density ....... 100 %  (floor fully solid)
+  Strength > Infill/Wall overlap ......... 25 %   (default 15 %)
+  Speed    > Outer wall .................. 60 mm/s
+  Speed    > Inner wall .................. 100 mm/s
+  Others   > Spiral vase ................. OFF    (this was the cause of rev A's weakness)
+  Support OFF, Brim OFF (the flat base holds well on its own)
+  Filament > Nozzle temperature .......... 225 C (transparent PLA bonds and clears better hot)
+  Filament > Flow ratio .................. 1.00 (Generic PLA default is 0.98; slight extra closes pores)
+  Bed 60-65 C. Place the dish opening UP, flat base on the plate, as imported.
+  Expected: about 98 g and roughly 4 hours. These are my estimates - read the real numbers
+  in Bambu Studio after "Slice plate" before you start.
+
+AFTER PRINTING - DO NOT SKIP
+  1. Leak test FIRST: fill to 10 mm below the rim, stand it on dry paper towel for at least 1 hour
+     (overnight is better). The electronics bay is directly under the dish - never put an untested
+     dish on the model.
+  2. If the towel is dry: ready to use. Nothing else needed.
+  3. If it weeps anywhere: dry it fully, brush one thin coat of clear 2-part epoxy (or clear nail varnish)
+     on the INSIDE over the wet spot and the floor corner, let it cure, repeat the leak test.
+  4. Slide it onto the seat EMPTY, then fill.
+  5. Water: pour about 400 mL (glass dish was 380 mL, rev A was 450 mL). The check is unchanged:
+     water 1-2 mm over the cage plate, about 10 mm below the rim.
+  6. No hot water and do not leave it in a hot car or in direct sun: PLA softens at about 55-60 C.
+
+NOT YET VERIFIED
+  The printed part has not been leak-tested. Watertightness depends on the print (dry filament,
+  no under-extrusion), so step 1 above is the proof, not this file.

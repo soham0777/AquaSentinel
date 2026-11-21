@@ -17,5 +17,16 @@ mechanical/cad/assembly/*_MidWater.stl
 
 
 # AquaSentinel Pi: private and generated files
-14_RASPBERRY_PI_SOFTWARE/aquasentinel/secrets.json
-14_RASPBERRY_PI_SOFTWARE/aquasentinel/logs/
+**/secrets.json
+**/aquasentinel/logs/
+
+# kept off the public repository (team decision, 21 Nov 2026)
+10_SUBMISSIONS_AND_CERTIFICATES/04_Team_change_Oct2026/
+10_SUBMISSIONS_AND_CERTIFICATES/06_Portal_records/
+11_PROJECT_RECORDS_AND_AUDITS/_ai_working_notes/
+**/cloud/.firebase/
+# over GitHub's 100 MB file limit
+02_FILMS/03_R3_Assembly_and_Operation_animation.mp4
+
+# old drafts stay local (21 Nov 2026)
+99_OLDER_VERSIONS_DO_NOT_USE/

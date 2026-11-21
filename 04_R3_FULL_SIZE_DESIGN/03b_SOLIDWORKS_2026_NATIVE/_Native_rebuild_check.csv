@@ -1,0 +1,67 @@
+PartNo,File,Material,Mass_kg,Volume_cm3,Original_volume_cm3,Faces_native,Faces_original,Features,Max_bbox_diff_mm,Bodies
+AS3-101,AS3-101_Pier_bracket_weldment_upper_and_lower_identical.SLDPRT,AISI Type 316L stainless steel,12.684,1580.12,1591.27,40,158,13,0.0,1
+AS3-102,AS3-102_Pole_clamp_cap.SLDPRT,AISI Type 316L stainless steel,2.917,363.4,368.58,16,122,8,0.1,1
+AS3-103,AS3-103_Stage_target_plate.SLDPRT,AISI Type 316L stainless steel,0.459,57.2,57.2,6,6,5,0.0,1
+AS3-111,AS3-111_Guide_pole_2in_Sch_40S_SS316L.SLDPRT,AISI Type 316L stainless steel,16.558,2062.78,2056.9,4,192,5,0.1,1
+AS3-112,AS3-112_Pole_top_cap.SLDPRT,POM Acetal Copolymer,0.126,90.79,88.01,4,82,5,3.6,1
+AS3-113,AS3-113_Stop_collar_split_clamp_on.SLDPRT,AISI Type 316L stainless steel,1.242,154.73,156.06,9,198,6,0.0,1
+AS3-114,AS3-114_Stop_buffer_ring_EPDM.SLDPRT,EPDM,0.072,79.82,79.59,4,192,5,0.0,1
+AS3-201,AS3-201_Pontoon_hull_rotomoulded_foam_filled.SLDPRT,PE High Density,6.821,55341.05,55563.41,20,874,49,3.2,1
+AS3-202,AS3-202_Bow_bumper_pad.SLDPRT,EPDM,0.054,60.17,59.85,26,142,6,0.2,1
+AS3-203,AS3-203_Hull_vent_test_plug.SLDPRT,POM Acetal Copolymer,0.012,8.4,8.34,11,66,6,0.0,1
+AS3-211,AS3-211_Crossbeam_SHS_40x40x3.SLDPRT,6061-T6 (SS),0.875,324.15,322.69,18,64,5,0.0,1
+AS3-212,AS3-212_Beam_end_cap.SLDPRT,POM Acetal Copolymer,0.009,6.65,6.64,10,18,5,0.0,1
+AS3-213,AS3-213_Equipment_deck_plate.SLDPRT,6061-T6 (SS),1.989,736.82,736.87,11,336,5,0.0,1
+AS3-301,AS3-301_Guide_carriage_fixed_half_weldment.SLDPRT,6061-T6 (SS),2.805,1038.79,1039.25,154,1000,26,0.0,22
+AS3-302,AS3-302_Guide_carriage_opening_gate_weldment.SLDPRT,6061-T6 (SS),1.914,708.76,709.05,122,710,22,0.0,18
+AS3-311,AS3-311_Concave_guide_roller_UHMW_PE.SLDPRT,PE High Density,0.058,61.08,60.87,14,680,5,1.7,1
+AS3-312,AS3-312_Roller_axle_M10_nyloc_nuts.SLDPRT,AISI 316 Annealed Stainless Steel Bar (SS),0.06,7.5,8.2,17,38,7,0.0,1
+AS3-313,AS3-313_Gate_hinge_pin_D10.SLDPRT,AISI 316 Annealed Stainless Steel Bar (SS),0.192,24.03,23.63,5,44,6,0.0,1
+AS3-314,AS3-314_T_handle_latch_pin_tool_free.SLDPRT,AISI 316 Annealed Stainless Steel Bar (SS),0.068,8.49,8.96,9,76,10,0.1,1
+AS3-321,AS3-321_Carriage_brace_struts_pair.SLDPRT,AISI Type 316L stainless steel,0.85,248.76,243.83,18,132,18,8.5,6
+AS3-401,AS3-401_Sensor_well_sleeve_PE100_D160_SDR26.SLDPRT,PE High Density,1.051,1103.91,1102.14,4,256,5,0.0,1
+AS3-402,AS3-402_Hatch_flange_ring_quarter_turn_seat.SLDPRT,AISI Type 316L stainless steel,0.397,49.48,49.4,4,256,5,0.0,1
+AS3-403,AS3-403_Sensor_guard_cage.SLDPRT,AISI Type 316L stainless steel,1.844,229.78,228.05,51,898,19,0.0,1
+AS3-404,AS3-404_V_debris_deflector.SLDPRT,PE High Density,0.715,751.45,751.45,8,8,5,0.0,1
+AS3-411,AS3-411_Cartridge_cap_wiper_drive_housing.SLDPRT,POM Acetal Copolymer,0.746,536.96,533.46,46,282,18,2.1,1
+AS3-412,AS3-412_Cartridge_lift_handle.SLDPRT,AISI 316 Annealed Stainless Steel Bar (SS),0.15,50.55,49.83,7,376,5,0.8,1
+AS3-413,AS3-413_Cartridge_spine_wiper_shaft.SLDPRT,AISI Type 316L stainless steel,0.852,106.15,104.84,7,146,6,0.0,2
+AS3-414,AS3-414_Probe_holder_spiders_x2.SLDPRT,POM Acetal Copolymer,0.116,83.23,82.78,88,1328,22,0.0,18
+AS3-415,AS3-415_Optical_wiper_arm_brush_pads.SLDPRT,AISI Type 316L stainless steel,0.123,15.37,15.37,22,18,7,0.0,1
+AS3-416,AS3-416_Probe_cables_in_well_run.SLDPRT,PVC Rigid,0.0,54.33,50.82,28,608,11,12.6,4
+AS3-417,AS3-417_Sampler_intake_strainer_riser.SLDPRT,AISI 316 Annealed Stainless Steel Bar (SS),0.15,62.73,61.59,10,112,7,0.0,3
+AS3-420,AS3-420_Probe_body_envelope.SLDPRT,POM Acetal Copolymer,0.45,229.69,228.75,10,322,5,0.0,1
+AS3-421,AS3-421_ID_band_pH_probe.SLDPRT,ABS,0.005,2.31,2.3,4,160,5,0.0,1
+AS3-422,AS3-422_ID_band_EC_probe.SLDPRT,ABS,0.005,2.31,2.3,4,160,5,0.0,1
+AS3-423,AS3-423_ID_band_Optical_DO.SLDPRT,ABS,0.005,2.31,2.3,4,160,5,0.0,1
+AS3-424,AS3-424_ID_band_Turbidity_probe.SLDPRT,ABS,0.005,2.31,2.3,4,160,5,0.0,1
+AS3-501,AS3-501_Pod_mounting_rails_pair.SLDPRT,6061-T6 (SS),0.451,167.04,167.04,12,12,6,0.0,2
+AS3-511,AS3-511_Power_control_pod_IP67_body.SLDPRT,ABS PC,1.433,11722.57,11720.53,121,442,57,0.5,1
+AS3-512,AS3-512_Pod_lid_hinged.SLDPRT,ABS PC,0.798,2388.59,2384.83,32,206,12,0.0,1
+AS3-513,AS3-513_Pod_mounting_plate.SLDPRT,6061-T6 (SS),0.358,132.48,132.48,6,6,5,0.0,1
+AS3-514,AS3-514_LiFePO4_12_8_V_6_Ah_with_BMS.SLDPRT,,0.8,921.16,920.63,26,62,6,0.3,1
+AS3-515,AS3-515_Controller_board_ESP32_RS485_RTC_microSD_LTE_Cat.SLDPRT,E-Glass Fiber,0.2,36.94,36.78,29,72,12,0.0,1
+AS3-516,AS3-516_MPPT_charge_controller.SLDPRT,ABS PC,0.15,167.25,166.98,26,62,6,0.3,1
+AS3-521,AS3-521_PV_module_20_W_frame_backsheet.SLDPRT,6061-T6 (SS),1.55,1281.4,1281.16,33,60,13,5.7,1
+AS3-522,AS3-522_PV_module_20_W_cells_glass.SLDPRT,Glass,0.45,250.96,250.96,144,144,76,0.0,24
+AS3-523,AS3-523_Canopy_stanchions_hinge_pin_blocks.SLDPRT,6061-T6 (SS),0.518,191.73,189.78,144,656,20,1.5,12
+AS3-601,AS3-601_Autosampler_cassette_insulated_body.SLDPRT,PE High Density,1.904,9631.61,9627.24,31,176,9,0.0,1
+AS3-602,AS3-602_Autosampler_lid_hinged_tamper_seal_hasp.SLDPRT,ABS PC,0.445,499.86,498.01,31,416,8,0.7,1
+AS3-603,AS3-603_Bottle_carousel_lift_out_cassette.SLDPRT,POM Acetal Copolymer,0.197,141.92,141.49,5,72,6,0.0,1
+AS3-604,AS3-604_Sample_bottle_250_mL_HDPE_lab_supplied.SLDPRT,PE High Density,0.29,384.73,382.78,7,182,5,2.1,1
+AS3-605,AS3-605_Bottle_cap_septum.SLDPRT,ABS,0.005,11.26,11.17,3,30,5,0.0,1
+AS3-606,AS3-606_Peristaltic_pump_12_V_reversible.SLDPRT,ABS PC,0.35,93.82,93.03,5,60,10,0.0,1
+AS3-701,AS3-701_Beacon_mast.SLDPRT,6061-T6 (SS),0.369,136.61,135.74,7,162,6,0.0,1
+AS3-702,AS3-702_Jal_Deep_beacon_base.SLDPRT,ABS PC,0.18,110.58,110.13,3,42,5,0.0,1
+AS3-703,AS3-703_Jal_Deep_360_deg_LED_lens_green_normal_red_alert.SLDPRT,ABS PC,0.08,274.25,272.59,5,122,6,2.0,1
+AS3-711,AS3-711_LTE_antenna_whip_N_type.SLDPRT,POM Acetal Copolymer,0.12,74.18,72.96,6,70,9,1.5,1
+AS3-712,AS3-712_Stage_sensor_waterproof_ultrasonic_looking_up.SLDPRT,POM Acetal Copolymer,0.06,54.51,54.15,5,64,6,0.0,1
+AS3-801,AS3-801_Grab_handle_two_person_carry.SLDPRT,AISI 316 Annealed Stainless Steel Bar (SS),0.23,84.47,86.34,11,436,7,0.2,1
+AS3-802,AS3-802_Lifting_eye_bolt_M12_DIN_580.SLDPRT,AISI Type 316L stainless steel,0.106,13.24,12.71,7,428,10,0.0,3
+AS3-811,AS3-811_Cable_harness_probes_stage_sensor_PV_beacon.SLDPRT,PVC Rigid,0.6,68.45,64.28,41,1687,13,18.1,5
+AS3-812,AS3-812_Sampler_hoses_intake_purge_to_waste.SLDPRT,PVC 0.007 Plasticized,0.15,101.53,97.2,16,783,7,18.9,2
+AS3-901,AS3-901_Bolt_M8_x_60_A4_washer.SLDPRT,AISI Type 316L stainless steel,0.033,4.15,4.07,12,52,7,0.0,1
+AS3-902,AS3-902_Bolt_M10_x_70_A4_washer.SLDPRT,AISI Type 316L stainless steel,0.061,7.61,7.47,12,52,7,0.0,1
+AS3-903,AS3-903_Screw_M6_x_25_A4.SLDPRT,AISI Type 316L stainless steel,0.01,1.22,1.2,12,52,7,0.0,1
+AS3-904,AS3-904_Chemical_anchor_M12_x_130_A4.SLDPRT,AISI Type 316L stainless steel,0.144,17.89,17.51,12,52,7,0.0,1
+AS3-905,AS3-905_Bolt_M10_x_40_A4_washer.SLDPRT,AISI Type 316L stainless steel,0.042,5.26,5.17,12,52,7,0.0,1

@@ -1,63 +1,195 @@
-# AquaSentinel
+<div align="center">
 
-**Team Sanjivani Hero's Journey · AG26-1500$41 · AAKRUTI 2026 · Robotics**
-**India Geo Finale: booth 19 Nov, pitch 20 Nov 2026 (Pune)**
+<img src="docs/assets/readme-banner.jpg" alt="AquaSentinel: a float on a bridge pier that reads the river every 15 minutes and keeps a sample of any spill" width="100%">
 
-AquaSentinel is a solar-powered float that rides on a stainless guide pole clamped to a bridge pier.
-Every 15 minutes it reads the river; when a spill passes it turns its light red, sends an SMS through the
-SIM800L, and keeps a bottle of that water for the lab. No motor, no anchor — it rises and falls with the river.
+[![Encouragement Award](https://img.shields.io/badge/%F0%9F%8F%86_Encouragement_Award-AAKRUTI_2026_India_Finale-f9b000?style=for-the-badge)](#-encouragement-award-aakruti-2026-india-finale)
+[![SOLIDWORKS 2026](https://img.shields.io/badge/SOLIDWORKS-2026-da291c?style=for-the-badge)](04_R3_FULL_SIZE_DESIGN)
+[![Simulation](https://img.shields.io/badge/SOLIDWORKS_Simulation-pole_%2B_bracket-0b6e8e?style=for-the-badge)](04_R3_FULL_SIZE_DESIGN/09_Simulation_FEA_pole_and_bracket)
+[![Raspberry Pi](https://img.shields.io/badge/Raspberry_Pi-Python-c51a4a?style=for-the-badge)](07_RASPBERRY_PI_SOFTWARE)
+[![License: MIT](https://img.shields.io/badge/code-MIT-34c7ba?style=for-the-badge)](LICENSE)
 
-> **Local project map:** `00_START_HERE.md`. This repository is an older public snapshot; the full folder on the team
-> laptop (CAD, decks, videos, manuals) is the source of truth.
+**[Website](https://soham0777.github.io/AquaSentinel/)** · **[Live dashboard](https://aquasentinel-live.web.app)** · **[Pitch film](docs/media/aquasentinel-pitch-film.mp4)** · **[Journey film](docs/media/aquasentinel-journey-film.mp4)** · **[Finale deck](01_PITCH_20Nov/02_Pitch_Deck_7min_AS_SUBMITTED_17Nov.pdf)** · **[Drawings](04_R3_FULL_SIZE_DESIGN/04_Drawings/AquaSentinel_R3_Drawing_Set.pdf)** · **[Cost sheet](08_COST_AND_BUSINESS/04_AquaSentinel_Cost_48k_Value_Engineered.pdf)**
 
-## Current build (17 Nov 2026)
+</div>
 
-**1:5 LIVE model** — a scale model built around the real, full-size sensors:
+---
 
-| Layer | Hardware | Role |
+## 🏆 Encouragement Award, AAKRUTI 2026 India Finale
+
+On **20 November 2026**, at the India Finale of the 16th **AAKRUTI Innovation Competition** by **Dassault Systèmes** (DS Campus, Pune), **AquaSentinel received an Encouragement Award**. The competition drew more than 15,000 students in 2,443 teams. **Sanjivani University** also received an **Outstanding College Participation** award.
+
+<p align="center">
+<img src="docs/media/award/aakruti2026_finale_team_on_stage.jpg" width="49%" alt="Team Sanjivani Hero's Journey presenting AquaSentinel on stage at the AAKRUTI 2026 India Finale">
+<img src="docs/media/award/aakruti2026_india_finale_group_photo.jpg" width="49%" alt="Finalists, jury and organisers of the AAKRUTI 2026 India Finale">
+<br><sub>Left: our team presenting AquaSentinel at the India Finale. Right: finalists, jury and organisers. Photos: Dassault Systèmes Solutions Lab, from <a href="https://www.linkedin.com/posts/aakrutiinnovationcompetition2026-3dexperienceworld2027-ugcPost-7529524580290416640-ub56/">the official results post</a>.</sub>
+</p>
+
+> 🌟 **Encouragement Awards:** Sanjivani's Hero, **AquaSentinel**, SANJIVANI UNIVERSITY
+> <br><sub>From the organisers' results post, <a href="https://www.linkedin.com/posts/aakrutiinnovationcompetition2026-3dexperienceworld2027-ugcPost-7529524580290416640-ub56/">Dassault Systèmes Solutions Lab on LinkedIn</a>. Also reported by <a href="https://www.punekarnews.in/indian-students-win-dassault-systemes-aakruti-2026-with-healthcare-innovations/">Punekar News</a>, 20 Nov 2026.</sub>
+
+Jury: Lalit Kumar Das, Sudhir Patil, Aditi Singh, Ravikiran Pothukuchi and Suchit Jain.
+
+---
+
+## The problem, in four numbers
+
+| | |
+|---:|---|
+| **1.4 million** | people die every year from unsafe drinking water, sanitation and hygiene (WHO, 2023) |
+| **2 lakh** | Indians die every year for lack of safe water (NITI Aayog, 2018) |
+| **296** | polluted river stretches and locations in India; **54** in Maharashtra, the most of any state (CPCB, 2025) |
+| **once a month** | how often most river monitoring points are sampled, by hand. A spill lasts a few hours. |
+
+On the Godavari at Kopargaon, a spill at two in the morning looks like water. By sunrise it has moved on, and nobody was there to take the sample.
+
+## Our answer
+
+> **AquaSentinel rides a guide pole on a bridge pier, reads the water every 15 minutes, and when the river changes it lights a red beacon, raises an SMS alert and bottles a sample of that water, at that minute, for the lab.**
+
+```mermaid
+flowchart LR
+    R(["River"]) --> S["7 sensors<br/>pH · TDS · turbidity · water temp<br/>air temp + humidity · light · MQ-3"]
+    S --> N["Arduino Nano<br/>on our milled Sensor Hub"]
+    N -- "USB · one line a second" --> P["Raspberry Pi<br/>141 lines of decision rules"]
+    P --> B{"Normal for<br/>this river?"}
+    B -- yes --> L["Log · green light"]
+    B -- "2 of 3 readings unusual" --> A["Red beacon · SMS alert<br/>pump fills the sample bottle"]
+```
+
+## Watch it
+
+<table>
+<tr>
+<td width="50%" align="center"><a href="docs/media/aquasentinel-pitch-film.mp4"><img src="docs/assets/pitch-film-teaser.gif" alt="Pitch film teaser" width="100%"></a><br><b>The pitch</b> · 92 s<br><sub>The problem, the float, how it works and what it costs.</sub></td>
+<td width="50%" align="center"><a href="docs/media/aquasentinel-journey-film.mp4"><img src="docs/assets/journey-film-teaser.gif" alt="Journey film teaser: our board milled from our own G-code" width="100%"></a><br><b>Our journey</b> · 92 s<br><sub>From our first handwritten page to the board we milled, and what we learned.</sub></td>
+</tr>
+</table>
+
+<sub>Both films are made only from our own CAD, renders, drawings, dashboard captures and sourced figures. The milling shot is drawn from our real isolation G-code.</sub>
+
+## Pour something in
+
+The 1:5 LIVE model on our table carries the real, full-size sensors in a dish of water. Change the water and it names what it sees.
+
+| Put this in the dish | It says | Because |
 |---|---|---|
-| Sensors | **PH-4502C** (pH, E-201-C electrode), **SEN0244** (TDS), **SEN0189** (turbidity), **DS18B20** (water temp), **DHT11** (air temp/humidity), **LDR** (light), **MQ-3** (vapour) | measure the water |
-| Sensor hub | **Arduino Nano (ATmega328P)** on our own milled **Sensor Hub PCB v1.2** (104 × 72 mm, single-sided, KiCad, CNC-milled 12 Nov) | reads every sensor, drives RGB beacon + pump, streams 1 JSON line/s over USB |
-| Brain | **Raspberry Pi 3B+** | decisions (NORMAL / ACIDIC / INDUSTRIAL / RUNOFF / SOLVENT / SENSOR FAULT), dashboard, SIM800L SMS, pump/bottle sampling, CSV logging |
+| Clean tap water | 🟢 **NORMAL** | readings stay where it learned them |
+| A spoon of salt | 🔴 **INDUSTRIAL** | dissolved solids jump |
+| A little vinegar | 🔴 **ACIDIC** | pH falls |
+| A spoon of soil | 🔴 **RUNOFF** | the water turns cloudy while the salts stay flat |
+| Sanitiser held at the bottle | 🔴 **SOLVENT** | vapour above the sample |
+| Pull out the temperature probe | 🔴 **SENSOR FAULT** (blinking) | a dead sensor is never reported as clean water |
 
-- Electronics build guide: `12_ELECTRONICS_MANUAL_1to5/AquaSentinel_LIVE_1to5_Electronics_Assembly_Manual.pdf` (Rev 2.0)
-- Mechanical build guide: `02_LIVE_MODEL_1to5/00_ASSEMBLY_MANUAL/AquaSentinel_LIVE_1to5_Assembly_Manual_SOLIDWORKS.pdf` (30 pages, 7 Nov) with a one-page addendum (15 Nov) that corrects the rain pocket and pin map — read the addendum before wiring
-- Board design + Nano firmware: `12_ELECTRONICS_MANUAL_1to5/PCB_SENSOR_HUB_v1`
-- Raspberry Pi software: `14_RASPBERRY_PI_SOFTWARE` (auto-start service, dashboard on port 8080, SMS, calibration tools)
+It learns the dish for 20 seconds first, and needs two unusual readings out of three before it calls anything.
 
-**Full-size R3 design** — 66-part float in SOLIDWORKS (`05_R3_FULL_SIZE_CAD`), FEA in `06_SIMULATION`,
-value-engineered product cost ≈ ₹48,000 (`07_COST_AND_BUSINESS`).
+<p align="center"><img src="docs/assets/img/dashboard-industrial.jpg" width="760" alt="The dashboard after a spoon of salt"><br><sub>The Raspberry Pi's dashboard after a spoon of salt, captured from the simulator built into our software.</sub></p>
 
-### Status, honestly
+## The board we milled
 
-On 17 Nov 2026:
-- **Proven:** sensors, beacon and pump on the bench; the Pi reads the Nano live; pH, turbidity and MQ-3 are calibrated; SMS numbers are set.
-- **Not yet proven:** an SMS received end to end, the cloud link, and the model floated.
+<img align="right" src="docs/assets/img/copper-toolpath.jpg" width="380" alt="The copper side of the Sensor Hub: our isolation toolpath, drawn to scale">
 
-The local status is in `00_START_HERE.md`.
+- **Why:** ten small boards on a tray clashed twice in SOLIDWORKS, so we drew one board instead.
+- **What:** Sensor Hub v1.2, 104 × 72 mm, single-sided, drawn in KiCad, milled on a desktop CNC on **12 November**.
+- **How:** an Arduino Nano reads all seven sensors and drives the light and the pump; every sensor has its own labelled header.
+- **Learned:** Windows blocked the usual milling program, so we wrote our own G-code sender. The TDS board disturbs the pH probe, so the Nano powers it only while it reads.
+- **Tested:** on **13 November** all seven sensors, the beacon and the pump answered through the board.
 
-## Folder map (local project)
+<br clear="right">
 
-| Folder | Contents |
+## The full-size float, R3
+
+<p align="center"><img src="docs/assets/img/r3-3dexcite-dusk.jpg" width="49%" alt="The R3 at dusk, rendered in 3DEXCITE Creative Experience"> <img src="docs/assets/img/r3-motion-study.jpg" width="49%" alt="Motion study: low, normal and flood water"><br><sub>Left: the R3 at dusk, rendered in 3DEXCITE Creative Experience on the 3DEXPERIENCE platform. Right: the float follows the river through 2 m of rise.</sub></p>
+
+| | |
 |---|---|
-| `00_PROJECT_CONTROL` | audit/critical path, reorg log, backup policy |
-| `01_FINALE_PRESENTATION` | current 7-minute finale deck; 7 Nov submission in `01_FINALE_PRESENTATION/_SUBMISSION_RECORD_7Nov2026/` |
-| `02_LIVE_MODEL_1to5` | 1:5 live model: assembly manual, 38 STLs, SOLIDWORKS parts/assembly, labels, printed dish |
-| `05_R3_FULL_SIZE_CAD` | full-size R3: manual, BOM, CAD, drawings, design checks, renders, STEP/STL |
-| `06_SIMULATION` | SOLIDWORKS Simulation studies and reports (guide pole, pier bracket) |
-| `07_COST_AND_BUSINESS` | `00_COST_SUMMARY_READ_FIRST.md`: ₹47,886 a float (≈ ₹48,000), ₹8,000 a month; full working + cost sheet PDF; old estimates marked superseded |
-| `08_VIDEOS` | the 16 Nov pitch and journey films, R3 assembly animation, raw teammate recordings; older cuts in `_earlier_cuts/` |
-| `09_SUBMISSIONS_AND_CERTIFICATES` | per-stage records: earlier stages, FDC Oct, FDC update 7 Nov, team change, certificates, portal, Maker Fest 2027 |
-| `12_ELECTRONICS_MANUAL_1to5` | electronics manual Rev 2.0, Sensor Hub PCB v1.2 (design + firmware) |
-| `13_CREATIVE_EXPERIENCE_STORYTELLING` | 3DEXCITE Creative Experience storyline, assets, story video, AR model, scripts |
-| `14_RASPBERRY_PI_SOFTWARE` | Raspberry Pi 3B+ software: nano link, decisions, SMS, dashboard, logging, install |
-| `99_ARCHIVE` | purge record and the SHA-256 manifest of the pre-purge state |
+| **Assembly** | 66 part numbers, 144 parts, 48.5 kg, one SOLIDWORKS assembly |
+| **Structure** | 316L pole and pier brackets, 6061 aluminium frame, rotomoulded PE hulls |
+| **Motion** | rides a 2-inch pole on eight rollers through 2 m of river rise; turns with the current like a weathervane |
+| **Design checks** | **14 of 14 pass**: reserve buoyancy 2.27, freeboard 143 mm, righting arm positive to 60° |
+| **Guide pole** | 64.0 MPa with pinned ends and the carriage couple: safety factor **2.66** on 170 MPa |
+| **CAD caught** | the pole running through the electronics pod, and a mass of 48.5 kg, not the 25.4 kg we guessed |
 
-Number gaps (03, 04, 10, 11) are intentional: those folders were archived and then deleted on 14 Nov 2026, and their
-numbers were not reused. See `00_PROJECT_CONTROL/PURGE_REPORT_2026-11-14.md`.
+### Six SOLIDWORKS drawings
 
-## Repository note
+<p align="center"><a href="04_R3_FULL_SIZE_DESIGN/04_Drawings/AquaSentinel_R3_Drawing_Set.pdf"><img src="docs/assets/img/r3-drawing-install.jpg" width="32%" alt="AS3-DWG-01 installation"></a> <a href="04_R3_FULL_SIZE_DESIGN/04_Drawings/AquaSentinel_R3_Drawing_Set.pdf"><img src="docs/assets/img/r3-drawing-ga.jpg" width="32%" alt="AS3-DWG-02 float general arrangement"></a> <a href="04_R3_FULL_SIZE_DESIGN/04_Drawings/AquaSentinel_R3_Drawing_Set.pdf"><img src="docs/assets/img/r3-drawing-bracket.jpg" width="32%" alt="AS3-DWG-06 pier bracket"></a><br><sub>AS3-DWG-01 to 06, A3, first-angle: installation, float, guide carriage, sensor well, hull, pier bracket. Native <code>.SLDDRW</code> files in <a href="04_R3_FULL_SIZE_DESIGN/04_Drawings/SOLIDWORKS">04_Drawings/SOLIDWORKS</a>.</sub></p>
 
-The public repository is an older, divergent snapshot. Heavy assets (decks, videos, CAD, manuals, archive) are
-intentionally local-only and are **not** in git. Read `00_PROJECT_CONTROL/BACKUP_AND_VERSION_CONTROL.md` before
-committing or pushing. Start at `00_START_HERE.md`.
+<p align="center"><img src="docs/assets/img/r3-design-checks.jpg" width="88%" alt="R3 design checks, 14 of 14 pass"></p>
+
+## How we got here
+
+```mermaid
+timeline
+    title AquaSentinel, 2026
+    Idea : One page of ideas, called AquaRight then
+    Design : The R3 in SOLIDWORKS : CAD stops us twice
+    5 Oct : FDC submitted : pole and bracket simulated
+    31 Oct : 1:5 LIVE model designed around the real sensors
+    7 Nov : Assembly manuals
+    12 Nov : Sensor Hub milled with our own G-code sender
+    13 Nov : All seven sensors answer through the board
+    19–20 Nov : India Geo Finale, DS Campus, Pune : Encouragement Award
+```
+
+## What it costs
+
+| | |
+|---|---|
+| One sentinel at 100 units | **₹47,886** before GST |
+| The first one | ₹64,616 |
+| One real-time monitoring station | ₹35–40 lakh, the price of **73–84** sentinels |
+| Proposed service | ₹8,000 a month; hardware paid back in about 12 months |
+
+Costed from Indian supplier listings, November 2026, line by line in [the cost sheet](08_COST_AND_BUSINESS/04_AquaSentinel_Cost_48k_Value_Engineered.pdf).
+
+## Run the software, no hardware needed
+
+```bash
+cd 07_RASPBERRY_PI_SOFTWARE/aquasentinel
+python3 -m aquasentinel --simulate     # dashboard on http://localhost:8080, plays the six waters
+python3 tools/self_test.py             # checks the decision rules on every water
+```
+
+On the Raspberry Pi, `bash install.sh` sets up the service, the SIM800L port and the full-screen dashboard. See [PI_SETUP_AND_OPERATION.md](07_RASPBERRY_PI_SOFTWARE/aquasentinel/PI_SETUP_AND_OPERATION.md).
+
+## Inside this repository
+
+| Folder | What you will find |
+|---|---|
+| [`01_PITCH_20Nov`](01_PITCH_20Nov) | the 7-minute finale deck (PPTX + PDF), the final pitch script, a one-page glance card, the mechanical and design Q&A, and the fact check behind every number |
+| [`02_FILMS`](02_FILMS) | the pitch film and the journey film (both have music), and the team's raw recordings |
+| [`03_BOOTH_PRINTS`](03_BOOTH_PRINTS) | every booth print: A1 poster, 12 A3 story boards, drawings, leave-behind, part tags, "Try me" stickers, bottle labels, with the print order sheet |
+| [`04_R3_FULL_SIZE_DESIGN`](04_R3_FULL_SIZE_DESIGN) | R3 assembly manual, parts list, Pack and Go, native SOLIDWORKS parts, six drawings, 14 design checks, renders, STEP for every part, and the pole and bracket FEA |
+| [`05_LIVE_MODEL_1to5`](05_LIVE_MODEL_1to5) | the 1:5 LIVE model: 31-page assembly manual, 38 STL print files, SOLIDWORKS parts and assembly |
+| [`06_ELECTRONICS_AND_PCB`](06_ELECTRONICS_AND_PCB) | electronics manual, Sensor Hub v1.2 KiCad design, G-code, our G-code sender, Nano firmware |
+| [`07_RASPBERRY_PI_SOFTWARE`](07_RASPBERRY_PI_SOFTWARE) | decision rules, dashboard, SMS, Firebase cloud, logging, installer, self-test |
+| [`08_COST_AND_BUSINESS`](08_COST_AND_BUSINESS) | the cost summary, the full working and the cost sheet |
+| [`09_CREATIVE_EXPERIENCE_3DEXCITE`](09_CREATIVE_EXPERIENCE_3DEXCITE) | 3DEXCITE storyline, assets and renders, AR model, story video |
+| [`10_SUBMISSIONS_AND_CERTIFICATES`](10_SUBMISSIONS_AND_CERTIFICATES) | every stage we submitted, the FDC report and the participation certificates |
+| [`11_PROJECT_RECORDS_AND_AUDITS`](11_PROJECT_RECORDS_AND_AUDITS) | audits, reorganisation and purge reports, the backup policy |
+| [`docs`](docs) | the project website, the films and every image on this page |
+
+New here? Start with [`00_START_HERE.md`](00_START_HERE.md).
+
+## Where it stands
+
+| Proven | Not yet |
+|---|---|
+| All 7 sensors, the beacon and the pump work through our own board (13 Nov) | an SMS received end to end |
+| The Raspberry Pi reads the board live; pH, turbidity and MQ-3 calibrated | the 1:5 model floated in water |
+| The [live cloud dashboard](https://aquasentinel-live.web.app) shows the Kopargaon 1:5 station (18 Nov) | the full-size R3 built: it is a design, checked in CAD |
+| R3: 14 of 14 design checks, 2 SOLIDWORKS Simulation studies | a tank test, then 30 days on the Godavari |
+
+## The team
+
+**Built by**
+
+| | |
+|---|---|
+| **Soham Prabhakar Kadu** | Team leader and project lead · Third Year, AI & ML |
+| **Bhakti Ajay Kadam** | Electronics lead, finale presenter · Third Year, Computer Science & Engineering |
+
+**Team Sanjivani Hero's Journey** also included Prasad Satish Ugale (Direct Second Year, Mechanical Engineering) and Tanmay Nilesh Pendbhaje (First Year, Mechanical Engineering), with Dr. Kiran Wakchaure as mentor.
+
+AG26-1500$41 · Sanjivani University, Kopargaon · AAKRUTI Innovation Competition 2026 by Dassault Systèmes
+
+<sub>Code and documentation are under the MIT licence; the presentation, films, renders and drawings are the team's copyright. Award photos are © Dassault Systèmes, shown with credit. See [LICENSE](LICENSE).</sub>

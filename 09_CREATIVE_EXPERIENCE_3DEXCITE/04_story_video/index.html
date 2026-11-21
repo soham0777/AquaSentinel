@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AquaSentinel story render</title>
+<style>
+  body { margin:0; background:#091f2e; color:#fff; font-family:"Segoe UI",sans-serif; }
+  #out { width:100%; height:auto; display:block; }
+  #hud { position:fixed; left:8px; top:8px; background:#000a; padding:4px 8px; font:12px monospace; }
+</style>
+<script type="importmap">
+{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+               "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }
+</script>
+</head>
+<body>
+<canvas id="out" width="1920" height="1080"></canvas>
+<div id="hud">loading…</div>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+const W = 1920, H = 1080, FPS = 30, DUR = 66;
+const P = new URLSearchParams(location.search);
+const RENDER = P.has('render');
+const hud = document.getElementById('hud');
+const out = document.getElementById('out'), octx = out.getContext('2d');
+
+// ---------- three.js ----------
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(W, H, false);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.0;
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+const scene = new THREE.Scene();
+const cam = new THREE.PerspectiveCamera(36, W / H, 0.05, 400);
+scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
+// sky dome with a vertical gradient (dusk -> night)
+const skyU = { top: { value: new THREE.Color(0x23406b) }, hor: { value: new THREE.Color(0xf0a868) } };
+const sky = new THREE.Mesh(new THREE.SphereGeometry(150, 32, 16), new THREE.ShaderMaterial({
+  side: THREE.BackSide, depthWrite: false, fog: false, uniforms: skyU,
+  vertexShader: 'varying vec3 vP; void main(){ vP = normalize(position); gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.0); }',
+  fragmentShader: 'uniform vec3 top; uniform vec3 hor; varying vec3 vP; void main(){ float h = clamp(vP.y*2.2, 0.0, 1.0); gl_FragColor = vec4(mix(hor, top, pow(h,0.7)), 1.0); }'
+}));
+scene.add(sky);
+
+const hemi = new THREE.HemisphereLight(0xbfd8ff, 0x2b3a2a, 1.2); scene.add(hemi);
+const sun = new THREE.DirectionalLight(0xffc98a, 2.2); sun.position.set(6, 6, 3); sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048); Object.assign(sun.shadow.camera, { left: -4, right: 4, top: 6, bottom: -2, near: 0.5, far: 30 });
+scene.add(sun);
+const fill = new THREE.DirectionalLight(0x9ec9ff, 0.6); fill.position.set(-4, 3, -5); scene.add(fill);
+const beaconLight = new THREE.PointLight(0x30ff80, 0, 6, 1.6); scene.add(beaconLight);
+
+// water
+const wGeo = new THREE.PlaneGeometry(60, 60, 120, 120); wGeo.rotateX(-Math.PI / 2);
+const wBase = wGeo.attributes.position.array.slice();
+const wMat = new THREE.MeshStandardMaterial({ color: 0x1f7a8c, roughness: 0.22, metalness: 0.0, transparent: true, opacity: 0.94, envMapIntensity: 0.5, side: THREE.DoubleSide });
+const water = new THREE.Mesh(wGeo, wMat); water.receiveShadow = true; scene.add(water);
+const bed = new THREE.Mesh(new THREE.PlaneGeometry(60, 60).rotateX(-Math.PI / 2), new THREE.MeshStandardMaterial({ color: 0x2a2a20 }));
+bed.position.y = -1.4; scene.add(bed);
+
+// bridge deck + railing on top of the pier (context, simple)
+const concrete = new THREE.MeshStandardMaterial({ color: 0x8d8f8c, roughness: 0.9 });
+const deck = new THREE.Mesh(new THREE.BoxGeometry(2.0, 0.32, 30), concrete); deck.position.set(-1.2, 3.69, 0); deck.castShadow = deck.receiveShadow = true; scene.add(deck);
+const railMat = new THREE.MeshStandardMaterial({ color: 0x5c6670, roughness: 0.5, metalness: 0.6 });
+const rail = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.05, 30), railMat); rail.position.set(-0.25, 4.85, 0); scene.add(rail);
+for (let z = -14; z <= 14; z += 1.5) { const p = new THREE.Mesh(new THREE.BoxGeometry(0.05, 1.0, 0.05), railMat); p.position.set(-0.25, 4.35, z); scene.add(p); }
+
+// technician (simple mannequin, 1.75 m, hi-vis vest + hard hat)
+const tech = new THREE.Group();
+const skin = new THREE.MeshStandardMaterial({ color: 0x8a5a3c, roughness: 0.7 });
+const vest = new THREE.MeshStandardMaterial({ color: 0xff7a00, roughness: 0.6, emissive: 0x331400 });
+const navy = new THREE.MeshStandardMaterial({ color: 0x1d2b44, roughness: 0.8 });
+const hat = new THREE.MeshStandardMaterial({ color: 0xffd400, roughness: 0.4 });
+function cap(r, l, m) { const g = new THREE.Mesh(new THREE.CapsuleGeometry(r, l, 6, 12), m); g.castShadow = true; return g; }
+const legL = cap(0.075, 0.72, navy); legL.position.set(0, 0.45, 0.1); tech.add(legL);
+const legR = cap(0.075, 0.72, navy); legR.position.set(0, 0.45, -0.1); tech.add(legR);
+const torso = cap(0.17, 0.42, vest); torso.position.set(0, 1.15, 0); tech.add(torso);
+const head = new THREE.Mesh(new THREE.SphereGeometry(0.11, 20, 16), skin); head.position.set(0, 1.58, 0); tech.add(head);
+const helm = new THREE.Mesh(new THREE.SphereGeometry(0.125, 20, 12, 0, Math.PI * 2, 0, Math.PI / 2), hat); helm.position.set(0, 1.6, 0); tech.add(helm);
+const armL = new THREE.Group(); armL.position.set(0, 1.36, 0.22); const al = cap(0.055, 0.5, vest); al.position.y = -0.3; armL.add(al); tech.add(armL);
+const armR = new THREE.Group(); armR.position.set(0, 1.36, -0.22); const ar = cap(0.055, 0.5, vest); ar.position.y = -0.3; armR.add(ar); tech.add(armR);
+tech.position.set(-0.55, 3.85, 0.25); tech.visible = false; scene.add(tech);
+
+// ---------- model ----------
+const DROP = ['Probe_DO', 'Probe_Band_DO', 'Wiper_Arm', 'Stage_Sensor', 'Stage_Target_Plate', 'Bottle_Carousel',
+  'Bottle_2', 'Bottle_Cap_2', 'Bottle_3', 'Bottle_Cap_3', 'Bottle_4', 'Bottle_Cap_4'];
+let FLOAT, lensMat, pivots = {}, explodeList = [], floatBaseZ = 0, waterBaseY = 1.0;
+const gltf = await new GLTFLoader().loadAsync('AquaSentinel_R3.glb');
+const model = gltf.scene; scene.add(model);
+model.traverse(o => {
+  if (o.isMesh) { o.castShadow = true; o.receiveShadow = true;
+    if (o.name === 'Bridge_Pier') { o.material = o.material.clone(); o.material.color.set(0x6d6f6b); o.material.roughness = 0.95; } }
+  if (DROP.includes(o.name)) o.visible = false;
+  if (o.name === 'FLOAT') FLOAT = o;
+  if (o.name === 'Beacon_Lens') { o.material = o.material.clone(); lensMat = o.material; lensMat.transparent = false; }
+  if (o.name && o.name.startsWith('PIVOT_')) { const e = o.userData; pivots[e.pivot] = { o, e }; o.matrixAutoUpdate = false; }
+});
+FLOAT.traverse(o => { if (o !== FLOAT && o.userData && o.userData.explode && !o.name.startsWith('PIVOT_')) explodeList.push({ o, base: o.position.clone(), v: new THREE.Vector3(...o.userData.explode) }); });
+floatBaseZ = FLOAT.position.z;
+// waterline: hull bottom + 117 mm draft (143 mm freeboard on a 260 mm hull)
+model.updateMatrixWorld(true);
+{ const b = new THREE.Box3().setFromObject(model.getObjectByName('Pontoon_Port')); waterBaseY = b.min.y + 0.117; }
+
+window.__dbg = { water, bed, FLOAT, model, THREE, get waterBaseY() { return waterBaseY; } };
+function setPivot(name, f) {
+  const p = pivots[name]; if (!p) return;
+  const o = new THREE.Vector3(...p.e.origin), ax = new THREE.Vector3(...p.e.axis).normalize();
+  const m = new THREE.Matrix4().makeTranslation(o.x, o.y, o.z)
+    .multiply(new THREE.Matrix4().makeRotationAxis(ax, THREE.MathUtils.degToRad(p.e.open_deg * f)))
+    .multiply(new THREE.Matrix4().makeTranslation(-o.x, -o.y, -o.z))
+    .multiply(new THREE.Matrix4().makeTranslation(0, 0, (p.e.lift || 0) * f));
+  p.o.matrix.copy(m); p.o.matrixWorldNeedsUpdate = true;
+}
+
+// ---------- overlays ----------
+const A = '/02_CXP_2D_assets/';
+const IMG = {};
+const names = { title: '00_title_card_1920x1080.png', b1: '01_act_banner_Dusk_at_the_bridge.png', b2: '02_act_banner_The_river_rises.png',
+  b3: '03_act_banner_0200.png', b4: '04_act_banner_It_keeps_the_evidence.png', b5: '05_act_banner_Serviced_from_the_bridge.png',
+  b6: '06_act_banner_Inside_the_sentinel.png', sms: '10_sms_alert_phone_760x1240.png', normal: '11_status_NORMAL.png',
+  alert: '12_status_ALERT.png', sampling: '14_status_SAMPLING.png', gauge: '15_river_level_gauge.png',
+  cBeacon: '36_callout_Beacon.png', cSensor: '33_callout_Sensor.png', cAuto: '35_callout_Autosampler.png', cGuide: '32_callout_Guide.png' };
+await Promise.all(Object.entries(names).map(([k, f]) => new Promise(r => { const i = new Image(); i.onload = r; i.onerror = r; i.src = A + f; IMG[k] = i; })));
+
+// ---------- timeline helpers ----------
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const ss = (a, b, t) => { const x = clamp((t - a) / (b - a)); return x * x * (3 - 2 * x); };
+const win = (t, a, b, f = 0.6) => ss(a, a + f, t) * (1 - ss(b - f, b, t));   // fade in at a, out at b
+const lerp = (a, b, x) => a + (b - a) * x;
+const lerpV = (a, b, x) => new THREE.Vector3(lerp(a[0], b[0], x), lerp(a[1], b[1], x), lerp(a[2], b[2], x));
+const C = (h) => new THREE.Color(h);
+
+// camera keyframes: [time, position, target]
+const SHOTS = [
+  [0, [8.0, 3.4, 5.0], [-0.2, 2.0, 0]],
+  [5, [6.4, 2.3, 4.4], [0.2, 1.6, 0]],
+  [13, [6.4, 2.3, -4.4], [0.2, 1.6, 0]],
+  [15, [6.2, 4.1, 3.0], [0.1, 2.2, 0]],
+  [22, [6.4, 4.4, 2.4], [0.1, 2.6, 0]],
+  [24.5, [2.7, 2.15, -1.7], [0.8, 1.65, -0.2]],
+  [31, [3.6, 2.4, -2.6], [0.5, 1.5, -0.1]],
+  [33.5, [2.3, 1.9, 1.5], [0.75, 1.33, 0.0]],
+  [40, [2.6, 2.05, 1.8], [0.72, 1.35, 0.0]],
+  [42, [2.4, 4.3, 6.4], [-0.2, 3.6, 0.0]],
+  [45, [2.0, 4.4, 6.0], [-0.3, 3.9, 0.0]],
+  [46.5, [1.4, 2.4, 2.8], [0.05, 1.6, 0.0]],
+  [50.5, [1.6, 2.6, 3.0], [0.05, 1.8, 0.0]],
+  [52, [5.0, 2.6, 3.4], [0.35, 1.7, 0.0]],
+  [59, [5.0, 2.6, -3.4], [0.35, 1.7, 0.0]],
+  [61, [8.0, 3.6, 5.0], [-0.2, 2.0, 0]],
+  [66, [9.0, 4.0, 5.6], [-0.2, 2.0, 0]],
+];
+function camAt(t) {
+  let i = 0; while (i < SHOTS.length - 2 && t > SHOTS[i + 1][0]) i++;
+  const [t0, p0, g0] = SHOTS[i], [t1, p1, g1] = SHOTS[i + 1];
+  const x = ss(t0, t1, t);
+  cam.position.copy(lerpV(p0, p1, x)); cam.lookAt(lerpV(g0, g1, x));
+}
+
+function update(t) {
+  // night factor (spill act), spill colour, rise, alert
+  const night = ss(23, 25, t) * (1 - ss(41, 43, t));
+  const brown = ss(25, 27.5, t) * (1 - ss(41, 43, t));
+  const rise = ss(15.5, 20.5, t) * (1 - ss(21.2, 23, t));       // 0..1 -> 2 m
+  const alert = t >= 26 && t < 42 ? 1 : 0;
+  const lidOpen = ss(34, 36, t) * (1 - ss(40, 41, t));
+  const gate = ss(46.6, 48, t) * (1 - ss(51, 52, t));
+  const cart = ss(48, 50.4, t) * (1 - ss(50.8, 51.9, t));
+  const expl = ss(52.5, 55.5, t) * (1 - ss(58, 60, t));
+  skyU.top.value.copy(C(0x23406b).lerp(C(0x050b16), night));
+  skyU.hor.value.copy(C(0xf0a868).lerp(C(0x1c2b45), night));
+  const fogc = C(0x7d8a96).lerp(C(0x0d1828), night);
+  scene.fog = new THREE.Fog(fogc, 28, 95);
+  sun.intensity = lerp(2.4, 0.12, night); hemi.intensity = lerp(1.1, 0.3, night);
+  fill.intensity = lerp(0.6, 0.45, night); renderer.toneMappingExposure = lerp(1.0, 0.8, night);
+  wMat.color.copy(C(0x1f7a8c).lerp(C(0x8a5a22), brown)).multiplyScalar(lerp(1, 1.6, night));
+  // waves
+  const pos = wGeo.attributes.position.array;
+  for (let i = 0; i < pos.length; i += 3) pos[i + 1] = wBase[i + 1] + 0.012 * Math.sin(wBase[i] * 1.7 + t * 1.6) + 0.008 * Math.sin(wBase[i + 2] * 2.3 + t * 1.1);
+  wGeo.attributes.position.needsUpdate = true; wGeo.computeVertexNormals();
+  water.position.y = waterBaseY + 2.0 * rise;
+  FLOAT.position.z = floatBaseZ + 2000 * rise;
+  // beacon
+  const pulse = alert ? 0.6 + 0.4 * Math.abs(Math.sin(t * 5)) : 1;
+  const col = alert ? C(0xff2a2a) : C(0x2bff7a);
+  lensMat.color.copy(col); lensMat.emissive.copy(col); lensMat.emissiveIntensity = alert ? 2.5 * pulse : 1.2;
+  const lw = new THREE.Vector3(); model.getObjectByName('Beacon_Lens').getWorldPosition(lw);
+  const lb = new THREE.Box3().setFromObject(model.getObjectByName('Beacon_Lens')); lb.getCenter(lw);
+  beaconLight.position.copy(lw); beaconLight.color.copy(col); beaconLight.intensity = lerp(0.6, 6, night) * pulse;
+  setPivot('samplerlid', lidOpen); setPivot('gate', gate); setPivot('cartridge', cart); setPivot('podlid', 0); setPivot('canopy', 0);
+  for (const e of explodeList) e.o.position.copy(e.base).addScaledVector(e.v, 0.55 * expl);
+  // technician
+  tech.visible = t > 41.5 && t < 51.5;
+  armR.rotation.z = lerp(0, -1.2, ss(43, 44.5, t)); armL.rotation.z = lerp(0, -0.9, ss(45, 46.5, t));
+  tech.rotation.y = 0; // faces +x (towards the float)
+  camAt(t);
+}
+
+function drawImg(img, x, y, w, alpha, slideX = 0) {
+  if (!img || !img.naturalWidth || alpha <= 0.001) return;
+  const h = w * img.naturalHeight / img.naturalWidth;
+  octx.globalAlpha = alpha; octx.drawImage(img, x + slideX, y, w, h); octx.globalAlpha = 1;
+}
+function compose(t) {
+  octx.drawImage(renderer.domElement, 0, 0);
+  // act banners (full-frame transparent overlays)
+  const acts = [['b1', 5, 14], ['b2', 14, 23], ['b3', 23.5, 33], ['b4', 33.5, 41], ['b5', 41.5, 51.5], ['b6', 52, 60]];
+  for (const [k, a, b] of acts) drawImg(IMG[k], 0, 0, W, win(t, a, b));
+  // status chips
+  drawImg(IMG.normal, 1530, 40, 340, win(t, 5.5, 26) + win(t, 42, 60));
+  drawImg(IMG.alert, 1500, 40, 380, win(t, 26, 33.5));
+  drawImg(IMG.sampling, 1500, 40, 380, win(t, 33.5, 41.5));
+  // gauge during the rise
+  const ga = win(t, 15, 22.6);
+  if (ga > 0) {
+    drawImg(IMG.gauge, 1580, 170, 260, ga);
+    const rise = ss(15.5, 20.5, t) * (1 - ss(21.2, 23, t));
+    const y0 = 170 + (110 + (650 - 110) * 0.15 + (650 - 110) * 0.85) * 260 / 340, y1 = 170 + (110 + (650 - 110) * 0.15) * 260 / 340;
+    const yy = lerp(y0, y1, rise);
+    octx.globalAlpha = ga; octx.fillStyle = '#f4b400'; octx.beginPath(); octx.moveTo(1640, yy); octx.lineTo(1670, yy - 12); octx.lineTo(1670, yy + 12); octx.fill(); octx.globalAlpha = 1;
+  }
+  // SMS phone slides in from the right
+  const sa = win(t, 27, 33); drawImg(IMG.sms, 1440, 150, 400, sa, (1 - ss(27, 28, t)) * 300);
+  // exploded-view callouts
+  drawImg(IMG.cBeacon, 1220, 150, 640, win(t, 54.5, 59.5)); drawImg(IMG.cSensor, 1220, 300, 640, win(t, 55.2, 59.5));
+  drawImg(IMG.cAuto, 1220, 450, 640, win(t, 55.9, 59.5)); drawImg(IMG.cGuide, 1220, 600, 640, win(t, 56.6, 59.5));
+  // footer caption
+  octx.font = '22px "Segoe UI"'; octx.fillStyle = 'rgba(255,255,255,0.75)'; octx.textAlign = 'right';
+  octx.fillText('3D animation of our R3 CAD' + (t > 23 && t < 41 ? '  ·  spill colours are an illustration' : ''), W - 30, H - 24);
+  octx.textAlign = 'left';
+  // title card at the start, end card at the end
+  drawImg(IMG.title, 0, 0, W, 1 - ss(4, 5.2, t));
+  const e = ss(60.5, 62, t);
+  if (e > 0) {
+    octx.globalAlpha = e * 0.82; octx.fillStyle = '#091f2e'; octx.fillRect(0, 0, W, H); octx.globalAlpha = e;
+    octx.fillStyle = '#fff'; octx.font = '600 120px Bahnschrift'; octx.fillText('AquaSentinel', 160, 430);
+    octx.fillStyle = '#9fdde3'; octx.font = '56px Bahnschrift'; octx.fillText('A river that raises its own alarm.', 166, 520);
+    octx.fillStyle = '#d6e4ee'; octx.font = '36px "Segoe UI"';
+    octx.fillText('Senses every 15 min  ·  decides on board  ·  alarm + SMS + sample', 166, 610);
+    octx.fillStyle = '#b8c7d3'; octx.font = '30px "Segoe UI"';
+    octx.fillText("Team Sanjivani Hero's Journey  ·  AAKRUTI 2026  ·  India Geo Finale", 166, 960);
+    octx.globalAlpha = 1;
+  }
+}
+
+function frame(t) { update(t); renderer.render(scene, cam); compose(t); }
+
+if (RENDER) {
+  const N = Math.round(DUR * FPS), start = +(P.get('from') || 0);
+  for (let i = start; i < N; i++) {
+    frame(i / FPS);
+    const blob = await new Promise(r => out.toBlob(r, 'image/jpeg', 0.93));
+    await fetch('/frame/' + i, { method: 'POST', body: blob });
+    if (i % 30 === 0) hud.textContent = `rendering ${i}/${N}`;
+  }
+  hud.textContent = 'DONE ' + N; window.__done = N;
+} else {
+  const t0 = performance.now(), seek = +(P.get('t') || 0);
+  window.__seek = (s) => frame(s);
+  function loop() { const t = P.has('t') ? seek : ((performance.now() - t0) / 1000) % DUR; frame(t); hud.textContent = 't=' + t.toFixed(1); if (!P.has('t')) requestAnimationFrame(loop); }
+  loop();
+}
+window.__ready = true;
+</script>
+</body>
+</html>
